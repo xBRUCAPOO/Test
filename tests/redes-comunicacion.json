@@ -1,186 +1,130 @@
 {
   "nombre": "Redes y Comunicación",
-  "tema": "Redes, protocolos, seguridad, criptografía, PGP, Armadura ASCII, modelo OSI, topologías y comandos de Windows",
+  "tema": "Dispositivos de conexión ISP, tipos de redes, protocolos, topologías, comunicaciones, modelo OSI, seguridad, PGP, ASCII y comandos de Windows",
   "preguntas": [
     {
-      "pregunta": "Un alumno ejecuta `dir` desde PowerShell. ¿Qué información puede obtener directamente con ese comando?",
+      "pregunta": "Una vivienda recibe Internet por fibra óptica y el proveedor instala un equipo que convierte la señal óptica para entregar Ethernet. ¿Qué dispositivo cumple principalmente esa función?",
       "opciones": [
-        "La lista de archivos y carpetas de la ubicación actual",
-        "Las direcciones IP de todos los dispositivos de la red",
-        "Los puertos TCP abiertos en el equipo",
-        "La ruta que siguen los paquetes hasta Internet"
+        "ONT/ONU",
+        "Switch",
+        "Punto de acceso",
+        "Repetidor"
       ],
       "correcta": 0,
-      "descripcion": "`dir` permite listar el contenido de una ubicación del sistema de archivos. No está diseñado para consultar información de red, por lo que las otras opciones corresponden a funciones de herramientas diferentes."
+      "descripcion": "La ONT/ONU termina la conexión de fibra y convierte la señal óptica en una interfaz que puede utilizar la red del cliente. Un switch distribuye tramas, un punto de acceso brinda Wi-Fi y un repetidor extiende una señal existente."
     },
     {
-      "pregunta": "Un usuario quiere saber en qué carpeta se encuentra actualmente trabajando dentro de PowerShell. ¿Qué comando resulta más adecuado?",
+      "pregunta": "En una conexión doméstica, ¿qué equipo suele encargarse de decidir hacia qué red debe enviarse un paquete destinado a Internet?",
       "opciones": [
-        "getmac",
-        "pwd",
-        "nslookup",
-        "netstat"
+        "Switch de acceso",
+        "Router o gateway",
+        "Punto de acceso",
+        "Tarjeta de red"
       ],
       "correcta": 1,
-      "descripcion": "`pwd` muestra la ruta o ubicación de trabajo actual en PowerShell. Los demás comandos están relacionados con información de red y no con la ubicación dentro del sistema de archivos."
+      "descripcion": "El router o gateway realiza funciones de capa 3 y decide el siguiente salto para tráfico destinado a otras redes. Un switch normalmente conmuta dentro de la LAN, mientras que un AP y una NIC cumplen funciones diferentes."
     },
     {
-      "pregunta": "Un administrador necesita identificar físicamente una interfaz de red mediante su dirección MAC. ¿Qué comando de Windows puede utilizar?",
+      "pregunta": "Un ISP entrega un módem/ONT y el cliente conecta detrás varios equipos cableados. ¿Qué dispositivo permite concentrar esas conexiones Ethernet dentro de la LAN?",
       "opciones": [
-        "tracert",
-        "ipconfig",
-        "getmac",
-        "nslookup"
-      ],
-      "correcta": 2,
-      "descripcion": "`getmac` está destinado específicamente a mostrar las direcciones MAC asociadas a los adaptadores de red. `ipconfig` también muestra información de interfaces, pero su objetivo principal es la configuración IP."
-    },
-    {
-      "pregunta": "¿Cuál de las siguientes afirmaciones diferencia correctamente una dirección MAC de una dirección IP?",
-      "opciones": [
-        "La MAC identifica una interfaz a nivel de enlace, mientras que la IP proporciona direccionamiento lógico en una red",
-        "La MAC siempre identifica una página web, mientras que la IP identifica una contraseña",
-        "La MAC solamente existe en Internet, mientras que la IP solo existe en redes locales",
-        "La MAC y la IP son exactamente el mismo tipo de dirección y cumplen la misma función"
-      ],
-      "correcta": 0,
-      "descripcion": "La dirección MAC está asociada a una interfaz de red y opera principalmente en la capa de enlace, mientras que la dirección IP proporciona direccionamiento lógico para permitir la comunicación entre redes."
-    },
-    {
-      "pregunta": "Un técnico necesita revisar rápidamente la dirección IPv4, la máscara de subred y la puerta de enlace configuradas en Windows. ¿Qué comando debería utilizar primero?",
-      "opciones": [
-        "netstat",
-        "ipconfig",
-        "getmac",
-        "tracert"
-      ],
-      "correcta": 1,
-      "descripcion": "`ipconfig` muestra los principales parámetros de configuración IP del equipo, incluyendo dirección IPv4, máscara de subred y, cuando está configurada, la puerta de enlace predeterminada."
-    },
-    {
-      "pregunta": "¿Por qué un técnico podría preferir `ipconfig /all` en lugar de ejecutar solamente `ipconfig`?",
-      "opciones": [
-        "Porque muestra información más detallada de los adaptadores y parámetros de configuración",
-        "Porque convierte automáticamente IPv4 en IPv6",
-        "Porque permite modificar cualquier dirección MAC del equipo",
-        "Porque muestra exclusivamente los sitios web visitados"
-      ],
-      "correcta": 0,
-      "descripcion": "`ipconfig /all` amplía la información mostrada por `ipconfig`, incluyendo detalles adicionales de los adaptadores, servidores DNS, DHCP, direcciones físicas y otros parámetros de configuración."
-    },
-    {
-      "pregunta": "Un usuario quiere observar por qué dispositivos intermedios pasa la comunicación antes de llegar a un servidor remoto. ¿Qué herramienta resulta más apropiada?",
-      "opciones": [
-        "dir",
-        "tracert",
-        "getmac",
-        "pwd"
-      ],
-      "correcta": 1,
-      "descripcion": "`tracert` permite observar los saltos que realiza el tráfico hacia un destino. Esto ayuda a identificar routers o dispositivos intermedios que participan en el recorrido."
-    },
-    {
-      "pregunta": "Si `tracert` muestra varios saltos antes de llegar al destino, ¿qué representa principalmente cada salto?",
-      "opciones": [
-        "Una carpeta del equipo local",
-        "Una interfaz de sonido",
-        "Un dispositivo de red intermedio que participa en el recorrido",
-        "Una contraseña utilizada por el servidor"
-      ],
-      "correcta": 2,
-      "descripcion": "Cada salto representa normalmente un dispositivo de red intermedio, como un router, que participa en el recorrido de los paquetes hacia el destino."
-    },
-    {
-      "pregunta": "Un administrador sospecha que una aplicación mantiene conexiones TCP abiertas. ¿Qué comando le permite observar conexiones y estados de red?",
-      "opciones": [
-        "netstat",
-        "pwd",
-        "dir",
-        "getmac"
-      ],
-      "correcta": 0,
-      "descripcion": "`netstat` permite consultar conexiones de red, puertos locales y remotos y diferentes estados de las conexiones. Por eso resulta apropiado para analizar actividad de red del equipo."
-    },
-    {
-      "pregunta": "En una salida de `netstat`, una conexión aparece como `ESTABLISHED`. ¿Qué interpretación es la más adecuada?",
-      "opciones": [
-        "La conexión está establecida y existe comunicación entre los extremos",
-        "La conexión nunca llegó a comenzar",
-        "El adaptador de red fue eliminado",
-        "El equipo perdió necesariamente el acceso a Internet"
-      ],
-      "correcta": 0,
-      "descripcion": "`ESTABLISHED` indica que la conexión TCP está establecida entre los extremos. No significa que el equipo tenga Internet en general, sino que esa conexión concreta se encuentra establecida."
-    },
-    {
-      "pregunta": "¿Qué función cumple principalmente la dirección 127.0.0.1 en IPv4?",
-      "opciones": [
-        "Identificar al propio equipo mediante la interfaz de loopback",
-        "Identificar automáticamente al router de Internet",
-        "Representar siempre la dirección pública del usuario",
-        "Identificar al servidor DNS del proveedor"
-      ],
-      "correcta": 0,
-      "descripcion": "127.0.0.1 pertenece al rango de loopback y permite que un equipo se comunique consigo mismo. Se utiliza frecuentemente para probar servicios que están ejecutándose localmente."
-    },
-    {
-      "pregunta": "Un usuario escribe el nombre de un sitio web y su computadora necesita averiguar qué dirección IP corresponde a ese nombre. ¿Qué sistema interviene principalmente?",
-      "opciones": [
+        "Switch",
         "DNS",
-        "MAC",
-        "DHCP",
-        "FTP"
+        "Router remoto",
+        "Servidor SMTP"
       ],
       "correcta": 0,
-      "descripcion": "DNS permite resolver nombres de dominio, como un nombre de sitio web, y obtener las direcciones IP asociadas. Esto evita que los usuarios tengan que memorizar direcciones IP."
+      "descripcion": "Un switch permite interconectar múltiples dispositivos Ethernet dentro de una LAN y reenviar tramas según sus direcciones MAC. No realiza por sí solo la función de resolución DNS ni de correo."
     },
     {
-      "pregunta": "¿Qué ventaja ofrece `nslookup` cuando se está investigando un problema relacionado con DNS?",
+      "pregunta": "Una casa tiene Internet funcionando por cable, pero quiere que teléfonos y notebooks se conecten mediante Wi-Fi. ¿Qué equipo o función debe proporcionar la red local?",
       "opciones": [
-        "Permite realizar consultas DNS y observar información sobre la resolución de nombres",
-        "Permite cambiar físicamente la tarjeta de red",
-        "Permite listar todas las carpetas del disco",
-        "Permite modificar automáticamente la topología de la red"
+        "Punto de acceso inalámbrico",
+        "Servidor DNS público",
+        "Switch sin radio",
+        "ONT sin Wi-Fi"
       ],
       "correcta": 0,
-      "descripcion": "`nslookup` permite consultar servidores DNS y comprobar cómo se resuelve un nombre. Es útil para detectar problemas de resolución de dominios o comprobar qué servidor DNS responde."
+      "descripcion": "El punto de acceso proporciona conectividad inalámbrica y enlaza los clientes Wi-Fi con la red cableada. Un switch común y una ONT sin radio no crean por sí mismos la cobertura Wi-Fi."
     },
     {
-      "pregunta": "Un equipo tiene como dirección IPv4 192.168.1.25 y máscara 255.255.255.0. ¿Qué representa principalmente la máscara?",
+      "pregunta": "¿Cuál es una diferencia funcional razonable entre un router doméstico y un switch de la misma red?",
       "opciones": [
-        "Indica qué parte de la dirección corresponde a la red y cuál al dispositivo",
-        "Indica la dirección MAC del equipo",
-        "Indica el nombre del proveedor de Internet",
-        "Indica el protocolo utilizado para enviar correos"
+        "El router conecta y enruta entre redes; el switch principalmente interconecta equipos dentro de una LAN",
+        "El router solo transmite Wi-Fi y el switch solo traduce nombres de dominio",
+        "El router trabaja exclusivamente con direcciones MAC y el switch exclusivamente con IP",
+        "Ambos realizan exactamente el mismo proceso, pero con nombres comerciales distintos"
       ],
       "correcta": 0,
-      "descripcion": "La máscara de subred permite separar la parte correspondiente a la red de la parte correspondiente a los hosts. En este caso, 255.255.255.0 equivale a una máscara /24."
+      "descripcion": "El router trabaja principalmente en el direccionamiento y encaminamiento entre redes, mientras que el switch Ethernet conmuta tramas dentro de una red local. Algunos equipos domésticos integran ambas funciones."
     },
     {
-      "pregunta": "Un equipo necesita enviar tráfico hacia una red que no pertenece a su red local. ¿Qué dispositivo o dirección suele utilizar como siguiente paso?",
+      "pregunta": "Un ISP entrega Internet mediante cable coaxial y el equipo instalado adapta la señal del servicio para que el router pueda utilizarla. ¿Qué dispositivo es el más probable?",
       "opciones": [
-        "La puerta de enlace predeterminada",
-        "La dirección de loopback",
-        "El nombre de la carpeta actual",
-        "La dirección MAC de la impresora"
+        "Módem de cable",
+        "Switch PoE",
+        "Punto de acceso",
+        "Servidor DNS"
       ],
       "correcta": 0,
-      "descripcion": "La puerta de enlace predeterminada normalmente es el router al que el equipo entrega tráfico destinado a otras redes. Sin ella, el equipo puede comunicarse localmente pero tener dificultades para alcanzar redes externas."
+      "descripcion": "En accesos por cable, el módem de cable adapta la señal de la red del proveedor a una interfaz utilizable por la red del cliente. Los otros dispositivos cumplen funciones diferentes."
     },
-
     {
-      "pregunta": "Una persona conecta un teléfono con unos auriculares Bluetooth y también con un reloj inteligente cercano. ¿Qué tipo de red describe mejor esta situación?",
+      "pregunta": "¿Qué situación describe mejor el uso de un repetidor en una red doméstica?",
       "opciones": [
-        "WAN",
-        "MAN",
+        "Extender la cobertura de una señal existente hacia una zona con menor alcance",
+        "Asignar direcciones IP públicas a todos los dispositivos",
+        "Resolver nombres de dominio antes de acceder a una web",
+        "Convertir una dirección MAC en una dirección IPv4"
+      ],
+      "correcta": 0,
+      "descripcion": "Un repetidor recibe y vuelve a transmitir una señal para ampliar su cobertura. No reemplaza las funciones de DHCP, DNS ni el direccionamiento IP."
+    },
+    {
+      "pregunta": "Una empresa conecta varios equipos a un switch y conecta ese switch a un router que tiene salida al ISP. ¿Qué papel cumple el switch en ese diseño?",
+      "opciones": [
+        "Concentrar la conectividad de los equipos de la LAN",
+        "Determinar las rutas de Internet entre países",
+        "Asignar necesariamente la IP pública del ISP",
+        "Resolver todos los nombres de dominio"
+      ],
+      "correcta": 0,
+      "descripcion": "El switch concentra las conexiones locales y permite que los dispositivos de la LAN intercambien tramas. El router es quien normalmente conecta esa LAN con otras redes."
+    },
+    {
+      "pregunta": "En una red de cliente, ¿qué equipo suele actuar como puerta de enlace predeterminada hacia el ISP?",
+      "opciones": [
+        "El router del cliente",
+        "El teclado de administración",
+        "El switch de la LAN",
+        "La impresora de red"
+      ],
+      "correcta": 0,
+      "descripcion": "La puerta de enlace predeterminada suele ser la interfaz LAN del router. Ese equipo puede reenviar tráfico desde la red local hacia la red del proveedor."
+    },
+    {
+      "pregunta": "Un ISP ofrece fibra hasta el hogar. ¿Cuál de estas combinaciones representa mejor una cadena típica de conexión del cliente?",
+      "opciones": [
+        "Fibra → ONT/ONU → router → dispositivos de la LAN",
+        "Fibra → DNS → teclado → dispositivos",
+        "Fibra → switch → tabla ASCII → router",
+        "Fibra → impresora → servidor SMTP → LAN"
+      ],
+      "correcta": 0,
+      "descripcion": "En un acceso FTTH es habitual que la fibra llegue a una ONT/ONU y desde allí se entregue conectividad al router. Luego el router y los switches/AP permiten conectar los dispositivos finales."
+    },
+    {
+      "pregunta": "Un usuario conecta teléfono, reloj y auriculares en un radio reducido alrededor de sí. ¿Qué clasificación describe mejor esa red?",
+      "opciones": [
+        "PAN",
         "LAN",
-        "PAN"
+        "MAN",
+        "WAN"
       ],
-      "correcta": 3,
-      "descripcion": "Una PAN (Personal Area Network) conecta dispositivos personales en un área pequeña alrededor del usuario. Bluetooth es un ejemplo típico de tecnología utilizada en este contexto."
+      "correcta": 0,
+      "descripcion": "Una PAN cubre un área personal pequeña y suele conectar dispositivos cercanos al usuario. Bluetooth es una tecnología frecuente en este tipo de escenario."
     },
     {
-      "pregunta": "Una escuela conecta computadoras, impresoras y servidores dentro de su edificio mediante una red administrada por la institución. ¿Qué clasificación corresponde mejor?",
+      "pregunta": "Una escuela conecta laboratorios, administración e impresoras dentro del mismo establecimiento. ¿Qué tipo de red encaja mejor?",
       "opciones": [
         "PAN",
         "LAN",
@@ -188,10 +132,10 @@
         "WAN"
       ],
       "correcta": 1,
-      "descripcion": "Una LAN (Local Area Network) conecta dispositivos dentro de un área geográfica limitada, como una casa, escuela, laboratorio u oficina."
+      "descripcion": "Una LAN conecta dispositivos dentro de un área local limitada, como una vivienda, edificio, escuela u oficina."
     },
     {
-      "pregunta": "Una empresa conecta mediante una misma infraestructura de comunicaciones varias instalaciones distribuidas dentro de una ciudad. ¿Qué tipo de red describe mejor el escenario?",
+      "pregunta": "Una organización enlaza diferentes edificios distribuidos por una ciudad mediante una infraestructura común. ¿Qué clasificación es la más adecuada?",
       "opciones": [
         "PAN",
         "LAN",
@@ -199,10 +143,10 @@
         "WAN"
       ],
       "correcta": 2,
-      "descripcion": "Una MAN (Metropolitan Area Network) está pensada para cubrir una zona metropolitana o una ciudad, siendo mayor que una LAN pero generalmente menor que una WAN."
+      "descripcion": "Una MAN cubre normalmente un ámbito metropolitano, mayor que una LAN y menor que una WAN de alcance regional o global."
     },
     {
-      "pregunta": "Una organización conecta sucursales ubicadas en Argentina, Brasil y España. ¿Qué clasificación representa mejor el alcance de esa infraestructura?",
+      "pregunta": "Una compañía mantiene redes interconectadas en Argentina, Chile y España. ¿Qué tipo de red representa mejor el alcance?",
       "opciones": [
         "PAN",
         "LAN",
@@ -210,694 +154,953 @@
         "WAN"
       ],
       "correcta": 3,
-      "descripcion": "Una WAN (Wide Area Network) permite interconectar redes ubicadas a grandes distancias geográficas, incluso entre países y continentes."
+      "descripcion": "Una WAN permite interconectar redes separadas por grandes distancias geográficas, incluso entre países y continentes."
     },
     {
-      "pregunta": "¿Qué característica permite diferenciar principalmente una LAN de una WAN?",
+      "pregunta": "¿Qué criterio diferencia mejor PAN, LAN, MAN y WAN cuando se clasifican por alcance?",
       "opciones": [
-        "El alcance geográfico de la red y la distancia entre las redes conectadas",
-        "La cantidad de caracteres de las direcciones MAC",
-        "El hecho de que una LAN no pueda utilizar routers",
-        "El hecho de que una WAN solo pueda utilizar conexiones inalámbricas"
+        "La extensión geográfica y el ámbito que cubre la infraestructura",
+        "La cantidad de letras del nombre del protocolo",
+        "La marca de los routers utilizados",
+        "El sistema operativo instalado en los clientes"
       ],
       "correcta": 0,
-      "descripcion": "La diferencia fundamental está relacionada con el alcance. Una LAN normalmente cubre un área limitada, mientras que una WAN puede interconectar redes separadas por grandes distancias."
+      "descripcion": "La clasificación PAN/LAN/MAN/WAN se relaciona principalmente con el alcance geográfico de la red. Las tecnologías concretas pueden variar dentro de cada categoría."
     },
-
     {
-      "pregunta": "Dos fabricantes diferentes quieren que sus dispositivos puedan comunicarse siguiendo reglas compatibles. ¿Qué concepto facilita principalmente esta interoperabilidad?",
+      "pregunta": "Una LAN moderna utiliza Ethernet para equipos cableados y Wi-Fi para clientes inalámbricos. ¿Qué conclusión es más correcta?",
       "opciones": [
-        "Un estándar de comunicación",
-        "Una dirección MAC privada",
-        "Una carpeta compartida",
-        "Una contraseña local"
+        "Una misma LAN puede integrar distintas tecnologías de acceso compatibles",
+        "Una LAN solo puede utilizar un único protocolo físico",
+        "Wi-Fi convierte automáticamente la LAN en una MAN",
+        "Ethernet solo puede funcionar en una WAN"
       ],
       "correcta": 0,
-      "descripcion": "Los estándares establecen especificaciones y reglas comunes que permiten que productos y sistemas diferentes puedan interoperar correctamente."
+      "descripcion": "Una LAN puede combinar Ethernet, Wi-Fi y otros medios mientras los dispositivos puedan comunicarse dentro de la misma infraestructura lógica. El tipo de red depende del alcance y diseño, no de una sola tecnología."
     },
     {
-      "pregunta": "¿Cuál describe mejor a un protocolo de comunicación?",
+      "pregunta": "¿Qué estándar está directamente asociado con Ethernet en redes LAN cableadas?",
       "opciones": [
-        "Un conjunto de reglas que define cómo intercambian información los sistemas",
-        "Una pieza física obligatoria de una computadora",
-        "Un número que identifica exclusivamente una tarjeta gráfica",
-        "Una topología que determina dónde está cada monitor"
+        "IEEE 802.3",
+        "IEEE 802.11",
+        "IEEE 802.15",
+        "IEEE 802.16"
       ],
       "correcta": 0,
-      "descripcion": "Un protocolo establece reglas sobre cómo se estructura, transmite, recibe e interpreta la información durante una comunicación entre sistemas."
+      "descripcion": "IEEE 802.3 corresponde a Ethernet. IEEE 802.11 se asocia principalmente con WLAN/Wi-Fi, mientras que 802.15 incluye tecnologías de redes personales."
     },
     {
-      "pregunta": "Un navegador solicita una página web a un servidor. ¿Qué protocolo pertenece directamente a la comunicación web solicitada?",
+      "pregunta": "¿Qué familia de estándares está asociada principalmente con Wi-Fi?",
       "opciones": [
-        "HTTP",
-        "DHCP",
-        "SMTP",
-        "FTP"
+        "IEEE 802.3",
+        "IEEE 802.11",
+        "IEEE 802.15.1",
+        "IEEE 802.1X exclusivamente"
+      ],
+      "correcta": 1,
+      "descripcion": "IEEE 802.11 define la familia de estándares para redes inalámbricas LAN conocidas comercialmente como Wi-Fi. 802.3 corresponde a Ethernet."
+    },
+    {
+      "pregunta": "Un dispositivo Bluetooth se comunica con otro a pocos metros. ¿Qué combinación resulta más coherente?",
+      "opciones": [
+        "PAN y IEEE 802.15",
+        "LAN y IEEE 802.3 únicamente",
+        "WAN y IEEE 802.11",
+        "MAN y SMTP"
       ],
       "correcta": 0,
-      "descripcion": "HTTP es uno de los protocolos fundamentales de la Web y define la comunicación entre clientes y servidores para solicitar y transferir recursos."
+      "descripcion": "Bluetooth se utiliza habitualmente en redes personales y se relaciona con la familia IEEE 802.15. No significa que toda PAN tenga que usar exclusivamente Bluetooth."
     },
     {
-      "pregunta": "¿Qué diferencia conceptual existe entre HTTP y HTTPS?",
+      "pregunta": "¿Por qué una WAN puede utilizar distintos protocolos y tecnologías en diferentes tramos?",
       "opciones": [
-        "HTTPS incorpora mecanismos criptográficos para proteger la comunicación HTTP",
-        "HTTP utiliza IP y HTTPS utiliza exclusivamente MAC",
-        "HTTPS sirve únicamente para enviar correo electrónico",
-        "HTTP es un protocolo de transporte y HTTPS es una topología"
+        "Porque una WAN puede interconectar redes heterogéneas mediante dispositivos de encaminamiento",
+        "Porque todas las WAN deben usar el mismo medio físico",
+        "Porque WAN significa exclusivamente red inalámbrica",
+        "Porque una WAN no necesita direcciones IP"
       ],
       "correcta": 0,
-      "descripcion": "HTTPS utiliza HTTP sobre una conexión protegida mediante TLS, proporcionando confidencialidad e integridad para la comunicación entre cliente y servidor."
+      "descripcion": "Una WAN puede atravesar enlaces y redes diferentes. Los routers y protocolos de interconexión permiten que esas redes heterogéneas participen en una comunicación extremo a extremo."
     },
     {
-      "pregunta": "Un administrador necesita transferir archivos entre un cliente y un servidor utilizando un protocolo diseñado específicamente para esa tarea. ¿Cuál resulta más apropiado?",
+      "pregunta": "Una red de oficina ocupa un solo edificio, pero utiliza varios switches, Wi-Fi y routers internos. ¿Su cantidad de dispositivos determina que sea una MAN?",
       "opciones": [
-        "FTP",
+        "Sí, porque una MAN depende de tener muchos dispositivos",
+        "No, el alcance y la cobertura son más relevantes que la cantidad de dispositivos",
+        "Sí, siempre que tenga más de un switch",
+        "No, porque cualquier red con Wi-Fi es automáticamente una PAN"
+      ],
+      "correcta": 1,
+      "descripcion": "La clasificación no depende simplemente de contar dispositivos. Una red dentro de un edificio sigue siendo normalmente una LAN aunque tenga muchos equipos y diferentes tecnologías."
+    },
+    {
+      "pregunta": "¿Cuál de estas situaciones representa mejor una MAN y no simplemente una LAN?",
+      "opciones": [
+        "Un laboratorio con 40 computadoras en un edificio",
+        "Una red que interconecta sedes distribuidas por una misma ciudad",
+        "Un teléfono conectado a unos auriculares",
+        "Una red doméstica con dos notebooks"
+      ],
+      "correcta": 1,
+      "descripcion": "Una MAN está pensada para un alcance metropolitano. Interconectar sedes de una misma ciudad encaja mejor con esta clasificación que los otros escenarios."
+    },
+    {
+      "pregunta": "En una red local, ¿qué función cumple principalmente Ethernet?",
+      "opciones": [
+        "Define mecanismos de comunicación de la LAN cableada, incluyendo el formato y acceso a tramas",
+        "Resuelve nombres de dominio públicos",
+        "Asigna automáticamente todas las IP mediante DHCP",
+        "Cifra por sí solo todo el contenido de Internet"
+      ],
+      "correcta": 0,
+      "descripcion": "Ethernet, definido por IEEE 802.3, especifica aspectos de la comunicación de redes locales cableadas, incluyendo formatos de trama y mecanismos de acceso al medio."
+    },
+    {
+      "pregunta": "¿Qué combinación relaciona correctamente tecnología y tipo de red?",
+      "opciones": [
+        "Bluetooth—PAN; Ethernet—LAN; enlaces metropolitanos—MAN; Internet interconectada—WAN",
+        "Bluetooth—WAN; Ethernet—PAN; Internet—LAN; MAN—solo Bluetooth",
+        "Ethernet—WAN exclusivamente; Wi-Fi—solo MAN",
+        "DNS—PAN; TCP—LAN; ASCII—WAN"
+      ],
+      "correcta": 0,
+      "descripcion": "La primera combinación relaciona ejemplos razonables de tecnologías y alcances. Sin embargo, una tecnología concreta no determina por sí sola la clasificación en todos los casos."
+    },
+    {
+      "pregunta": "Si dos redes LAN están en ciudades diferentes y se interconectan mediante routers y enlaces de un proveedor, ¿qué categoría describe mejor el conjunto?",
+      "opciones": [
+        "PAN",
+        "LAN",
+        "MAN",
+        "WAN"
+      ],
+      "correcta": 3,
+      "descripcion": "Al interconectar LAN separadas por una gran distancia geográfica se forma una infraestructura de alcance WAN. Las LAN originales siguen existiendo como redes locales."
+    },
+    {
+      "pregunta": "Un paquete necesita atravesar varios routers para llegar a otra red. ¿Qué protocolo proporciona el direccionamiento lógico utilizado para identificar redes y hosts en Internet?",
+      "opciones": [
+        "IP",
         "DNS",
-        "SMTP",
-        "DHCP"
+        "TCP",
+        "ASCII"
       ],
       "correcta": 0,
-      "descripcion": "FTP fue diseñado para realizar transferencias de archivos entre sistemas. DNS, SMTP y DHCP tienen funciones diferentes dentro de una red."
+      "descripcion": "IP proporciona el direccionamiento lógico necesario para identificar interfaces y redes y permite que los routers tomen decisiones de encaminamiento."
     },
     {
-      "pregunta": "¿Qué protocolo está asociado principalmente con el envío de correo electrónico?",
-      "opciones": [
-        "SMTP",
-        "DHCP",
-        "DNS",
-        "FTP"
-      ],
-      "correcta": 0,
-      "descripcion": "SMTP (Simple Mail Transfer Protocol) se utiliza principalmente para transportar y enviar mensajes de correo electrónico entre clientes y servidores o entre servidores."
-    },
-    {
-      "pregunta": "Un dispositivo se conecta a una red y recibe automáticamente una dirección IP, máscara y otros parámetros. ¿Qué protocolo está asociado con este proceso?",
-      "opciones": [
-        "DHCP",
-        "HTTP",
-        "SMTP",
-        "FTP"
-      ],
-      "correcta": 0,
-      "descripcion": "DHCP permite asignar automáticamente parámetros de configuración de red a los dispositivos, evitando que el administrador tenga que configurarlos manualmente uno por uno."
-    },
-    {
-      "pregunta": "Una aplicación necesita transportar datos dando prioridad a la entrega ordenada y confiable. ¿Qué protocolo de transporte sería más apropiado?",
+      "pregunta": "Una aplicación necesita una comunicación orientada a conexión con control de entrega y orden de datos. ¿Qué protocolo encaja mejor?",
       "opciones": [
         "UDP",
         "TCP",
+        "DNS",
+        "IP"
+      ],
+      "correcta": 1,
+      "descripcion": "TCP establece una comunicación orientada a conexión y proporciona mecanismos para controlar la entrega y ordenar los datos recibidos."
+    },
+    {
+      "pregunta": "Un navegador conoce `www.ejemplo.com`, pero necesita obtener una dirección IP para iniciar la comunicación. ¿Qué sistema interviene?",
+      "opciones": [
+        "TCP",
+        "DNS",
+        "Ethernet",
+        "DHCP"
+      ],
+      "correcta": 1,
+      "descripcion": "DNS traduce o resuelve nombres de dominio mediante consultas a servidores DNS. Después, otros protocolos como IP y TCP/UDP pueden participar en la comunicación."
+    },
+    {
+      "pregunta": "¿Cuál es la relación más precisa entre TCP e IP?",
+      "opciones": [
+        "TCP gestiona la comunicación de transporte, mientras IP proporciona direccionamiento y encaminamiento de paquetes",
+        "TCP asigna direcciones IP y DNS garantiza la entrega física",
+        "IP cifra los datos y TCP convierte nombres de dominio",
+        "Ambos son exactamente el mismo protocolo con nombres diferentes"
+      ],
+      "correcta": 0,
+      "descripcion": "TCP e IP cumplen funciones diferentes y complementarias. TCP pertenece al transporte y gestiona una comunicación confiable; IP se ocupa principalmente del direccionamiento y encaminamiento."
+    },
+    {
+      "pregunta": "Una aplicación envía pequeñas consultas donde la rapidez y la baja sobrecarga son importantes y puede manejar pérdidas por su cuenta. ¿Qué transporte podría elegir?",
+      "opciones": [
+        "TCP",
+        "UDP",
+        "DNS siempre",
+        "Ethernet exclusivamente"
+      ],
+      "correcta": 1,
+      "descripcion": "UDP tiene menor sobrecarga y no establece por sí mismo los mecanismos de confiabilidad de TCP. Puede ser adecuado cuando la aplicación prioriza rapidez o implementa su propio control."
+    },
+    {
+      "pregunta": "¿Qué ocurre conceptualmente cuando DNS resuelve un nombre de dominio correctamente?",
+      "opciones": [
+        "Obtiene registros asociados al nombre, como una dirección IP",
+        "Convierte la IP en una dirección MAC para todos los routers de Internet",
+        "Establece una sesión TCP obligatoria con cada página web",
+        "Cambia la máscara de subred del equipo"
+      ],
+      "correcta": 0,
+      "descripcion": "DNS consulta registros del sistema de nombres y puede devolver direcciones IP asociadas con un dominio. Esa información permite que el cliente conozca a qué dirección comunicarse."
+    },
+    {
+      "pregunta": "Un ping puede recibir respuestas de una dirección IP aunque el nombre de dominio asociado no se resuelva. ¿Qué conclusión es razonable?",
+      "opciones": [
+        "La conectividad IP puede funcionar aunque exista un problema de resolución DNS",
+        "TCP necesariamente está roto",
+        "La dirección MAC dejó de existir",
+        "El equipo se convirtió en una WAN"
+      ],
+      "correcta": 0,
+      "descripcion": "El ping hacia una IP prueba una forma de conectividad basada en IP/ICMP. Si funciona por IP pero no por nombre, es razonable investigar DNS por separado."
+    },
+    {
+      "pregunta": "¿Qué protocolo se encuentra principalmente en la capa de Transporte del modelo OSI?",
+      "opciones": [
+        "IP",
+        "TCP",
+        "DNS",
+        "Ethernet"
+      ],
+      "correcta": 1,
+      "descripcion": "TCP es un protocolo de transporte y se asocia con la capa 4 del modelo OSI. IP corresponde principalmente a la capa de Red."
+    },
+    {
+      "pregunta": "¿Qué protocolo se asocia principalmente con la capa de Red del modelo OSI?",
+      "opciones": [
+        "TCP",
+        "IP",
         "DNS",
         "HTTP"
       ],
       "correcta": 1,
-      "descripcion": "TCP incorpora mecanismos de control que permiten establecer una comunicación orientada a conexión y gestionar la entrega ordenada y confiable de los datos."
+      "descripcion": "IP se ocupa del direccionamiento lógico y del encaminamiento, funciones asociadas principalmente con la capa 3, Red."
     },
     {
-      "pregunta": "Una aplicación prioriza reducir la sobrecarga y puede tolerar que el protocolo de transporte no garantice por sí mismo la entrega de cada paquete. ¿Qué opción encaja mejor?",
+      "pregunta": "DNS puede utilizar UDP y también TCP en determinadas situaciones. ¿Qué afirmación evita una simplificación incorrecta?",
       "opciones": [
-        "TCP",
-        "UDP",
-        "SMTP",
-        "DHCP"
+        "DNS no debe confundirse con TCP o UDP: DNS es el servicio/protocolo de nombres y puede utilizar distintos transportes",
+        "DNS reemplaza siempre a TCP",
+        "DNS solo funciona sobre Ethernet",
+        "DNS es una dirección IP reservada"
+      ],
+      "correcta": 0,
+      "descripcion": "DNS es el sistema/protocolo de resolución de nombres y tradicionalmente utiliza UDP para muchas consultas, aunque también puede utilizar TCP en situaciones específicas."
+    },
+    {
+      "pregunta": "Si un servidor recibe un segmento TCP dirigido a un puerto concreto, ¿qué información está ayudando a identificar ese puerto?",
+      "opciones": [
+        "La capa de transporte utiliza números de puerto para distinguir servicios o procesos",
+        "DNS convierte directamente el puerto en una dirección MAC",
+        "IP utiliza el puerto para reemplazar la dirección de red",
+        "ASCII determina el puerto mediante caracteres"
+      ],
+      "correcta": 0,
+      "descripcion": "Los números de puerto permiten identificar aplicaciones o servicios dentro de un host. TCP y UDP utilizan puertos en la capa de transporte."
+    },
+    {
+      "pregunta": "¿Cuál de estos conjuntos representa correctamente tres funciones diferentes?",
+      "opciones": [
+        "IP: direccionamiento; TCP: transporte confiable; DNS: resolución de nombres",
+        "IP: correo; TCP: tabla ASCII; DNS: topología",
+        "IP: cifrado; TCP: dirección MAC; DNS: alimentación eléctrica",
+        "IP: Wi-Fi; TCP: fibra óptica; DNS: switch"
+      ],
+      "correcta": 0,
+      "descripcion": "La primera opción distingue correctamente las funciones principales: IP direcciona y enruta, TCP gestiona transporte orientado a conexión y DNS resuelve nombres."
+    },
+    {
+      "pregunta": "Un administrador prueba `ping 192.168.1.1`. ¿Qué está comprobando principalmente si recibe respuestas?",
+      "opciones": [
+        "Que existe una respuesta al tráfico ICMP hacia esa dirección IP",
+        "Que el servidor DNS resolvió un nombre de dominio",
+        "Que TCP estableció una conexión HTTP",
+        "Que la MAC del destino fue convertida a ASCII"
+      ],
+      "correcta": 0,
+      "descripcion": "Ping utiliza normalmente ICMP para enviar solicitudes de eco y recibir respuestas. Una respuesta demuestra alcance de esa dirección mediante ese mecanismo, aunque no garantiza que todos los servicios del host estén funcionando."
+    },
+    {
+      "pregunta": "Un dominio responde correctamente por DNS, pero una página web no carga. ¿Por qué no sería correcto concluir que DNS es necesariamente el único problema?",
+      "opciones": [
+        "La resolución de nombres y el funcionamiento del servicio web son etapas diferentes",
+        "Porque DNS controla directamente el monitor",
+        "Porque TCP no utiliza direcciones IP",
+        "Porque HTTP funciona sin ninguna red"
+      ],
+      "correcta": 0,
+      "descripcion": "Que DNS resuelva correctamente solo demuestra que el nombre pudo obtener información asociada. El problema posterior puede estar en TCP, el servidor web, HTTP/HTTPS, firewall u otros componentes."
+    },
+    {
+      "pregunta": "En una topología BUS, varios dispositivos comparten un medio principal. ¿Qué característica la distingue de una estrella?",
+      "opciones": [
+        "Los equipos comparten un segmento principal en lugar de depender de un punto central único",
+        "Cada equipo posee enlaces directos con todos los demás",
+        "Todos los dispositivos se conectan exclusivamente a un switch central",
+        "Los datos solo pueden viajar mediante una conexión inalámbrica"
+      ],
+      "correcta": 0,
+      "descripcion": "La topología bus se basa en un medio principal compartido. En estrella, cada dispositivo tiene normalmente un enlace hacia un punto central."
+    },
+    {
+      "pregunta": "En una red en ANILLO, un dispositivo deja de funcionar y la red no posee mecanismos alternativos. ¿Qué riesgo representa?",
+      "opciones": [
+        "La interrupción puede afectar el recorrido de comunicación del anillo",
+        "Solo cambia la dirección IP pública",
+        "DNS reemplaza automáticamente el dispositivo sin configuración",
+        "La topología se transforma automáticamente en estrella"
+      ],
+      "correcta": 0,
+      "descripcion": "En un anillo simple, una interrupción puede afectar el camino de comunicación. Diseños redundantes pueden reducir este riesgo, pero no debe asumirse que todos los anillos tienen la misma tolerancia."
+    },
+    {
+      "pregunta": "Una topología ESTRELLA utiliza un switch central. Si un cable de un equipo se rompe, ¿qué ocurre normalmente con ese equipo?",
+      "opciones": [
+        "Ese enlace queda afectado, mientras los demás enlaces pueden continuar funcionando",
+        "Toda la red necesariamente pierde alimentación",
+        "El switch se convierte en un servidor DNS",
+        "Todos los equipos cambian automáticamente de IP pública"
+      ],
+      "correcta": 0,
+      "descripcion": "Una ventaja de la estrella es que una falla en el enlace de un equipo suele aislar principalmente a ese equipo, mientras el resto puede seguir comunicándose a través del punto central."
+    },
+    {
+      "pregunta": "¿Qué ventaja conceptual ofrece una topología ÁRBOL frente a una estrella única?",
+      "opciones": [
+        "Permite organizar la red en niveles jerárquicos mediante varios puntos de distribución",
+        "Obliga a que todos los equipos compartan un único cable",
+        "Elimina la necesidad de direccionamiento IP",
+        "Hace que todos los dispositivos tengan enlaces directos entre sí"
+      ],
+      "correcta": 0,
+      "descripcion": "La topología árbol extiende una estructura jerárquica, pudiendo utilizar varios niveles de distribución. Esto facilita organizar redes grandes por segmentos."
+    },
+    {
+      "pregunta": "Una universidad conecta un switch central con switches de distintos pisos y cada switch conecta los equipos de su piso. ¿Qué topología describe mejor la estructura global?",
+      "opciones": [
+        "Árbol",
+        "Bus",
+        "Anillo simple",
+        "PAN"
+      ],
+      "correcta": 0,
+      "descripcion": "La estructura tiene niveles jerárquicos: un punto de distribución conecta otros puntos y estos conectan dispositivos finales. Esto corresponde conceptualmente a una topología árbol."
+    },
+    {
+      "pregunta": "¿Qué escenario se adapta mejor a una topología BUS tradicional?",
+      "opciones": [
+        "Varios dispositivos conectados a un medio troncal compartido",
+        "Equipos conectados individualmente a un switch central",
+        "Cada dispositivo enlazado directamente con todos los demás",
+        "Varios switches organizados en niveles jerárquicos"
+      ],
+      "correcta": 0,
+      "descripcion": "El rasgo central de BUS es el medio troncal compartido. Las demás descripciones corresponden a estrella, malla y árbol respectivamente."
+    },
+    {
+      "pregunta": "¿Qué escenario corresponde mejor a una topología ESTRELLA?",
+      "opciones": [
+        "Cada computadora tiene un enlace hacia un dispositivo central de distribución",
+        "Todos los equipos utilizan un único cable troncal compartido",
+        "Cada equipo se conecta al siguiente formando un círculo",
+        "Los dispositivos se organizan obligatoriamente en dos anillos"
+      ],
+      "correcta": 0,
+      "descripcion": "La conexión individual de cada equipo hacia un punto central es la característica distintiva de la estrella."
+    },
+    {
+      "pregunta": "En una topología ÁRBOL, ¿qué relación suele existir entre los dispositivos de distribución?",
+      "opciones": [
+        "Se organizan jerárquicamente en distintos niveles",
+        "Todos se conectan únicamente al mismo cable físico",
+        "Cada uno debe formar un círculo independiente",
+        "Ninguno puede conectarse con otro switch"
+      ],
+      "correcta": 0,
+      "descripcion": "Árbol organiza nodos de distribución en una estructura jerárquica, donde un nivel superior puede conectar y distribuir hacia niveles inferiores."
+    },
+    {
+      "pregunta": "¿Qué problema puede producir una falla en el dispositivo central de una estrella si no existe redundancia?",
+      "opciones": [
+        "Puede dejar sin comunicación a muchos o todos los equipos conectados a ese punto",
+        "Solo cambia el nombre DNS de un equipo",
+        "Afecta exclusivamente a la tabla ASCII",
+        "Convierte automáticamente la red en bus"
+      ],
+      "correcta": 0,
+      "descripcion": "El punto central es crítico en una estrella. Si falla y no existe un camino alternativo, múltiples equipos pueden perder conectividad."
+    },
+    {
+      "pregunta": "Una organización quiere separar una gran LAN por sectores usando switches de distribución y acceso en niveles. ¿Qué topología representa mejor esa organización?",
+      "opciones": [
+        "Árbol",
+        "Bus",
+        "Anillo simple",
+        "PAN"
+      ],
+      "correcta": 0,
+      "descripcion": "La estructura jerárquica por niveles de distribución y acceso corresponde a una topología árbol, muy común como modelo conceptual para redes empresariales."
+    },
+    {
+      "pregunta": "¿Cuál es una diferencia importante entre BUS y ANILLO?",
+      "opciones": [
+        "En BUS existe un medio troncal compartido; en ANILLO los enlaces forman un circuito",
+        "En BUS todos los equipos usan un switch central; en ANILLO no existe ningún enlace",
+        "BUS y ANILLO son exactamente la misma topología",
+        "ANILLO requiere obligatoriamente Wi-Fi y BUS fibra óptica"
+      ],
+      "correcta": 0,
+      "descripcion": "Bus y anillo tienen estructuras físicas diferentes. El bus se organiza alrededor de un medio compartido, mientras que el anillo forma un circuito de conexiones entre nodos."
+    },
+    {
+      "pregunta": "Si una red se diseña con un switch principal, varios switches secundarios y equipos conectados a cada secundario, ¿qué característica permite llamarla árbol?",
+      "opciones": [
+        "La existencia de una organización jerárquica de distribución",
+        "El uso obligatorio de un solo cable para todos",
+        "La ausencia total de switches",
+        "El uso exclusivo de direcciones MAC públicas"
+      ],
+      "correcta": 0,
+      "descripcion": "La característica esencial es la jerarquía: un nivel de distribución conecta niveles inferiores que a su vez conectan los dispositivos finales."
+    },
+    {
+      "pregunta": "Una emisora transmite un programa y los receptores solamente reciben, sin un canal de respuesta dentro de esa comunicación. ¿Qué tipo corresponde?",
+      "opciones": [
+        "Unilateral",
+        "Bilateral simultánea",
+        "Bilateral alternada",
+        "Multicast bidireccional"
+      ],
+      "correcta": 0,
+      "descripcion": "Una comunicación unilateral tiene un único sentido de transmisión. El receptor recibe información pero no dispone de un canal de retorno dentro de esa comunicación."
+    },
+    {
+      "pregunta": "Dos personas mantienen una conversación telefónica y ambas pueden hablar y escuchar al mismo tiempo. ¿Qué tipo de comunicación es?",
+      "opciones": [
+        "Unilateral",
+        "Bilateral simultánea",
+        "Bilateral alternada",
+        "Solo broadcast"
       ],
       "correcta": 1,
-      "descripcion": "UDP tiene una estructura más simple y menor sobrecarga que TCP. No proporciona por sí mismo mecanismos equivalentes de confiabilidad y ordenamiento."
+      "descripcion": "La comunicación bilateral simultánea permite transmitir en ambos sentidos al mismo tiempo. Es el modelo conocido como full-duplex."
     },
     {
-      "pregunta": "¿Qué protocolo se ocupa de resolver nombres como `ejemplo.com` en direcciones IP?",
+      "pregunta": "Dos dispositivos utilizan un canal de radio en el que uno transmite mientras el otro espera, y luego intercambian los roles. ¿Qué tipo de comunicación representa?",
       "opciones": [
-        "DNS",
-        "TCP",
-        "FTP",
-        "SMTP"
-      ],
-      "correcta": 0,
-      "descripcion": "DNS proporciona el sistema de resolución de nombres de dominio. Permite obtener información asociada a un nombre, como sus registros de dirección IP."
-    },
-
-    {
-      "pregunta": "Una organización quiere proteger un archivo para que una persona sin la clave apropiada no pueda interpretar fácilmente su contenido. ¿Qué técnica debería aplicar?",
-      "opciones": [
-        "Cifrado",
-        "Topología de red",
-        "DNS",
-        "Direccionamiento IP"
-      ],
-      "correcta": 0,
-      "descripcion": "El cifrado transforma la información mediante algoritmos y claves para que el contenido no pueda ser interpretado fácilmente por quien no posee los medios necesarios para descifrarlo."
-    },
-    {
-      "pregunta": "¿Qué característica distingue al cifrado simétrico?",
-      "opciones": [
-        "Utiliza normalmente la misma clave secreta para cifrar y descifrar",
-        "Utiliza exclusivamente una clave pública",
-        "No requiere ninguna clave",
-        "Utiliza siempre una dirección IP como clave"
-      ],
-      "correcta": 0,
-      "descripcion": "En el cifrado simétrico se utiliza una misma clave secreta, o información equivalente, para las operaciones de cifrado y descifrado. Esto lo hace eficiente, aunque la distribución segura de la clave es un desafío."
-    },
-    {
-      "pregunta": "¿Qué característica identifica a la criptografía asimétrica?",
-      "opciones": [
-        "Utiliza un par de claves relacionadas: una pública y una privada",
-        "Utiliza siempre una única contraseña compartida",
-        "No utiliza algoritmos matemáticos",
-        "Solo puede utilizarse para direcciones IP"
-      ],
-      "correcta": 0,
-      "descripcion": "La criptografía asimétrica utiliza un par de claves relacionadas matemáticamente. La clave pública puede compartirse, mientras que la privada debe mantenerse protegida."
-    },
-    {
-      "pregunta": "Un documento fue firmado digitalmente y luego modificado. ¿Qué propiedad de seguridad permitiría detectar esa modificación?",
-      "opciones": [
-        "Integridad",
-        "Disponibilidad",
-        "Alcance geográfico",
-        "Topología"
-      ],
-      "correcta": 0,
-      "descripcion": "La integridad se refiere a que la información no haya sido alterada de manera no autorizada. Las firmas digitales permiten detectar cambios en los datos firmados."
-    },
-    {
-      "pregunta": "Una persona recibe un documento firmado digitalmente y quiere verificar que la firma corresponde a la identidad asociada con ella. ¿Qué propiedad está intentando comprobar principalmente?",
-      "opciones": [
-        "Autenticidad",
-        "Ancho de banda",
-        "Latencia",
-        "Disponibilidad física"
-      ],
-      "correcta": 0,
-      "descripcion": "La autenticidad busca comprobar que la información o firma puede atribuirse al origen o identidad correspondiente. En una firma digital intervienen mecanismos criptográficos para realizar esta verificación."
-    },
-    {
-      "pregunta": "¿Qué combinación describe mejor los objetivos de una firma digital?",
-      "opciones": [
-        "Ayudar a verificar la autenticidad del firmante y detectar modificaciones del contenido firmado",
-        "Aumentar físicamente la velocidad de una conexión de red",
-        "Asignar automáticamente direcciones IP",
-        "Convertir una LAN en una WAN"
-      ],
-      "correcta": 0,
-      "descripcion": "Una firma digital permite asociar una firma con una identidad mediante criptografía y comprobar la integridad del contenido firmado. No tiene como objetivo mejorar el rendimiento de la red."
-    },
-
-    {
-      "pregunta": "Una empresa contrata a una organización que le proporciona acceso a Internet. ¿Qué término describe a esa organización?",
-      "opciones": [
-        "ISP",
-        "DNS",
-        "LAN",
-        "MAC"
-      ],
-      "correcta": 0,
-      "descripcion": "ISP significa Internet Service Provider, es decir, proveedor de servicios de Internet. Es la entidad que proporciona al usuario o empresa conectividad y otros servicios relacionados."
-    },
-    {
-      "pregunta": "¿Cuál de estas situaciones representa mejor la función de un ISP?",
-      "opciones": [
-        "Proporcionar conectividad a Internet a un cliente",
-        "Traducir exclusivamente direcciones MAC a nombres de usuario",
-        "Definir las siete capas del modelo OSI",
-        "Crear automáticamente una firma digital para cualquier documento"
-      ],
-      "correcta": 0,
-      "descripcion": "Un ISP proporciona servicios de acceso y conectividad a Internet. Puede ofrecer otros servicios, pero su función principal en este contexto es proporcionar la conexión a la red."
-    },
-
-    {
-      "pregunta": "¿Qué significa PGP?",
-      "opciones": [
-        "Pretty Good Privacy",
-        "Private Gateway Protocol",
-        "Public General Protection",
-        "Personal Graphical Password"
-      ],
-      "correcta": 0,
-      "descripcion": "PGP significa Pretty Good Privacy. Es un sistema de criptografía utilizado para proteger información y permitir mecanismos como cifrado y firmas digitales."
-    },
-    {
-      "pregunta": "¿Qué enfoque criptográfico caracteriza a sistemas como PGP?",
-      "opciones": [
-        "Puede combinar criptografía simétrica y asimétrica para aprovechar las ventajas de ambas",
-        "Utiliza únicamente direcciones MAC para proteger mensajes",
-        "No utiliza claves criptográficas",
-        "Solo transforma nombres de dominio en direcciones IP"
-      ],
-      "correcta": 0,
-      "descripcion": "PGP utiliza un enfoque híbrido: puede emplear criptografía asimétrica para cuestiones relacionadas con las claves y criptografía simétrica para proteger eficientemente los datos."
-    },
-    {
-      "pregunta": "En un sistema como PGP, ¿qué función cumple principalmente una clave pública?",
-      "opciones": [
-        "Puede compartirse con otras personas y participar en operaciones criptográficas sin revelar la clave privada",
-        "Debe mantenerse siempre secreta y nunca puede entregarse a nadie",
-        "Reemplaza físicamente la dirección MAC de una computadora",
-        "Determina automáticamente la máscara de subred"
-      ],
-      "correcta": 0,
-      "descripcion": "La clave pública está diseñada para poder distribuirse. Según la operación criptográfica, puede utilizarse para cifrado o para verificar firmas, mientras que la clave privada debe mantenerse protegida."
-    },
-    {
-      "pregunta": "¿Qué debe ocurrir con la clave privada de un usuario que utiliza criptografía asimétrica?",
-      "opciones": [
-        "Debe mantenerse protegida porque su divulgación puede comprometer operaciones realizadas con ella",
-        "Debe publicarse junto con la dirección IP",
-        "Debe enviarse a todos los servidores DNS",
-        "Debe convertirse obligatoriamente en una dirección MAC"
-      ],
-      "correcta": 0,
-      "descripcion": "La clave privada es información sensible. Si otra persona obtiene acceso a ella, puede comprometer operaciones que dependen de la identidad criptográfica del propietario."
-    },
-
-    {
-      "pregunta": "Según la definición utilizada en este test, ¿qué es la Armadura ASCII?",
-      "opciones": [
-        "Un modelo criptográfico para protocolos como PGP para convertir datos binarios complejos en bloques de texto",
-        "Un protocolo utilizado para asignar direcciones IP automáticamente",
-        "Una topología utilizada para conectar switches en una LAN",
-        "Un método físico para aumentar el alcance de una red inalámbrica"
-      ],
-      "correcta": 0,
-      "descripcion": "En este material, la Armadura ASCII se define como un modelo criptográfico asociado a protocolos como PGP que permite convertir datos binarios complejos en bloques de texto para facilitar su representación y transporte."
-    },
-    {
-      "pregunta": "Un archivo cifrado de PGP debe representarse como bloques de texto para poder transportarse por un sistema que trabaja cómodamente con texto. ¿Qué concepto corresponde a esta función según el material?",
-      "opciones": [
-        "Armadura ASCII",
-        "DHCP",
-        "Topología estrella",
-        "Máscara de subred"
-      ],
-      "correcta": 0,
-      "descripcion": "La Armadura ASCII se utiliza, según la definición del material, para representar datos binarios complejos de PGP mediante bloques de texto. Esto facilita su manipulación en sistemas orientados al intercambio de texto."
-    },
-    {
-      "pregunta": "¿Cuál de las siguientes opciones representa correctamente la relación entre PGP y la Armadura ASCII según este contenido?",
-      "opciones": [
-        "PGP puede trabajar con datos criptográficos y la Armadura ASCII permite representarlos como bloques de texto",
-        "La Armadura ASCII reemplaza a PGP y realiza por sí sola todo el cifrado",
-        "PGP es una topología de red y la Armadura ASCII es un protocolo de transporte",
-        "La Armadura ASCII asigna las direcciones IP que PGP utiliza"
-      ],
-      "correcta": 0,
-      "descripcion": "La relación planteada en este material es que PGP participa en las operaciones criptográficas, mientras que la Armadura ASCII permite representar determinados datos binarios resultantes como texto."
-    },
-
-    {
-      "pregunta": "¿Qué significa ASCII?",
-      "opciones": [
-        "American Standard Code for Information Interchange",
-        "Advanced Security Code for Internet Integration",
-        "American System Communication Interface",
-        "Application Standard Code for Internet Information"
-      ],
-      "correcta": 0,
-      "descripcion": "ASCII corresponde a American Standard Code for Information Interchange, un estándar histórico para representar determinados caracteres mediante valores numéricos."
-    },
-    {
-      "pregunta": "¿Cuál es la función general de ASCII en el tratamiento de texto?",
-      "opciones": [
-        "Establecer una representación numérica para determinados caracteres",
-        "Asignar direcciones IP a los dispositivos",
-        "Cifrar automáticamente cualquier archivo",
-        "Determinar qué router debe utilizar un paquete"
-      ],
-      "correcta": 0,
-      "descripcion": "ASCII establece una correspondencia entre determinados caracteres y valores numéricos. Esto permite representar texto de una manera estandarizada para sistemas informáticos."
-    },
-
-    {
-      "pregunta": "¿Cuál es el objetivo principal del modelo OSI?",
-      "opciones": [
-        "Organizar y describir las funciones de comunicación de red mediante diferentes capas",
-        "Reemplazar todas las direcciones IP por direcciones MAC",
-        "Proporcionar exclusivamente servicios de correo electrónico",
-        "Convertir automáticamente datos binarios en texto"
-      ],
-      "correcta": 0,
-      "descripcion": "El modelo OSI es un modelo de referencia que divide las funciones de comunicación en siete capas, facilitando el estudio y la comprensión de cómo se comunican los sistemas."
-    },
-    {
-      "pregunta": "¿Cuántas capas posee el modelo OSI?",
-      "opciones": [
-        "4",
-        "5",
-        "7",
-        "9"
+        "Unilateral",
+        "Bilateral simultánea",
+        "Bilateral alternada",
+        "Sin comunicación"
       ],
       "correcta": 2,
-      "descripcion": "El modelo OSI posee siete capas: Física, Enlace de datos, Red, Transporte, Sesión, Presentación y Aplicación."
+      "descripcion": "La bilateral alternada permite comunicación en ambos sentidos, pero no simultáneamente. Es comparable conceptualmente con half-duplex."
     },
     {
-      "pregunta": "Un problema está relacionado con la transmisión de bits mediante señales eléctricas, ópticas o de radio. ¿Qué capa OSI corresponde principalmente al problema?",
+      "pregunta": "¿Qué característica distingue a una comunicación bilateral de una unilateral?",
+      "opciones": [
+        "Existe un canal o posibilidad de retorno para que ambas partes transmitan información",
+        "La comunicación bilateral siempre utiliza fibra óptica",
+        "La unilateral necesita obligatoriamente dos routers",
+        "La bilateral no puede utilizar señales digitales"
+      ],
+      "correcta": 0,
+      "descripcion": "La diferencia principal es el sentido de intercambio. En una comunicación bilateral ambas partes pueden transmitir, mientras que en una unilateral la información fluye en un único sentido."
+    },
+    {
+      "pregunta": "Un sensor transmite periódicamente mediciones a un servidor y nunca recibe datos de vuelta como parte de ese intercambio. ¿Qué clasificación describe mejor ese flujo?",
+      "opciones": [
+        "Unilateral",
+        "Bilateral simultánea",
+        "Bilateral alternada",
+        "Anillo"
+      ],
+      "correcta": 0,
+      "descripcion": "El flujo descrito es unilateral porque la información viaja del sensor hacia el servidor sin un canal de respuesta dentro de la comunicación indicada."
+    },
+    {
+      "pregunta": "Un equipo envía una solicitud a otro y este responde después, pero nunca transmiten ambos al mismo tiempo por el canal. ¿Qué tipo corresponde?",
+      "opciones": [
+        "Bilateral alternada",
+        "Bilateral simultánea",
+        "Unilateral",
+        "Broadcast"
+      ],
+      "correcta": 0,
+      "descripcion": "Ambas partes transmiten, por lo que es bilateral, pero lo hacen en momentos diferentes, por lo que corresponde a una comunicación bilateral alternada."
+    },
+    {
+      "pregunta": "¿Qué ejemplo representa mejor una comunicación bilateral simultánea?",
+      "opciones": [
+        "Una llamada de voz donde ambas personas pueden hablar al mismo tiempo",
+        "Una transmisión de radio tradicional de una emisora a sus oyentes",
+        "Un cartel digital que solamente muestra información",
+        "Un sensor que solo envía temperatura"
+      ],
+      "correcta": 0,
+      "descripcion": "En una llamada bidireccional simultánea, ambos participantes pueden enviar y recibir información al mismo tiempo."
+    },
+    {
+      "pregunta": "Una radio tipo walkie-talkie permite que ambos usuarios hablen, pero normalmente deben esperar su turno para transmitir. ¿Cómo se clasifica el intercambio?",
+      "opciones": [
+        "Bilateral alternada",
+        "Bilateral simultánea",
+        "Unilateral",
+        "Sin canal de retorno"
+      ],
+      "correcta": 0,
+      "descripcion": "El walkie-talkie es un ejemplo clásico de comunicación half-duplex: ambos pueden transmitir, pero el canal se utiliza en un sentido por vez."
+    },
+    {
+      "pregunta": "En el modelo OSI, ¿qué capa se ocupa de transmitir bits mediante señales por el medio físico?",
+      "opciones": [
+        "Física",
+        "Enlace de datos",
+        "Red",
+        "Transporte"
+      ],
+      "correcta": 0,
+      "descripcion": "La capa Física define aspectos relacionados con la transmisión de bits y las características del medio y las señales. No se ocupa de decidir rutas IP."
+    },
+    {
+      "pregunta": "Ethernet y las direcciones MAC se relacionan principalmente con qué capa OSI?",
+      "opciones": [
+        "Física",
+        "Enlace de datos",
+        "Red",
+        "Sesión"
+      ],
+      "correcta": 1,
+      "descripcion": "Ethernet y las direcciones MAC se asocian principalmente con la capa 2, Enlace de datos, que trabaja con tramas y comunicación dentro del enlace."
+    },
+    {
+      "pregunta": "IP se ubica principalmente en qué capa del modelo OSI?",
+      "opciones": [
+        "Enlace",
+        "Red",
+        "Transporte",
+        "Aplicación"
+      ],
+      "correcta": 1,
+      "descripcion": "IP corresponde principalmente a la capa 3, Red. Proporciona direccionamiento lógico y participa en el encaminamiento entre redes."
+    },
+    {
+      "pregunta": "TCP y UDP se asocian principalmente con qué capa?",
+      "opciones": [
+        "Física",
+        "Red",
+        "Transporte",
+        "Presentación"
+      ],
+      "correcta": 2,
+      "descripcion": "TCP y UDP son protocolos de la capa 4, Transporte. Proporcionan mecanismos de comunicación entre procesos extremos, con características diferentes."
+    },
+    {
+      "pregunta": "¿Qué capa OSI se ocupa principalmente de establecer, mantener y gestionar sesiones entre aplicaciones?",
+      "opciones": [
+        "Sesión",
+        "Física",
+        "Red",
+        "Enlace"
+      ],
+      "correcta": 0,
+      "descripcion": "La capa de Sesión se ocupa de funciones relacionadas con el establecimiento, mantenimiento y terminación de sesiones de comunicación entre aplicaciones."
+    },
+    {
+      "pregunta": "La codificación, representación y transformación del formato de los datos se relaciona principalmente con qué capa?",
+      "opciones": [
+        "Presentación",
+        "Transporte",
+        "Red",
+        "Física"
+      ],
+      "correcta": 0,
+      "descripcion": "La capa de Presentación se ocupa de cómo se representan los datos, incluyendo aspectos como formato, codificación y transformación necesarios para su interpretación."
+    },
+    {
+      "pregunta": "HTTP, FTP y SMTP se consideran principalmente protocolos de qué capa del modelo OSI?",
       "opciones": [
         "Aplicación",
         "Transporte",
-        "Física",
-        "Sesión"
+        "Red",
+        "Enlace"
       ],
-      "correcta": 2,
-      "descripcion": "La capa Física se ocupa de la transmisión de bits y de las características del medio físico utilizado para transportar las señales."
+      "correcta": 0,
+      "descripcion": "Estos protocolos proporcionan servicios directamente relacionados con aplicaciones y se asocian conceptualmente con la capa 7, Aplicación."
     },
     {
-      "pregunta": "Una investigación analiza direcciones MAC y tramas Ethernet. ¿Qué capa OSI resulta más directamente relacionada?",
+      "pregunta": "¿Cuál de estas asociaciones es correcta?",
       "opciones": [
-        "Enlace de datos",
+        "Ethernet—Enlace; IP—Red; TCP—Transporte; HTTP—Aplicación",
+        "Ethernet—Transporte; IP—Aplicación; TCP—Red; HTTP—Física",
+        "Ethernet—Sesión; IP—Física; TCP—Presentación; HTTP—Red",
+        "Ethernet—Aplicación; IP—Enlace; TCP—Física; HTTP—Sesión"
+      ],
+      "correcta": 0,
+      "descripcion": "La primera asociación coincide con las funciones principales del modelo OSI: Ethernet en enlace, IP en red, TCP en transporte y HTTP en aplicación."
+    },
+    {
+      "pregunta": "DNS se considera principalmente un protocolo de qué capa OSI?",
+      "opciones": [
+        "Aplicación",
+        "Transporte",
         "Red",
+        "Física"
+      ],
+      "correcta": 0,
+      "descripcion": "DNS proporciona un servicio de resolución de nombres para las aplicaciones, por lo que se asocia principalmente con la capa de Aplicación, aunque utilice TCP o UDP como transporte."
+    },
+    {
+      "pregunta": "Un problema afecta a la señal eléctrica del cable, pero las direcciones IP son correctas. ¿Qué capa conviene revisar primero?",
+      "opciones": [
+        "Física",
+        "Aplicación",
+        "Sesión",
+        "Presentación"
+      ],
+      "correcta": 0,
+      "descripcion": "Si el problema está en la señal o en el medio físico, la capa Física es la primera candidata. Que la configuración IP sea correcta no descarta una falla física."
+    },
+    {
+      "pregunta": "Un equipo puede detectar la red Ethernet, pero las comunicaciones entre subredes no funcionan por una ruta incorrecta. ¿Qué capa se relaciona directamente con el problema?",
+      "opciones": [
+        "Red",
+        "Presentación",
         "Sesión",
         "Aplicación"
       ],
       "correcta": 0,
-      "descripcion": "Las direcciones MAC y tecnologías como Ethernet están asociadas principalmente con la capa de Enlace de datos, que se ocupa de la comunicación dentro del enlace de red."
+      "descripcion": "El encaminamiento entre redes y el direccionamiento IP son funciones asociadas principalmente con la capa de Red."
     },
     {
-      "pregunta": "Un técnico analiza el direccionamiento IP y el encaminamiento de paquetes entre redes. ¿Qué capa OSI está más relacionada?",
-      "opciones": [
-        "Física",
-        "Red",
-        "Presentación",
-        "Sesión"
-      ],
-      "correcta": 1,
-      "descripcion": "La capa de Red se ocupa del direccionamiento lógico y del encaminamiento de paquetes entre diferentes redes. IP es un protocolo asociado principalmente con esta capa."
-    },
-    {
-      "pregunta": "Una aplicación necesita controlar una comunicación de extremo a extremo y utiliza TCP. ¿Qué capa OSI corresponde principalmente?",
-      "opciones": [
-        "Transporte",
-        "Física",
-        "Enlace de datos",
-        "Presentación"
-      ],
-      "correcta": 0,
-      "descripcion": "TCP pertenece a la capa de Transporte. Esta capa proporciona funciones relacionadas con la comunicación extremo a extremo, incluyendo mecanismos de confiabilidad en TCP."
-    },
-    {
-      "pregunta": "Un sistema debe transformar o representar los datos de una forma que puedan ser interpretados correctamente por diferentes sistemas. ¿Qué capa OSI está asociada a esta función?",
+      "pregunta": "Una conexión TCP funciona, pero una aplicación no interpreta correctamente el formato de los datos recibidos. ¿Qué capa conceptual puede estar involucrada?",
       "opciones": [
         "Presentación",
         "Física",
+        "Enlace",
+        "Red"
+      ],
+      "correcta": 0,
+      "descripcion": "La capa de Presentación se ocupa de la representación y transformación de datos. Un problema de formato puede estar relacionado con esta función conceptual."
+    },
+    {
+      "pregunta": "¿Qué capa OSI se encuentra inmediatamente por encima de Transporte?",
+      "opciones": [
+        "Sesión",
         "Red",
-        "Enlace de datos"
+        "Enlace",
+        "Física"
       ],
       "correcta": 0,
-      "descripcion": "La capa de Presentación se relaciona con la representación, formato y transformación de los datos para que puedan ser interpretados correctamente."
+      "descripcion": "El orden desde abajo es Física, Enlace, Red, Transporte, Sesión, Presentación y Aplicación. Por lo tanto, Sesión está inmediatamente por encima de Transporte."
     },
     {
-      "pregunta": "¿Cuál es el orden correcto de las capas OSI desde la capa 1 hasta la capa 7?",
+      "pregunta": "¿Qué capa OSI se encuentra inmediatamente por debajo de Transporte?",
       "opciones": [
-        "Física, Enlace de datos, Red, Transporte, Sesión, Presentación, Aplicación",
-        "Aplicación, Presentación, Sesión, Transporte, Red, Enlace, Física",
-        "Física, Red, Transporte, Enlace, Sesión, Aplicación, Presentación",
-        "Enlace, Física, Transporte, Red, Aplicación, Sesión, Presentación"
+        "Red",
+        "Sesión",
+        "Presentación",
+        "Aplicación"
       ],
       "correcta": 0,
-      "descripcion": "El orden ascendente del modelo OSI es Física, Enlace de datos, Red, Transporte, Sesión, Presentación y Aplicación."
-    },
-
-    {
-      "pregunta": "Una red conecta todos sus equipos a un dispositivo central. ¿Qué topología describe mejor esta organización?",
-      "opciones": [
-        "Anillo",
-        "Bus",
-        "Estrella",
-        "Malla"
-      ],
-      "correcta": 2,
-      "descripcion": "En una topología estrella los dispositivos se conectan a un punto central, que puede ser un switch. Esta organización facilita la administración y el aislamiento de ciertos fallos."
+      "descripcion": "En el modelo OSI, Transporte es la capa 4 y Red es la capa 3, por lo que Red se encuentra inmediatamente por debajo."
     },
     {
-      "pregunta": "Una red utiliza un medio principal compartido al que se conectan diferentes dispositivos. ¿Qué topología representa mejor este diseño?",
+      "pregunta": "Un administrador quiere relacionar un protocolo con la capa 4 y observa TCP. ¿Qué función debe asociar principalmente con él?",
       "opciones": [
-        "Malla",
-        "Bus",
-        "Estrella",
-        "Anillo"
-      ],
-      "correcta": 1,
-      "descripcion": "La topología bus utiliza un medio principal compartido. Los dispositivos se conectan a ese medio para intercambiar información."
-    },
-    {
-      "pregunta": "Los dispositivos de una red están conectados formando un circuito cerrado, donde cada uno tiene conexión con los siguientes del recorrido. ¿Qué topología es?",
-      "opciones": [
-        "Bus",
-        "Estrella",
-        "Anillo",
-        "Malla"
-      ],
-      "correcta": 2,
-      "descripcion": "La topología anillo organiza los dispositivos formando un circuito cerrado. La información puede circular siguiendo el recorrido establecido por el anillo."
-    },
-    {
-      "pregunta": "Una red busca disponer de múltiples caminos entre diferentes dispositivos para aumentar la redundancia. ¿Qué topología resulta más adecuada conceptualmente?",
-      "opciones": [
-        "Malla",
-        "Bus",
-        "Estrella simple",
-        "Anillo simple"
+        "Transporte extremo a extremo y entrega ordenada/confiable",
+        "Direccionamiento físico mediante MAC",
+        "Resolución de nombres de dominio",
+        "Transmisión eléctrica de bits"
       ],
       "correcta": 0,
-      "descripcion": "La topología malla utiliza múltiples enlaces entre dispositivos, lo que puede proporcionar caminos alternativos si uno de los enlaces deja de funcionar."
+      "descripcion": "TCP pertenece a Transporte y proporciona mecanismos como control de conexión, ordenamiento y retransmisión para lograr una entrega confiable."
     },
     {
-      "pregunta": "Una infraestructura combina sectores con topología estrella y otros sectores organizados de otra manera. ¿Cómo puede clasificarse globalmente?",
+      "pregunta": "Una persona firma digitalmente un documento. ¿Qué propiedad puede verificarse al comprobar correctamente la firma?",
       "opciones": [
-        "Topología híbrida",
-        "Topología PAN",
-        "Topología TCP",
-        "Topología física única"
+        "Que el contenido no fue modificado desde la firma y que la firma corresponde a la clave asociada",
+        "Que el documento ocupa menos espacio",
+        "Que la red utilizada es una LAN",
+        "Que el servidor siempre está disponible"
       ],
       "correcta": 0,
-      "descripcion": "Una topología híbrida combina dos o más tipos de topologías. Es común encontrar diseños reales que mezclan diferentes estructuras según las necesidades de cada sector."
+      "descripcion": "La verificación de una firma digital permite comprobar la relación entre la firma y la clave pública correspondiente y detectar modificaciones del contenido firmado."
     },
     {
-      "pregunta": "Una empresa utiliza switches para conectar numerosos equipos dentro de una oficina. ¿Qué topología física es frecuente en este escenario?",
+      "pregunta": "¿Qué diferencia conceptual existe entre cifrar un mensaje para un destinatario y firmarlo digitalmente?",
       "opciones": [
-        "Estrella",
-        "Anillo puro",
-        "Bus puro",
-        "Malla completa obligatoria"
+        "El cifrado busca proteger la confidencialidad; la firma permite verificar origen/autenticidad e integridad",
+        "Ambos procesos tienen exactamente el mismo objetivo",
+        "La firma solo reduce el tamaño del mensaje",
+        "El cifrado siempre demuestra quién escribió el mensaje"
       ],
       "correcta": 0,
-      "descripcion": "En muchas redes Ethernet modernas los dispositivos se conectan a switches ubicados como puntos centrales, formando una estructura que conceptualmente corresponde a una topología estrella."
+      "descripcion": "El cifrado se utiliza principalmente para impedir que terceros interpreten el contenido. La firma digital está orientada a verificar la relación con el firmante y detectar modificaciones."
     },
-
     {
-      "pregunta": "Un usuario observa que una conexión TCP aparece como `TIME_WAIT` en `netstat`. ¿Qué interpretación es más razonable?",
+      "pregunta": "Si un archivo cifrado se modifica sin autorización y luego se intenta descifrar, ¿qué propiedad de seguridad se vio comprometida independientemente de que pueda abrirse?",
       "opciones": [
-        "La conexión TCP fue cerrada y permanece temporalmente en ese estado",
-        "La conexión nunca comenzó y está esperando que se conecte el usuario",
-        "El equipo no tiene ninguna interfaz de red instalada",
-        "El servidor DNS está apagado"
+        "Integridad",
+        "Alcance",
+        "Topología",
+        "Disponibilidad del ISP"
       ],
       "correcta": 0,
-      "descripcion": "`TIME_WAIT` aparece después del cierre de determinadas conexiones TCP y permite mantener información durante un período para manejar correctamente segmentos que pudieran llegar posteriormente."
+      "descripcion": "La integridad se refiere a que los datos permanezcan sin modificaciones no autorizadas. El cifrado por sí solo no debe confundirse con un mecanismo completo de integridad."
     },
     {
-      "pregunta": "Un `nslookup` muestra que el servidor DNS configurado no responde a una consulta. ¿Qué problema sería razonable investigar primero?",
+      "pregunta": "Una persona quiere que cualquiera pueda verificar su firma digital, pero no quiere entregar la clave con la que firma. ¿Qué esquema de claves corresponde?",
       "opciones": [
-        "La comunicación entre el equipo y el servidor DNS o la configuración del DNS",
-        "El tamaño físico del monitor",
-        "La topología del teclado",
-        "La cantidad de archivos de la carpeta Descargas"
+        "Publica su clave pública y conserva privada su clave privada",
+        "Publica su clave privada y conserva secreta la pública",
+        "Comparte la misma clave secreta con todos",
+        "Publica la dirección MAC en lugar de una clave"
       ],
       "correcta": 0,
-      "descripcion": "Si una consulta DNS no obtiene respuesta, tiene sentido revisar la conectividad con el servidor DNS, su dirección configurada y su disponibilidad antes de buscar problemas completamente ajenos a DNS."
+      "descripcion": "En criptografía asimétrica, la clave pública se distribuye para permitir verificaciones, mientras que la clave privada utilizada para firmar debe mantenerse bajo control del propietario."
     },
     {
-      "pregunta": "Un equipo puede comunicarse con otros dispositivos de su LAN, pero no puede acceder a redes externas. ¿Qué configuración sería especialmente importante revisar?",
+      "pregunta": "¿Por qué la criptografía simétrica suele ser eficiente para cifrar grandes cantidades de datos?",
       "opciones": [
-        "La puerta de enlace predeterminada",
-        "El nombre de la carpeta actual",
-        "La resolución de la pantalla",
-        "La dirección MAC del teclado"
+        "Sus algoritmos suelen ser computacionalmente eficientes y utilizan una clave compartida",
+        "Porque no utiliza ninguna operación matemática",
+        "Porque cada byte tiene una clave pública distinta",
+        "Porque reemplaza automáticamente a DNS"
       ],
       "correcta": 0,
-      "descripcion": "La puerta de enlace predeterminada permite enviar tráfico hacia redes que están fuera de la red local. Si falta o es incorrecta, la comunicación local puede funcionar mientras falla el acceso a otras redes."
+      "descripcion": "Los algoritmos simétricos suelen ser rápidos y adecuados para grandes volúmenes de datos. El desafío principal está en compartir y proteger la clave secreta."
     },
     {
-      "pregunta": "Un equipo puede acceder a un servidor mediante su dirección IP, pero no puede acceder utilizando el nombre de dominio. ¿Qué componente debería investigarse especialmente?",
+      "pregunta": "Una organización necesita cifrar información para un destinatario utilizando criptografía asimétrica. ¿Qué clave se utiliza normalmente para que solo el destinatario pueda descifrarla?",
       "opciones": [
-        "DNS",
-        "Topología física del teclado",
-        "MAC del monitor",
-        "Puerto USB"
+        "La clave pública del destinatario para cifrar y la privada del destinatario para descifrar",
+        "La privada del destinatario para cifrar y la pública de cualquier persona para descifrar",
+        "La MAC del destinatario",
+        "La dirección IP del servidor"
       ],
       "correcta": 0,
-      "descripcion": "Si la conexión por IP funciona pero la resolución por nombre falla, el problema probablemente está relacionado con DNS o con la configuración de resolución de nombres."
+      "descripcion": "En el esquema típico de cifrado asimétrico, el remitente utiliza la clave pública del destinatario y el destinatario utiliza su clave privada para recuperar el contenido."
     },
-
     {
-      "pregunta": "VERDADERO O FALSO: `ipconfig /all` proporciona más información de configuración de red que `ipconfig` sin parámetros.",
+      "pregunta": "¿Cuál de estas situaciones requiere principalmente confidencialidad?",
       "opciones": [
-        "Verdadero",
-        "Falso"
+        "Enviar un documento de forma que un tercero que lo intercepte no pueda leer su contenido",
+        "Comprobar que un documento fue firmado por una persona",
+        "Detectar que un archivo fue modificado",
+        "Verificar que un servidor está disponible"
       ],
       "correcta": 0,
-      "descripcion": "Es verdadero. `ipconfig /all` muestra información ampliada de los adaptadores, como servidores DNS, DHCP, dirección física y otros parámetros que no aparecen en la salida básica."
+      "descripcion": "La confidencialidad busca impedir que personas no autorizadas puedan interpretar la información. El cifrado es una herramienta fundamental para lograrla."
     },
     {
-      "pregunta": "VERDADERO O FALSO: `tracert` sirve principalmente para listar los archivos de una carpeta.",
+      "pregunta": "En PGP, ¿qué ventaja aporta combinar criptografía simétrica y asimétrica?",
       "opciones": [
-        "Verdadero",
-        "Falso"
-      ],
-      "correcta": 1,
-      "descripcion": "Es falso. `tracert` se utiliza para observar el recorrido de los paquetes hacia un destino. El comando utilizado para listar archivos y carpetas es `dir`."
-    },
-    {
-      "pregunta": "VERDADERO O FALSO: DNS permite asociar nombres de dominio con información como direcciones IP.",
-      "opciones": [
-        "Verdadero",
-        "Falso"
+        "Permite usar cifrado simétrico eficiente para los datos y criptografía asimétrica para gestionar la clave de sesión",
+        "Evita por completo el uso de claves",
+        "Hace innecesario cualquier algoritmo criptográfico",
+        "Convierte todas las direcciones IP en nombres"
       ],
       "correcta": 0,
-      "descripcion": "Es verdadero. DNS proporciona un sistema de resolución de nombres que permite obtener información asociada a dominios, incluyendo direcciones IP mediante registros correspondientes."
+      "descripcion": "Los sistemas híbridos aprovechan la velocidad del cifrado simétrico para el contenido y la criptografía asimétrica para proteger o intercambiar la clave utilizada por el cifrado simétrico."
     },
     {
-      "pregunta": "VERDADERO O FALSO: Una LAN necesariamente debe conectar dispositivos ubicados en diferentes continentes.",
+      "pregunta": "¿Qué elemento debe proteger especialmente un usuario que utiliza PGP para firmar mensajes?",
       "opciones": [
-        "Verdadero",
-        "Falso"
-      ],
-      "correcta": 1,
-      "descripcion": "Es falso. Una LAN está destinada a un área local limitada, como una vivienda, oficina, laboratorio o edificio. Una red que conecta grandes distancias se clasifica normalmente como WAN."
-    },
-    {
-      "pregunta": "VERDADERO O FALSO: Una WAN puede utilizarse para interconectar redes ubicadas en diferentes países.",
-      "opciones": [
-        "Verdadero",
-        "Falso"
+        "Su clave privada",
+        "La dirección IP del router",
+        "El nombre del dominio",
+        "La tabla de rutas del switch"
       ],
       "correcta": 0,
-      "descripcion": "Es verdadero. Las WAN están diseñadas para conectar redes separadas por grandes distancias geográficas, incluyendo diferentes ciudades, países o continentes."
+      "descripcion": "La clave privada representa una parte crítica de la identidad criptográfica. Si un tercero obtiene acceso a ella, puede comprometer la capacidad de realizar operaciones de firma asociadas."
     },
     {
-      "pregunta": "VERDADERO O FALSO: TCP y UDP pertenecen principalmente a la capa de Transporte del modelo OSI.",
+      "pregunta": "¿Qué función cumple una clave pública en PGP cuando se quiere verificar una firma?",
       "opciones": [
-        "Verdadero",
-        "Falso"
+        "Permite comprobar matemáticamente la firma asociada a la clave privada correspondiente",
+        "Permite recuperar la contraseña de la clave privada",
+        "Reemplaza el servidor DNS",
+        "Determina la topología física de la red"
       ],
       "correcta": 0,
-      "descripcion": "Es verdadero. TCP y UDP son protocolos de transporte y se asocian principalmente con la capa 4 del modelo OSI."
+      "descripcion": "La clave pública correspondiente permite verificar una firma creada con la clave privada asociada. La clave privada no debe revelarse para realizar esa verificación."
     },
     {
-      "pregunta": "VERDADERO O FALSO: La dirección MAC y la dirección IP son exactamente equivalentes y cumplen la misma función.",
+      "pregunta": "En una representación de datos PGP mediante Armadura ASCII, ¿qué transformación conceptual se busca?",
       "opciones": [
-        "Verdadero",
-        "Falso"
-      ],
-      "correcta": 1,
-      "descripcion": "Es falso. La MAC y la IP tienen funciones y niveles diferentes. La MAC identifica una interfaz a nivel de enlace, mientras que la IP proporciona direccionamiento lógico para la comunicación en redes."
-    },
-    {
-      "pregunta": "VERDADERO O FALSO: HTTPS incorpora mecanismos criptográficos para proteger la comunicación web.",
-      "opciones": [
-        "Verdadero",
-        "Falso"
+        "Representar datos binarios como caracteres de texto para facilitar su transporte",
+        "Convertir automáticamente el contenido en una dirección IP",
+        "Eliminar toda forma de cifrado",
+        "Cambiar una LAN por una WAN"
       ],
       "correcta": 0,
-      "descripcion": "Es verdadero. HTTPS utiliza HTTP sobre TLS, proporcionando protección criptográfica que ayuda a preservar la confidencialidad e integridad de la comunicación."
+      "descripcion": "La Armadura ASCII, según la definición utilizada en este test, representa datos binarios mediante bloques de texto. No constituye por sí misma el proceso criptográfico de cifrado."
     },
     {
-      "pregunta": "VERDADERO O FALSO: DHCP se utiliza principalmente para enviar correos electrónicos.",
+      "pregunta": "La tabla ASCII tradicional utiliza valores numéricos para representar caracteres. ¿Qué idea expresa mejor esta correspondencia?",
       "opciones": [
-        "Verdadero",
-        "Falso"
-      ],
-      "correcta": 1,
-      "descripcion": "Es falso. DHCP se utiliza para proporcionar automáticamente parámetros de configuración de red. SMTP es el protocolo asociado principalmente con el envío de correo electrónico."
-    },
-    {
-      "pregunta": "VERDADERO O FALSO: Una firma digital puede ayudar a comprobar la integridad de los datos firmados.",
-      "opciones": [
-        "Verdadero",
-        "Falso"
+        "Un carácter puede asociarse con un valor numérico definido por el estándar",
+        "Cada carácter siempre representa una dirección IP",
+        "ASCII determina la ruta de un paquete",
+        "ASCII es un protocolo de transporte confiable"
       ],
       "correcta": 0,
-      "descripcion": "Es verdadero. Una firma digital se encuentra vinculada criptográficamente al contenido firmado, por lo que una modificación posterior puede hacer que la verificación de la firma falle."
+      "descripcion": "ASCII establece una correspondencia entre caracteres y valores numéricos. Esto permite que sistemas informáticos representen e intercambien determinados caracteres de forma estandarizada."
     },
     {
-      "pregunta": "VERDADERO O FALSO: El cifrado simétrico utiliza normalmente una misma clave secreta para cifrar y descifrar.",
+      "pregunta": "Un técnico quiere comprobar rápidamente la configuración IPv4 de todas las interfaces disponibles en Windows. ¿Qué comando es el más directo?",
       "opciones": [
-        "Verdadero",
-        "Falso"
+        "ipconfig",
+        "getmac",
+        "tree",
+        "netstat"
       ],
       "correcta": 0,
-      "descripcion": "Es verdadero. En el cifrado simétrico se utiliza normalmente una misma clave secreta para ambas operaciones, por lo que proteger y distribuir esa clave es un aspecto importante de seguridad."
+      "descripcion": "`ipconfig` muestra información de configuración IP de los adaptadores. Es la opción directa para consultar direcciones IPv4, máscaras y otros parámetros básicos."
     },
     {
-      "pregunta": "VERDADERO O FALSO: La criptografía asimétrica utiliza un par formado por una clave pública y una clave privada.",
+      "pregunta": "En PowerShell, un técnico necesita información ampliada sobre DNS, DHCP y direcciones físicas de los adaptadores. ¿Qué comando debe preferir?",
       "opciones": [
-        "Verdadero",
-        "Falso"
+        "ipconfig /all",
+        "pwd",
+        "ping",
+        "tracert"
       ],
       "correcta": 0,
-      "descripcion": "Es verdadero. La criptografía asimétrica trabaja con dos claves relacionadas matemáticamente. La pública puede compartirse y la privada debe mantenerse protegida."
+      "descripcion": "`ipconfig /all` muestra información detallada de los adaptadores, incluyendo parámetros como servidores DNS, DHCP y direcciones físicas."
     },
     {
-      "pregunta": "VERDADERO O FALSO: La clave privada de un sistema de criptografía asimétrica debería publicarse para que cualquiera pueda utilizarla.",
+      "pregunta": "Un administrador quiere consultar las direcciones MAC de las interfaces de red sin revisar toda la configuración IP. ¿Qué comando resulta más específico?",
       "opciones": [
-        "Verdadero",
-        "Falso"
-      ],
-      "correcta": 1,
-      "descripcion": "Es falso. La clave privada debe mantenerse protegida. La que está diseñada para distribuirse públicamente es la clave pública."
-    },
-    {
-      "pregunta": "VERDADERO O FALSO: PGP puede utilizar mecanismos de criptografía simétrica y asimétrica.",
-      "opciones": [
-        "Verdadero",
-        "Falso"
+        "getmac",
+        "tree",
+        "dir",
+        "nslookup"
       ],
       "correcta": 0,
-      "descripcion": "Es verdadero. PGP utiliza un enfoque híbrido que combina técnicas simétricas y asimétricas para proteger información y gestionar aspectos relacionados con las claves."
+      "descripcion": "`getmac` está orientado a mostrar las direcciones MAC de los adaptadores. Los otros comandos tienen objetivos distintos."
     },
     {
-      "pregunta": "VERDADERO O FALSO: Según la definición utilizada en este test, la Armadura ASCII permite convertir datos binarios complejos en bloques de texto en protocolos como PGP.",
+      "pregunta": "Un estudiante quiere representar visualmente la estructura de carpetas y subcarpetas desde una ubicación de Windows. ¿Qué comando es apropiado?",
       "opciones": [
-        "Verdadero",
-        "Falso"
+        "tree",
+        "dir",
+        "pwd",
+        "netstat"
       ],
       "correcta": 0,
-      "descripcion": "Es verdadero. Esta es precisamente la definición utilizada en el material: la Armadura ASCII se presenta como un modelo criptográfico asociado a protocolos como PGP para convertir datos binarios complejos en bloques de texto."
+      "descripcion": "`tree` muestra una representación jerárquica de directorios y subdirectorios. `dir` lista contenido, pero no tiene como objetivo principal dibujar la estructura jerárquica."
     },
     {
-      "pregunta": "VERDADERO O FALSO: El modelo OSI posee seis capas.",
+      "pregunta": "¿Qué diferencia práctica existe entre `dir` y `tree`?",
       "opciones": [
-        "Verdadero",
-        "Falso"
-      ],
-      "correcta": 1,
-      "descripcion": "Es falso. El modelo OSI posee siete capas, desde Física en la capa 1 hasta Aplicación en la capa 7."
-    },
-    {
-      "pregunta": "VERDADERO O FALSO: IP se relaciona principalmente con la capa de Red del modelo OSI.",
-      "opciones": [
-        "Verdadero",
-        "Falso"
+        "`dir` lista contenido de una ubicación, mientras `tree` representa la jerarquía de directorios",
+        "`dir` consulta DNS y `tree` consulta TCP",
+        "`dir` muestra MAC y `tree` muestra IP",
+        "Ambos comandos realizan exactamente la misma tarea"
       ],
       "correcta": 0,
-      "descripcion": "Es verdadero. IP proporciona direccionamiento lógico y funciones relacionadas con el encaminamiento, características asociadas principalmente con la capa 3, la capa de Red."
+      "descripcion": "`dir` permite observar archivos y carpetas de una ubicación, mientras `tree` muestra la organización jerárquica de directorios y subdirectorios."
     },
     {
-      "pregunta": "VERDADERO O FALSO: En una topología estrella, los dispositivos se conectan normalmente a un punto central.",
+      "pregunta": "Un usuario está trabajando en PowerShell y quiere conocer la ruta de la ubicación actual. ¿Qué comando puede utilizar?",
       "opciones": [
-        "Verdadero",
-        "Falso"
+        "pwd",
+        "dir",
+        "getmac",
+        "ping"
       ],
       "correcta": 0,
-      "descripcion": "Es verdadero. La característica principal de la topología estrella es que los dispositivos se conectan a un punto central, como un switch."
+      "descripcion": "En PowerShell, `pwd` muestra la ubicación o ruta de trabajo actual. Es equivalente conceptualmente a consultar el directorio actual."
     },
     {
-      "pregunta": "VERDADERO O FALSO: Una topología de malla puede ofrecer caminos alternativos gracias a sus múltiples enlaces.",
+      "pregunta": "¿Cuál es una característica propia de PowerShell frente a un comando individual como `ping`?",
       "opciones": [
-        "Verdadero",
-        "Falso"
+        "PowerShell es un entorno de shell y automatización que permite ejecutar comandos y scripts",
+        "PowerShell es exclusivamente un protocolo de transporte",
+        "PowerShell es una dirección IP privada",
+        "PowerShell es una topología de red"
       ],
       "correcta": 0,
-      "descripcion": "Es verdadero. La existencia de múltiples enlaces entre dispositivos permite que una red en malla pueda disponer de rutas alternativas cuando un enlace falla."
+      "descripcion": "PowerShell es una shell y plataforma de automatización de Microsoft. Puede ejecutar comandos, administrar el sistema y trabajar con scripts y objetos."
+    },
+    {
+      "pregunta": "Un técnico quiere comprobar si una dirección IP responde a solicitudes de eco ICMP. ¿Qué comando utilizaría normalmente?",
+      "opciones": [
+        "ping",
+        "netstat",
+        "tree",
+        "getmac"
+      ],
+      "correcta": 0,
+      "descripcion": "`ping` envía normalmente solicitudes de eco ICMP y permite comprobar si existe respuesta desde una dirección o nombre determinado. No prueba por sí solo todos los servicios de un host."
+    },
+    {
+      "pregunta": "Un equipo tiene una conexión TCP sospechosa y el administrador quiere consultar puertos y estados de conexiones. ¿Qué comando es el más apropiado?",
+      "opciones": [
+        "netstat",
+        "pwd",
+        "dir",
+        "tree"
+      ],
+      "correcta": 0,
+      "descripcion": "`netstat` permite consultar conexiones de red, puertos y estados como ESTABLISHED o TIME_WAIT, por lo que es útil para analizar actividad de red."
+    },
+    {
+      "pregunta": "Un administrador quiere observar los saltos que realiza el tráfico hasta un servidor remoto. ¿Qué herramienta debe utilizar?",
+      "opciones": [
+        "tracert",
+        "nslookup",
+        "getmac",
+        "dir"
+      ],
+      "correcta": 0,
+      "descripcion": "`tracert` muestra información sobre los saltos intermedios hacia un destino, ayudando a analizar el recorrido de los paquetes."
+    },
+    {
+      "pregunta": "Un técnico conoce el nombre de un dominio y quiere comprobar qué información devuelve el sistema DNS para ese nombre. ¿Qué comando es más adecuado?",
+      "opciones": [
+        "nslookup",
+        "netstat",
+        "tree",
+        "pwd"
+      ],
+      "correcta": 0,
+      "descripcion": "`nslookup` permite realizar consultas DNS y observar información de resolución de nombres. Es útil para diagnosticar problemas relacionados con DNS."
+    },
+    {
+      "pregunta": "Un alumno escribe `ipconfig\\all` en lugar de `ipconfig /all`. ¿Cuál es el problema principal en Windows?",
+      "opciones": [
+        "La opción correcta utiliza `/` como separador: `ipconfig /all`",
+        "Debe utilizarse siempre `\\` porque es la sintaxis de todas las opciones",
+        "El comando correcto es `ipconfig-all`",
+        "La opción solo funciona desde un navegador web"
+      ],
+      "correcta": 0,
+      "descripcion": "En Windows, las opciones de `ipconfig` se escriben con una barra `/`, por lo que la forma correcta es `ipconfig /all`. La barra invertida `\\` tiene otros usos en Windows."
+    },
+    {
+      "pregunta": "Un administrador ejecuta `ping` y recibe respuestas, pero una aplicación web no funciona. ¿Qué conclusión es la más prudente?",
+      "opciones": [
+        "La conectividad básica probada por ping funciona, pero eso no garantiza que el servicio web esté disponible",
+        "La página web necesariamente funciona porque ping respondió",
+        "DNS necesariamente está roto",
+        "TCP y HTTP están garantizados porque ICMP respondió"
+      ],
+      "correcta": 0,
+      "descripcion": "Una respuesta de ping demuestra una forma de conectividad mediante ICMP, pero no garantiza que el servidor web, su puerto, HTTP/HTTPS o la aplicación estén funcionando."
+    },
+    {
+      "pregunta": "¿Qué conjunto relaciona correctamente cada herramienta con su objetivo principal?",
+      "opciones": [
+        "ipconfig—configuración IP; getmac—MAC; netstat—conexiones; nslookup—DNS",
+        "ipconfig—tabla ASCII; getmac—DNS; netstat—carpetas; nslookup—MAC",
+        "ipconfig—correo; getmac—HTTP; netstat—fibra; nslookup—topología",
+        "ipconfig—cifrado; getmac—PGP; netstat—OSI; nslookup—firma digital"
+      ],
+      "correcta": 0,
+      "descripcion": "La primera relación es correcta: `ipconfig` consulta configuración IP, `getmac` muestra MAC, `netstat` permite observar conexiones y `nslookup` consulta DNS."
     }
   ]
 }
