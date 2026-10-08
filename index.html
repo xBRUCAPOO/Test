@@ -97,6 +97,9 @@
       </div>
 
       <article class="qcard" id="qCard">
+        <!-- [v1.3.0] Tema de la pregunta: texto pequeño gris, opcional (campo "tema" de cada pregunta en el JSON).
+             Si la pregunta no tiene tema queda vacío y el CSS lo oculta. Lo completa script.js -->
+        <p class="qtopic" id="qTopic"></p>
         <h2 class="qtext" id="qText"></h2>
         <div class="options" id="options" role="radiogroup" aria-label="Opciones de respuesta"></div>
       </article>
@@ -111,11 +114,21 @@
           <span class="material-symbols-outlined" id="btnNextIcon">arrow_forward</span>
         </button>
       </div>
+
+      <!-- [v1.3.0] "Terminar test": permite cerrar el test en cualquier momento. Las preguntas sin contestar
+           quedan marcadas en gris en los resultados y la nota se muestra como "Incompleto" -->
+      <div class="quiz__finish">
+        <button class="btn btn--ghost btn--sm" id="btnFinish" type="button">
+          <span class="material-symbols-outlined">stop_circle</span>
+          <span>Terminar test</span>
+        </button>
+      </div>
     </section>
 
   </main>
 
-  <!-- FLOAT DE RESULTADOS: puntaje 0/10 arriba y debajo todas las respuestas elegidas (verde = bien, rojo = mal, amarillo = sin responder).
+  <!-- FLOAT DE RESULTADOS: puntaje 0/10 arriba y debajo todas las respuestas elegidas (verde = bien, rojo = mal, gris = sin responder).
+       [v1.3.0] Si el test se terminó antes, debajo del puntaje aparece "Incompleto" (naranja) y los 2 promedios.
        En celular se muestra como panel que sube desde abajo -->
   <div class="float" id="resultFloat" hidden role="dialog" aria-modal="true" aria-labelledby="resultTitle">
     <div class="float__panel">
@@ -132,7 +145,20 @@
             <span class="score__value" id="scoreValue">0</span><span class="score__max">/10</span>
           </div>
         </div>
+        <!-- [v1.3.0] "Incompleto": solo se muestra si quedaron preguntas sin contestar (color warning). Lo maneja script.js -->
+        <p class="score__incomplete" id="scoreIncomplete" hidden>Incompleto</p>
         <p class="score__msg" id="scoreMsg"></p>
+        <!-- [v1.3.0] Los 2 promedios (solo si el test quedó incompleto):
+             General = sobre todas las preguntas, las sin contestar suman 0 (es el valor del aro).
+             Contestadas = solo sobre las preguntas que sí se contestaron -->
+        <div class="score__avgs" id="scoreAvgs" hidden>
+          <span class="score__avg" title="Sobre todas las preguntas: las sin contestar suman 0">
+            <small>General</small><strong id="avgAll">0</strong><span class="score__avg-max">/10</span>
+          </span>
+          <span class="score__avg" title="Solo sobre las preguntas contestadas">
+            <small>Contestadas</small><strong id="avgAnswered">0</strong><span class="score__avg-max">/10</span>
+          </span>
+        </div>
         <p class="score__meta" id="scoreMeta"></p>
       </div>
 
@@ -160,7 +186,8 @@
   <footer class="footer">
     <span>Test</span>
     <span class="footer__sep">·</span>
-    <span id="footerVersion">v1.2.0</span>
+    <!-- [v1.3.0] versión y fecha actualizadas por los cambios de esta entrega -->
+    <span id="footerVersion">v1.3.0</span>
     <span class="footer__sep">·</span>
     <span id="footerDate">08/10/2026</span>
   </footer>

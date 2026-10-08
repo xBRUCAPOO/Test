@@ -1,5 +1,5 @@
 /* =========================================================
-   TEST — script.js  (v1.2.0)
+   TEST — script.js  (v1.3.0)
    Lógica de la app de tests multiple choice.
 
    CÓMO AGREGAR UN TEST (las preguntas ya NO se escriben acá):
@@ -17,12 +17,16 @@
          "pregunta": "Texto de la pregunta",
          "opciones": ["Opción A", "Opción B", "Opción C", "Opción D"],
          "correcta": 1,                        // posición de la correcta (0 = A, 1 = B, 2 = C...)
+         "tema": "Subtema que se evalúa",      // [v1.3.0] opcional: texto pequeño gris arriba de la pregunta (se toma por pregunta)
          "descripcion": "Por qué es correcta"  // opcional: se muestra SOLO en los resultados, bajo una respuesta incorrecta
        }
      ]
    }
    Se puede usar de 2 a 26 opciones por pregunta.
    El puntaje final siempre se calcula sobre 10, sin importar cuántas preguntas haya.
+   [v1.3.0] El test se puede terminar en cualquier momento con "Terminar test". Si quedan preguntas sin contestar,
+   los resultados muestran "Incompleto" y 2 promedios: General (las sin contestar suman 0) y Contestadas (solo las respondidas).
+   [v1.3.0] "Anterior" solo permite volver hasta 2 preguntas por detrás de la más lejana a la que se llegó.
    ========================================================= */
 
 /* =========================================================
@@ -32,6 +36,7 @@
 const TESTS_DIR = "tests/";               // [v1.2.0] carpeta donde viven los JSON de preguntas
 const INDEX_URL = TESTS_DIR + "index.json"; // [v1.2.0] lista de archivos de test disponibles
 const MAX_SCORE = 10;                     // Puntaje máximo del test
+const MAX_BACK = 2;                       // [v1.3.0] cuántas preguntas se puede volver con "Anterior" (respecto de la más lejana alcanzada)
 const RING_LENGTH = 2 * Math.PI * 52;     // Circunferencia del aro de puntaje (coincide con style.css)
 
 // Atajo para obtener elementos por id
@@ -56,9 +61,11 @@ const els = {
   qCounter: $("qCounter"),
   progressBar: $("progressBar"),
   qCard: $("qCard"),
+  qTopic: $("qTopic"),                   // [v1.3.0] tema de la pregunta (texto pequeño gris)
   qText: $("qText"),
   options: $("options"),
   btnPrev: $("btnPrev"),
+  btnFinish: $("btnFinish"),             // [v1.3.0] "Terminar test": cierra el test en cualquier momento
   btnNext: $("btnNext"),
   btnNextLabel: $("btnNextLabel"),
   btnNextIcon: $("btnNextIcon"),
@@ -68,6 +75,10 @@ const els = {
   scoreValue: $("scoreValue"),
   scoreMsg: $("scoreMsg"),
   scoreMeta: $("scoreMeta"),
+  scoreIncomplete: $("scoreIncomplete"), // [v1.3.0] texto "Incompleto" (naranja)
+  scoreAvgs: $("scoreAvgs"),             // [v1.3.0] contenedor de los 2 promedios
+  avgAll: $("avgAll"),                   // [v1.3.0] promedio general (todas las preguntas)
+  avgAnswered: $("avgAnswered"),         // [v1.3.0] promedio solo de las contestadas
   reviewList: $("reviewList"),
   btnHome: $("btnHome"),
   btnRetry: $("btnRetry")
@@ -79,6 +90,7 @@ let questions = [];     // Preguntas del test elegido (ya validadas)
 let current = 0;        // Índice de la pregunta actual
 let answers = [];       // Respuesta elegida por pregunta (null = sin responder)
 let quizActive = false; // true mientras se está resolviendo el test
+let maxReached = 0;     // [v1.3.0] índice de la pregunta más lejana a la que se llegó (límite para "Anterior")
 
 /* =========================================================
    2) UTILIDADES
@@ -89,6 +101,13 @@ const pad = (n) => String(n).padStart(2, "0");
 
 // Muestra el puntaje sin decimales si es entero (7) o con 1 decimal (6.7)
 const formatScore = (v) => (Number.isInteger(v) ? String(v) : v.toFixed(1));
+
+// [v1.3.0] Nota sobre 10 con 1 decimal: aciertos / base. La base es el total de preguntas (promedio general)
+// o solo las contestadas (promedio de contestadas)
+const calcScore = (correct, base) => Math.round((correct / base) * MAX_SCORE * 10) / 10;
+
+// [v1.3.0] Índice más bajo al que se puede volver: hasta MAX_BACK preguntas por detrás de la más lejana alcanzada
+const minAllowedIndex = () => Math.max(0, maxReached - MAX_BACK);
 
 // Curva de suavizado para la animación de conteo del puntaje
 const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
@@ -162,6 +181,8 @@ function sanitizeQuestions(raw, origen) {
         pregunta: q.pregunta,
         opciones: q.opciones.map(String),
         correcta: q.correcta,
+        // [v1.3.0] Tema opcional de la pregunta: se muestra en gris arriba de la pregunta mientras se resuelve
+        tema: typeof q.tema === "string" ? q.tema.trim() : "",
         // Descripción opcional: se muestra solo en los resultados, bajo una respuesta incorrecta
         descripcion: typeof q.descripcion === "string" ? q.descripcion.trim() : ""
       });
@@ -334,6 +355,7 @@ function setupStart() {
 function startTest() {
   if (questions.length === 0) return;
   current = 0;
+  maxReached = 0; // [v1.3.0] reinicia el límite de "Anterior"
   answers = new Array(questions.length).fill(null);
   quizActive = true;
   setTag("EN CURSO");
@@ -348,6 +370,8 @@ function renderQuestion() {
   els.qCounter.textContent = `${pad(current + 1)} / ${pad(questions.length)}`;
   els.progressBar.style.width = `${((current + 1) / questions.length) * 100}%`;
   els.qText.textContent = q.pregunta; // textContent evita que el texto se interprete como HTML
+  els.qTopic.textContent = q.tema;    // [v1.3.0] tema opcional: si está vacío, el CSS oculta el párrafo
+  maxReached = Math.max(maxReached, current); // [v1.3.0] recuerda la pregunta más lejana alcanzada (límite de "Anterior")
 
   els.options.textContent = "";
   q.opciones.forEach((texto, i) => {
@@ -379,7 +403,7 @@ function renderQuestion() {
 
   window.scrollTo(0, 0); // [v1.2.0] en celular, cada pregunta nueva arranca desde arriba
 
-  els.btnPrev.disabled = current === 0;
+  els.btnPrev.disabled = current <= minAllowedIndex(); // [v1.3.0] solo se puede volver hasta 2 preguntas
   updateNext();
 }
 
@@ -413,9 +437,10 @@ function goNext() {
   }
 }
 
-// Vuelve a la pregunta anterior (conserva la respuesta ya elegida)
+// Vuelve a la pregunta anterior (conserva la respuesta ya elegida).
+// [v1.3.0] Solo hasta MAX_BACK (2) preguntas por detrás de la más lejana alcanzada; también rige para la flecha izquierda del teclado
 function goPrev() {
-  if (current === 0) return;
+  if (current <= minAllowedIndex()) return;
   current--;
   renderQuestion();
 }
@@ -424,16 +449,23 @@ function goPrev() {
    7) RESULTADOS (float con puntaje /10 y revisión)
    ========================================================= */
 
-// Calcula la nota y abre el float de resultados
+// Calcula las notas y abre el float de resultados.
+// [v1.3.0] El test se puede terminar en cualquier momento ("Terminar test"): las preguntas sin contestar suman 0
+// en el promedio general y no cuentan en el promedio de contestadas
 function finishTest() {
+  if (!quizActive) return; // evita terminar dos veces (por ejemplo, con un doble toque)
   quizActive = false;
   setTag("FINALIZADO");
 
+  const total = questions.length;
   const correct = questions.reduce((acc, q, i) => acc + (answers[i] === q.correcta ? 1 : 0), 0);
-  const score = Math.round((correct / questions.length) * MAX_SCORE * 10) / 10; // sobre 10, 1 decimal
+  const answered = answers.filter((a) => a !== null).length;   // preguntas contestadas
+  const incomplete = answered < total;                         // true si quedó alguna sin contestar
+  const scoreAll = calcScore(correct, total);                  // promedio general: las sin contestar suman 0
+  const scoreAnswered = answered > 0 ? calcScore(correct, answered) : null; // solo contestadas (null si no contestó ninguna)
 
   buildReview();
-  showFloat(score, correct);
+  showFloat({ scoreAll, scoreAnswered, correct, answered, total, incomplete });
 }
 
 // Devuelve un mensaje según la nota
@@ -454,7 +486,7 @@ function scoreTone(score) {
 }
 
 // Crea una línea de respuesta ("Tu respuesta" / "Correcta") según el tono:
-// "ok" = verde (success), "bad" = rojo (error), "skip" = amarillo (warning, sin responder)
+// "ok" = verde (success), "bad" = rojo (error), "skip" = gris (sin responder) [v1.3.0: antes amarillo]
 function answerLine(label, texto, tone) {
   const row = document.createElement("div");
   row.className = `review__ans review__ans--${tone}`;
@@ -470,7 +502,7 @@ function answerLine(label, texto, tone) {
   return row;
 }
 
-// [v1.2.0] Crea el bloque de descripción (color info) que explica por qué la correcta es la correcta
+// [v1.2.0] Crea el bloque de descripción que explica por qué la correcta es la correcta ([v1.3.0] ahora en gris)
 function descriptionBlock(texto) {
   const box = document.createElement("div");
   box.className = "review__desc";
@@ -485,7 +517,7 @@ function descriptionBlock(texto) {
   return box;
 }
 
-// Arma la lista con todas las preguntas y las respuestas elegidas (verde = bien, rojo = mal, amarillo = sin responder)
+// Arma la lista con todas las preguntas y las respuestas elegidas (verde = bien, rojo = mal, gris = sin responder)
 function buildReview() {
   els.reviewList.textContent = "";
 
@@ -493,7 +525,7 @@ function buildReview() {
     const chosen = answers[i];
     const ok = chosen === q.correcta;
     const skipped = chosen === null;                    // pregunta sin responder
-    const tone = ok ? "ok" : skipped ? "skip" : "bad";  // tono: verde / amarillo / rojo
+    const tone = ok ? "ok" : skipped ? "skip" : "bad";  // tono: verde / gris / rojo
 
     const item = document.createElement("li");
     item.className = `review__item review__item--${tone}`;
@@ -517,7 +549,7 @@ function buildReview() {
     head.append(num, qText, status);
     item.appendChild(head);
 
-    // Respuesta elegida (verde si acertó, roja si falló, amarilla si quedó sin responder)
+    // Respuesta elegida (verde si acertó, roja si falló, gris si quedó sin responder)
     const chosenText = skipped ? "Sin responder" : q.opciones[chosen];
     item.appendChild(answerLine("Tu respuesta", chosenText, tone));
 
@@ -533,10 +565,19 @@ function buildReview() {
 }
 
 // Abre el float y anima el puntaje (conteo + aro)
-function showFloat(score, correct) {
+// [v1.3.0] Recibe las dos notas: el aro, el conteo, el mensaje y el color usan la general (scoreAll).
+// Si el test quedó incompleto se muestran además "Incompleto" (naranja) y los 2 promedios
+function showFloat({ scoreAll, scoreAnswered, correct, answered, total, incomplete }) {
+  const score = scoreAll; // el resto de la función (aro y conteo) trabaja con la nota general
   els.scoreMsg.textContent = scoreMessage(score);
   els.scoreBox.dataset.tone = scoreTone(score); // el CSS pinta aro y mensaje según este tono
-  els.scoreMeta.textContent = `${correct} de ${questions.length} correctas`;
+  els.scoreIncomplete.hidden = !incomplete;
+  els.scoreAvgs.hidden = !incomplete;
+  els.avgAll.textContent = formatScore(scoreAll);
+  els.avgAnswered.textContent = scoreAnswered === null ? "—" : formatScore(scoreAnswered); // "—" si no contestó ninguna
+  els.scoreMeta.textContent = incomplete
+    ? `${correct} de ${total} correctas · ${answered} contestadas`
+    : `${correct} de ${total} correctas`;
   els.scoreValue.textContent = "0";
   els.scoreBar.style.strokeDashoffset = RING_LENGTH; // aro vacío antes de animar
 
@@ -582,6 +623,7 @@ els.btnStart.addEventListener("click", startTest);
 els.btnChange.addEventListener("click", showMenu); // [v1.2.0] "Cambiar test"
 els.btnPrev.addEventListener("click", goPrev);
 els.btnNext.addEventListener("click", goNext);
+els.btnFinish.addEventListener("click", finishTest); // [v1.3.0] "Terminar test": cierra el test cuando se quiera
 els.btnRetry.addEventListener("click", retry);
 els.btnHome.addEventListener("click", showMenu);   // [v1.2.0] "Menú" del float: vuelve a elegir test
 

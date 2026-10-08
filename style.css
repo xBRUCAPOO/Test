@@ -1,5 +1,5 @@
 /* =========================================================
-   TEST — style.css  (v1.2.0)
+   TEST — style.css  (v1.3.0)
    Estética: profesional y sobria. Base neutra oscura (grafito),
    celeste solo en detalles (foco, progreso, selección, marca).
    Colores de estado: success / warning / error / info.
@@ -40,6 +40,11 @@
   --color-error-a35: rgba(239, 68, 68, 0.35);
   --color-info-a10: rgba(59, 130, 246, 0.1);
   --color-info-a35: rgba(59, 130, 246, 0.35);
+
+  /* [v1.3.0] Gris neutro: preguntas sin contestar, tema de la pregunta y descripciones de las respuestas */
+  --color-gray: #8e95a1;
+  --color-gray-a10: rgba(142, 149, 161, 0.1);
+  --color-gray-a30: rgba(142, 149, 161, 0.3);
 
   /* [v1.1.0] Botón principal neutro (claro sobre fondo oscuro) */
   --color-action: #f2f4f7;
@@ -574,6 +579,20 @@ body.no-scroll {
   animation: fadeUp 0.5s var(--ease) both;
 }
 
+/* [v1.3.0] Tema de la pregunta: texto pequeño gris arriba de la pregunta (opcional).
+   Sirve para indicar qué tema se está evaluando; si no hay tema el párrafo queda vacío y se oculta */
+.qtopic {
+  margin-bottom: 10px;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  color: var(--color-gray);
+  overflow-wrap: anywhere;
+}
+.qtopic:empty {
+  display: none;
+}
+
 /* pre-wrap respeta saltos de línea (útil para preguntas con código) */
 .qtext {
   font-family: var(--font-title);
@@ -668,6 +687,23 @@ body.no-scroll {
 }
 .quiz__nav #btnNext {
   margin-left: auto;
+}
+
+/* [v1.3.0] Botón "Terminar test": fila propia debajo de la navegación, discreto (texto tenue y más chico)
+   para que no se confunda con "Siguiente" */
+.quiz__finish {
+  display: flex;
+  justify-content: center;
+}
+.quiz__finish .btn {
+  color: var(--color-text-dim);
+}
+.btn--sm {
+  padding: 10px 16px;
+  font-size: 0.85rem;
+}
+.btn--sm .material-symbols-outlined {
+  font-size: 18px;
 }
 
 /* ---------- Float de resultados ---------- */
@@ -780,6 +816,61 @@ body.no-scroll {
   color: var(--color-text-dim);
 }
 
+/* [v1.3.0] "Incompleto": aparece bajo el puntaje cuando el test se terminó con preguntas sin contestar.
+   Usa el color de estado warning (script.js lo muestra u oculta con el atributo hidden) */
+.score__incomplete {
+  margin-bottom: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-warning);
+}
+.score__incomplete[hidden] {
+  display: none;
+}
+
+/* [v1.3.0] Los 2 promedios (General y Contestadas), en dos chips compactos para no ocupar mucho alto en el celular */
+.score__avgs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+.score__avgs[hidden] {
+  display: none;
+}
+.score__avg {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 6px 12px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 999px;
+  background: var(--color-surface-2);
+}
+.score__avg small {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.score__avg strong {
+  font-family: var(--font-title);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+.score__avg-max {
+  margin-left: -6px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
 /* [v1.1.0] Tono de la nota (lo define script.js con data-tone): success / warning / error */
 .float__head[data-tone="success"] .score__bar { stroke: var(--color-success); }
 .float__head[data-tone="success"] .score__msg { color: var(--color-success); }
@@ -814,7 +905,7 @@ body.no-scroll {
 }
 
 /* [v1.1.0] Cada pregunta revisada: barra lateral y fondo suave según el estado
-   (verde = bien, rojo = mal, amarillo = sin responder) */
+   (verde = bien, rojo = mal, [v1.3.0] gris = sin responder) */
 .review__item {
   padding: 14px 16px;
   border: 1px solid var(--color-border);
@@ -833,10 +924,12 @@ body.no-scroll {
   border-left-color: var(--color-error);
   background: var(--color-error-a10);
 }
+/* [v1.3.0] Pregunta sin contestar: ahora en gris (antes amarillo). Sirve para distinguir lo que se dejó sin responder
+   al terminar el test antes de tiempo */
 .review__item--skip {
-  border-color: var(--color-warning-a35);
-  border-left-color: var(--color-warning);
-  background: var(--color-warning-a10);
+  border-color: var(--color-gray-a30);
+  border-left-color: var(--color-gray);
+  background: var(--color-gray-a10);
 }
 
 .review__head {
@@ -863,7 +956,10 @@ body.no-scroll {
 }
 .review__item--ok .review__status { color: var(--color-success); }
 .review__item--bad .review__status { color: var(--color-error); }
-.review__item--skip .review__status { color: var(--color-warning); }
+.review__item--skip .review__status { color: var(--color-gray); }
+/* [v1.3.0] En las sin contestar también el número y el texto de la pregunta van en gris */
+.review__item--skip .review__num,
+.review__item--skip .review__q { color: var(--color-gray); }
 
 /* Líneas "Tu respuesta" y "Correcta" */
 .review__ans {
@@ -884,7 +980,7 @@ body.no-scroll {
 }
 .review__ans--ok { color: var(--color-success); }
 .review__ans--bad { color: var(--color-error); }
-.review__ans--skip { color: var(--color-warning); }
+.review__ans--skip { color: var(--color-gray); } /* [v1.3.0] "Sin responder" en gris (antes amarillo) */
 .review__label {
   font-family: var(--font-mono);
   font-size: 0.72rem;
@@ -892,6 +988,31 @@ body.no-scroll {
   text-transform: uppercase;
   opacity: 0.75;
   margin-right: 8px;
+}
+
+/* [v1.3.0] Descripción de la respuesta (la "Explicación" que aparece bajo una respuesta incorrecta): ahora en gris.
+   Nota: la versión anterior del CSS no tenía reglas para este bloque, por eso se agregan completas acá */
+.review__desc {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 10px 12px;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--color-gray);
+  border: 1px solid var(--color-gray-a30);
+  border-radius: 10px;
+  background: var(--color-gray-a10);
+}
+.review__desc .material-symbols-outlined {
+  font-size: 19px;
+  flex-shrink: 0;
+  color: var(--color-gray);
+}
+.review__desc span:last-child {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 /* Pie del float: botones */
@@ -973,6 +1094,17 @@ body.no-scroll {
   .score { width: 148px; height: 148px; }
   .score__text { padding-top: 44px; }
   .score__value { font-size: 2.8rem; }
+}
+
+/* [v1.3.0] Pantallas bajas (celulares chicos o en horizontal): el puntaje se achica para que, cuando aparecen
+   "Incompleto" y los 2 promedios, siga quedando lugar para ver la lista de respuestas */
+@media (max-height: 720px) {
+  .float__head { padding: 18px 16px 14px; }
+  .score { width: 116px; height: 116px; margin: 10px auto 8px; }
+  .score__text { padding-top: 36px; }
+  .score__value { font-size: 2.2rem; }
+  .score__max { font-size: 1rem; }
+  .score__avgs { margin-top: 8px; }
 }
 
 /* ---------- Accesibilidad: sin animaciones si el usuario lo pide ---------- */
