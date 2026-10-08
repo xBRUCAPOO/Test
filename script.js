@@ -262,7 +262,7 @@ function renderMenu() {
 
     const iconBox = document.createElement("span");
     iconBox.className = "test-card__icon";
-    iconBox.appendChild(icon("description"));
+    iconBox.appendChild(icon("device_hub"));
 
     const info = document.createElement("span");
     info.className = "test-card__info";
