@@ -427,3 +427,4 @@ document.addEventListener("keydown", (e) => {
 
 questions = sanitizeQuestions(QUESTIONS);
 setupStart();
+ 
