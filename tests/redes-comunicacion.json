@@ -11,7 +11,8 @@
         "Repetidor"
       ],
       "correcta": 0,
-      "descripcion": "La ONT/ONU termina la conexión de fibra y convierte la señal óptica en una interfaz que puede utilizar la red del cliente. Un switch distribuye tramas, un punto de acceso brinda Wi-Fi y un repetidor extiende una señal existente."
+      "descripcion": "La ONT/ONU termina la conexión de fibra y convierte la señal óptica en una interfaz que puede utilizar la red del cliente. Un switch distribuye tramas, un punto de acceso brinda Wi-Fi y un repetidor extiende una señal existente.",
+      "tema": "Dispositivos de conexión ISP"
     },
     {
       "pregunta": "En una conexión doméstica, ¿qué equipo suele encargarse de decidir hacia qué red debe enviarse un paquete destinado a Internet?",
@@ -22,7 +23,8 @@
         "Tarjeta de red"
       ],
       "correcta": 1,
-      "descripcion": "El router o gateway realiza funciones de capa 3 y decide el siguiente salto para tráfico destinado a otras redes. Un switch normalmente conmuta dentro de la LAN, mientras que un AP y una NIC cumplen funciones diferentes."
+      "descripcion": "El router o gateway realiza funciones de capa 3 y decide el siguiente salto para tráfico destinado a otras redes. Un switch normalmente conmuta dentro de la LAN, mientras que un AP y una NIC cumplen funciones diferentes.",
+      "tema": "Dispositivos de conexión ISP"
     },
     {
       "pregunta": "Un ISP entrega un módem/ONT y el cliente conecta detrás varios equipos cableados. ¿Qué dispositivo permite concentrar esas conexiones Ethernet dentro de la LAN?",
@@ -33,7 +35,8 @@
         "Servidor SMTP"
       ],
       "correcta": 0,
-      "descripcion": "Un switch permite interconectar múltiples dispositivos Ethernet dentro de una LAN y reenviar tramas según sus direcciones MAC. No realiza por sí solo la función de resolución DNS ni de correo."
+      "descripcion": "Un switch permite interconectar múltiples dispositivos Ethernet dentro de una LAN y reenviar tramas según sus direcciones MAC. No realiza por sí solo la función de resolución DNS ni de correo.",
+      "tema": "Dispositivos de conexión ISP"
     },
     {
       "pregunta": "Una casa tiene Internet funcionando por cable, pero quiere que teléfonos y notebooks se conecten mediante Wi-Fi. ¿Qué equipo o función debe proporcionar la red local?",
@@ -44,7 +47,8 @@
         "ONT sin Wi-Fi"
       ],
       "correcta": 0,
-      "descripcion": "El punto de acceso proporciona conectividad inalámbrica y enlaza los clientes Wi-Fi con la red cableada. Un switch común y una ONT sin radio no crean por sí mismos la cobertura Wi-Fi."
+      "descripcion": "El punto de acceso proporciona conectividad inalámbrica y enlaza los clientes Wi-Fi con la red cableada. Un switch común y una ONT sin radio no crean por sí mismos la cobertura Wi-Fi.",
+      "tema": "Dispositivos de conexión ISP"
     },
     {
       "pregunta": "¿Cuál es una diferencia funcional razonable entre un router doméstico y un switch de la misma red?",
@@ -55,7 +59,8 @@
         "Ambos realizan exactamente el mismo proceso, pero con nombres comerciales distintos"
       ],
       "correcta": 0,
-      "descripcion": "El router trabaja principalmente en el direccionamiento y encaminamiento entre redes, mientras que el switch Ethernet conmuta tramas dentro de una red local. Algunos equipos domésticos integran ambas funciones."
+      "descripcion": "El router trabaja principalmente en el direccionamiento y encaminamiento entre redes, mientras que el switch Ethernet conmuta tramas dentro de una red local. Algunos equipos domésticos integran ambas funciones.",
+      "tema": "Dispositivos de conexión ISP"
     },
     {
       "pregunta": "Un ISP entrega Internet mediante cable coaxial y el equipo instalado adapta la señal del servicio para que el router pueda utilizarla. ¿Qué dispositivo es el más probable?",
@@ -66,7 +71,8 @@
         "Servidor DNS"
       ],
       "correcta": 0,
-      "descripcion": "En accesos por cable, el módem de cable adapta la señal de la red del proveedor a una interfaz utilizable por la red del cliente. Los otros dispositivos cumplen funciones diferentes."
+      "descripcion": "En accesos por cable, el módem de cable adapta la señal de la red del proveedor a una interfaz utilizable por la red del cliente. Los otros dispositivos cumplen funciones diferentes.",
+      "tema": "Dispositivos de conexión ISP"
     },
     {
       "pregunta": "¿Qué situación describe mejor el uso de un repetidor en una red doméstica?",
@@ -77,7 +83,8 @@
         "Convertir una dirección MAC en una dirección IPv4"
       ],
       "correcta": 0,
-      "descripcion": "Un repetidor recibe y vuelve a transmitir una señal para ampliar su cobertura. No reemplaza las funciones de DHCP, DNS ni el direccionamiento IP."
+      "descripcion": "Un repetidor recibe y vuelve a transmitir una señal para ampliar su cobertura. No reemplaza las funciones de DHCP, DNS ni el direccionamiento IP.",
+      "tema": "Dispositivos de conexión ISP"
     },
     {
       "pregunta": "Una empresa conecta varios equipos a un switch y conecta ese switch a un router que tiene salida al ISP. ¿Qué papel cumple el switch en ese diseño?",
@@ -88,7 +95,8 @@
         "Resolver todos los nombres de dominio"
       ],
       "correcta": 0,
-      "descripcion": "El switch concentra las conexiones locales y permite que los dispositivos de la LAN intercambien tramas. El router es quien normalmente conecta esa LAN con otras redes."
+      "descripcion": "El switch concentra las conexiones locales y permite que los dispositivos de la LAN intercambien tramas. El router es quien normalmente conecta esa LAN con otras redes.",
+      "tema": "Dispositivos de conexión ISP"
     },
     {
       "pregunta": "En una red de cliente, ¿qué equipo suele actuar como puerta de enlace predeterminada hacia el ISP?",
@@ -99,7 +107,8 @@
         "La impresora de red"
       ],
       "correcta": 0,
-      "descripcion": "La puerta de enlace predeterminada suele ser la interfaz LAN del router. Ese equipo puede reenviar tráfico desde la red local hacia la red del proveedor."
+      "descripcion": "La puerta de enlace predeterminada suele ser la interfaz LAN del router. Ese equipo puede reenviar tráfico desde la red local hacia la red del proveedor.",
+      "tema": "Dispositivos de conexión ISP"
     },
     {
       "pregunta": "Un ISP ofrece fibra hasta el hogar. ¿Cuál de estas combinaciones representa mejor una cadena típica de conexión del cliente?",
@@ -110,7 +119,8 @@
         "Fibra → impresora → servidor SMTP → LAN"
       ],
       "correcta": 0,
-      "descripcion": "En un acceso FTTH es habitual que la fibra llegue a una ONT/ONU y desde allí se entregue conectividad al router. Luego el router y los switches/AP permiten conectar los dispositivos finales."
+      "descripcion": "En un acceso FTTH es habitual que la fibra llegue a una ONT/ONU y desde allí se entregue conectividad al router. Luego el router y los switches/AP permiten conectar los dispositivos finales.",
+      "tema": "Dispositivos de conexión ISP"
     },
     {
       "pregunta": "Un usuario conecta teléfono, reloj y auriculares en un radio reducido alrededor de sí. ¿Qué clasificación describe mejor esa red?",
@@ -121,7 +131,8 @@
         "WAN"
       ],
       "correcta": 0,
-      "descripcion": "Una PAN cubre un área personal pequeña y suele conectar dispositivos cercanos al usuario. Bluetooth es una tecnología frecuente en este tipo de escenario."
+      "descripcion": "Una PAN cubre un área personal pequeña y suele conectar dispositivos cercanos al usuario. Bluetooth es una tecnología frecuente en este tipo de escenario.",
+      "tema": "Tipos de redes: PAN, LAN, MAN y WAN"
     },
     {
       "pregunta": "Una escuela conecta laboratorios, administración e impresoras dentro del mismo establecimiento. ¿Qué tipo de red encaja mejor?",
@@ -132,7 +143,8 @@
         "WAN"
       ],
       "correcta": 1,
-      "descripcion": "Una LAN conecta dispositivos dentro de un área local limitada, como una vivienda, edificio, escuela u oficina."
+      "descripcion": "Una LAN conecta dispositivos dentro de un área local limitada, como una vivienda, edificio, escuela u oficina.",
+      "tema": "Tipos de redes: PAN, LAN, MAN y WAN"
     },
     {
       "pregunta": "Una organización enlaza diferentes edificios distribuidos por una ciudad mediante una infraestructura común. ¿Qué clasificación es la más adecuada?",
@@ -143,7 +155,8 @@
         "WAN"
       ],
       "correcta": 2,
-      "descripcion": "Una MAN cubre normalmente un ámbito metropolitano, mayor que una LAN y menor que una WAN de alcance regional o global."
+      "descripcion": "Una MAN cubre normalmente un ámbito metropolitano, mayor que una LAN y menor que una WAN de alcance regional o global.",
+      "tema": "Tipos de redes: PAN, LAN, MAN y WAN"
     },
     {
       "pregunta": "Una compañía mantiene redes interconectadas en Argentina, Chile y España. ¿Qué tipo de red representa mejor el alcance?",
@@ -154,7 +167,8 @@
         "WAN"
       ],
       "correcta": 3,
-      "descripcion": "Una WAN permite interconectar redes separadas por grandes distancias geográficas, incluso entre países y continentes."
+      "descripcion": "Una WAN permite interconectar redes separadas por grandes distancias geográficas, incluso entre países y continentes.",
+      "tema": "Tipos de redes: PAN, LAN, MAN y WAN"
     },
     {
       "pregunta": "¿Qué criterio diferencia mejor PAN, LAN, MAN y WAN cuando se clasifican por alcance?",
@@ -165,7 +179,8 @@
         "El sistema operativo instalado en los clientes"
       ],
       "correcta": 0,
-      "descripcion": "La clasificación PAN/LAN/MAN/WAN se relaciona principalmente con el alcance geográfico de la red. Las tecnologías concretas pueden variar dentro de cada categoría."
+      "descripcion": "La clasificación PAN/LAN/MAN/WAN se relaciona principalmente con el alcance geográfico de la red. Las tecnologías concretas pueden variar dentro de cada categoría.",
+      "tema": "Tipos de redes: PAN, LAN, MAN y WAN"
     },
     {
       "pregunta": "Una LAN moderna utiliza Ethernet para equipos cableados y Wi-Fi para clientes inalámbricos. ¿Qué conclusión es más correcta?",
@@ -176,7 +191,8 @@
         "Ethernet solo puede funcionar en una WAN"
       ],
       "correcta": 0,
-      "descripcion": "Una LAN puede combinar Ethernet, Wi-Fi y otros medios mientras los dispositivos puedan comunicarse dentro de la misma infraestructura lógica. El tipo de red depende del alcance y diseño, no de una sola tecnología."
+      "descripcion": "Una LAN puede combinar Ethernet, Wi-Fi y otros medios mientras los dispositivos puedan comunicarse dentro de la misma infraestructura lógica. El tipo de red depende del alcance y diseño, no de una sola tecnología.",
+      "tema": "Tipos de redes: PAN, LAN, MAN y WAN"
     },
     {
       "pregunta": "¿Qué estándar está directamente asociado con Ethernet en redes LAN cableadas?",
@@ -187,7 +203,8 @@
         "IEEE 802.16"
       ],
       "correcta": 0,
-      "descripcion": "IEEE 802.3 corresponde a Ethernet. IEEE 802.11 se asocia principalmente con WLAN/Wi-Fi, mientras que 802.15 incluye tecnologías de redes personales."
+      "descripcion": "IEEE 802.3 corresponde a Ethernet. IEEE 802.11 se asocia principalmente con WLAN/Wi-Fi, mientras que 802.15 incluye tecnologías de redes personales.",
+      "tema": "Tipos de redes: PAN, LAN, MAN y WAN"
     },
     {
       "pregunta": "¿Qué familia de estándares está asociada principalmente con Wi-Fi?",
@@ -198,7 +215,8 @@
         "IEEE 802.1X exclusivamente"
       ],
       "correcta": 1,
-      "descripcion": "IEEE 802.11 define la familia de estándares para redes inalámbricas LAN conocidas comercialmente como Wi-Fi. 802.3 corresponde a Ethernet."
+      "descripcion": "IEEE 802.11 define la familia de estándares para redes inalámbricas LAN conocidas comercialmente como Wi-Fi. 802.3 corresponde a Ethernet.",
+      "tema": "Tipos de redes: PAN, LAN, MAN y WAN"
     },
     {
       "pregunta": "Un dispositivo Bluetooth se comunica con otro a pocos metros. ¿Qué combinación resulta más coherente?",
@@ -209,7 +227,8 @@
         "MAN y SMTP"
       ],
       "correcta": 0,
-      "descripcion": "Bluetooth se utiliza habitualmente en redes personales y se relaciona con la familia IEEE 802.15. No significa que toda PAN tenga que usar exclusivamente Bluetooth."
+      "descripcion": "Bluetooth se utiliza habitualmente en redes personales y se relaciona con la familia IEEE 802.15. No significa que toda PAN tenga que usar exclusivamente Bluetooth.",
+      "tema": "Tipos de redes: PAN, LAN, MAN y WAN"
     },
     {
       "pregunta": "¿Por qué una WAN puede utilizar distintos protocolos y tecnologías en diferentes tramos?",
@@ -220,7 +239,8 @@
         "Porque una WAN no necesita direcciones IP"
       ],
       "correcta": 0,
-      "descripcion": "Una WAN puede atravesar enlaces y redes diferentes. Los routers y protocolos de interconexión permiten que esas redes heterogéneas participen en una comunicación extremo a extremo."
+      "descripcion": "Una WAN puede atravesar enlaces y redes diferentes. Los routers y protocolos de interconexión permiten que esas redes heterogéneas participen en una comunicación extremo a extremo.",
+      "tema": "Tipos de redes: PAN, LAN, MAN y WAN"
     },
     {
       "pregunta": "Una red de oficina ocupa un solo edificio, pero utiliza varios switches, Wi-Fi y routers internos. ¿Su cantidad de dispositivos determina que sea una MAN?",
@@ -231,7 +251,8 @@
         "No, porque cualquier red con Wi-Fi es automáticamente una PAN"
       ],
       "correcta": 1,
-      "descripcion": "La clasificación no depende simplemente de contar dispositivos. Una red dentro de un edificio sigue siendo normalmente una LAN aunque tenga muchos equipos y diferentes tecnologías."
+      "descripcion": "La clasificación no depende simplemente de contar dispositivos. Una red dentro de un edificio sigue siendo normalmente una LAN aunque tenga muchos equipos y diferentes tecnologías.",
+      "tema": "Tipos de redes: PAN, LAN, MAN y WAN"
     },
     {
       "pregunta": "¿Cuál de estas situaciones representa mejor una MAN y no simplemente una LAN?",
@@ -242,7 +263,8 @@
         "Una red doméstica con dos notebooks"
       ],
       "correcta": 1,
-      "descripcion": "Una MAN está pensada para un alcance metropolitano. Interconectar sedes de una misma ciudad encaja mejor con esta clasificación que los otros escenarios."
+      "descripcion": "Una MAN está pensada para un alcance metropolitano. Interconectar sedes de una misma ciudad encaja mejor con esta clasificación que los otros escenarios.",
+      "tema": "Tipos de redes: PAN, LAN, MAN y WAN"
     },
     {
       "pregunta": "En una red local, ¿qué función cumple principalmente Ethernet?",
@@ -253,7 +275,8 @@
         "Cifra por sí solo todo el contenido de Internet"
       ],
       "correcta": 0,
-      "descripcion": "Ethernet, definido por IEEE 802.3, especifica aspectos de la comunicación de redes locales cableadas, incluyendo formatos de trama y mecanismos de acceso al medio."
+      "descripcion": "Ethernet, definido por IEEE 802.3, especifica aspectos de la comunicación de redes locales cableadas, incluyendo formatos de trama y mecanismos de acceso al medio.",
+      "tema": "Tipos de redes: PAN, LAN, MAN y WAN"
     },
     {
       "pregunta": "¿Qué combinación relaciona correctamente tecnología y tipo de red?",
@@ -264,7 +287,8 @@
         "DNS—PAN; TCP—LAN; ASCII—WAN"
       ],
       "correcta": 0,
-      "descripcion": "La primera combinación relaciona ejemplos razonables de tecnologías y alcances. Sin embargo, una tecnología concreta no determina por sí sola la clasificación en todos los casos."
+      "descripcion": "La primera combinación relaciona ejemplos razonables de tecnologías y alcances. Sin embargo, una tecnología concreta no determina por sí sola la clasificación en todos los casos.",
+      "tema": "Tipos de redes: PAN, LAN, MAN y WAN"
     },
     {
       "pregunta": "Si dos redes LAN están en ciudades diferentes y se interconectan mediante routers y enlaces de un proveedor, ¿qué categoría describe mejor el conjunto?",
@@ -275,7 +299,8 @@
         "WAN"
       ],
       "correcta": 3,
-      "descripcion": "Al interconectar LAN separadas por una gran distancia geográfica se forma una infraestructura de alcance WAN. Las LAN originales siguen existiendo como redes locales."
+      "descripcion": "Al interconectar LAN separadas por una gran distancia geográfica se forma una infraestructura de alcance WAN. Las LAN originales siguen existiendo como redes locales.",
+      "tema": "Tipos de redes: PAN, LAN, MAN y WAN"
     },
     {
       "pregunta": "Un paquete necesita atravesar varios routers para llegar a otra red. ¿Qué protocolo proporciona el direccionamiento lógico utilizado para identificar redes y hosts en Internet?",
@@ -286,7 +311,8 @@
         "ASCII"
       ],
       "correcta": 0,
-      "descripcion": "IP proporciona el direccionamiento lógico necesario para identificar interfaces y redes y permite que los routers tomen decisiones de encaminamiento."
+      "descripcion": "IP proporciona el direccionamiento lógico necesario para identificar interfaces y redes y permite que los routers tomen decisiones de encaminamiento.",
+      "tema": "TCP, IP y DNS"
     },
     {
       "pregunta": "Una aplicación necesita una comunicación orientada a conexión con control de entrega y orden de datos. ¿Qué protocolo encaja mejor?",
@@ -297,7 +323,8 @@
         "IP"
       ],
       "correcta": 1,
-      "descripcion": "TCP establece una comunicación orientada a conexión y proporciona mecanismos para controlar la entrega y ordenar los datos recibidos."
+      "descripcion": "TCP establece una comunicación orientada a conexión y proporciona mecanismos para controlar la entrega y ordenar los datos recibidos.",
+      "tema": "TCP, IP y DNS"
     },
     {
       "pregunta": "Un navegador conoce `www.ejemplo.com`, pero necesita obtener una dirección IP para iniciar la comunicación. ¿Qué sistema interviene?",
@@ -308,7 +335,8 @@
         "DHCP"
       ],
       "correcta": 1,
-      "descripcion": "DNS traduce o resuelve nombres de dominio mediante consultas a servidores DNS. Después, otros protocolos como IP y TCP/UDP pueden participar en la comunicación."
+      "descripcion": "DNS traduce o resuelve nombres de dominio mediante consultas a servidores DNS. Después, otros protocolos como IP y TCP/UDP pueden participar en la comunicación.",
+      "tema": "TCP, IP y DNS"
     },
     {
       "pregunta": "¿Cuál es la relación más precisa entre TCP e IP?",
@@ -319,7 +347,8 @@
         "Ambos son exactamente el mismo protocolo con nombres diferentes"
       ],
       "correcta": 0,
-      "descripcion": "TCP e IP cumplen funciones diferentes y complementarias. TCP pertenece al transporte y gestiona una comunicación confiable; IP se ocupa principalmente del direccionamiento y encaminamiento."
+      "descripcion": "TCP e IP cumplen funciones diferentes y complementarias. TCP pertenece al transporte y gestiona una comunicación confiable; IP se ocupa principalmente del direccionamiento y encaminamiento.",
+      "tema": "TCP, IP y DNS"
     },
     {
       "pregunta": "Una aplicación envía pequeñas consultas donde la rapidez y la baja sobrecarga son importantes y puede manejar pérdidas por su cuenta. ¿Qué transporte podría elegir?",
@@ -330,7 +359,8 @@
         "Ethernet exclusivamente"
       ],
       "correcta": 1,
-      "descripcion": "UDP tiene menor sobrecarga y no establece por sí mismo los mecanismos de confiabilidad de TCP. Puede ser adecuado cuando la aplicación prioriza rapidez o implementa su propio control."
+      "descripcion": "UDP tiene menor sobrecarga y no establece por sí mismo los mecanismos de confiabilidad de TCP. Puede ser adecuado cuando la aplicación prioriza rapidez o implementa su propio control.",
+      "tema": "TCP, IP y DNS"
     },
     {
       "pregunta": "¿Qué ocurre conceptualmente cuando DNS resuelve un nombre de dominio correctamente?",
@@ -341,7 +371,8 @@
         "Cambia la máscara de subred del equipo"
       ],
       "correcta": 0,
-      "descripcion": "DNS consulta registros del sistema de nombres y puede devolver direcciones IP asociadas con un dominio. Esa información permite que el cliente conozca a qué dirección comunicarse."
+      "descripcion": "DNS consulta registros del sistema de nombres y puede devolver direcciones IP asociadas con un dominio. Esa información permite que el cliente conozca a qué dirección comunicarse.",
+      "tema": "TCP, IP y DNS"
     },
     {
       "pregunta": "Un ping puede recibir respuestas de una dirección IP aunque el nombre de dominio asociado no se resuelva. ¿Qué conclusión es razonable?",
@@ -352,7 +383,8 @@
         "El equipo se convirtió en una WAN"
       ],
       "correcta": 0,
-      "descripcion": "El ping hacia una IP prueba una forma de conectividad basada en IP/ICMP. Si funciona por IP pero no por nombre, es razonable investigar DNS por separado."
+      "descripcion": "El ping hacia una IP prueba una forma de conectividad basada en IP/ICMP. Si funciona por IP pero no por nombre, es razonable investigar DNS por separado.",
+      "tema": "TCP, IP y DNS"
     },
     {
       "pregunta": "¿Qué protocolo se encuentra principalmente en la capa de Transporte del modelo OSI?",
@@ -363,7 +395,8 @@
         "Ethernet"
       ],
       "correcta": 1,
-      "descripcion": "TCP es un protocolo de transporte y se asocia con la capa 4 del modelo OSI. IP corresponde principalmente a la capa de Red."
+      "descripcion": "TCP es un protocolo de transporte y se asocia con la capa 4 del modelo OSI. IP corresponde principalmente a la capa de Red.",
+      "tema": "Modelo OSI: capas y protocolos"
     },
     {
       "pregunta": "¿Qué protocolo se asocia principalmente con la capa de Red del modelo OSI?",
@@ -374,7 +407,8 @@
         "HTTP"
       ],
       "correcta": 1,
-      "descripcion": "IP se ocupa del direccionamiento lógico y del encaminamiento, funciones asociadas principalmente con la capa 3, Red."
+      "descripcion": "IP se ocupa del direccionamiento lógico y del encaminamiento, funciones asociadas principalmente con la capa 3, Red.",
+      "tema": "Modelo OSI: capas y protocolos"
     },
     {
       "pregunta": "DNS puede utilizar UDP y también TCP en determinadas situaciones. ¿Qué afirmación evita una simplificación incorrecta?",
@@ -385,7 +419,8 @@
         "DNS es una dirección IP reservada"
       ],
       "correcta": 0,
-      "descripcion": "DNS es el sistema/protocolo de resolución de nombres y tradicionalmente utiliza UDP para muchas consultas, aunque también puede utilizar TCP en situaciones específicas."
+      "descripcion": "DNS es el sistema/protocolo de resolución de nombres y tradicionalmente utiliza UDP para muchas consultas, aunque también puede utilizar TCP en situaciones específicas.",
+      "tema": "TCP, IP y DNS: comunicación y diagnóstico"
     },
     {
       "pregunta": "Si un servidor recibe un segmento TCP dirigido a un puerto concreto, ¿qué información está ayudando a identificar ese puerto?",
@@ -396,7 +431,8 @@
         "ASCII determina el puerto mediante caracteres"
       ],
       "correcta": 0,
-      "descripcion": "Los números de puerto permiten identificar aplicaciones o servicios dentro de un host. TCP y UDP utilizan puertos en la capa de transporte."
+      "descripcion": "Los números de puerto permiten identificar aplicaciones o servicios dentro de un host. TCP y UDP utilizan puertos en la capa de transporte.",
+      "tema": "TCP, IP y DNS: comunicación y diagnóstico"
     },
     {
       "pregunta": "¿Cuál de estos conjuntos representa correctamente tres funciones diferentes?",
@@ -407,7 +443,8 @@
         "IP: Wi-Fi; TCP: fibra óptica; DNS: switch"
       ],
       "correcta": 0,
-      "descripcion": "La primera opción distingue correctamente las funciones principales: IP direcciona y enruta, TCP gestiona transporte orientado a conexión y DNS resuelve nombres."
+      "descripcion": "La primera opción distingue correctamente las funciones principales: IP direcciona y enruta, TCP gestiona transporte orientado a conexión y DNS resuelve nombres.",
+      "tema": "TCP, IP y DNS: comunicación y diagnóstico"
     },
     {
       "pregunta": "Un administrador prueba `ping 192.168.1.1`. ¿Qué está comprobando principalmente si recibe respuestas?",
@@ -418,7 +455,8 @@
         "Que la MAC del destino fue convertida a ASCII"
       ],
       "correcta": 0,
-      "descripcion": "Ping utiliza normalmente ICMP para enviar solicitudes de eco y recibir respuestas. Una respuesta demuestra alcance de esa dirección mediante ese mecanismo, aunque no garantiza que todos los servicios del host estén funcionando."
+      "descripcion": "Ping utiliza normalmente ICMP para enviar solicitudes de eco y recibir respuestas. Una respuesta demuestra alcance de esa dirección mediante ese mecanismo, aunque no garantiza que todos los servicios del host estén funcionando.",
+      "tema": "TCP, IP y DNS: comunicación y diagnóstico"
     },
     {
       "pregunta": "Un dominio responde correctamente por DNS, pero una página web no carga. ¿Por qué no sería correcto concluir que DNS es necesariamente el único problema?",
@@ -429,7 +467,8 @@
         "Porque HTTP funciona sin ninguna red"
       ],
       "correcta": 0,
-      "descripcion": "Que DNS resuelva correctamente solo demuestra que el nombre pudo obtener información asociada. El problema posterior puede estar en TCP, el servidor web, HTTP/HTTPS, firewall u otros componentes."
+      "descripcion": "Que DNS resuelva correctamente solo demuestra que el nombre pudo obtener información asociada. El problema posterior puede estar en TCP, el servidor web, HTTP/HTTPS, firewall u otros componentes.",
+      "tema": "TCP, IP y DNS: comunicación y diagnóstico"
     },
     {
       "pregunta": "En una topología BUS, varios dispositivos comparten un medio principal. ¿Qué característica la distingue de una estrella?",
@@ -440,7 +479,8 @@
         "Los datos solo pueden viajar mediante una conexión inalámbrica"
       ],
       "correcta": 0,
-      "descripcion": "La topología bus se basa en un medio principal compartido. En estrella, cada dispositivo tiene normalmente un enlace hacia un punto central."
+      "descripcion": "La topología bus se basa en un medio principal compartido. En estrella, cada dispositivo tiene normalmente un enlace hacia un punto central.",
+      "tema": "Topologías de red"
     },
     {
       "pregunta": "En una red en ANILLO, un dispositivo deja de funcionar y la red no posee mecanismos alternativos. ¿Qué riesgo representa?",
@@ -451,7 +491,8 @@
         "La topología se transforma automáticamente en estrella"
       ],
       "correcta": 0,
-      "descripcion": "En un anillo simple, una interrupción puede afectar el camino de comunicación. Diseños redundantes pueden reducir este riesgo, pero no debe asumirse que todos los anillos tienen la misma tolerancia."
+      "descripcion": "En un anillo simple, una interrupción puede afectar el camino de comunicación. Diseños redundantes pueden reducir este riesgo, pero no debe asumirse que todos los anillos tienen la misma tolerancia.",
+      "tema": "Topologías de red"
     },
     {
       "pregunta": "Una topología ESTRELLA utiliza un switch central. Si un cable de un equipo se rompe, ¿qué ocurre normalmente con ese equipo?",
@@ -462,7 +503,8 @@
         "Todos los equipos cambian automáticamente de IP pública"
       ],
       "correcta": 0,
-      "descripcion": "Una ventaja de la estrella es que una falla en el enlace de un equipo suele aislar principalmente a ese equipo, mientras el resto puede seguir comunicándose a través del punto central."
+      "descripcion": "Una ventaja de la estrella es que una falla en el enlace de un equipo suele aislar principalmente a ese equipo, mientras el resto puede seguir comunicándose a través del punto central.",
+      "tema": "Topologías de red"
     },
     {
       "pregunta": "¿Qué ventaja conceptual ofrece una topología ÁRBOL frente a una estrella única?",
@@ -473,7 +515,8 @@
         "Hace que todos los dispositivos tengan enlaces directos entre sí"
       ],
       "correcta": 0,
-      "descripcion": "La topología árbol extiende una estructura jerárquica, pudiendo utilizar varios niveles de distribución. Esto facilita organizar redes grandes por segmentos."
+      "descripcion": "La topología árbol extiende una estructura jerárquica, pudiendo utilizar varios niveles de distribución. Esto facilita organizar redes grandes por segmentos.",
+      "tema": "Topologías de red"
     },
     {
       "pregunta": "Una universidad conecta un switch central con switches de distintos pisos y cada switch conecta los equipos de su piso. ¿Qué topología describe mejor la estructura global?",
@@ -484,7 +527,8 @@
         "PAN"
       ],
       "correcta": 0,
-      "descripcion": "La estructura tiene niveles jerárquicos: un punto de distribución conecta otros puntos y estos conectan dispositivos finales. Esto corresponde conceptualmente a una topología árbol."
+      "descripcion": "La estructura tiene niveles jerárquicos: un punto de distribución conecta otros puntos y estos conectan dispositivos finales. Esto corresponde conceptualmente a una topología árbol.",
+      "tema": "Topologías de red"
     },
     {
       "pregunta": "¿Qué escenario se adapta mejor a una topología BUS tradicional?",
@@ -495,7 +539,8 @@
         "Varios switches organizados en niveles jerárquicos"
       ],
       "correcta": 0,
-      "descripcion": "El rasgo central de BUS es el medio troncal compartido. Las demás descripciones corresponden a estrella, malla y árbol respectivamente."
+      "descripcion": "El rasgo central de BUS es el medio troncal compartido. Las demás descripciones corresponden a estrella, malla y árbol respectivamente.",
+      "tema": "Topologías de red"
     },
     {
       "pregunta": "¿Qué escenario corresponde mejor a una topología ESTRELLA?",
@@ -506,7 +551,8 @@
         "Los dispositivos se organizan obligatoriamente en dos anillos"
       ],
       "correcta": 0,
-      "descripcion": "La conexión individual de cada equipo hacia un punto central es la característica distintiva de la estrella."
+      "descripcion": "La conexión individual de cada equipo hacia un punto central es la característica distintiva de la estrella.",
+      "tema": "Topologías de red"
     },
     {
       "pregunta": "En una topología ÁRBOL, ¿qué relación suele existir entre los dispositivos de distribución?",
@@ -517,7 +563,8 @@
         "Ninguno puede conectarse con otro switch"
       ],
       "correcta": 0,
-      "descripcion": "Árbol organiza nodos de distribución en una estructura jerárquica, donde un nivel superior puede conectar y distribuir hacia niveles inferiores."
+      "descripcion": "Árbol organiza nodos de distribución en una estructura jerárquica, donde un nivel superior puede conectar y distribuir hacia niveles inferiores.",
+      "tema": "Topologías de red"
     },
     {
       "pregunta": "¿Qué problema puede producir una falla en el dispositivo central de una estrella si no existe redundancia?",
@@ -528,7 +575,8 @@
         "Convierte automáticamente la red en bus"
       ],
       "correcta": 0,
-      "descripcion": "El punto central es crítico en una estrella. Si falla y no existe un camino alternativo, múltiples equipos pueden perder conectividad."
+      "descripcion": "El punto central es crítico en una estrella. Si falla y no existe un camino alternativo, múltiples equipos pueden perder conectividad.",
+      "tema": "Topologías de red"
     },
     {
       "pregunta": "Una organización quiere separar una gran LAN por sectores usando switches de distribución y acceso en niveles. ¿Qué topología representa mejor esa organización?",
@@ -539,7 +587,8 @@
         "PAN"
       ],
       "correcta": 0,
-      "descripcion": "La estructura jerárquica por niveles de distribución y acceso corresponde a una topología árbol, muy común como modelo conceptual para redes empresariales."
+      "descripcion": "La estructura jerárquica por niveles de distribución y acceso corresponde a una topología árbol, muy común como modelo conceptual para redes empresariales.",
+      "tema": "Topologías de red"
     },
     {
       "pregunta": "¿Cuál es una diferencia importante entre BUS y ANILLO?",
@@ -550,7 +599,8 @@
         "ANILLO requiere obligatoriamente Wi-Fi y BUS fibra óptica"
       ],
       "correcta": 0,
-      "descripcion": "Bus y anillo tienen estructuras físicas diferentes. El bus se organiza alrededor de un medio compartido, mientras que el anillo forma un circuito de conexiones entre nodos."
+      "descripcion": "Bus y anillo tienen estructuras físicas diferentes. El bus se organiza alrededor de un medio compartido, mientras que el anillo forma un circuito de conexiones entre nodos.",
+      "tema": "Topologías de red"
     },
     {
       "pregunta": "Si una red se diseña con un switch principal, varios switches secundarios y equipos conectados a cada secundario, ¿qué característica permite llamarla árbol?",
@@ -561,7 +611,8 @@
         "El uso exclusivo de direcciones MAC públicas"
       ],
       "correcta": 0,
-      "descripcion": "La característica esencial es la jerarquía: un nivel de distribución conecta niveles inferiores que a su vez conectan los dispositivos finales."
+      "descripcion": "La característica esencial es la jerarquía: un nivel de distribución conecta niveles inferiores que a su vez conectan los dispositivos finales.",
+      "tema": "Topologías de red"
     },
     {
       "pregunta": "Una emisora transmite un programa y los receptores solamente reciben, sin un canal de respuesta dentro de esa comunicación. ¿Qué tipo corresponde?",
@@ -572,7 +623,8 @@
         "Multicast bidireccional"
       ],
       "correcta": 0,
-      "descripcion": "Una comunicación unilateral tiene un único sentido de transmisión. El receptor recibe información pero no dispone de un canal de retorno dentro de esa comunicación."
+      "descripcion": "Una comunicación unilateral tiene un único sentido de transmisión. El receptor recibe información pero no dispone de un canal de retorno dentro de esa comunicación.",
+      "tema": "Tipos de comunicación"
     },
     {
       "pregunta": "Dos personas mantienen una conversación telefónica y ambas pueden hablar y escuchar al mismo tiempo. ¿Qué tipo de comunicación es?",
@@ -583,7 +635,8 @@
         "Solo broadcast"
       ],
       "correcta": 1,
-      "descripcion": "La comunicación bilateral simultánea permite transmitir en ambos sentidos al mismo tiempo. Es el modelo conocido como full-duplex."
+      "descripcion": "La comunicación bilateral simultánea permite transmitir en ambos sentidos al mismo tiempo. Es el modelo conocido como full-duplex.",
+      "tema": "Tipos de comunicación"
     },
     {
       "pregunta": "Dos dispositivos utilizan un canal de radio en el que uno transmite mientras el otro espera, y luego intercambian los roles. ¿Qué tipo de comunicación representa?",
@@ -594,7 +647,8 @@
         "Sin comunicación"
       ],
       "correcta": 2,
-      "descripcion": "La bilateral alternada permite comunicación en ambos sentidos, pero no simultáneamente. Es comparable conceptualmente con half-duplex."
+      "descripcion": "La bilateral alternada permite comunicación en ambos sentidos, pero no simultáneamente. Es comparable conceptualmente con half-duplex.",
+      "tema": "Tipos de comunicación"
     },
     {
       "pregunta": "¿Qué característica distingue a una comunicación bilateral de una unilateral?",
@@ -605,7 +659,8 @@
         "La bilateral no puede utilizar señales digitales"
       ],
       "correcta": 0,
-      "descripcion": "La diferencia principal es el sentido de intercambio. En una comunicación bilateral ambas partes pueden transmitir, mientras que en una unilateral la información fluye en un único sentido."
+      "descripcion": "La diferencia principal es el sentido de intercambio. En una comunicación bilateral ambas partes pueden transmitir, mientras que en una unilateral la información fluye en un único sentido.",
+      "tema": "Tipos de comunicación"
     },
     {
       "pregunta": "Un sensor transmite periódicamente mediciones a un servidor y nunca recibe datos de vuelta como parte de ese intercambio. ¿Qué clasificación describe mejor ese flujo?",
@@ -616,7 +671,8 @@
         "Anillo"
       ],
       "correcta": 0,
-      "descripcion": "El flujo descrito es unilateral porque la información viaja del sensor hacia el servidor sin un canal de respuesta dentro de la comunicación indicada."
+      "descripcion": "El flujo descrito es unilateral porque la información viaja del sensor hacia el servidor sin un canal de respuesta dentro de la comunicación indicada.",
+      "tema": "Tipos de comunicación"
     },
     {
       "pregunta": "Un equipo envía una solicitud a otro y este responde después, pero nunca transmiten ambos al mismo tiempo por el canal. ¿Qué tipo corresponde?",
@@ -627,7 +683,8 @@
         "Broadcast"
       ],
       "correcta": 0,
-      "descripcion": "Ambas partes transmiten, por lo que es bilateral, pero lo hacen en momentos diferentes, por lo que corresponde a una comunicación bilateral alternada."
+      "descripcion": "Ambas partes transmiten, por lo que es bilateral, pero lo hacen en momentos diferentes, por lo que corresponde a una comunicación bilateral alternada.",
+      "tema": "Tipos de comunicación"
     },
     {
       "pregunta": "¿Qué ejemplo representa mejor una comunicación bilateral simultánea?",
@@ -638,7 +695,8 @@
         "Un sensor que solo envía temperatura"
       ],
       "correcta": 0,
-      "descripcion": "En una llamada bidireccional simultánea, ambos participantes pueden enviar y recibir información al mismo tiempo."
+      "descripcion": "En una llamada bidireccional simultánea, ambos participantes pueden enviar y recibir información al mismo tiempo.",
+      "tema": "Tipos de comunicación"
     },
     {
       "pregunta": "Una radio tipo walkie-talkie permite que ambos usuarios hablen, pero normalmente deben esperar su turno para transmitir. ¿Cómo se clasifica el intercambio?",
@@ -649,7 +707,8 @@
         "Sin canal de retorno"
       ],
       "correcta": 0,
-      "descripcion": "El walkie-talkie es un ejemplo clásico de comunicación half-duplex: ambos pueden transmitir, pero el canal se utiliza en un sentido por vez."
+      "descripcion": "El walkie-talkie es un ejemplo clásico de comunicación half-duplex: ambos pueden transmitir, pero el canal se utiliza en un sentido por vez.",
+      "tema": "Tipos de comunicación"
     },
     {
       "pregunta": "En el modelo OSI, ¿qué capa se ocupa de transmitir bits mediante señales por el medio físico?",
@@ -660,7 +719,8 @@
         "Transporte"
       ],
       "correcta": 0,
-      "descripcion": "La capa Física define aspectos relacionados con la transmisión de bits y las características del medio y las señales. No se ocupa de decidir rutas IP."
+      "descripcion": "La capa Física define aspectos relacionados con la transmisión de bits y las características del medio y las señales. No se ocupa de decidir rutas IP.",
+      "tema": "Modelo OSI: capas y protocolos"
     },
     {
       "pregunta": "Ethernet y las direcciones MAC se relacionan principalmente con qué capa OSI?",
@@ -671,7 +731,8 @@
         "Sesión"
       ],
       "correcta": 1,
-      "descripcion": "Ethernet y las direcciones MAC se asocian principalmente con la capa 2, Enlace de datos, que trabaja con tramas y comunicación dentro del enlace."
+      "descripcion": "Ethernet y las direcciones MAC se asocian principalmente con la capa 2, Enlace de datos, que trabaja con tramas y comunicación dentro del enlace.",
+      "tema": "Modelo OSI: capas y protocolos"
     },
     {
       "pregunta": "IP se ubica principalmente en qué capa del modelo OSI?",
@@ -682,7 +743,8 @@
         "Aplicación"
       ],
       "correcta": 1,
-      "descripcion": "IP corresponde principalmente a la capa 3, Red. Proporciona direccionamiento lógico y participa en el encaminamiento entre redes."
+      "descripcion": "IP corresponde principalmente a la capa 3, Red. Proporciona direccionamiento lógico y participa en el encaminamiento entre redes.",
+      "tema": "Modelo OSI: capas y protocolos"
     },
     {
       "pregunta": "TCP y UDP se asocian principalmente con qué capa?",
@@ -693,7 +755,8 @@
         "Presentación"
       ],
       "correcta": 2,
-      "descripcion": "TCP y UDP son protocolos de la capa 4, Transporte. Proporcionan mecanismos de comunicación entre procesos extremos, con características diferentes."
+      "descripcion": "TCP y UDP son protocolos de la capa 4, Transporte. Proporcionan mecanismos de comunicación entre procesos extremos, con características diferentes.",
+      "tema": "Modelo OSI: capas y protocolos"
     },
     {
       "pregunta": "¿Qué capa OSI se ocupa principalmente de establecer, mantener y gestionar sesiones entre aplicaciones?",
@@ -704,7 +767,8 @@
         "Enlace"
       ],
       "correcta": 0,
-      "descripcion": "La capa de Sesión se ocupa de funciones relacionadas con el establecimiento, mantenimiento y terminación de sesiones de comunicación entre aplicaciones."
+      "descripcion": "La capa de Sesión se ocupa de funciones relacionadas con el establecimiento, mantenimiento y terminación de sesiones de comunicación entre aplicaciones.",
+      "tema": "Modelo OSI: capas y protocolos"
     },
     {
       "pregunta": "La codificación, representación y transformación del formato de los datos se relaciona principalmente con qué capa?",
@@ -715,7 +779,8 @@
         "Física"
       ],
       "correcta": 0,
-      "descripcion": "La capa de Presentación se ocupa de cómo se representan los datos, incluyendo aspectos como formato, codificación y transformación necesarios para su interpretación."
+      "descripcion": "La capa de Presentación se ocupa de cómo se representan los datos, incluyendo aspectos como formato, codificación y transformación necesarios para su interpretación.",
+      "tema": "Modelo OSI: capas y protocolos"
     },
     {
       "pregunta": "HTTP, FTP y SMTP se consideran principalmente protocolos de qué capa del modelo OSI?",
@@ -726,7 +791,8 @@
         "Enlace"
       ],
       "correcta": 0,
-      "descripcion": "Estos protocolos proporcionan servicios directamente relacionados con aplicaciones y se asocian conceptualmente con la capa 7, Aplicación."
+      "descripcion": "Estos protocolos proporcionan servicios directamente relacionados con aplicaciones y se asocian conceptualmente con la capa 7, Aplicación.",
+      "tema": "Modelo OSI: capas y protocolos"
     },
     {
       "pregunta": "¿Cuál de estas asociaciones es correcta?",
@@ -737,7 +803,8 @@
         "Ethernet—Aplicación; IP—Enlace; TCP—Física; HTTP—Sesión"
       ],
       "correcta": 0,
-      "descripcion": "La primera asociación coincide con las funciones principales del modelo OSI: Ethernet en enlace, IP en red, TCP en transporte y HTTP en aplicación."
+      "descripcion": "La primera asociación coincide con las funciones principales del modelo OSI: Ethernet en enlace, IP en red, TCP en transporte y HTTP en aplicación.",
+      "tema": "Modelo OSI: capas y protocolos"
     },
     {
       "pregunta": "DNS se considera principalmente un protocolo de qué capa OSI?",
@@ -748,7 +815,8 @@
         "Física"
       ],
       "correcta": 0,
-      "descripcion": "DNS proporciona un servicio de resolución de nombres para las aplicaciones, por lo que se asocia principalmente con la capa de Aplicación, aunque utilice TCP o UDP como transporte."
+      "descripcion": "DNS proporciona un servicio de resolución de nombres para las aplicaciones, por lo que se asocia principalmente con la capa de Aplicación, aunque utilice TCP o UDP como transporte.",
+      "tema": "Modelo OSI: capas y protocolos"
     },
     {
       "pregunta": "Un problema afecta a la señal eléctrica del cable, pero las direcciones IP son correctas. ¿Qué capa conviene revisar primero?",
@@ -759,7 +827,8 @@
         "Presentación"
       ],
       "correcta": 0,
-      "descripcion": "Si el problema está en la señal o en el medio físico, la capa Física es la primera candidata. Que la configuración IP sea correcta no descarta una falla física."
+      "descripcion": "Si el problema está en la señal o en el medio físico, la capa Física es la primera candidata. Que la configuración IP sea correcta no descarta una falla física.",
+      "tema": "Modelo OSI: capas y protocolos"
     },
     {
       "pregunta": "Un equipo puede detectar la red Ethernet, pero las comunicaciones entre subredes no funcionan por una ruta incorrecta. ¿Qué capa se relaciona directamente con el problema?",
@@ -770,7 +839,8 @@
         "Aplicación"
       ],
       "correcta": 0,
-      "descripcion": "El encaminamiento entre redes y el direccionamiento IP son funciones asociadas principalmente con la capa de Red."
+      "descripcion": "El encaminamiento entre redes y el direccionamiento IP son funciones asociadas principalmente con la capa de Red.",
+      "tema": "Modelo OSI: capas y protocolos"
     },
     {
       "pregunta": "Una conexión TCP funciona, pero una aplicación no interpreta correctamente el formato de los datos recibidos. ¿Qué capa conceptual puede estar involucrada?",
@@ -781,7 +851,8 @@
         "Red"
       ],
       "correcta": 0,
-      "descripcion": "La capa de Presentación se ocupa de la representación y transformación de datos. Un problema de formato puede estar relacionado con esta función conceptual."
+      "descripcion": "La capa de Presentación se ocupa de la representación y transformación de datos. Un problema de formato puede estar relacionado con esta función conceptual.",
+      "tema": "Modelo OSI: capas y protocolos"
     },
     {
       "pregunta": "¿Qué capa OSI se encuentra inmediatamente por encima de Transporte?",
@@ -792,7 +863,8 @@
         "Física"
       ],
       "correcta": 0,
-      "descripcion": "El orden desde abajo es Física, Enlace, Red, Transporte, Sesión, Presentación y Aplicación. Por lo tanto, Sesión está inmediatamente por encima de Transporte."
+      "descripcion": "El orden desde abajo es Física, Enlace, Red, Transporte, Sesión, Presentación y Aplicación. Por lo tanto, Sesión está inmediatamente por encima de Transporte.",
+      "tema": "Modelo OSI: capas y protocolos"
     },
     {
       "pregunta": "¿Qué capa OSI se encuentra inmediatamente por debajo de Transporte?",
@@ -803,7 +875,8 @@
         "Aplicación"
       ],
       "correcta": 0,
-      "descripcion": "En el modelo OSI, Transporte es la capa 4 y Red es la capa 3, por lo que Red se encuentra inmediatamente por debajo."
+      "descripcion": "En el modelo OSI, Transporte es la capa 4 y Red es la capa 3, por lo que Red se encuentra inmediatamente por debajo.",
+      "tema": "Modelo OSI: capas y protocolos"
     },
     {
       "pregunta": "Un administrador quiere relacionar un protocolo con la capa 4 y observa TCP. ¿Qué función debe asociar principalmente con él?",
@@ -814,7 +887,8 @@
         "Transmisión eléctrica de bits"
       ],
       "correcta": 0,
-      "descripcion": "TCP pertenece a Transporte y proporciona mecanismos como control de conexión, ordenamiento y retransmisión para lograr una entrega confiable."
+      "descripcion": "TCP pertenece a Transporte y proporciona mecanismos como control de conexión, ordenamiento y retransmisión para lograr una entrega confiable.",
+      "tema": "Modelo OSI: capas y protocolos"
     },
     {
       "pregunta": "Una persona firma digitalmente un documento. ¿Qué propiedad puede verificarse al comprobar correctamente la firma?",
@@ -825,7 +899,8 @@
         "Que el servidor siempre está disponible"
       ],
       "correcta": 0,
-      "descripcion": "La verificación de una firma digital permite comprobar la relación entre la firma y la clave pública correspondiente y detectar modificaciones del contenido firmado."
+      "descripcion": "La verificación de una firma digital permite comprobar la relación entre la firma y la clave pública correspondiente y detectar modificaciones del contenido firmado.",
+      "tema": "Firma digital"
     },
     {
       "pregunta": "¿Qué diferencia conceptual existe entre cifrar un mensaje para un destinatario y firmarlo digitalmente?",
@@ -836,7 +911,8 @@
         "El cifrado siempre demuestra quién escribió el mensaje"
       ],
       "correcta": 0,
-      "descripcion": "El cifrado se utiliza principalmente para impedir que terceros interpreten el contenido. La firma digital está orientada a verificar la relación con el firmante y detectar modificaciones."
+      "descripcion": "El cifrado se utiliza principalmente para impedir que terceros interpreten el contenido. La firma digital está orientada a verificar la relación con el firmante y detectar modificaciones.",
+      "tema": "Cifrado e integridad"
     },
     {
       "pregunta": "Si un archivo cifrado se modifica sin autorización y luego se intenta descifrar, ¿qué propiedad de seguridad se vio comprometida independientemente de que pueda abrirse?",
@@ -847,7 +923,8 @@
         "Disponibilidad del ISP"
       ],
       "correcta": 0,
-      "descripcion": "La integridad se refiere a que los datos permanezcan sin modificaciones no autorizadas. El cifrado por sí solo no debe confundirse con un mecanismo completo de integridad."
+      "descripcion": "La integridad se refiere a que los datos permanezcan sin modificaciones no autorizadas. El cifrado por sí solo no debe confundirse con un mecanismo completo de integridad.",
+      "tema": "Cifrado e integridad"
     },
     {
       "pregunta": "Una persona quiere que cualquiera pueda verificar su firma digital, pero no quiere entregar la clave con la que firma. ¿Qué esquema de claves corresponde?",
@@ -858,7 +935,8 @@
         "Publica la dirección MAC en lugar de una clave"
       ],
       "correcta": 0,
-      "descripcion": "En criptografía asimétrica, la clave pública se distribuye para permitir verificaciones, mientras que la clave privada utilizada para firmar debe mantenerse bajo control del propietario."
+      "descripcion": "En criptografía asimétrica, la clave pública se distribuye para permitir verificaciones, mientras que la clave privada utilizada para firmar debe mantenerse bajo control del propietario.",
+      "tema": "Firma digital"
     },
     {
       "pregunta": "¿Por qué la criptografía simétrica suele ser eficiente para cifrar grandes cantidades de datos?",
@@ -869,7 +947,8 @@
         "Porque reemplaza automáticamente a DNS"
       ],
       "correcta": 0,
-      "descripcion": "Los algoritmos simétricos suelen ser rápidos y adecuados para grandes volúmenes de datos. El desafío principal está en compartir y proteger la clave secreta."
+      "descripcion": "Los algoritmos simétricos suelen ser rápidos y adecuados para grandes volúmenes de datos. El desafío principal está en compartir y proteger la clave secreta.",
+      "tema": "Cifrado simétrico y asimétrico"
     },
     {
       "pregunta": "Una organización necesita cifrar información para un destinatario utilizando criptografía asimétrica. ¿Qué clave se utiliza normalmente para que solo el destinatario pueda descifrarla?",
@@ -880,7 +959,8 @@
         "La dirección IP del servidor"
       ],
       "correcta": 0,
-      "descripcion": "En el esquema típico de cifrado asimétrico, el remitente utiliza la clave pública del destinatario y el destinatario utiliza su clave privada para recuperar el contenido."
+      "descripcion": "En el esquema típico de cifrado asimétrico, el remitente utiliza la clave pública del destinatario y el destinatario utiliza su clave privada para recuperar el contenido.",
+      "tema": "Cifrado simétrico y asimétrico"
     },
     {
       "pregunta": "¿Cuál de estas situaciones requiere principalmente confidencialidad?",
@@ -891,7 +971,8 @@
         "Verificar que un servidor está disponible"
       ],
       "correcta": 0,
-      "descripcion": "La confidencialidad busca impedir que personas no autorizadas puedan interpretar la información. El cifrado es una herramienta fundamental para lograrla."
+      "descripcion": "La confidencialidad busca impedir que personas no autorizadas puedan interpretar la información. El cifrado es una herramienta fundamental para lograrla.",
+      "tema": "Cifrado simétrico y asimétrico"
     },
     {
       "pregunta": "En PGP, ¿qué ventaja aporta combinar criptografía simétrica y asimétrica?",
@@ -902,7 +983,8 @@
         "Convierte todas las direcciones IP en nombres"
       ],
       "correcta": 0,
-      "descripcion": "Los sistemas híbridos aprovechan la velocidad del cifrado simétrico para el contenido y la criptografía asimétrica para proteger o intercambiar la clave utilizada por el cifrado simétrico."
+      "descripcion": "Los sistemas híbridos aprovechan la velocidad del cifrado simétrico para el contenido y la criptografía asimétrica para proteger o intercambiar la clave utilizada por el cifrado simétrico.",
+      "tema": "PGP y criptografía"
     },
     {
       "pregunta": "¿Qué elemento debe proteger especialmente un usuario que utiliza PGP para firmar mensajes?",
@@ -913,7 +995,8 @@
         "La tabla de rutas del switch"
       ],
       "correcta": 0,
-      "descripcion": "La clave privada representa una parte crítica de la identidad criptográfica. Si un tercero obtiene acceso a ella, puede comprometer la capacidad de realizar operaciones de firma asociadas."
+      "descripcion": "La clave privada representa una parte crítica de la identidad criptográfica. Si un tercero obtiene acceso a ella, puede comprometer la capacidad de realizar operaciones de firma asociadas.",
+      "tema": "PGP y criptografía"
     },
     {
       "pregunta": "¿Qué función cumple una clave pública en PGP cuando se quiere verificar una firma?",
@@ -924,7 +1007,8 @@
         "Determina la topología física de la red"
       ],
       "correcta": 0,
-      "descripcion": "La clave pública correspondiente permite verificar una firma creada con la clave privada asociada. La clave privada no debe revelarse para realizar esa verificación."
+      "descripcion": "La clave pública correspondiente permite verificar una firma creada con la clave privada asociada. La clave privada no debe revelarse para realizar esa verificación.",
+      "tema": "PGP y criptografía"
     },
     {
       "pregunta": "En una representación de datos PGP mediante Armadura ASCII, ¿qué transformación conceptual se busca?",
@@ -935,7 +1019,8 @@
         "Cambiar una LAN por una WAN"
       ],
       "correcta": 0,
-      "descripcion": "La Armadura ASCII, según la definición utilizada en este test, representa datos binarios mediante bloques de texto. No constituye por sí misma el proceso criptográfico de cifrado."
+      "descripcion": "La Armadura ASCII, según la definición utilizada en este test, representa datos binarios mediante bloques de texto. No constituye por sí misma el proceso criptográfico de cifrado.",
+      "tema": "Armadura ASCII en PGP"
     },
     {
       "pregunta": "La tabla ASCII tradicional utiliza valores numéricos para representar caracteres. ¿Qué idea expresa mejor esta correspondencia?",
@@ -946,7 +1031,8 @@
         "ASCII es un protocolo de transporte confiable"
       ],
       "correcta": 0,
-      "descripcion": "ASCII establece una correspondencia entre caracteres y valores numéricos. Esto permite que sistemas informáticos representen e intercambien determinados caracteres de forma estandarizada."
+      "descripcion": "ASCII establece una correspondencia entre caracteres y valores numéricos. Esto permite que sistemas informáticos representen e intercambien determinados caracteres de forma estandarizada.",
+      "tema": "Tabla ASCII"
     },
     {
       "pregunta": "Un técnico quiere comprobar rápidamente la configuración IPv4 de todas las interfaces disponibles en Windows. ¿Qué comando es el más directo?",
@@ -957,7 +1043,8 @@
         "netstat"
       ],
       "correcta": 0,
-      "descripcion": "`ipconfig` muestra información de configuración IP de los adaptadores. Es la opción directa para consultar direcciones IPv4, máscaras y otros parámetros básicos."
+      "descripcion": "`ipconfig` muestra información de configuración IP de los adaptadores. Es la opción directa para consultar direcciones IPv4, máscaras y otros parámetros básicos.",
+      "tema": "Comandos de Windows y PowerShell"
     },
     {
       "pregunta": "En PowerShell, un técnico necesita información ampliada sobre DNS, DHCP y direcciones físicas de los adaptadores. ¿Qué comando debe preferir?",
@@ -968,7 +1055,8 @@
         "tracert"
       ],
       "correcta": 0,
-      "descripcion": "`ipconfig /all` muestra información detallada de los adaptadores, incluyendo parámetros como servidores DNS, DHCP y direcciones físicas."
+      "descripcion": "`ipconfig /all` muestra información detallada de los adaptadores, incluyendo parámetros como servidores DNS, DHCP y direcciones físicas.",
+      "tema": "Comandos de Windows y PowerShell"
     },
     {
       "pregunta": "Un administrador quiere consultar las direcciones MAC de las interfaces de red sin revisar toda la configuración IP. ¿Qué comando resulta más específico?",
@@ -979,7 +1067,8 @@
         "nslookup"
       ],
       "correcta": 0,
-      "descripcion": "`getmac` está orientado a mostrar las direcciones MAC de los adaptadores. Los otros comandos tienen objetivos distintos."
+      "descripcion": "`getmac` está orientado a mostrar las direcciones MAC de los adaptadores. Los otros comandos tienen objetivos distintos.",
+      "tema": "Comandos de Windows y PowerShell"
     },
     {
       "pregunta": "Un estudiante quiere representar visualmente la estructura de carpetas y subcarpetas desde una ubicación de Windows. ¿Qué comando es apropiado?",
@@ -990,7 +1079,8 @@
         "netstat"
       ],
       "correcta": 0,
-      "descripcion": "`tree` muestra una representación jerárquica de directorios y subdirectorios. `dir` lista contenido, pero no tiene como objetivo principal dibujar la estructura jerárquica."
+      "descripcion": "`tree` muestra una representación jerárquica de directorios y subdirectorios. `dir` lista contenido, pero no tiene como objetivo principal dibujar la estructura jerárquica.",
+      "tema": "Comandos de Windows y PowerShell"
     },
     {
       "pregunta": "¿Qué diferencia práctica existe entre `dir` y `tree`?",
@@ -1001,7 +1091,8 @@
         "Ambos comandos realizan exactamente la misma tarea"
       ],
       "correcta": 0,
-      "descripcion": "`dir` permite observar archivos y carpetas de una ubicación, mientras `tree` muestra la organización jerárquica de directorios y subdirectorios."
+      "descripcion": "`dir` permite observar archivos y carpetas de una ubicación, mientras `tree` muestra la organización jerárquica de directorios y subdirectorios.",
+      "tema": "Comandos de Windows y PowerShell"
     },
     {
       "pregunta": "Un usuario está trabajando en PowerShell y quiere conocer la ruta de la ubicación actual. ¿Qué comando puede utilizar?",
@@ -1012,7 +1103,8 @@
         "ping"
       ],
       "correcta": 0,
-      "descripcion": "En PowerShell, `pwd` muestra la ubicación o ruta de trabajo actual. Es equivalente conceptualmente a consultar el directorio actual."
+      "descripcion": "En PowerShell, `pwd` muestra la ubicación o ruta de trabajo actual. Es equivalente conceptualmente a consultar el directorio actual.",
+      "tema": "Comandos de Windows y PowerShell"
     },
     {
       "pregunta": "¿Cuál es una característica propia de PowerShell frente a un comando individual como `ping`?",
@@ -1023,7 +1115,8 @@
         "PowerShell es una topología de red"
       ],
       "correcta": 0,
-      "descripcion": "PowerShell es una shell y plataforma de automatización de Microsoft. Puede ejecutar comandos, administrar el sistema y trabajar con scripts y objetos."
+      "descripcion": "PowerShell es una shell y plataforma de automatización de Microsoft. Puede ejecutar comandos, administrar el sistema y trabajar con scripts y objetos.",
+      "tema": "Comandos de Windows y PowerShell"
     },
     {
       "pregunta": "Un técnico quiere comprobar si una dirección IP responde a solicitudes de eco ICMP. ¿Qué comando utilizaría normalmente?",
@@ -1034,7 +1127,8 @@
         "getmac"
       ],
       "correcta": 0,
-      "descripcion": "`ping` envía normalmente solicitudes de eco ICMP y permite comprobar si existe respuesta desde una dirección o nombre determinado. No prueba por sí solo todos los servicios de un host."
+      "descripcion": "`ping` envía normalmente solicitudes de eco ICMP y permite comprobar si existe respuesta desde una dirección o nombre determinado. No prueba por sí solo todos los servicios de un host.",
+      "tema": "Comandos de Windows y PowerShell"
     },
     {
       "pregunta": "Un equipo tiene una conexión TCP sospechosa y el administrador quiere consultar puertos y estados de conexiones. ¿Qué comando es el más apropiado?",
@@ -1045,7 +1139,8 @@
         "tree"
       ],
       "correcta": 0,
-      "descripcion": "`netstat` permite consultar conexiones de red, puertos y estados como ESTABLISHED o TIME_WAIT, por lo que es útil para analizar actividad de red."
+      "descripcion": "`netstat` permite consultar conexiones de red, puertos y estados como ESTABLISHED o TIME_WAIT, por lo que es útil para analizar actividad de red.",
+      "tema": "Comandos de Windows y PowerShell"
     },
     {
       "pregunta": "Un administrador quiere observar los saltos que realiza el tráfico hasta un servidor remoto. ¿Qué herramienta debe utilizar?",
@@ -1056,7 +1151,8 @@
         "dir"
       ],
       "correcta": 0,
-      "descripcion": "`tracert` muestra información sobre los saltos intermedios hacia un destino, ayudando a analizar el recorrido de los paquetes."
+      "descripcion": "`tracert` muestra información sobre los saltos intermedios hacia un destino, ayudando a analizar el recorrido de los paquetes.",
+      "tema": "Comandos de Windows y PowerShell"
     },
     {
       "pregunta": "Un técnico conoce el nombre de un dominio y quiere comprobar qué información devuelve el sistema DNS para ese nombre. ¿Qué comando es más adecuado?",
@@ -1067,7 +1163,8 @@
         "pwd"
       ],
       "correcta": 0,
-      "descripcion": "`nslookup` permite realizar consultas DNS y observar información de resolución de nombres. Es útil para diagnosticar problemas relacionados con DNS."
+      "descripcion": "`nslookup` permite realizar consultas DNS y observar información de resolución de nombres. Es útil para diagnosticar problemas relacionados con DNS.",
+      "tema": "Comandos de Windows y PowerShell"
     },
     {
       "pregunta": "Un alumno escribe `ipconfig\\all` en lugar de `ipconfig /all`. ¿Cuál es el problema principal en Windows?",
@@ -1078,7 +1175,8 @@
         "La opción solo funciona desde un navegador web"
       ],
       "correcta": 0,
-      "descripcion": "En Windows, las opciones de `ipconfig` se escriben con una barra `/`, por lo que la forma correcta es `ipconfig /all`. La barra invertida `\\` tiene otros usos en Windows."
+      "descripcion": "En Windows, las opciones de `ipconfig` se escriben con una barra `/`, por lo que la forma correcta es `ipconfig /all`. La barra invertida `\\` tiene otros usos en Windows.",
+      "tema": "Comandos de Windows y PowerShell"
     },
     {
       "pregunta": "Un administrador ejecuta `ping` y recibe respuestas, pero una aplicación web no funciona. ¿Qué conclusión es la más prudente?",
@@ -1089,7 +1187,8 @@
         "TCP y HTTP están garantizados porque ICMP respondió"
       ],
       "correcta": 0,
-      "descripcion": "Una respuesta de ping demuestra una forma de conectividad mediante ICMP, pero no garantiza que el servidor web, su puerto, HTTP/HTTPS o la aplicación estén funcionando."
+      "descripcion": "Una respuesta de ping demuestra una forma de conectividad mediante ICMP, pero no garantiza que el servidor web, su puerto, HTTP/HTTPS o la aplicación estén funcionando.",
+      "tema": "Comandos de Windows y PowerShell"
     },
     {
       "pregunta": "¿Qué conjunto relaciona correctamente cada herramienta con su objetivo principal?",
@@ -1100,7 +1199,8 @@
         "ipconfig—cifrado; getmac—PGP; netstat—OSI; nslookup—firma digital"
       ],
       "correcta": 0,
-      "descripcion": "La primera relación es correcta: `ipconfig` consulta configuración IP, `getmac` muestra MAC, `netstat` permite observar conexiones y `nslookup` consulta DNS."
+      "descripcion": "La primera relación es correcta: `ipconfig` consulta configuración IP, `getmac` muestra MAC, `netstat` permite observar conexiones y `nslookup` consulta DNS.",
+      "tema": "Comandos de Windows y PowerShell"
     }
   ]
 }
