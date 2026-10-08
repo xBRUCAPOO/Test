@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test</title>
+
+  <!-- Conexión previa a Google Fonts: acelera la carga de tipografías e iconos -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- [v1.1.0] Tipografías (Google Fonts): solo Space Grotesk (textos y títulos) e IBM Plex Mono (etiquetas y números) para un look más sobrio -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+
+  <!-- Iconos (Google Fonts Icons): Material Symbols Outlined -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+
+  <!-- Estilos externos -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- [v1.1.0] Fondo sutil: grilla de puntos estática y un resplandor tenue arriba (se quitaron orbes y línea de escaneo) -->
+  <div class="bg" aria-hidden="true">
+    <div class="bg__dots"></div>
+    <div class="bg__glow"></div>
+  </div>
+
+  <main class="app">
+
+    <!-- Barra superior: marca y estado actual del test (LISTO / EN CURSO / FINALIZADO) -->
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand__mark"><span class="material-symbols-outlined">quiz</span></span>
+        <span class="brand__name">Test</span>
+      </div>
+      <div class="topbar__tag"><span class="topbar__dot"></span><span id="topTag">LISTO</span></div>
+    </header>
+
+    <!-- PANTALLA 1: inicio. Muestra título, tema, cantidad de preguntas y el botón para comenzar -->
+    <section class="screen screen--active" id="screenStart">
+      <p class="eyebrow">Evaluación</p>
+      <h1 class="title" id="mainTitle">Test</h1>
+      <p class="subtitle" id="testTopic"></p>
+
+      <div class="stats">
+        <div class="stat">
+          <span class="material-symbols-outlined">help</span>
+          <div><strong id="statCount">0</strong><small>preguntas</small></div>
+        </div>
+        <div class="stat">
+          <span class="material-symbols-outlined">grade</span>
+          <div><strong>10</strong><small>puntaje máx.</small></div>
+        </div>
+      </div>
+
+      <!-- Aviso (color info) que aparece solo cuando el array QUESTIONS (script.js) está vacío -->
+      <div class="notice" id="emptyNotice" hidden>
+        <span class="material-symbols-outlined">info</span>
+        <p>No hay preguntas cargadas todavía. Agregalas en el array <code>QUESTIONS</code> de <code>script.js</code>.</p>
+      </div>
+
+      <button class="btn btn--primary" id="btnStart" type="button">
+        <span>Comenzar</span>
+        <span class="material-symbols-outlined">arrow_forward</span>
+      </button>
+    </section>
+
+    <!-- PANTALLA 2: test. Progreso, pregunta actual, opciones y navegación -->
+    <section class="screen" id="screenQuiz">
+      <div class="progress">
+        <div class="progress__head">
+          <span class="eyebrow">Pregunta</span>
+          <span class="progress__count" id="qCounter">01 / 01</span>
+        </div>
+        <div class="progress__track"><div class="progress__bar" id="progressBar"></div></div>
+      </div>
+
+      <article class="qcard" id="qCard">
+        <h2 class="qtext" id="qText"></h2>
+        <div class="options" id="options" role="radiogroup" aria-label="Opciones de respuesta"></div>
+      </article>
+
+      <div class="quiz__nav">
+        <button class="btn btn--ghost" id="btnPrev" type="button">
+          <span class="material-symbols-outlined">arrow_back</span>
+          <span>Anterior</span>
+        </button>
+        <button class="btn btn--primary" id="btnNext" type="button" disabled>
+          <span id="btnNextLabel">Siguiente</span>
+          <span class="material-symbols-outlined" id="btnNextIcon">arrow_forward</span>
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FLOAT DE RESULTADOS: puntaje 0/10 arriba y debajo todas las respuestas elegidas (verde = bien, rojo = mal) -->
+  <div class="float" id="resultFloat" hidden role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+    <div class="float__panel">
+
+      <!-- [v1.1.0] id="scoreBox": script.js le pone data-tone (success / warning / error) para colorear aro y mensaje -->
+      <div class="float__head" id="scoreBox" data-tone="success">
+        <p class="eyebrow" id="resultTitle">Resultado</p>
+        <div class="score">
+          <svg class="score__ring" viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="score__track" cx="60" cy="60" r="52"></circle>
+            <circle class="score__bar" id="scoreBar" cx="60" cy="60" r="52"></circle>
+          </svg>
+          <div class="score__text">
+            <span class="score__value" id="scoreValue">0</span><span class="score__max">/10</span>
+          </div>
+        </div>
+        <p class="score__msg" id="scoreMsg"></p>
+        <p class="score__meta" id="scoreMeta"></p>
+      </div>
+
+      <div class="float__body">
+        <h2 class="review__title">Tus respuestas</h2>
+        <ol class="review" id="reviewList"></ol>
+      </div>
+
+      <div class="float__foot">
+        <button class="btn btn--ghost" id="btnHome" type="button">
+          <span class="material-symbols-outlined">home</span>
+          <span>Inicio</span>
+        </button>
+        <button class="btn btn--primary" id="btnRetry" type="button">
+          <span class="material-symbols-outlined">replay</span>
+          <span>Reintentar</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer con versión y fecha (actualizar cada vez que se modifique este archivo) -->
+  <footer class="footer">
+    <span>Test</span>
+    <span class="footer__sep">·</span>
+    <span id="footerVersion">v1.1.0</span>
+    <span class="footer__sep">·</span>
+    <span id="footerDate">08/10/2026</span>
+  </footer>
+
+  <!-- Lógica externa -->
+  <script src="script.js"></script>
+</body>
+</html>
