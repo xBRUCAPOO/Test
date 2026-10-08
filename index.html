@@ -2,14 +2,17 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- [v1.2.0] viewport-fit=cover: la página usa toda la pantalla del celular (notch / barra inferior) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!-- [v1.2.0] Color de la barra del navegador en celular (coincide con --color-bg del CSS) -->
+  <meta name="theme-color" content="#0a0b0e">
   <title>Test</title>
 
   <!-- Conexión previa a Google Fonts: acelera la carga de tipografías e iconos -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <!-- [v1.1.0] Tipografías (Google Fonts): solo Space Grotesk (textos y títulos) e IBM Plex Mono (etiquetas y números) para un look más sobrio -->
+  <!-- Tipografías (Google Fonts): Space Grotesk (textos y títulos) e IBM Plex Mono (etiquetas y números) -->
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
 
   <!-- Iconos (Google Fonts Icons): Material Symbols Outlined -->
@@ -20,7 +23,7 @@
 </head>
 <body>
 
-  <!-- [v1.1.0] Fondo sutil: grilla de puntos estática y un resplandor tenue arriba (se quitaron orbes y línea de escaneo) -->
+  <!-- Fondo sutil: grilla de puntos estática y un resplandor tenue arriba -->
   <div class="bg" aria-hidden="true">
     <div class="bg__dots"></div>
     <div class="bg__glow"></div>
@@ -28,17 +31,33 @@
 
   <main class="app">
 
-    <!-- Barra superior: marca y estado actual del test (LISTO / EN CURSO / FINALIZADO) -->
+    <!-- Barra superior: marca y estado actual (MENÚ / LISTO / EN CURSO / FINALIZADO) -->
     <header class="topbar">
       <div class="brand">
         <span class="brand__mark"><span class="material-symbols-outlined">quiz</span></span>
         <span class="brand__name">Test</span>
       </div>
-      <div class="topbar__tag"><span class="topbar__dot"></span><span id="topTag">LISTO</span></div>
+      <div class="topbar__tag"><span class="topbar__dot"></span><span id="topTag">MENÚ</span></div>
     </header>
 
-    <!-- PANTALLA 1: inicio. Muestra título, tema, cantidad de preguntas y el botón para comenzar -->
-    <section class="screen screen--active" id="screenStart">
+    <!-- [v1.2.0] PANTALLA 0: menú. Lista los tests detectados en tests/index.json para elegir cuál hacer -->
+    <section class="screen screen--active" id="screenMenu">
+      <p class="eyebrow">Evaluación</p>
+      <h1 class="title" id="menuTitle">Test</h1>
+      <p class="subtitle">Elegí un test para empezar.</p>
+
+      <!-- Aviso del menú (info / warning / error): cargando, sin tests o error al leer los JSON. Lo maneja script.js -->
+      <div class="notice notice--info" id="menuNotice">
+        <span class="material-symbols-outlined" id="menuNoticeIcon">hourglass_top</span>
+        <p id="menuNoticeText">Cargando tests…</p>
+      </div>
+
+      <!-- Tarjetas de los tests (las crea script.js) -->
+      <div class="menu" id="menuList"></div>
+    </section>
+
+    <!-- PANTALLA 1: inicio del test elegido. Muestra nombre, tema, cantidad de preguntas y el botón para comenzar -->
+    <section class="screen" id="screenStart">
       <p class="eyebrow">Evaluación</p>
       <h1 class="title" id="mainTitle">Test</h1>
       <p class="subtitle" id="testTopic"></p>
@@ -54,16 +73,17 @@
         </div>
       </div>
 
-      <!-- Aviso (color info) que aparece solo cuando el array QUESTIONS (script.js) está vacío -->
-      <div class="notice" id="emptyNotice" hidden>
-        <span class="material-symbols-outlined">info</span>
-        <p>No hay preguntas cargadas todavía. Agregalas en el array <code>QUESTIONS</code> de <code>script.js</code>.</p>
+      <!-- [v1.2.0] Botones: Comenzar + Cambiar test (vuelve al menú) -->
+      <div class="actions">
+        <button class="btn btn--primary" id="btnStart" type="button">
+          <span>Comenzar</span>
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </button>
+        <button class="btn btn--ghost" id="btnChange" type="button">
+          <span class="material-symbols-outlined">swap_horiz</span>
+          <span>Cambiar test</span>
+        </button>
       </div>
-
-      <button class="btn btn--primary" id="btnStart" type="button">
-        <span>Comenzar</span>
-        <span class="material-symbols-outlined">arrow_forward</span>
-      </button>
     </section>
 
     <!-- PANTALLA 2: test. Progreso, pregunta actual, opciones y navegación -->
@@ -95,11 +115,12 @@
 
   </main>
 
-  <!-- FLOAT DE RESULTADOS: puntaje 0/10 arriba y debajo todas las respuestas elegidas (verde = bien, rojo = mal) -->
+  <!-- FLOAT DE RESULTADOS: puntaje 0/10 arriba y debajo todas las respuestas elegidas (verde = bien, rojo = mal, amarillo = sin responder).
+       En celular se muestra como panel que sube desde abajo -->
   <div class="float" id="resultFloat" hidden role="dialog" aria-modal="true" aria-labelledby="resultTitle">
     <div class="float__panel">
 
-      <!-- [v1.1.0] id="scoreBox": script.js le pone data-tone (success / warning / error) para colorear aro y mensaje -->
+      <!-- id="scoreBox": script.js le pone data-tone (success / warning / error) para colorear aro y mensaje -->
       <div class="float__head" id="scoreBox" data-tone="success">
         <p class="eyebrow" id="resultTitle">Resultado</p>
         <div class="score">
@@ -120,10 +141,11 @@
         <ol class="review" id="reviewList"></ol>
       </div>
 
+      <!-- [v1.2.0] "Menú" reemplaza a "Inicio": vuelve a la lista para elegir otro test -->
       <div class="float__foot">
         <button class="btn btn--ghost" id="btnHome" type="button">
-          <span class="material-symbols-outlined">home</span>
-          <span>Inicio</span>
+          <span class="material-symbols-outlined">apps</span>
+          <span>Menú</span>
         </button>
         <button class="btn btn--primary" id="btnRetry" type="button">
           <span class="material-symbols-outlined">replay</span>
@@ -138,7 +160,7 @@
   <footer class="footer">
     <span>Test</span>
     <span class="footer__sep">·</span>
-    <span id="footerVersion">v1.1.0</span>
+    <span id="footerVersion">v1.2.0</span>
     <span class="footer__sep">·</span>
     <span id="footerDate">08/10/2026</span>
   </footer>
@@ -146,4 +168,4 @@
   <!-- Lógica externa -->
   <script src="script.js"></script>
 </body>
-</html> 
+</html>

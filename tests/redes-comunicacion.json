@@ -1,0 +1,887 @@
+{
+  "nombre": "Redes y Comunicación",
+  "tema": "Comandos de Windows, tipos de redes, protocolos, seguridad, PGP, Armadura ASCII, modelo OSI y topologías de red",
+  "preguntas": [
+    {
+      "pregunta": "¿Qué comando permite visualizar los archivos y carpetas de la ubicación actual?",
+      "opciones": ["pwd", "dir", "getmac", "netstat"],
+      "correcta": 1,
+      "descripcion": "El comando dir muestra los archivos y carpetas de la ubicación actual."
+    },
+    {
+      "pregunta": "¿Qué comando permite conocer la ubicación o ruta actual en PowerShell?",
+      "opciones": ["ipconfig", "tracert", "pwd", "nslookup"],
+      "correcta": 2,
+      "descripcion": "pwd muestra la ubicación o ruta actual en PowerShell."
+    },
+    {
+      "pregunta": "¿Qué comando permite consultar las direcciones MAC de los adaptadores de red?",
+      "opciones": ["getmac", "dir", "pwd", "netstat"],
+      "correcta": 0,
+      "descripcion": "getmac muestra las direcciones MAC de los adaptadores de red."
+    },
+    {
+      "pregunta": "¿Qué representa una dirección MAC?",
+      "opciones": ["La dirección de una página web", "La dirección física de una interfaz de red", "La dirección del servidor DNS", "La máscara de subred"],
+      "correcta": 1,
+      "descripcion": "La dirección MAC identifica físicamente una interfaz de red."
+    },
+    {
+      "pregunta": "¿Qué comando muestra información básica de la configuración de red?",
+      "opciones": ["ipconfig", "dir", "getmac", "pwd"],
+      "correcta": 0,
+      "descripcion": "ipconfig muestra información como la dirección IP, máscara de subred y puerta de enlace."
+    },
+    {
+      "pregunta": "¿Qué comando proporciona información detallada de la configuración de red?",
+      "opciones": ["ipconfig /all", "pwd /all", "dir /all", "netstat /all"],
+      "correcta": 0,
+      "descripcion": "ipconfig /all muestra información detallada de los adaptadores y su configuración."
+    },
+    {
+      "pregunta": "¿Para qué sirve el comando tracert?",
+      "opciones": ["Mostrar archivos", "Consultar la dirección MAC", "Seguir la ruta que toman los paquetes hasta un destino", "Cambiar la dirección IP"],
+      "correcta": 2,
+      "descripcion": "tracert permite observar los saltos o routers que atraviesan los paquetes hasta llegar al destino."
+    },
+    {
+      "pregunta": "¿Qué representa cada salto mostrado por tracert?",
+      "opciones": ["Un archivo", "Un dispositivo o router intermedio", "Una contraseña", "Una dirección MAC local"],
+      "correcta": 1,
+      "descripcion": "Cada salto normalmente representa un dispositivo de red intermedio por el que pasa la comunicación."
+    },
+    {
+      "pregunta": "¿Qué comando permite visualizar conexiones de red activas?",
+      "opciones": ["netstat", "pwd", "dir", "getmac"],
+      "correcta": 0,
+      "descripcion": "netstat muestra conexiones de red, puertos y estados de comunicación."
+    },
+    {
+      "pregunta": "¿Qué significa el estado ESTABLISHED en netstat?",
+      "opciones": ["La conexión está establecida", "La conexión fue eliminada", "No existe conexión", "El equipo está apagado"],
+      "correcta": 0,
+      "descripcion": "ESTABLISHED indica que una conexión está establecida entre dos dispositivos."
+    },
+    {
+      "pregunta": "¿Qué significa TIME_WAIT en netstat?",
+      "opciones": ["Una conexión está esperando después de haber sido cerrada", "Una conexión está completamente activa", "El DNS está funcionando", "El adaptador está deshabilitado"],
+      "correcta": 0,
+      "descripcion": "TIME_WAIT indica que una conexión TCP fue cerrada y permanece temporalmente en ese estado."
+    },
+    {
+      "pregunta": "¿Qué dirección IP representa normalmente a localhost?",
+      "opciones": ["8.8.8.8", "192.168.0.1", "127.0.0.1", "255.255.255.0"],
+      "correcta": 2,
+      "descripcion": "127.0.0.1 es la dirección IPv4 utilizada normalmente para identificar al propio equipo."
+    },
+    {
+      "pregunta": "¿Qué significa DNS?",
+      "opciones": ["Digital Network System", "Domain Name System", "Data Network Security", "Dynamic Network Service"],
+      "correcta": 1,
+      "descripcion": "DNS significa Domain Name System y permite asociar nombres de dominio con direcciones IP."
+    },
+    {
+      "pregunta": "¿Qué comando permite consultar información relacionada con DNS?",
+      "opciones": ["nslookup", "getmac", "dir", "pwd"],
+      "correcta": 0,
+      "descripcion": "nslookup permite consultar servidores DNS y obtener información sobre dominios y direcciones IP."
+    },
+    {
+      "pregunta": "¿Qué es una dirección IPv4?",
+      "opciones": ["Una dirección física de 64 bits", "Una dirección lógica de 32 bits utilizada en redes IP", "Una contraseña de red", "Una dirección exclusiva para Bluetooth"],
+      "correcta": 1,
+      "descripcion": "IPv4 utiliza direcciones de 32 bits para identificar dispositivos en una red."
+    },
+    {
+      "pregunta": "¿Qué función cumple la puerta de enlace predeterminada?",
+      "opciones": ["Identifica la tarjeta de sonido", "Permite comunicarse con otras redes", "Muestra los archivos", "Cambia la dirección MAC"],
+      "correcta": 1,
+      "descripcion": "La puerta de enlace permite enviar tráfico desde una red local hacia otras redes."
+    },
+    {
+      "pregunta": "¿Qué función cumple una máscara de subred?",
+      "opciones": ["Indicar qué parte de una IP corresponde a la red y cuál al host", "Cifrar una conexión", "Traducir nombres de dominio", "Identificar físicamente una computadora"],
+      "correcta": 0,
+      "descripcion": "La máscara de subred permite determinar qué parte de una dirección IP identifica la red y cuál identifica al dispositivo."
+    },
+
+    {
+      "pregunta": "¿Qué tipo de red conecta dispositivos personales cercanos?",
+      "opciones": ["WAN", "MAN", "PAN", "LAN"],
+      "correcta": 2,
+      "descripcion": "PAN significa Personal Area Network y conecta dispositivos personales en un área pequeña."
+    },
+    {
+      "pregunta": "¿Qué tipo de red se utiliza normalmente dentro de una casa, escuela u oficina?",
+      "opciones": ["LAN", "WAN", "MAN", "PAN"],
+      "correcta": 0,
+      "descripcion": "LAN significa Local Area Network y se utiliza para conectar dispositivos dentro de un área local."
+    },
+    {
+      "pregunta": "¿Qué tipo de red puede cubrir una ciudad?",
+      "opciones": ["PAN", "LAN", "MAN", "WAN"],
+      "correcta": 2,
+      "descripcion": "MAN significa Metropolitan Area Network y puede cubrir una ciudad o área metropolitana."
+    },
+    {
+      "pregunta": "¿Qué tipo de red puede conectar dispositivos ubicados en diferentes países?",
+      "opciones": ["PAN", "LAN", "WAN", "MAN"],
+      "correcta": 2,
+      "descripcion": "WAN significa Wide Area Network y permite conectar redes a grandes distancias geográficas."
+    },
+    {
+      "pregunta": "¿Qué significa PAN?",
+      "opciones": ["Personal Area Network", "Private Access Network", "Public Area Network", "Personal Access Node"],
+      "correcta": 0,
+      "descripcion": "PAN significa Personal Area Network."
+    },
+    {
+      "pregunta": "¿Qué significa LAN?",
+      "opciones": ["Large Access Network", "Local Area Network", "Local Access Node", "Long Area Network"],
+      "correcta": 1,
+      "descripcion": "LAN significa Local Area Network."
+    },
+    {
+      "pregunta": "¿Qué significa MAN?",
+      "opciones": ["Main Access Network", "Metropolitan Area Network", "Medium Access Node", "Multiple Area Network"],
+      "correcta": 1,
+      "descripcion": "MAN significa Metropolitan Area Network."
+    },
+    {
+      "pregunta": "¿Qué significa WAN?",
+      "opciones": ["Wide Area Network", "Wireless Access Network", "Web Area Node", "World Access Network"],
+      "correcta": 0,
+      "descripcion": "WAN significa Wide Area Network."
+    },
+
+    {
+      "pregunta": "¿Qué es un protocolo de comunicación?",
+      "opciones": ["Un tipo de cable", "Un conjunto de reglas para la comunicación entre dispositivos", "Una dirección IP", "Un antivirus"],
+      "correcta": 1,
+      "descripcion": "Un protocolo establece reglas que permiten que los dispositivos se comuniquen correctamente."
+    },
+    {
+      "pregunta": "¿Cuál de estos es un protocolo utilizado para acceder a páginas web?",
+      "opciones": ["HTTP", "FTP", "SMTP", "DHCP"],
+      "correcta": 0,
+      "descripcion": "HTTP es un protocolo utilizado para la transferencia de recursos en la Web."
+    },
+    {
+      "pregunta": "¿Qué protocolo es una versión segura de HTTP?",
+      "opciones": ["FTP", "HTTPS", "SMTP", "DNS"],
+      "correcta": 1,
+      "descripcion": "HTTPS utiliza mecanismos de seguridad mediante cifrado para proteger la comunicación web."
+    },
+    {
+      "pregunta": "¿Para qué se utiliza principalmente FTP?",
+      "opciones": ["Enviar y transferir archivos", "Resolver nombres de dominio", "Asignar direcciones IP", "Enviar correos electrónicos"],
+      "correcta": 0,
+      "descripcion": "FTP es un protocolo diseñado para transferir archivos entre sistemas."
+    },
+    {
+      "pregunta": "¿Qué protocolo se utiliza principalmente para enviar correos electrónicos?",
+      "opciones": ["SMTP", "FTP", "HTTP", "DHCP"],
+      "correcta": 0,
+      "descripcion": "SMTP es utilizado principalmente para el envío de correo electrónico."
+    },
+    {
+      "pregunta": "¿Qué protocolo permite obtener automáticamente una configuración IP?",
+      "opciones": ["SMTP", "DHCP", "FTP", "HTTP"],
+      "correcta": 1,
+      "descripcion": "DHCP permite asignar automáticamente parámetros de configuración de red a los dispositivos."
+    },
+    {
+      "pregunta": "¿Qué protocolo traduce nombres de dominio a direcciones IP?",
+      "opciones": ["DNS", "FTP", "SMTP", "TCP"],
+      "correcta": 0,
+      "descripcion": "DNS permite resolver nombres de dominio en direcciones IP."
+    },
+    {
+      "pregunta": "¿Cuál de estos protocolos está orientado a una comunicación confiable?",
+      "opciones": ["UDP", "TCP", "IP", "DNS"],
+      "correcta": 1,
+      "descripcion": "TCP proporciona mecanismos para una comunicación confiable y ordenada."
+    },
+    {
+      "pregunta": "¿Cuál de estos protocolos prioriza velocidad y menor sobrecarga?",
+      "opciones": ["TCP", "UDP", "SMTP", "FTP"],
+      "correcta": 1,
+      "descripcion": "UDP tiene menor sobrecarga que TCP y no establece una conexión de la misma manera."
+    },
+
+    {
+      "pregunta": "¿Qué es un estándar en comunicación?",
+      "opciones": ["Una regla o especificación acordada para facilitar la compatibilidad", "Una contraseña", "Un virus", "Una dirección IP"],
+      "correcta": 0,
+      "descripcion": "Los estándares establecen reglas comunes que permiten la interoperabilidad entre sistemas y dispositivos."
+    },
+    {
+      "pregunta": "¿Por qué son importantes los estándares de comunicación?",
+      "opciones": ["Porque hacen que todos los dispositivos tengan la misma marca", "Porque facilitan que diferentes dispositivos y sistemas sean compatibles", "Porque eliminan las direcciones IP", "Porque reemplazan los protocolos"],
+      "correcta": 1,
+      "descripcion": "Los estándares permiten que dispositivos y sistemas diferentes puedan comunicarse de forma compatible."
+    },
+
+    {
+      "pregunta": "¿Qué es una firma digital?",
+      "opciones": ["Una contraseña escrita en una computadora", "Un mecanismo criptográfico que permite verificar autenticidad e integridad", "Una imagen de una firma manuscrita", "Un antivirus"],
+      "correcta": 1,
+      "descripcion": "La firma digital utiliza criptografía para ayudar a verificar quién firmó un contenido y si fue modificado."
+    },
+    {
+      "pregunta": "¿Qué propiedad ayuda a garantizar una firma digital?",
+      "opciones": ["Autenticidad", "Mayor velocidad de Internet", "Mayor espacio de almacenamiento", "Cambio de dirección IP"],
+      "correcta": 0,
+      "descripcion": "La firma digital ayuda a comprobar la autenticidad del firmante."
+    },
+    {
+      "pregunta": "¿Qué propiedad permite detectar si un documento firmado fue modificado?",
+      "opciones": ["Integridad", "Velocidad", "Disponibilidad", "Compresión"],
+      "correcta": 0,
+      "descripcion": "La integridad permite comprobar que los datos no fueron alterados."
+    },
+
+    {
+      "pregunta": "¿Qué es el cifrado?",
+      "opciones": ["Un proceso para convertir datos en una forma protegida mediante un algoritmo", "Una forma de eliminar archivos", "Una técnica para aumentar la velocidad", "Un tipo de conexión física"],
+      "correcta": 0,
+      "descripcion": "El cifrado transforma información para protegerla frente a personas no autorizadas."
+    },
+    {
+      "pregunta": "¿Cuál es el objetivo principal del cifrado?",
+      "opciones": ["Proteger la información frente a accesos no autorizados", "Aumentar la resolución de una imagen", "Crear una dirección IP", "Eliminar virus automáticamente"],
+      "correcta": 0,
+      "descripcion": "El cifrado busca proteger la confidencialidad de la información."
+    },
+    {
+      "pregunta": "¿Qué característica tiene normalmente el cifrado simétrico?",
+      "opciones": ["Utiliza una misma clave para cifrar y descifrar", "No utiliza ninguna clave", "Utiliza siempre tres claves", "Solo funciona con imágenes"],
+      "correcta": 0,
+      "descripcion": "En el cifrado simétrico normalmente se utiliza la misma clave secreta para cifrar y descifrar."
+    },
+    {
+      "pregunta": "¿Qué utiliza la criptografía asimétrica?",
+      "opciones": ["Una clave pública y una clave privada", "Solo una contraseña", "Solo una dirección IP", "Una máscara de subred"],
+      "correcta": 0,
+      "descripcion": "La criptografía asimétrica utiliza un par de claves relacionadas: pública y privada."
+    },
+
+    {
+      "pregunta": "¿Qué significa ISP?",
+      "opciones": ["Internet Service Provider", "Internet Security Protocol", "Internal System Provider", "Internet Server Program"],
+      "correcta": 0,
+      "descripcion": "ISP significa Internet Service Provider, o proveedor de servicios de Internet."
+    },
+    {
+      "pregunta": "¿Qué función cumple un ISP?",
+      "opciones": ["Proporcionar acceso a Internet", "Crear tarjetas gráficas", "Cifrar todos los archivos del equipo", "Reemplazar el sistema operativo"],
+      "correcta": 0,
+      "descripcion": "Un ISP proporciona servicios que permiten a los usuarios conectarse a Internet."
+    },
+
+    {
+      "pregunta": "¿Qué significa PGP?",
+      "opciones": ["Pretty Good Privacy", "Private General Protocol", "Public Gateway Protection", "Personal Global Password"],
+      "correcta": 0,
+      "descripcion": "PGP significa Pretty Good Privacy y es utilizado para proteger información mediante criptografía."
+    },
+    {
+      "pregunta": "¿Para qué puede utilizarse PGP?",
+      "opciones": ["Cifrar información y realizar firmas digitales", "Aumentar la velocidad del procesador", "Crear redes LAN automáticamente", "Reemplazar el DNS"],
+      "correcta": 0,
+      "descripcion": "PGP puede utilizarse para cifrar información y generar firmas digitales."
+    },
+    {
+      "pregunta": "¿Qué tipo de criptografía utiliza PGP?",
+      "opciones": ["Puede combinar criptografía simétrica y asimétrica", "Solo utiliza ASCII", "No utiliza criptografía", "Solo utiliza direcciones IP"],
+      "correcta": 0,
+      "descripcion": "PGP utiliza un enfoque híbrido que combina criptografía simétrica y asimétrica."
+    },
+
+    {
+      "pregunta": "¿Qué es la Armadura ASCII?",
+      "opciones": [
+        "Un modelo criptográfico para protocolos como PGP para convertir datos binarios complejos en bloques de texto",
+        "Un tipo de cable de red",
+        "Un protocolo para asignar direcciones IP",
+        "Una topología de red"
+      ],
+      "correcta": 0,
+      "descripcion": "La Armadura ASCII es presentada en este contexto como un modelo criptográfico utilizado por protocolos como PGP para convertir datos binarios complejos en bloques de texto."
+    },
+    {
+      "pregunta": "¿Para qué se utiliza la Armadura ASCII en protocolos como PGP?",
+      "opciones": [
+        "Para convertir datos binarios complejos en bloques de texto",
+        "Para aumentar la velocidad de Internet",
+        "Para asignar direcciones IP",
+        "Para crear redes inalámbricas"
+      ],
+      "correcta": 0,
+      "descripcion": "La Armadura ASCII permite representar datos binarios complejos mediante bloques de texto."
+    },
+    {
+      "pregunta": "¿Con qué protocolo se relaciona la Armadura ASCII?",
+      "opciones": ["PGP", "DHCP", "FTP", "SMTP"],
+      "correcta": 0,
+      "descripcion": "La Armadura ASCII se relaciona con protocolos criptográficos como PGP."
+    },
+    {
+      "pregunta": "¿Qué tipo de información puede representar la Armadura ASCII?",
+      "opciones": ["Datos binarios complejos en forma de bloques de texto", "Solo direcciones IP", "Solo nombres de dominio", "Únicamente archivos de audio"],
+      "correcta": 0,
+      "descripcion": "La Armadura ASCII permite representar datos binarios complejos como bloques de texto."
+    },
+
+    {
+      "pregunta": "¿Qué es ASCII?",
+      "opciones": [
+        "Un estándar de codificación de caracteres",
+        "Un protocolo de correo",
+        "Una topología de red",
+        "Un sistema operativo"
+      ],
+      "correcta": 0,
+      "descripcion": "ASCII es un estándar de codificación utilizado para representar caracteres mediante valores numéricos."
+    },
+    {
+      "pregunta": "¿Qué significa ASCII?",
+      "opciones": [
+        "American Standard Code for Information Interchange",
+        "Advanced System Code for Internet Information",
+        "American Security Code for Internet Integration",
+        "Advanced Standard Communication Interface"
+      ],
+      "correcta": 0,
+      "descripcion": "ASCII significa American Standard Code for Information Interchange."
+    },
+    {
+      "pregunta": "¿Qué representa ASCII principalmente?",
+      "opciones": ["Caracteres mediante valores numéricos", "Direcciones IP", "Puertos de red", "Claves privadas"],
+      "correcta": 0,
+      "descripcion": "ASCII asigna valores numéricos a determinados caracteres."
+    },
+
+    {
+      "pregunta": "¿Qué es el modelo OSI?",
+      "opciones": [
+        "Un modelo de referencia para comprender las comunicaciones de red",
+        "Un protocolo de correo",
+        "Un antivirus",
+        "Un tipo de cable"
+      ],
+      "correcta": 0,
+      "descripcion": "El modelo OSI organiza las funciones de comunicación de red en siete capas."
+    },
+    {
+      "pregunta": "¿Cuántas capas tiene el modelo OSI?",
+      "opciones": ["4", "5", "7", "8"],
+      "correcta": 2,
+      "descripcion": "El modelo OSI está compuesto por siete capas."
+    },
+    {
+      "pregunta": "¿Cuál es la capa 1 del modelo OSI?",
+      "opciones": ["Física", "Red", "Transporte", "Aplicación"],
+      "correcta": 0,
+      "descripcion": "La capa 1 es la capa Física."
+    },
+    {
+      "pregunta": "¿Cuál es la capa 2 del modelo OSI?",
+      "opciones": ["Red", "Enlace de datos", "Sesión", "Presentación"],
+      "correcta": 1,
+      "descripcion": "La capa 2 es la capa de Enlace de datos."
+    },
+    {
+      "pregunta": "¿Cuál es la capa 3 del modelo OSI?",
+      "opciones": ["Transporte", "Red", "Aplicación", "Física"],
+      "correcta": 1,
+      "descripcion": "La capa 3 es la capa de Red."
+    },
+    {
+      "pregunta": "¿Cuál es la capa 4 del modelo OSI?",
+      "opciones": ["Transporte", "Sesión", "Red", "Enlace de datos"],
+      "correcta": 0,
+      "descripcion": "La capa 4 es la capa de Transporte."
+    },
+    {
+      "pregunta": "¿Cuál es la capa 5 del modelo OSI?",
+      "opciones": ["Presentación", "Sesión", "Red", "Aplicación"],
+      "correcta": 1,
+      "descripcion": "La capa 5 es la capa de Sesión."
+    },
+    {
+      "pregunta": "¿Cuál es la capa 6 del modelo OSI?",
+      "opciones": ["Aplicación", "Transporte", "Presentación", "Física"],
+      "correcta": 2,
+      "descripcion": "La capa 6 es la capa de Presentación."
+    },
+    {
+      "pregunta": "¿Cuál es la capa 7 del modelo OSI?",
+      "opciones": ["Aplicación", "Sesión", "Red", "Enlace de datos"],
+      "correcta": 0,
+      "descripcion": "La capa 7 es la capa de Aplicación."
+    },
+    {
+      "pregunta": "¿En qué capa del modelo OSI trabaja principalmente IP?",
+      "opciones": ["Capa 1", "Capa 2", "Capa 3", "Capa 7"],
+      "correcta": 2,
+      "descripcion": "IP pertenece principalmente a la capa de Red del modelo OSI."
+    },
+    {
+      "pregunta": "¿En qué capa del modelo OSI se ubican TCP y UDP?",
+      "opciones": ["Capa 2", "Capa 3", "Capa 4", "Capa 6"],
+      "correcta": 2,
+      "descripcion": "TCP y UDP pertenecen a la capa de Transporte."
+    },
+    {
+      "pregunta": "¿Qué capa del modelo OSI se relaciona con las direcciones MAC?",
+      "opciones": ["Capa 2", "Capa 3", "Capa 5", "Capa 7"],
+      "correcta": 0,
+      "descripcion": "Las direcciones MAC están relacionadas principalmente con la capa de Enlace de datos."
+    },
+
+    {
+      "pregunta": "¿Qué es una topología de red?",
+      "opciones": [
+        "La forma en que se organizan o conectan los dispositivos de una red",
+        "Una dirección IP",
+        "Un protocolo de seguridad",
+        "Un tipo de contraseña"
+      ],
+      "correcta": 0,
+      "descripcion": "La topología describe cómo están organizados y conectados los dispositivos de una red."
+    },
+    {
+      "pregunta": "¿Cuál es una característica de la topología estrella?",
+      "opciones": [
+        "Los dispositivos se conectan a un punto central",
+        "Todos los dispositivos forman un círculo",
+        "Todos utilizan un único cable principal sin dispositivo central",
+        "Cada dispositivo se conecta con todos los demás"
+      ],
+      "correcta": 0,
+      "descripcion": "En una topología estrella los dispositivos se conectan normalmente a un dispositivo central."
+    },
+    {
+      "pregunta": "¿Cuál es una característica de la topología bus?",
+      "opciones": [
+        "Utiliza un medio o cable principal compartido",
+        "Cada dispositivo tiene conexión directa con todos",
+        "Siempre utiliza un punto central",
+        "Forma obligatoriamente un círculo"
+      ],
+      "correcta": 0,
+      "descripcion": "La topología bus utiliza un medio principal compartido al que se conectan los dispositivos."
+    },
+    {
+      "pregunta": "¿Cuál es una característica de la topología anillo?",
+      "opciones": [
+        "Los dispositivos se conectan formando un circuito cerrado",
+        "Todos se conectan a un punto central",
+        "No existe conexión entre dispositivos",
+        "Solo funciona mediante Wi-Fi"
+      ],
+      "correcta": 0,
+      "descripcion": "En una topología anillo los dispositivos se organizan formando un circuito cerrado."
+    },
+    {
+      "pregunta": "¿Cuál es una característica de la topología malla?",
+      "opciones": [
+        "Los dispositivos pueden tener múltiples conexiones entre sí",
+        "Todos dependen de un único cable principal",
+        "Solo existe un dispositivo conectado",
+        "No permite comunicación entre dispositivos"
+      ],
+      "correcta": 0,
+      "descripcion": "La topología malla utiliza múltiples enlaces para proporcionar diferentes caminos de comunicación."
+    },
+    {
+      "pregunta": "¿Qué topología utiliza un dispositivo central como punto de conexión?",
+      "opciones": ["Estrella", "Bus", "Anillo", "Malla"],
+      "correcta": 0,
+      "descripcion": "La topología estrella utiliza un punto central para conectar los dispositivos."
+    },
+    {
+      "pregunta": "¿Qué topología puede ofrecer varios caminos alternativos entre dispositivos?",
+      "opciones": ["Bus", "Malla", "Estrella simple", "Anillo simple"],
+      "correcta": 1,
+      "descripcion": "La topología malla puede proporcionar múltiples caminos de comunicación."
+    },
+    {
+      "pregunta": "¿Qué es una topología híbrida?",
+      "opciones": [
+        "Una combinación de dos o más tipos de topologías",
+        "Una red que solo utiliza Wi-Fi",
+        "Una red sin dispositivos",
+        "Un protocolo de Internet"
+      ],
+      "correcta": 0,
+      "descripcion": "Una topología híbrida combina diferentes tipos de topologías de red."
+    },
+
+    {
+      "pregunta": "¿Qué dispositivo suele utilizarse como punto central en una red con topología estrella?",
+      "opciones": ["Switch", "Monitor", "Teclado", "Impresora"],
+      "correcta": 0,
+      "descripcion": "Un switch puede funcionar como punto central de conexión en una topología estrella."
+    },
+    {
+      "pregunta": "¿Qué protocolo permite la navegación web segura?",
+      "opciones": ["HTTPS", "FTP", "DHCP", "SMTP"],
+      "correcta": 0,
+      "descripcion": "HTTPS protege la comunicación web mediante mecanismos criptográficos."
+    },
+    {
+      "pregunta": "¿Cuál de estas opciones corresponde a una red de área local?",
+      "opciones": ["LAN", "WAN", "MAN", "PAN"],
+      "correcta": 0,
+      "descripcion": "LAN corresponde a Local Area Network o red de área local."
+    },
+    {
+      "pregunta": "¿Cuál sería un ejemplo de una PAN?",
+      "opciones": [
+        "Un celular conectado a unos auriculares Bluetooth",
+        "Una red que conecta países",
+        "Una red que cubre una ciudad",
+        "Internet mundial"
+      ],
+      "correcta": 0,
+      "descripcion": "Una conexión personal cercana mediante Bluetooth es un ejemplo de PAN."
+    },
+    {
+      "pregunta": "¿Cuál sería un ejemplo de una LAN?",
+      "opciones": [
+        "Los equipos conectados dentro de una escuela",
+        "Internet entre distintos países",
+        "Una red metropolitana",
+        "Una conexión entre un celular y un reloj personal"
+      ],
+      "correcta": 0,
+      "descripcion": "Una red interna de una escuela es un ejemplo típico de LAN."
+    },
+    {
+      "pregunta": "¿Cuál sería un ejemplo de una WAN?",
+      "opciones": [
+        "Una red que conecta oficinas de una empresa ubicadas en diferentes países",
+        "Un celular conectado a auriculares",
+        "Una red dentro de un aula",
+        "Una conexión entre dos computadoras cercanas"
+      ],
+      "correcta": 0,
+      "descripcion": "Una WAN puede conectar redes ubicadas a grandes distancias geográficas."
+    },
+    {
+      "pregunta": "¿Qué protocolo se utiliza para la resolución de nombres de dominio?",
+      "opciones": ["DNS", "HTTP", "FTP", "SMTP"],
+      "correcta": 0,
+      "descripcion": "DNS se utiliza para resolver nombres de dominio y obtener sus direcciones IP."
+    },
+    {
+      "pregunta": "¿Qué protocolo se utiliza para transferir archivos?",
+      "opciones": ["FTP", "DNS", "DHCP", "SMTP"],
+      "correcta": 0,
+      "descripcion": "FTP es un protocolo destinado a la transferencia de archivos."
+    },
+    {
+      "pregunta": "¿Qué protocolo se utiliza para enviar correo electrónico?",
+      "opciones": ["SMTP", "DNS", "DHCP", "FTP"],
+      "correcta": 0,
+      "descripcion": "SMTP se utiliza principalmente para enviar mensajes de correo electrónico."
+    },
+    {
+      "pregunta": "¿Qué protocolo puede asignar automáticamente una dirección IP a un dispositivo?",
+      "opciones": ["DHCP", "SMTP", "FTP", "HTTP"],
+      "correcta": 0,
+      "descripcion": "DHCP permite asignar automáticamente parámetros de configuración de red."
+    },
+    {
+      "pregunta": "¿Cuál es una diferencia principal entre TCP y UDP?",
+      "opciones": [
+        "TCP prioriza confiabilidad mientras UDP tiene menor sobrecarga",
+        "UDP siempre es más seguro que TCP",
+        "TCP no utiliza Internet",
+        "UDP solo sirve para correo electrónico"
+      ],
+      "correcta": 0,
+      "descripcion": "TCP ofrece mecanismos de confiabilidad, mientras UDP tiene una comunicación más simple y menor sobrecarga."
+    },
+    {
+      "pregunta": "¿Qué elemento identifica lógicamente a un dispositivo dentro de una red IP?",
+      "opciones": ["Dirección IP", "Dirección MAC", "Cable de red", "Monitor"],
+      "correcta": 0,
+      "descripcion": "La dirección IP identifica lógicamente a un dispositivo dentro de una red IP."
+    },
+    {
+      "pregunta": "¿Qué elemento identifica físicamente una interfaz de red?",
+      "opciones": ["Dirección MAC", "Dirección IP", "DNS", "HTTP"],
+      "correcta": 0,
+      "descripcion": "La dirección MAC identifica una interfaz de red a nivel de enlace."
+    },
+    {
+      "pregunta": "¿Qué herramienta permite comprobar qué servidor DNS está respondiendo a una consulta?",
+      "opciones": ["nslookup", "dir", "getmac", "pwd"],
+      "correcta": 0,
+      "descripcion": "nslookup muestra información del servidor DNS utilizado y de las consultas realizadas."
+    },
+    {
+      "pregunta": "¿Qué comando permite observar los puertos y conexiones de red?",
+      "opciones": ["netstat", "pwd", "dir", "getmac"],
+      "correcta": 0,
+      "descripcion": "netstat permite consultar conexiones, puertos y estados relacionados con la red."
+    },
+    {
+      "pregunta": "¿Qué comando permite comprobar la ruta que siguen los paquetes hacia un destino?",
+      "opciones": ["tracert", "getmac", "dir", "pwd"],
+      "correcta": 0,
+      "descripcion": "tracert muestra los saltos que atraviesan los paquetes hacia un destino."
+    },
+    {
+      "pregunta": "¿Qué comando muestra la configuración IP de un equipo Windows?",
+      "opciones": ["ipconfig", "netstat", "tracert", "getmac"],
+      "correcta": 0,
+      "descripcion": "ipconfig muestra la configuración IP de los adaptadores de red."
+    },
+    {
+      "pregunta": "¿Qué combinación permite obtener información más detallada de la configuración de red en Windows?",
+      "opciones": ["ipconfig /all", "dir /network", "pwd /ip", "getmac /dns"],
+      "correcta": 0,
+      "descripcion": "ipconfig /all muestra información detallada de los adaptadores de red."
+    },
+    {
+      "pregunta": "¿Cuál de estos conceptos está relacionado directamente con la protección de información mediante criptografía?",
+      "opciones": ["Cifrado", "Topología bus", "Dirección MAC", "tracert"],
+      "correcta": 0,
+      "descripcion": "El cifrado es una técnica criptográfica utilizada para proteger información."
+    },
+    {
+      "pregunta": "¿Qué mecanismo permite comprobar que una información no fue alterada?",
+      "opciones": ["Integridad", "PAN", "WAN", "DNS"],
+      "correcta": 0,
+      "descripcion": "La integridad permite detectar modificaciones no autorizadas en la información."
+    },
+    {
+      "pregunta": "¿Qué mecanismo permite comprobar quién generó o firmó determinada información?",
+      "opciones": ["Autenticidad", "Máscara de subred", "LAN", "FTP"],
+      "correcta": 0,
+      "descripcion": "La autenticidad permite verificar la identidad asociada a la información."
+    },
+    {
+      "pregunta": "¿Qué tipo de red tiene el alcance geográfico más pequeño?",
+      "opciones": ["PAN", "WAN", "MAN", "Internet"],
+      "correcta": 0,
+      "descripcion": "PAN está diseñada para conexiones personales de corto alcance."
+    },
+    {
+      "pregunta": "¿Qué tipo de red tiene normalmente el mayor alcance geográfico?",
+      "opciones": ["PAN", "LAN", "MAN", "WAN"],
+      "correcta": 3,
+      "descripcion": "WAN está diseñada para conectar redes a grandes distancias geográficas."
+    },
+    {
+      "pregunta": "¿Qué capa OSI está más cercana al usuario final?",
+      "opciones": ["Aplicación", "Física", "Red", "Enlace de datos"],
+      "correcta": 0,
+      "descripcion": "La capa de Aplicación es la séptima capa y está más cercana a las aplicaciones utilizadas por el usuario."
+    },
+    {
+      "pregunta": "¿Qué capa OSI se ocupa de la transmisión de bits mediante el medio físico?",
+      "opciones": ["Física", "Aplicación", "Sesión", "Transporte"],
+      "correcta": 0,
+      "descripcion": "La capa Física se ocupa de la transmisión de bits a través del medio físico."
+    },
+    {
+      "pregunta": "¿Qué capa OSI se ocupa principalmente del direccionamiento lógico y encaminamiento?",
+      "opciones": ["Red", "Física", "Presentación", "Sesión"],
+      "correcta": 0,
+      "descripcion": "La capa de Red se ocupa del direccionamiento lógico y del encaminamiento de paquetes."
+    },
+    {
+      "pregunta": "¿Qué capa OSI se ocupa de establecer y gestionar sesiones de comunicación?",
+      "opciones": ["Sesión", "Red", "Física", "Enlace de datos"],
+      "correcta": 0,
+      "descripcion": "La capa de Sesión administra las sesiones de comunicación entre aplicaciones."
+    },
+    {
+      "pregunta": "¿Qué capa OSI se relaciona con la representación y formato de los datos?",
+      "opciones": ["Presentación", "Transporte", "Red", "Física"],
+      "correcta": 0,
+      "descripcion": "La capa de Presentación se relaciona con el formato, representación y transformación de los datos."
+    },
+    {
+      "pregunta": "¿Qué topología conecta todos los dispositivos a un punto central?",
+      "opciones": ["Estrella", "Anillo", "Bus", "Malla"],
+      "correcta": 0,
+      "descripcion": "La topología estrella conecta los dispositivos a un punto central."
+    },
+    {
+      "pregunta": "¿Qué topología utiliza un cable principal compartido?",
+      "opciones": ["Bus", "Estrella", "Malla", "Anillo"],
+      "correcta": 0,
+      "descripcion": "La topología bus utiliza un medio principal compartido."
+    },
+    {
+      "pregunta": "¿Qué topología conecta los dispositivos formando un círculo?",
+      "opciones": ["Anillo", "Estrella", "Bus", "Malla"],
+      "correcta": 0,
+      "descripcion": "En la topología anillo los dispositivos se conectan formando un circuito."
+    },
+    {
+      "pregunta": "¿Qué topología puede proporcionar mayor redundancia mediante múltiples enlaces?",
+      "opciones": ["Malla", "Bus", "Estrella simple", "Anillo simple"],
+      "correcta": 0,
+      "descripcion": "La topología malla puede proporcionar varios caminos alternativos entre dispositivos."
+    },
+    {
+      "pregunta": "¿Qué elemento se utiliza en una red para interconectar dispositivos dentro de una LAN?",
+      "opciones": ["Switch", "Monitor", "Teclado", "Micrófono"],
+      "correcta": 0,
+      "descripcion": "Un switch permite interconectar dispositivos dentro de una red local."
+    },
+    {
+      "pregunta": "¿Cuál de estos conceptos pertenece a la seguridad informática?",
+      "opciones": ["Cifrado", "Topología estrella", "LAN", "tracert"],
+      "correcta": 0,
+      "descripcion": "El cifrado es una técnica utilizada para proteger información."
+    },
+    {
+      "pregunta": "¿Cuál es el objetivo de combinar criptografía simétrica y asimétrica en sistemas como PGP?",
+      "opciones": [
+        "Aprovechar las ventajas de ambos tipos de criptografía",
+        "Eliminar las claves",
+        "Evitar el uso de redes",
+        "Convertir todas las IP en MAC"
+      ],
+      "correcta": 0,
+      "descripcion": "Los sistemas híbridos pueden aprovechar la eficiencia del cifrado simétrico y las características de la criptografía asimétrica."
+    },
+    {
+      "pregunta": "¿Qué elemento de PGP puede utilizarse para verificar la identidad del autor de un mensaje?",
+      "opciones": ["Firma digital", "Máscara de subred", "DNS", "DHCP"],
+      "correcta": 0,
+      "descripcion": "Una firma digital puede utilizarse para verificar la autenticidad asociada a un mensaje."
+    },
+    {
+      "pregunta": "¿Qué elemento de PGP permite representar datos binarios como texto?",
+      "opciones": ["Armadura ASCII", "DHCP", "TCP", "DNS"],
+      "correcta": 0,
+      "descripcion": "La Armadura ASCII permite representar datos binarios complejos como bloques de texto."
+    },
+    {
+      "pregunta": "¿Qué concepto está relacionado con convertir datos binarios complejos en bloques de texto dentro de PGP?",
+      "opciones": ["Armadura ASCII", "Topología LAN", "Dirección MAC", "Puerta de enlace"],
+      "correcta": 0,
+      "descripcion": "La Armadura ASCII se utiliza para representar datos binarios complejos en forma de texto."
+    },
+    {
+      "pregunta": "¿Qué característica diferencia una WAN de una LAN?",
+      "opciones": [
+        "La WAN puede abarcar distancias geográficas mucho mayores",
+        "La WAN solo funciona con Bluetooth",
+        "La LAN siempre necesita Internet",
+        "La LAN no puede conectar computadoras"
+      ],
+      "correcta": 0,
+      "descripcion": "WAN puede conectar redes a grandes distancias, mientras LAN normalmente se limita a un área local."
+    },
+    {
+      "pregunta": "¿Qué característica diferencia una PAN de una WAN?",
+      "opciones": [
+        "PAN está destinada a conexiones personales cercanas, mientras WAN puede abarcar grandes distancias",
+        "PAN siempre es más grande que WAN",
+        "WAN solo funciona con Bluetooth",
+        "No existe ninguna diferencia"
+      ],
+      "correcta": 0,
+      "descripcion": "PAN se utiliza para conexiones personales de corto alcance, mientras WAN cubre grandes áreas geográficas."
+    },
+    {
+      "pregunta": "¿Qué protocolo permite que un navegador solicite recursos de un servidor web?",
+      "opciones": ["HTTP", "DHCP", "SMTP", "FTP"],
+      "correcta": 0,
+      "descripcion": "HTTP permite la comunicación entre clientes web y servidores para solicitar y transferir recursos."
+    },
+    {
+      "pregunta": "¿Cuál es una ventaja de utilizar HTTPS frente a HTTP?",
+      "opciones": [
+        "Protege la comunicación mediante mecanismos criptográficos",
+        "Elimina la necesidad de una dirección IP",
+        "Hace innecesario el DNS",
+        "Convierte la LAN en WAN"
+      ],
+      "correcta": 0,
+      "descripcion": "HTTPS agrega protección criptográfica a la comunicación web."
+    },
+    {
+      "pregunta": "¿Qué comando se utiliza para consultar información de DNS desde Windows?",
+      "opciones": ["nslookup", "netstat", "tracert", "dir"],
+      "correcta": 0,
+      "descripcion": "nslookup permite realizar consultas relacionadas con DNS."
+    },
+    {
+      "pregunta": "¿Qué comando se utiliza para visualizar la dirección MAC?",
+      "opciones": ["getmac", "ipconfig", "tracert", "pwd"],
+      "correcta": 0,
+      "descripcion": "getmac muestra las direcciones MAC de los adaptadores de red."
+    },
+    {
+      "pregunta": "¿Qué comando muestra la ubicación actual en PowerShell?",
+      "opciones": ["pwd", "dir", "getmac", "nslookup"],
+      "correcta": 0,
+      "descripcion": "pwd muestra la ruta o ubicación actual."
+    },
+    {
+      "pregunta": "¿Qué comando muestra archivos y carpetas?",
+      "opciones": ["dir", "tracert", "netstat", "nslookup"],
+      "correcta": 0,
+      "descripcion": "dir lista los archivos y carpetas de la ubicación actual."
+    },
+    {
+      "pregunta": "¿Qué comando permite visualizar las conexiones de red y sus estados?",
+      "opciones": ["netstat", "pwd", "dir", "getmac"],
+      "correcta": 0,
+      "descripcion": "netstat muestra conexiones de red, puertos y estados."
+    },
+    {
+      "pregunta": "¿Qué concepto permite asociar un nombre de dominio con una dirección IP?",
+      "opciones": ["DNS", "MAC", "TCP", "ASCII"],
+      "correcta": 0,
+      "descripcion": "DNS permite resolver nombres de dominio en direcciones IP."
+    },
+    {
+      "pregunta": "¿Cuál de estos es un ejemplo de protocolo de transporte?",
+      "opciones": ["TCP", "HTTP", "DNS", "FTP"],
+      "correcta": 0,
+      "descripcion": "TCP pertenece a la capa de Transporte del modelo OSI."
+    },
+    {
+      "pregunta": "¿Cuál de estos protocolos de transporte no establece una conexión como TCP?",
+      "opciones": ["UDP", "HTTP", "FTP", "SMTP"],
+      "correcta": 0,
+      "descripcion": "UDP es un protocolo de transporte orientado a datagramas y no establece una conexión como TCP."
+    },
+    {
+      "pregunta": "¿Qué modelo organiza la comunicación de red en siete capas?",
+      "opciones": ["Modelo OSI", "Modelo ASCII", "Modelo PGP", "Modelo DNS"],
+      "correcta": 0,
+      "descripcion": "El modelo OSI organiza las funciones de comunicación en siete capas."
+    },
+    {
+      "pregunta": "¿Qué capa del modelo OSI es responsable de la comunicación extremo a extremo mediante protocolos como TCP?",
+      "opciones": ["Transporte", "Física", "Presentación", "Aplicación"],
+      "correcta": 0,
+      "descripcion": "TCP pertenece a la capa de Transporte, responsable de funciones de comunicación extremo a extremo."
+    },
+    {
+      "pregunta": "¿Qué tipo de topología suele ser sencilla de administrar porque los dispositivos se conectan a un punto central?",
+      "opciones": ["Estrella", "Bus", "Anillo", "Malla"],
+      "correcta": 0,
+      "descripcion": "La topología estrella facilita la administración porque las conexiones convergen en un punto central."
+    },
+    {
+      "pregunta": "¿Qué topología puede requerir una gran cantidad de enlaces debido a sus múltiples conexiones?",
+      "opciones": ["Malla", "Bus", "Estrella", "Anillo"],
+      "correcta": 0,
+      "descripcion": "Una topología malla puede requerir numerosos enlaces debido a las conexiones entre dispositivos."
+    }
+  ]
+}

@@ -1,381 +1,57 @@
 /* =========================================================
-   TEST — script.js
+   TEST — script.js  (v1.2.0)
    Lógica de la app de tests multiple choice.
-   ========================================================= */
 
-/* =========================================================
-   1) CONFIGURACIÓN Y PREGUNTAS  (ÚNICA ZONA QUE SE EDITA)
-   ---------------------------------------------------------
-   Cada pregunta del array QUESTIONS tiene este formato:
+   CÓMO AGREGAR UN TEST (las preguntas ya NO se escriben acá):
+   1) Crear un archivo .json dentro de la carpeta  tests/  (ver tests/plantilla.json).
+   2) Agregar el nombre del archivo a la lista de  tests/index.json.
+   Al entrar a la página aparece un menú con todos los tests listados;
+   el nombre que se ve en el menú sale del campo "nombre" de cada JSON.
+
+   Formato de cada JSON:
    {
-     pregunta: "Texto de la pregunta",
-     opciones: ["Opción A", "Opción B", "Opción C", "Opción D"],
-     correcta: 0   // posición de la opción correcta (0 = A, 1 = B, 2 = C, 3 = D...)
+     "nombre": "Historia Argentina",          // nombre que se ve en el menú (si falta, se usa el del archivo)
+     "tema": "Texto opcional bajo el nombre",  // opcional
+     "preguntas": [
+       {
+         "pregunta": "Texto de la pregunta",
+         "opciones": ["Opción A", "Opción B", "Opción C", "Opción D"],
+         "correcta": 1,                        // posición de la correcta (0 = A, 1 = B, 2 = C...)
+         "descripcion": "Por qué es correcta"  // opcional: se muestra SOLO en los resultados, bajo una respuesta incorrecta
+       }
+     ]
    }
    Se puede usar de 2 a 26 opciones por pregunta.
    El puntaje final siempre se calcula sobre 10, sin importar cuántas preguntas haya.
    ========================================================= */
 
-// Título y tema que se muestran en la pantalla de inicio
-const TEST_CONFIG = {
-  titulo: "Test", // Título grande de la pantalla de inicio
-  tema: ""        // Subtítulo opcional (ej: "Historia Argentina"). Vacío = no se muestra
-};
-
-// Banco de preguntas: vacío a propósito, se completa cuando se necesite
-const QUESTIONS = [
-
-  {
-    pregunta: "¿Para qué sirve el comando dir?",
-    opciones: [
-      "Mostrar archivos y carpetas",
-      "Mostrar la dirección MAC",
-      "Consultar el DNS",
-      "Mostrar conexiones de red"
-    ],
-    correcta: 0
-  },
-
-  {
-    pregunta: "¿Qué información muestra el comando pwd?",
-    opciones: [
-      "La dirección IP",
-      "La ubicación o ruta actual",
-      "La dirección MAC",
-      "Las conexiones activas"
-    ],
-    correcta: 1
-  },
-
-  {
-    pregunta: "¿Para qué sirve el comando getmac?",
-    opciones: [
-      "Mostrar la dirección IP",
-      "Mostrar la dirección MAC",
-      "Mostrar la ruta de red",
-      "Consultar el DNS"
-    ],
-    correcta: 1
-  },
-
-  {
-    pregunta: "¿Qué significa MAC en una tarjeta de red?",
-    opciones: [
-      "Media Access Control",
-      "Machine Access Connection",
-      "Main Address Computer",
-      "Microsoft Access Control"
-    ],
-    correcta: 0
-  },
-
-  {
-    pregunta: "¿Para qué sirve ipconfig?",
-    opciones: [
-      "Mostrar archivos de una carpeta",
-      "Mostrar la configuración de red",
-      "Consultar un dominio DNS",
-      "Mostrar programas instalados"
-    ],
-    correcta: 1
-  },
-
-  {
-    pregunta: "¿Qué información puede mostrar ipconfig?",
-    opciones: [
-      "IP, máscara de subred y puerta de enlace",
-      "Contraseñas guardadas",
-      "Programas abiertos",
-      "Archivos del sistema"
-    ],
-    correcta: 0
-  },
-
-  {
-    pregunta: "¿Cuál es la forma correcta de obtener información detallada con ipconfig?",
-    opciones: [
-      "ipconfig\\all",
-      "ipconfig-all",
-      "ipconfig /all",
-      "ipconfig.all"
-    ],
-    correcta: 2
-  },
-
-  {
-    pregunta: "¿Qué ocurre si ejecutamos tracert sin indicar un destino?",
-    opciones: [
-      "Muestra la dirección MAC",
-      "Muestra la ayuda y las opciones del comando",
-      "Muestra automáticamente Google",
-      "Apaga la conexión a Internet"
-    ],
-    correcta: 1
-  },
-
-  {
-    pregunta: "¿Para qué sirve tracert?",
-    opciones: [
-      "Mostrar la ruta que sigue una conexión hasta un destino",
-      "Mostrar los archivos de una carpeta",
-      "Consultar la dirección MAC",
-      "Cambiar la dirección IP"
-    ],
-    correcta: 0
-  },
-
-  {
-    pregunta: "¿Qué representa cada salto en un tracert?",
-    opciones: [
-      "Un archivo del sistema",
-      "Un dispositivo o router intermedio",
-      "Una contraseña",
-      "Una dirección MAC local"
-    ],
-    correcta: 1
-  },
-
-  {
-    pregunta: "¿Qué comando utilizarías para rastrear la ruta hasta Google?",
-    opciones: [
-      "tracert google.com",
-      "dir google.com",
-      "getmac google.com",
-      "pwd google.com"
-    ],
-    correcta: 0
-  },
-
-  {
-    pregunta: "¿Para qué sirve netstat?",
-    opciones: [
-      "Mostrar conexiones de red",
-      "Mostrar carpetas",
-      "Consultar DNS",
-      "Mostrar la ruta de una conexión"
-    ],
-    correcta: 0
-  },
-
-  {
-    pregunta: "¿Qué significa ESTABLISHED en netstat?",
-    opciones: [
-      "La conexión fue bloqueada",
-      "La conexión está establecida",
-      "La conexión nunca existió",
-      "El equipo está apagado"
-    ],
-    correcta: 1
-  },
-
-  {
-    pregunta: "¿Qué significa TIME_WAIT en netstat?",
-    opciones: [
-      "Una conexión está esperando mientras termina de cerrarse",
-      "Una conexión está establecida permanentemente",
-      "No existe ninguna conexión",
-      "El DNS está funcionando"
-    ],
-    correcta: 0
-  },
-
-  {
-    pregunta: "¿Qué significa CLOSE_WAIT en netstat?",
-    opciones: [
-      "La conexión está esperando para comenzar",
-      "El otro extremo cerró la conexión y el equipo está terminando de cerrarla",
-      "La conexión está completamente establecida",
-      "El DNS respondió correctamente"
-    ],
-    correcta: 1
-  },
-
-  {
-    pregunta: "¿Qué significa 127.0.0.1?",
-    opciones: [
-      "La IP pública de Google",
-      "La dirección de localhost",
-      "La dirección del router",
-      "La dirección del servidor DNS"
-    ],
-    correcta: 1
-  },
-
-  {
-    pregunta: "¿Qué significa localhost?",
-    opciones: [
-      "Otro equipo de Internet",
-      "El propio equipo",
-      "El router de la red",
-      "El servidor DNS"
-    ],
-    correcta: 1
-  },
-
-  {
-    pregunta: "¿Qué es DNS?",
-    opciones: [
-      "Un tipo de tarjeta de red",
-      "Un sistema que relaciona nombres de dominio con direcciones IP",
-      "Un protocolo para mostrar archivos",
-      "Una dirección MAC"
-    ],
-    correcta: 1
-  },
-
-  {
-    pregunta: "¿Qué significa DNS?",
-    opciones: [
-      "Domain Name System",
-      "Digital Network Service",
-      "Data Name Server",
-      "Domain Network Security"
-    ],
-    correcta: 0
-  },
-
-  {
-    pregunta: "¿Para qué sirve nslookup?",
-    opciones: [
-      "Consultar información de DNS",
-      "Mostrar archivos",
-      "Mostrar la dirección MAC",
-      "Mostrar la carpeta actual"
-    ],
-    correcta: 0
-  },
-
-  {
-    pregunta: "¿Qué comando usarías para averiguar qué IP corresponde a google.com?",
-    opciones: [
-      "netstat google.com",
-      "nslookup google.com",
-      "getmac google.com",
-      "pwd google.com"
-    ],
-    correcta: 1
-  },
-
-  {
-    pregunta: "¿Qué hace principalmente un servidor DNS?",
-    opciones: [
-      "Traduce nombres de dominio a direcciones IP",
-      "Crea carpetas automáticamente",
-      "Muestra la dirección MAC",
-      "Controla los archivos de Windows"
-    ],
-    correcta: 0
-  },
-
-  {
-    pregunta: "En una dirección como 192.168.0.198, ¿qué representa?",
-    opciones: [
-      "Una dirección IP",
-      "Una dirección MAC",
-      "Un puerto",
-      "Un nombre DNS"
-    ],
-    correcta: 0
-  },
-
-  {
-    pregunta: "¿Qué es 192.168.0.1 en una red doméstica normalmente?",
-    opciones: [
-      "Una dirección MAC",
-      "La puerta de enlace o router",
-      "El servidor de Google",
-      "Una dirección DNS pública"
-    ],
-    correcta: 1
-  },
-
-  {
-    pregunta: "¿Qué indica la máscara de subred 255.255.255.0?",
-    opciones: [
-      "Información sobre cómo se divide la red",
-      "La dirección MAC del equipo",
-      "El nombre del usuario",
-      "El puerto HTTPS"
-    ],
-    correcta: 0
-  },
-
-  {
-    pregunta: "¿Qué comando muestra la dirección física de una interfaz de red?",
-    opciones: [
-      "pwd",
-      "tracert",
-      "getmac",
-      "nslookup"
-    ],
-    correcta: 2
-  },
-
-  {
-    pregunta: "¿Qué comando muestra la ubicación actual en PowerShell?",
-    opciones: [
-      "pwd",
-      "dir",
-      "netstat",
-      "getmac"
-    ],
-    correcta: 0
-  },
-
-  {
-    pregunta: "¿Qué comando permite ver las conexiones TCP activas?",
-    opciones: [
-      "dir",
-      "netstat",
-      "pwd",
-      "nslookup"
-    ],
-    correcta: 1
-  },
-
-  {
-    pregunta: "Si querés saber por dónde viaja tu conexión hasta un servidor, ¿qué comando usarías?",
-    opciones: [
-      "ipconfig",
-      "getmac",
-      "tracert",
-      "dir"
-    ],
-    correcta: 2
-  },
-
-  {
-    pregunta: "¿Cuál de estas relaciones entre comando y función es correcta?",
-    opciones: [
-      "dir → conexiones de red",
-      "getmac → dirección MAC",
-      "tracert → archivos y carpetas",
-      "nslookup → ubicación actual"
-    ],
-    correcta: 1
-  }
-
-];
-
 /* =========================================================
-   2) CONSTANTES Y ESTADO
+   1) CONSTANTES Y ESTADO
    ========================================================= */
 
-const MAX_SCORE = 10;                 // Puntaje máximo del test
-const RING_LENGTH = 2 * Math.PI * 52; // Circunferencia del aro de puntaje (coincide con style.css)
+const TESTS_DIR = "tests/";               // [v1.2.0] carpeta donde viven los JSON de preguntas
+const INDEX_URL = TESTS_DIR + "index.json"; // [v1.2.0] lista de archivos de test disponibles
+const MAX_SCORE = 10;                     // Puntaje máximo del test
+const RING_LENGTH = 2 * Math.PI * 52;     // Circunferencia del aro de puntaje (coincide con style.css)
 
 // Atajo para obtener elementos por id
 const $ = (id) => document.getElementById(id);
 
 // Referencias a los elementos del DOM que se usan en toda la app
 const els = {
+  screenMenu: $("screenMenu"),           // [v1.2.0] pantalla del menú de tests
+  menuTitle: $("menuTitle"),
+  menuNotice: $("menuNotice"),
+  menuNoticeIcon: $("menuNoticeIcon"),
+  menuNoticeText: $("menuNoticeText"),
+  menuList: $("menuList"),
   screenStart: $("screenStart"),
   screenQuiz: $("screenQuiz"),
   mainTitle: $("mainTitle"),
   testTopic: $("testTopic"),
   statCount: $("statCount"),
-  emptyNotice: $("emptyNotice"),
   btnStart: $("btnStart"),
+  btnChange: $("btnChange"),             // [v1.2.0] "Cambiar test": vuelve al menú
   topTag: $("topTag"),
   qCounter: $("qCounter"),
   progressBar: $("progressBar"),
@@ -387,7 +63,7 @@ const els = {
   btnNextLabel: $("btnNextLabel"),
   btnNextIcon: $("btnNextIcon"),
   float: $("resultFloat"),
-  scoreBox: $("scoreBox"), // [v1.1.0] contenedor del puntaje (recibe el tono de color)
+  scoreBox: $("scoreBox"),               // contenedor del puntaje (recibe el tono de color)
   scoreBar: $("scoreBar"),
   scoreValue: $("scoreValue"),
   scoreMsg: $("scoreMsg"),
@@ -397,13 +73,15 @@ const els = {
   btnRetry: $("btnRetry")
 };
 
-let questions = [];     // Preguntas válidas (ya filtradas)
+let catalog = [];       // [v1.2.0] tests cargados desde los JSON: { file, nombre, tema, preguntas }
+let currentTest = null; // [v1.2.0] test elegido en el menú
+let questions = [];     // Preguntas del test elegido (ya validadas)
 let current = 0;        // Índice de la pregunta actual
 let answers = [];       // Respuesta elegida por pregunta (null = sin responder)
 let quizActive = false; // true mientras se está resolviendo el test
 
 /* =========================================================
-   3) UTILIDADES
+   2) UTILIDADES
    ========================================================= */
 
 // Agrega un 0 adelante: 3 -> "03" (para el contador 01 / 10)
@@ -420,14 +98,58 @@ function setTag(text) {
   els.topTag.textContent = text;
 }
 
-// Muestra una pantalla y oculta la otra (reinicia la animación de entrada)
-function showScreen(screen) {
-  [els.screenStart, els.screenQuiz].forEach((s) => s.classList.remove("screen--active"));
-  screen.classList.add("screen--active");
+// Crea un icono de Material Symbols
+function icon(name) {
+  const s = document.createElement("span");
+  s.className = "material-symbols-outlined";
+  s.textContent = name;
+  return s;
 }
 
-// Filtra preguntas mal armadas y avisa por consola cuál falló
-function sanitizeQuestions(raw) {
+// Muestra una pantalla y oculta las demás (reinicia la animación de entrada)
+// [v1.2.0] Ahora son 3 pantallas (menú, inicio del test, test) y sube al tope de la página (útil en celular)
+function showScreen(screen) {
+  [els.screenMenu, els.screenStart, els.screenQuiz].forEach((s) => s.classList.remove("screen--active"));
+  screen.classList.add("screen--active");
+  window.scrollTo(0, 0);
+}
+
+// [v1.2.0] Arma un título letra por letra para la animación de entrada escalonada.
+// Las letras se agrupan por palabra para que en celular el título parta línea entre palabras y no se salga de la pantalla.
+function renderTitle(el, texto) {
+  el.textContent = "";
+  el.setAttribute("aria-label", texto);
+  el.classList.toggle("title--long", texto.length > 14); // títulos largos usan una tipografía más chica
+  let i = 0;
+  texto.split(" ").forEach((palabra, w, arr) => {
+    const word = document.createElement("span");
+    word.className = "title__word";
+    [...palabra].forEach((ch) => {
+      const span = document.createElement("span");
+      span.className = "title__char";
+      span.setAttribute("aria-hidden", "true");
+      span.textContent = ch;
+      span.style.animationDelay = `${i++ * 60}ms`;
+      word.appendChild(span);
+    });
+    el.appendChild(word);
+    if (w < arr.length - 1) el.appendChild(document.createTextNode(" ")); // espacio real: permite el salto de línea
+  });
+}
+
+/* =========================================================
+   3) CARGA DE TESTS DESDE JSON  [v1.2.0]
+   ========================================================= */
+
+// Lee un JSON por fetch (no-cache: si se edita un test, se ve el cambio al recargar)
+async function fetchJSON(url) {
+  const res = await fetch(url, { cache: "no-cache" });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
+
+// Filtra preguntas mal armadas, avisa por consola cuál falló y normaliza la descripción opcional
+function sanitizeQuestions(raw, origen) {
   const valid = [];
   raw.forEach((q, i) => {
     const ok =
@@ -436,47 +158,176 @@ function sanitizeQuestions(raw) {
       Array.isArray(q.opciones) && q.opciones.length >= 2 && q.opciones.length <= 26 &&
       Number.isInteger(q.correcta) && q.correcta >= 0 && q.correcta < q.opciones.length;
     if (ok) {
-      valid.push(q);
+      valid.push({
+        pregunta: q.pregunta,
+        opciones: q.opciones.map(String),
+        correcta: q.correcta,
+        // Descripción opcional: se muestra solo en los resultados, bajo una respuesta incorrecta
+        descripcion: typeof q.descripcion === "string" ? q.descripcion.trim() : ""
+      });
     } else {
-      console.warn(`[Test] La pregunta #${i + 1} está mal armada y se omitió.`, q);
+      console.warn(`[Test] ${origen}: la pregunta #${i + 1} está mal armada y se omitió.`, q);
     }
   });
   return valid;
 }
 
-/* =========================================================
-   4) PANTALLA DE INICIO
-   ========================================================= */
-
-// Arma el título letra por letra para la animación de entrada escalonada
-function renderTitle() {
-  els.mainTitle.textContent = "";
-  els.mainTitle.setAttribute("aria-label", TEST_CONFIG.titulo);
-  [...TEST_CONFIG.titulo].forEach((ch, i) => {
-    const span = document.createElement("span");
-    span.className = "title__char";
-    span.setAttribute("aria-hidden", "true");
-    span.textContent = ch === " " ? "\u00A0" : ch;
-    span.style.animationDelay = `${i * 90}ms`;
-    els.mainTitle.appendChild(span);
-  });
-  document.title = TEST_CONFIG.titulo;
+// Valida el contenido de un JSON de test y lo convierte al formato interno
+function parseTest(file, data) {
+  if (!data || !Array.isArray(data.preguntas)) throw new Error("falta el array \"preguntas\"");
+  const preguntas = sanitizeQuestions(data.preguntas, file);
+  if (preguntas.length === 0) throw new Error("no tiene preguntas válidas");
+  return {
+    file,
+    nombre: typeof data.nombre === "string" && data.nombre.trim() ? data.nombre.trim() : file.replace(/\.json$/i, ""),
+    tema: typeof data.tema === "string" ? data.tema.trim() : "",
+    preguntas
+  };
 }
 
-// Prepara la pantalla de inicio: título, tema, contador y estado del botón
-function setupStart() {
-  renderTitle();
-  els.testTopic.textContent = TEST_CONFIG.tema;
-  els.statCount.textContent = questions.length;
+// Muestra un aviso en el menú. tono: "info" | "warning" | "error"
+function setNotice(tono, iconName, texto) {
+  els.menuNotice.hidden = false;
+  els.menuNotice.className = `notice notice--${tono}`;
+  els.menuNoticeIcon.textContent = iconName;
+  els.menuNoticeText.textContent = texto;
+}
+// Lee tests/index.json, carga cada test listado y dibuja el menú
+async function loadCatalog() {
+  setNotice("info", "hourglass_top", "Cargando tests…");
 
-  const empty = questions.length === 0;
-  els.emptyNotice.hidden = !empty;   // Muestra el aviso si no hay preguntas
-  els.btnStart.disabled = empty;     // No se puede comenzar sin preguntas
+  // 1) Lista de archivos (acepta ["a.json"] o { "tests": ["a.json"] })
+  let files;
+  try {
+    const idx = await fetchJSON(INDEX_URL);
+    files = Array.isArray(idx) ? idx : idx && idx.tests;
+    if (!Array.isArray(files)) throw new Error("formato inválido");
+  } catch (err) {
+    console.error(`[Test] No se pudo leer ${INDEX_URL}`, err);
+    setNotice(
+      "error",
+      "error",
+      location.protocol === "file:"
+        ? "El navegador no deja leer los JSON abriendo el archivo directo. Abrí la página desde un servidor (Cloudflare Pages o la extensión Live Server de VS Code)."
+        : `No se pudo leer ${INDEX_URL}. Revisá que exista y que sea un JSON válido.`
+    );
+    return;
+  }
+
+  // Solo nombres de archivo simples dentro de tests/ (sin rutas hacia arriba)
+  files = files.filter((f) => typeof f === "string" && f.trim() !== "" && !f.includes("..") && !f.startsWith("/"));
+  if (files.length === 0) {
+    setNotice("info", "info", "No hay tests cargados. Agregá un .json en la carpeta tests/ y listalo en tests/index.json.");
+    return;
+  }
+
+  // 2) Cada test se carga en paralelo; si uno falla, los demás igual aparecen
+  const results = await Promise.allSettled(
+    files.map(async (f) => parseTest(f, await fetchJSON(TESTS_DIR + encodeURI(f))))
+  );
+
+  catalog = [];
+  const failed = [];
+  results.forEach((r, i) => {
+    if (r.status === "fulfilled") {
+      catalog.push(r.value);
+    } else {
+      failed.push(files[i]);
+      console.warn(`[Test] No se pudo cargar ${files[i]}:`, r.reason);
+    }
+  });
+
+  renderMenu();
+
+  if (failed.length > 0) {
+    setNotice("warning", "warning", `No se pudo cargar: ${failed.join(", ")}. Revisá que el JSON sea válido (el detalle está en la consola).`);
+  } else {
+    els.menuNotice.hidden = true;
+  }
+}
+
+/* =========================================================
+   4) MENÚ DE TESTS  [v1.2.0]
+   ========================================================= */
+
+// Dibuja una tarjeta por cada test cargado
+function renderMenu() {
+  els.menuList.textContent = "";
+
+  catalog.forEach((t, i) => {
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "test-card";
+    card.style.animationDelay = `${i * 70}ms`;
+
+    const iconBox = document.createElement("span");
+    iconBox.className = "test-card__icon";
+    iconBox.appendChild(icon("description"));
+
+    const info = document.createElement("span");
+    info.className = "test-card__info";
+
+    const name = document.createElement("strong");
+    name.className = "test-card__name";
+    name.textContent = t.nombre;
+    info.appendChild(name);
+
+    if (t.tema) {
+      const topic = document.createElement("span");
+      topic.className = "test-card__topic";
+      topic.textContent = t.tema;
+      info.appendChild(topic);
+    }
+
+    const meta = document.createElement("small");
+    meta.className = "test-card__meta";
+    meta.textContent = `${t.preguntas.length} ${t.preguntas.length === 1 ? "pregunta" : "preguntas"}`;
+    info.appendChild(meta);
+
+    const chev = icon("chevron_right");
+    chev.classList.add("test-card__chev");
+
+    card.append(iconBox, info, chev);
+    card.addEventListener("click", () => selectTest(t));
+    els.menuList.appendChild(card);
+  });
+}
+
+// Vuelve al menú de tests (desde "Cambiar test" o desde el float de resultados)
+function showMenu() {
+  hideFloat();
+  quizActive = false;
+  currentTest = null;
+  questions = [];
+  renderTitle(els.menuTitle, "Test");
+  document.title = "Test";
+  setTag("MENÚ");
+  showScreen(els.screenMenu);
+}
+
+// Elige un test del menú y muestra su pantalla de inicio
+function selectTest(t) {
+  currentTest = t;
+  questions = t.preguntas;
+  setupStart();
+  showScreen(els.screenStart);
+}
+
+/* =========================================================
+   5) PANTALLA DE INICIO DEL TEST
+   ========================================================= */
+
+// Prepara la pantalla de inicio con los datos del test elegido
+function setupStart() {
+  renderTitle(els.mainTitle, currentTest.nombre);
+  els.testTopic.textContent = currentTest.tema;
+  els.statCount.textContent = questions.length;
+  document.title = `${currentTest.nombre} · Test`;
   setTag("LISTO");
 }
 
 /* =========================================================
-   5) TEST (preguntas y navegación)
+   6) TEST (preguntas y navegación)
    ========================================================= */
 
 // Comienza (o reinicia) el test desde la primera pregunta
@@ -526,6 +377,8 @@ function renderQuestion() {
   void els.qCard.offsetWidth;
   els.qCard.classList.add("qcard--in");
 
+  window.scrollTo(0, 0); // [v1.2.0] en celular, cada pregunta nueva arranca desde arriba
+
   els.btnPrev.disabled = current === 0;
   updateNext();
 }
@@ -568,7 +421,7 @@ function goPrev() {
 }
 
 /* =========================================================
-   6) RESULTADOS (float con puntaje /10 y revisión)
+   7) RESULTADOS (float con puntaje /10 y revisión)
    ========================================================= */
 
 // Calcula la nota y abre el float de resultados
@@ -593,22 +446,14 @@ function scoreMessage(score) {
   return "Seguí practicando";
 }
 
-// [v1.1.0] Devuelve el tono de color de la nota (success / warning / error) para pintar el aro y el mensaje
+// Devuelve el tono de color de la nota (success / warning / error) para pintar el aro y el mensaje
 function scoreTone(score) {
   if (score >= 6) return "success"; // aprobado
   if (score >= 4) return "warning"; // hay que repasar
   return "error";                   // desaprobado
 }
 
-// Crea un icono de Material Symbols
-function icon(name) {
-  const s = document.createElement("span");
-  s.className = "material-symbols-outlined";
-  s.textContent = name;
-  return s;
-}
-
-// [v1.1.0] Crea una línea de respuesta ("Tu respuesta" / "Correcta") según el tono:
+// Crea una línea de respuesta ("Tu respuesta" / "Correcta") según el tono:
 // "ok" = verde (success), "bad" = rojo (error), "skip" = amarillo (warning, sin responder)
 function answerLine(label, texto, tone) {
   const row = document.createElement("div");
@@ -625,15 +470,30 @@ function answerLine(label, texto, tone) {
   return row;
 }
 
-// Arma la lista con todas las preguntas y las respuestas elegidas (verde = bien, rojo = mal)
+// [v1.2.0] Crea el bloque de descripción (color info) que explica por qué la correcta es la correcta
+function descriptionBlock(texto) {
+  const box = document.createElement("div");
+  box.className = "review__desc";
+
+  const body = document.createElement("span");
+  const tag = document.createElement("span");
+  tag.className = "review__label";
+  tag.textContent = "Explicación";
+  body.append(tag, document.createTextNode(texto));
+
+  box.append(icon("lightbulb"), body);
+  return box;
+}
+
+// Arma la lista con todas las preguntas y las respuestas elegidas (verde = bien, rojo = mal, amarillo = sin responder)
 function buildReview() {
   els.reviewList.textContent = "";
 
   questions.forEach((q, i) => {
     const chosen = answers[i];
     const ok = chosen === q.correcta;
-    const skipped = chosen === null;                        // [v1.1.0] pregunta sin responder
-    const tone = ok ? "ok" : skipped ? "skip" : "bad";      // [v1.1.0] tono: verde / amarillo / rojo
+    const skipped = chosen === null;                    // pregunta sin responder
+    const tone = ok ? "ok" : skipped ? "skip" : "bad";  // tono: verde / amarillo / rojo
 
     const item = document.createElement("li");
     item.className = `review__item review__item--${tone}`;
@@ -662,7 +522,11 @@ function buildReview() {
     item.appendChild(answerLine("Tu respuesta", chosenText, tone));
 
     // Si no acertó, también se muestra la correcta en verde
-    if (!ok) item.appendChild(answerLine("Correcta", q.opciones[q.correcta], "ok"));
+    if (!ok) {
+      item.appendChild(answerLine("Correcta", q.opciones[q.correcta], "ok"));
+      // [v1.2.0] y, si la pregunta tiene descripción, la explicación debajo (solo cuando no se acertó)
+      if (q.descripcion) item.appendChild(descriptionBlock(q.descripcion));
+    }
 
     els.reviewList.appendChild(item);
   });
@@ -671,7 +535,7 @@ function buildReview() {
 // Abre el float y anima el puntaje (conteo + aro)
 function showFloat(score, correct) {
   els.scoreMsg.textContent = scoreMessage(score);
-  els.scoreBox.dataset.tone = scoreTone(score); // [v1.1.0] el CSS pinta aro y mensaje según este tono
+  els.scoreBox.dataset.tone = scoreTone(score); // el CSS pinta aro y mensaje según este tono
   els.scoreMeta.textContent = `${correct} de ${questions.length} correctas`;
   els.scoreValue.textContent = "0";
   els.scoreBar.style.strokeDashoffset = RING_LENGTH; // aro vacío antes de animar
@@ -704,29 +568,22 @@ function hideFloat() {
   document.body.classList.remove("no-scroll");
 }
 
-// "Reintentar": cierra el float y empieza de nuevo
+// "Reintentar": cierra el float y empieza de nuevo el mismo test
 function retry() {
   hideFloat();
   startTest();
 }
 
-// "Inicio": cierra el float y vuelve a la pantalla inicial
-function goHome() {
-  hideFloat();
-  quizActive = false;
-  setupStart();
-  showScreen(els.screenStart);
-}
-
 /* =========================================================
-   7) EVENTOS
+   8) EVENTOS
    ========================================================= */
 
 els.btnStart.addEventListener("click", startTest);
+els.btnChange.addEventListener("click", showMenu); // [v1.2.0] "Cambiar test"
 els.btnPrev.addEventListener("click", goPrev);
 els.btnNext.addEventListener("click", goNext);
 els.btnRetry.addEventListener("click", retry);
-els.btnHome.addEventListener("click", goHome);
+els.btnHome.addEventListener("click", showMenu);   // [v1.2.0] "Menú" del float: vuelve a elegir test
 
 // Atajos de teclado durante el test: A-Z o 1-9 eligen opción, flechas navegan
 document.addEventListener("keydown", (e) => {
@@ -746,8 +603,9 @@ document.addEventListener("keydown", (e) => {
 });
 
 /* =========================================================
-   8) INICIO DE LA APP
+   9) INICIO DE LA APP
    ========================================================= */
 
-questions = sanitizeQuestions(QUESTIONS);
-setupStart();
+renderTitle(els.menuTitle, "Test");
+setTag("MENÚ");
+loadCatalog(); // [v1.2.0] lee tests/index.json y arma el menú
