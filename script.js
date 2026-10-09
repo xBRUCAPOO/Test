@@ -283,7 +283,7 @@ function renderMenu() {
 
     const iconBox = document.createElement("span");
     iconBox.className = "test-card__icon";
-    iconBox.appendChild(icon("device_hub"));
+    iconBox.appendChild(icon("connected_tv"));
 
     const info = document.createElement("span");
     info.className = "test-card__info";

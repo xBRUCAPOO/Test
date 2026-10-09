@@ -3,124 +3,124 @@
   "tema": "Dispositivos de conexión ISP, tipos de redes, protocolos, topologías, comunicaciones, modelo OSI, seguridad, PGP, ASCII y comandos de Windows",
   "preguntas": [
     {
-      "pregunta": "Una vivienda recibe Internet por fibra óptica y el proveedor instala un equipo que convierte la señal óptica para entregar Ethernet. ¿Qué dispositivo cumple principalmente esa función?",
+      "pregunta": "¿Qué significa la sigla ISP?",
       "opciones": [
-        "ONT/ONU",
-        "Switch",
-        "Punto de acceso",
-        "Repetidor"
+        "Internet Service Provider",
+        "Internet Security Protocol",
+        "Internal System Provider",
+        "Internet Signal Process"
       ],
       "correcta": 0,
-      "descripcion": "La ONT/ONU termina la conexión de fibra y convierte la señal óptica en una interfaz que puede utilizar la red del cliente. Un switch distribuye tramas, un punto de acceso brinda Wi-Fi y un repetidor extiende una señal existente.",
-      "tema": "Dispositivos de conexión ISP"
+      "descripcion": "ISP significa Internet Service Provider, que en español se traduce como proveedor de servicios de Internet.",
+      "tema": "Concepto de ISP"
     },
     {
-      "pregunta": "En una conexión doméstica, ¿qué equipo suele encargarse de decidir hacia qué red debe enviarse un paquete destinado a Internet?",
+      "pregunta": "¿Qué es un ISP?",
       "opciones": [
-        "Switch de acceso",
-        "Router o gateway",
-        "Punto de acceso",
-        "Tarjeta de red"
+        "Un servicio que permite registrar nombres de dominio",
+        "Una empresa u organización que brinda acceso a Internet",
+        "Un equipo que distribuye la conexión dentro de una casa",
+        "Una plataforma que aloja páginas web, pero no ofrece conexión a Internet"
       ],
       "correcta": 1,
-      "descripcion": "El router o gateway realiza funciones de capa 3 y decide el siguiente salto para tráfico destinado a otras redes. Un switch normalmente conmuta dentro de la LAN, mientras que un AP y una NIC cumplen funciones diferentes.",
-      "tema": "Dispositivos de conexión ISP"
+      "descripcion": "Un ISP es una empresa u organización que ofrece conexión a Internet a sus clientes.",
+      "tema": "Concepto de ISP"
     },
     {
-      "pregunta": "Un ISP entrega un módem/ONT y el cliente conecta detrás varios equipos cableados. ¿Qué dispositivo permite concentrar esas conexiones Ethernet dentro de la LAN?",
+      "pregunta": "¿Cuál de estas opciones puede ser un ISP?",
       "opciones": [
-        "Switch",
-        "DNS",
-        "Router remoto",
-        "Servidor SMTP"
+        "Una empresa que ofrece alojamiento para sitios web",
+        "Un fabricante de equipos de red",
+        "Una empresa que brinda conexión a Internet a sus clientes",
+        "Un buscador que permite encontrar páginas web"
       ],
-      "correcta": 0,
-      "descripcion": "Un switch permite interconectar múltiples dispositivos Ethernet dentro de una LAN y reenviar tramas según sus direcciones MAC. No realiza por sí solo la función de resolución DNS ni de correo.",
-      "tema": "Dispositivos de conexión ISP"
+      "correcta": 2,
+      "descripcion": "Una compañía que vende servicios de conexión a Internet es un proveedor de Internet o ISP.",
+      "tema": "Concepto de ISP"
     },
     {
-      "pregunta": "Una casa tiene Internet funcionando por cable, pero quiere que teléfonos y notebooks se conecten mediante Wi-Fi. ¿Qué equipo o función debe proporcionar la red local?",
+      "pregunta": "¿Quién suele contratar un servicio de un ISP?",
       "opciones": [
-        "Punto de acceso inalámbrico",
-        "Servidor DNS público",
-        "Switch sin radio",
-        "ONT sin Wi-Fi"
+        "Principalmente los fabricantes de routers",
+        "Solo las organizaciones que registran dominios",
+        "Únicamente las empresas que publican páginas web",
+        "Personas, empresas e instituciones que necesitan conexión a Internet"
       ],
-      "correcta": 0,
-      "descripcion": "El punto de acceso proporciona conectividad inalámbrica y enlaza los clientes Wi-Fi con la red cableada. Un switch común y una ONT sin radio no crean por sí mismos la cobertura Wi-Fi.",
-      "tema": "Dispositivos de conexión ISP"
+      "correcta": 3,
+      "descripcion": "Tanto las personas como las empresas, escuelas y otras organizaciones pueden contratar un servicio de Internet.",
+      "tema": "Concepto de ISP"
     },
     {
-      "pregunta": "¿Cuál es una diferencia funcional razonable entre un router doméstico y un switch de la misma red?",
+      "pregunta": "¿Cuál es el servicio principal que ofrece un ISP?",
       "opciones": [
-        "El router conecta y enruta entre redes; el switch principalmente interconecta equipos dentro de una LAN",
-        "El router solo transmite Wi-Fi y el switch solo traduce nombres de dominio",
-        "El router trabaja exclusivamente con direcciones MAC y el switch exclusivamente con IP",
-        "Ambos realizan exactamente el mismo proceso, pero con nombres comerciales distintos"
+        "Brindar acceso a Internet a sus clientes",
+        "Registrar automáticamente todos los dominios web",
+        "Fabricar los dispositivos que se conectan a la red",
+        "Crear y mantener todas las páginas que visitan sus clientes"
       ],
       "correcta": 0,
-      "descripcion": "El router trabaja principalmente en el direccionamiento y encaminamiento entre redes, mientras que el switch Ethernet conmuta tramas dentro de una red local. Algunos equipos domésticos integran ambas funciones.",
-      "tema": "Dispositivos de conexión ISP"
+      "descripcion": "La función principal de un ISP es brindar a sus clientes una conexión a Internet.",
+      "tema": "Concepto de ISP"
     },
     {
-      "pregunta": "Un ISP entrega Internet mediante cable coaxial y el equipo instalado adapta la señal del servicio para que el router pueda utilizarla. ¿Qué dispositivo es el más probable?",
+      "pregunta": "Si una casa contrata un plan de Internet, ¿qué tipo de empresa le brinda ese servicio?",
       "opciones": [
-        "Módem de cable",
-        "Switch PoE",
-        "Punto de acceso",
-        "Servidor DNS"
+        "Una empresa que vende routers, aunque no ofrezca conexión",
+        "Un ISP que tenga cobertura en esa zona",
+        "Un servicio de alojamiento web sin acceso a Internet",
+        "Un buscador que permite encontrar páginas web"
       ],
-      "correcta": 0,
-      "descripcion": "En accesos por cable, el módem de cable adapta la señal de la red del proveedor a una interfaz utilizable por la red del cliente. Los otros dispositivos cumplen funciones diferentes.",
-      "tema": "Dispositivos de conexión ISP"
+      "correcta": 1,
+      "descripcion": "El servicio de conexión a Internet de una casa suele ser brindado por un ISP.",
+      "tema": "Concepto de ISP"
     },
     {
-      "pregunta": "¿Qué situación describe mejor el uso de un repetidor en una red doméstica?",
+      "pregunta": "¿Cuál de estas opciones describe mejor a un ISP?",
       "opciones": [
-        "Extender la cobertura de una señal existente hacia una zona con menor alcance",
-        "Asignar direcciones IP públicas a todos los dispositivos",
-        "Resolver nombres de dominio antes de acceder a una web",
-        "Convertir una dirección MAC en una dirección IPv4"
+        "Una empresa que registra dominios y necesariamente da Internet",
+        "Un equipo que conecta dispositivos dentro de una red local",
+        "Una organización que ofrece acceso a Internet mediante un servicio",
+        "Una aplicación que permite visitar páginas sin conexión"
       ],
-      "correcta": 0,
-      "descripcion": "Un repetidor recibe y vuelve a transmitir una señal para ampliar su cobertura. No reemplaza las funciones de DHCP, DNS ni el direccionamiento IP.",
-      "tema": "Dispositivos de conexión ISP"
+      "correcta": 2,
+      "descripcion": "El ISP proporciona el servicio que permite a sus clientes acceder a Internet.",
+      "tema": "Concepto de ISP"
     },
     {
-      "pregunta": "Una empresa conecta varios equipos a un switch y conecta ese switch a un router que tiene salida al ISP. ¿Qué papel cumple el switch en ese diseño?",
+      "pregunta": "¿Un ISP puede brindar servicio de Internet a una empresa?",
       "opciones": [
-        "Concentrar la conectividad de los equipos de la LAN",
-        "Determinar las rutas de Internet entre países",
-        "Asignar necesariamente la IP pública del ISP",
-        "Resolver todos los nombres de dominio"
+        "No, porque los ISP solo conectan viviendas particulares",
+        "Sí, pero únicamente si la empresa fabrica sus propios routers",
+        "No, porque las empresas deben crear su propia conexión a Internet",
+        "Sí, los ISP pueden ofrecer planes para empresas y hogares"
       ],
-      "correcta": 0,
-      "descripcion": "El switch concentra las conexiones locales y permite que los dispositivos de la LAN intercambien tramas. El router es quien normalmente conecta esa LAN con otras redes.",
-      "tema": "Dispositivos de conexión ISP"
+      "correcta": 3,
+      "descripcion": "Los proveedores de Internet pueden ofrecer planes tanto a usuarios particulares como a empresas y otras organizaciones.",
+      "tema": "Concepto de ISP"
     },
     {
-      "pregunta": "En una red de cliente, ¿qué equipo suele actuar como puerta de enlace predeterminada hacia el ISP?",
+      "pregunta": "¿Qué necesita normalmente una persona para recibir Internet de un ISP?",
       "opciones": [
-        "El router del cliente",
-        "El teclado de administración",
-        "El switch de la LAN",
-        "La impresora de red"
+        "Contratar un servicio de un proveedor con cobertura en su zona",
+        "Registrar un nombre de dominio para su casa",
+        "Comprar un router, aunque no tenga contratado el servicio",
+        "Instalar un navegador web para que este genere la conexión"
       ],
       "correcta": 0,
-      "descripcion": "La puerta de enlace predeterminada suele ser la interfaz LAN del router. Ese equipo puede reenviar tráfico desde la red local hacia la red del proveedor.",
-      "tema": "Dispositivos de conexión ISP"
+      "descripcion": "Normalmente, la persona debe contratar un plan de un proveedor que tenga cobertura en su zona y contar con el equipo necesario para conectarse.",
+      "tema": "Concepto de ISP"
     },
     {
-      "pregunta": "Un ISP ofrece fibra hasta el hogar. ¿Cuál de estas combinaciones representa mejor una cadena típica de conexión del cliente?",
+      "pregunta": "¿Cuál de estas afirmaciones sobre un ISP es correcta?",
       "opciones": [
-        "Fibra → ONT/ONU → router → dispositivos de la LAN",
-        "Fibra → DNS → teclado → dispositivos",
-        "Fibra → switch → tabla ASCII → router",
-        "Fibra → impresora → servidor SMTP → LAN"
+        "Es un equipo que distribuye la señal dentro de una red local",
+        "Es un proveedor que ofrece acceso a Internet",
+        "Es un servicio que únicamente aloja páginas web",
+        "Es un protocolo que asigna direcciones IP a los dispositivos"
       ],
-      "correcta": 0,
-      "descripcion": "En un acceso FTTH es habitual que la fibra llegue a una ONT/ONU y desde allí se entregue conectividad al router. Luego el router y los switches/AP permiten conectar los dispositivos finales.",
-      "tema": "Dispositivos de conexión ISP"
+      "correcta": 1,
+      "descripcion": "Un ISP es un proveedor de servicios de Internet; no es un dispositivo específico ni un tipo de archivo.",
+      "tema": "Concepto de ISP"
     },
     {
       "pregunta": "Un usuario conecta teléfono, reloj y auriculares en un radio reducido alrededor de sí. ¿Qué clasificación describe mejor esa red?",
