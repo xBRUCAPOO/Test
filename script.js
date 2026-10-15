@@ -1,5 +1,5 @@
 /* =========================================================
-   TEST — script.js  (v1.3.0)
+   TEST — script.js  (v1.5.1)
    Lógica de la app de tests multiple choice.
 
    CÓMO AGREGAR UN TEST (las preguntas ya NO se escriben acá):
@@ -23,10 +23,28 @@
      ]
    }
    Se puede usar de 2 a 26 opciones por pregunta.
+
+   [v1.4.0] TIPOS DE PREGUNTA. El campo "tipo" es opcional: si no se pone, se detecta solo por la forma de la pregunta.
+     • Normal (la de siempre)  → "tipo": "normal"    | lleva "opciones" y "correcta": 1 (posición de la correcta)
+     • Verdadero o falso       → "tipo": "vf"        | NO lleva "opciones"; solo "correcta": true (o false)
+     • Selección múltiple      → "tipo": "multiple"  | lleva "opciones" y "correctas": [0, 2] (posiciones de TODAS las correctas)
+   Ejemplos:
+     { "tipo": "vf", "pregunta": "El agua hierve a 100 °C a nivel del mar", "correcta": true }
+     { "tipo": "multiple", "pregunta": "¿Cuáles son lenguajes de programación?", "opciones": ["Python", "HTML", "Java", "CSS"], "correctas": [0, 2] }
+   "tema" y "descripcion" siguen siendo opcionales en los 3 tipos.
+   PUNTAJE: normal y verdadero/falso valen 1 o 0. La selección múltiple da PUNTAJE PARCIAL: cada pregunta vale entre 0 y 1
+   según (correctas marcadas − incorrectas marcadas) / total de correctas, con mínimo 0 (marcar todo no da puntos).
    El puntaje final siempre se calcula sobre 10, sin importar cuántas preguntas haya.
    [v1.3.0] El test se puede terminar en cualquier momento con "Terminar test". Si quedan preguntas sin contestar,
    los resultados muestran "Incompleto" y 2 promedios: General (las sin contestar suman 0) y Contestadas (solo las respondidas).
    [v1.3.0] "Anterior" solo permite volver hasta 2 preguntas por detrás de la más lejana a la que se llegó.
+   [v1.5.0] La página se comporta como un formulario: si hay un test en curso, el navegador advierte
+   antes de cerrar o recargar que el progreso puede perderse.
+   [v1.5.0] "Anterior" y "Terminar test" piden confirmación en una ventana flotante antes de actuar.
+   [v1.5.0] Los resultados ocupan toda la pantalla; al scrollear las respuestas, el puntaje se minimiza
+   en una barra compacta arriba de todo para no estorbar la revisión.
+   [v1.5.1] En las preguntas de verdadero o falso, la opción elegida brilla según el valor:
+   "Verdadero" en verde (success) y "Falso" en rojo (error), sin importar si la respuesta es correcta.
    ========================================================= */
 
 /* =========================================================
@@ -37,6 +55,7 @@ const TESTS_DIR = "tests/";               // [v1.2.0] carpeta donde viven los JS
 const INDEX_URL = TESTS_DIR + "index.json"; // [v1.2.0] lista de archivos de test disponibles
 const MAX_SCORE = 10;                     // Puntaje máximo del test
 const MAX_BACK = 2;                       // [v1.3.0] cuántas preguntas se puede volver con "Anterior" (respecto de la más lejana alcanzada)
+const VF_OPCIONES = ["Verdadero", "Falso"]; // [v1.4.0] opciones fijas de las preguntas de verdadero o falso (posición 0 = Verdadero)
 const RING_LENGTH = 2 * Math.PI * 52;     // Circunferencia del aro de puntaje (coincide con style.css)
 
 // Atajo para obtener elementos por id
@@ -63,6 +82,7 @@ const els = {
   qCard: $("qCard"),
   qTopic: $("qTopic"),                   // [v1.3.0] tema de la pregunta (texto pequeño gris)
   qText: $("qText"),
+  qHint: $("qHint"),                     // [v1.4.0] aviso de selección múltiple ("Seleccioná todas las correctas")
   options: $("options"),
   btnPrev: $("btnPrev"),
   btnFinish: $("btnFinish"),             // [v1.3.0] "Terminar test": cierra el test en cualquier momento
@@ -81,16 +101,31 @@ const els = {
   avgAnswered: $("avgAnswered"),         // [v1.3.0] promedio solo de las contestadas
   reviewList: $("reviewList"),
   btnHome: $("btnHome"),
-  btnRetry: $("btnRetry")
+  btnRetry: $("btnRetry"),
+  // [v1.5.0] ventana flotante de confirmación (Anterior / Terminar test)
+  confirmBox: $("confirmBox"),
+  confirmIcon: $("confirmIcon"),
+  confirmTitle: $("confirmTitle"),
+  confirmText: $("confirmText"),
+  confirmOk: $("confirmOk"),
+  confirmCancel: $("confirmCancel"),
+  // [v1.5.0] panel de resultados y su barra compacta de puntaje
+  floatPanel: $("floatPanel"),
+  floatBody: $("floatBody"),
+  scoreMini: $("scoreMini"),
+  miniValue: $("miniValue"),
+  miniMsg: $("miniMsg"),
+  miniIncomplete: $("miniIncomplete")
 };
 
 let catalog = [];       // [v1.2.0] tests cargados desde los JSON: { file, nombre, tema, preguntas }
 let currentTest = null; // [v1.2.0] test elegido en el menú
 let questions = [];     // Preguntas del test elegido (ya validadas)
 let current = 0;        // Índice de la pregunta actual
-let answers = [];       // Respuesta elegida por pregunta (null = sin responder)
+let answers = [];       // [v1.4.0] Respuesta por pregunta: lista de posiciones elegidas (1 en normal y V/F, varias en múltiple); null = sin responder
 let quizActive = false; // true mientras se está resolviendo el test
 let maxReached = 0;     // [v1.3.0] índice de la pregunta más lejana a la que se llegó (límite para "Anterior")
+let pendingConfirm = null; // [v1.5.0] función que espera la respuesta de la ventana de confirmación (null = cerrada)
 
 /* =========================================================
    2) UTILIDADES
@@ -102,9 +137,23 @@ const pad = (n) => String(n).padStart(2, "0");
 // Muestra el puntaje sin decimales si es entero (7) o con 1 decimal (6.7)
 const formatScore = (v) => (Number.isInteger(v) ? String(v) : v.toFixed(1));
 
-// [v1.3.0] Nota sobre 10 con 1 decimal: aciertos / base. La base es el total de preguntas (promedio general)
-// o solo las contestadas (promedio de contestadas)
-const calcScore = (correct, base) => Math.round((correct / base) * MAX_SCORE * 10) / 10;
+// [v1.3.0] Nota sobre 10 con 1 decimal: puntos / base. La base es el total de preguntas (promedio general)
+// o solo las contestadas (promedio de contestadas). [v1.4.0] "points" puede ser fraccionario por el puntaje parcial
+const calcScore = (points, base) => Math.round((points / base) * MAX_SCORE * 10) / 10;
+
+// [v1.4.0] Cuánto vale la respuesta a una pregunta, de 0 a 1:
+//  • Normal y verdadero/falso: 1 si acertó, 0 si no.
+//  • Selección múltiple: puntaje parcial = (correctas marcadas − incorrectas marcadas) / total de correctas, con mínimo 0
+//    (así marcar todas las opciones no da puntos). Con una sola correcta la fórmula también da 1 o 0.
+function questionCredit(q, ans) {
+  if (!ans || ans.length === 0) return 0;
+  const hits = ans.filter((i) => q.correctas.includes(i)).length; // correctas marcadas
+  const wrong = ans.length - hits;                                // incorrectas marcadas
+  return Math.max(0, (hits - wrong) / q.correctas.length);
+}
+
+// [v1.4.0] Formatea puntos, que pueden ser fraccionarios: 3 -> "3", 2.6667 -> "2.67"
+const formatPoints = (v) => String(Math.round(v * 100) / 100);
 
 // [v1.3.0] Índice más bajo al que se puede volver: hasta MAX_BACK preguntas por detrás de la más lejana alcanzada
 const minAllowedIndex = () => Math.max(0, maxReached - MAX_BACK);
@@ -167,25 +216,76 @@ async function fetchJSON(url) {
   return res.json();
 }
 
-// Filtra preguntas mal armadas, avisa por consola cuál falló y normaliza la descripción opcional
+// [v1.4.0] Detecta el tipo de pregunta. Si el JSON trae "tipo" se usa ese (acepta "normal", "vf" / "verdadero_falso" /
+// "verdadero o falso", "multiple" / "seleccion multiple", sin importar mayúsculas ni tildes); si no lo trae, se deduce por la forma:
+// "correctas" (lista) = múltiple, "correcta" true/false = verdadero o falso, cualquier otra cosa = normal.
+// Devuelve null si el tipo escrito no se reconoce (la pregunta se omite con un aviso por consola)
+function detectType(q) {
+  if (typeof q.tipo === "string" && q.tipo.trim() !== "") {
+    const t = q.tipo.toLowerCase().normalize("NFD").replace(/[̀-ͯ\s_-]/g, ""); // sin tildes, espacios ni guiones
+    if (t === "vf" || t.startsWith("verdadero")) return "vf";
+    if (t.startsWith("multi") || t.startsWith("seleccionmultiple")) return "multiple";
+    if (t === "normal") return "normal";
+    return null;
+  }
+  if (Array.isArray(q.correctas)) return "multiple";
+  if (typeof q.correcta === "boolean") return "vf";
+  return "normal";
+}
+
+// [v1.4.0] Valida una pregunta según su tipo y la convierte al formato interno:
+// { tipo, pregunta, opciones, correctas: [posiciones correctas], letras, tema, descripcion }.
+// Devuelve null si está mal armada. Todos los tipos quedan con la misma forma, así el resto de la app los trata igual
+function normalizeQuestion(q) {
+  if (!q || typeof q.pregunta !== "string" || q.pregunta.trim() === "") return null;
+  const tipo = detectType(q);
+  if (!tipo) return null;
+
+  let opciones, correctas, letras;
+  if (tipo === "vf") {
+    // Verdadero o falso: las opciones son fijas; "correcta" es true/false (también se acepta el texto "verdadero" / "falso")
+    let valor = q.correcta;
+    if (typeof valor === "string") valor = { verdadero: true, v: true, falso: false, f: false }[valor.trim().toLowerCase()];
+    if (typeof valor !== "boolean") return null;
+    opciones = VF_OPCIONES.slice();
+    correctas = [valor ? 0 : 1];
+    letras = ["V", "F"];
+  } else {
+    // Normal y múltiple: de 2 a 26 opciones
+    if (!Array.isArray(q.opciones) || q.opciones.length < 2 || q.opciones.length > 26) return null;
+    opciones = q.opciones.map(String);
+    letras = opciones.map((_, i) => String.fromCharCode(65 + i)); // A, B, C, D...
+    const validIndex = (n) => Number.isInteger(n) && n >= 0 && n < opciones.length;
+    if (tipo === "normal") {
+      if (!validIndex(q.correcta)) return null;
+      correctas = [q.correcta];
+    } else {
+      // Múltiple: "correctas" es una lista de posiciones, con al menos 1 y sin repetidas
+      if (!Array.isArray(q.correctas) || q.correctas.length < 1 || !q.correctas.every(validIndex)) return null;
+      correctas = [...new Set(q.correctas)];
+    }
+  }
+
+  return {
+    tipo,
+    pregunta: q.pregunta,
+    opciones,
+    correctas,
+    letras,
+    // [v1.3.0] Tema opcional de la pregunta: se muestra en gris arriba de la pregunta mientras se resuelve
+    tema: typeof q.tema === "string" ? q.tema.trim() : "",
+    // Descripción opcional: se muestra solo en los resultados, bajo una respuesta incorrecta
+    descripcion: typeof q.descripcion === "string" ? q.descripcion.trim() : ""
+  };
+}
+
+// Filtra preguntas mal armadas y avisa por consola cuál falló
 function sanitizeQuestions(raw, origen) {
   const valid = [];
   raw.forEach((q, i) => {
-    const ok =
-      q &&
-      typeof q.pregunta === "string" && q.pregunta.trim() !== "" &&
-      Array.isArray(q.opciones) && q.opciones.length >= 2 && q.opciones.length <= 26 &&
-      Number.isInteger(q.correcta) && q.correcta >= 0 && q.correcta < q.opciones.length;
-    if (ok) {
-      valid.push({
-        pregunta: q.pregunta,
-        opciones: q.opciones.map(String),
-        correcta: q.correcta,
-        // [v1.3.0] Tema opcional de la pregunta: se muestra en gris arriba de la pregunta mientras se resuelve
-        tema: typeof q.tema === "string" ? q.tema.trim() : "",
-        // Descripción opcional: se muestra solo en los resultados, bajo una respuesta incorrecta
-        descripcion: typeof q.descripcion === "string" ? q.descripcion.trim() : ""
-      });
+    const norm = normalizeQuestion(q); // [v1.4.0] valida según el tipo (normal, verdadero/falso o múltiple)
+    if (norm) {
+      valid.push(norm);
     } else {
       console.warn(`[Test] ${origen}: la pregunta #${i + 1} está mal armada y se omitió.`, q);
     }
@@ -283,7 +383,7 @@ function renderMenu() {
 
     const iconBox = document.createElement("span");
     iconBox.className = "test-card__icon";
-    iconBox.appendChild(icon("connected_tv"));
+    iconBox.appendChild(icon("device_hub"));
 
     const info = document.createElement("span");
     info.className = "test-card__info";
@@ -373,25 +473,42 @@ function renderQuestion() {
   els.qTopic.textContent = q.tema;    // [v1.3.0] tema opcional: si está vacío, el CSS oculta el párrafo
   maxReached = Math.max(maxReached, current); // [v1.3.0] recuerda la pregunta más lejana alcanzada (límite de "Anterior")
 
+  // [v1.4.0] Según el tipo: normal y verdadero/falso eligen UNA opción (radio); selección múltiple permite marcar varias (casillas)
+  const multi = q.tipo === "multiple";
+  const picked = answers[current] || []; // posiciones ya elegidas (al volver a una pregunta se conservan)
+  els.qHint.textContent = multi ? "Seleccioná todas las correctas" : ""; // aviso fijo solo en múltiple (vacío = oculto por CSS)
+  els.options.setAttribute("role", multi ? "group" : "radiogroup");
+
   els.options.textContent = "";
   q.opciones.forEach((texto, i) => {
     const btn = document.createElement("button");
     btn.type = "button";
-    btn.className = "option";
-    btn.setAttribute("role", "radio");
-    btn.setAttribute("aria-checked", String(answers[current] === i));
+    // [v1.5.1] En verdadero/falso cada opción lleva la clase de su valor ("option--vf-v" = Verdadero,
+    // "option--vf-f" = Falso): el CSS ilumina la elegida en verde o rojo según ese valor
+    const vfSide = q.tipo === "vf" ? (i === 0 ? " option--vf-v" : " option--vf-f") : "";
+    btn.className = multi ? "option option--multi" : "option" + vfSide;
+    btn.setAttribute("role", multi ? "checkbox" : "radio");
+    btn.setAttribute("aria-checked", String(picked.includes(i)));
     btn.style.animationDelay = `${i * 70}ms`;
-    if (answers[current] === i) btn.classList.add("option--selected");
+    if (picked.includes(i)) btn.classList.add("option--selected");
 
     const letter = document.createElement("span");
     letter.className = "option__letter";
-    letter.textContent = String.fromCharCode(65 + i); // A, B, C, D...
+    letter.textContent = q.letras[i]; // A, B, C, D... (en verdadero/falso: V y F)
 
     const label = document.createElement("span");
     label.className = "option__text";
     label.textContent = texto;
 
     btn.append(letter, label);
+
+    // [v1.4.0] En múltiple se agrega una casilla a la derecha que se tilda al marcar la opción
+    if (multi) {
+      const mark = icon(picked.includes(i) ? "check_box" : "check_box_outline_blank");
+      mark.classList.add("option__mark");
+      btn.appendChild(mark);
+    }
+
     btn.addEventListener("click", () => selectOption(i));
     els.options.appendChild(btn);
   });
@@ -407,13 +524,26 @@ function renderQuestion() {
   updateNext();
 }
 
-// Guarda la opción elegida y la resalta (se puede cambiar antes de avanzar)
+// Guarda la opción elegida y la resalta (se puede cambiar antes de avanzar).
+// [v1.4.0] En normal y verdadero/falso reemplaza la elección; en selección múltiple marca o desmarca la opción tocada
+// (si no queda ninguna marcada, la pregunta vuelve a estar sin responder)
 function selectOption(i) {
-  answers[current] = i;
+  const q = questions[current];
+  if (q.tipo === "multiple") {
+    const sel = new Set(answers[current] || []);
+    if (sel.has(i)) sel.delete(i); else sel.add(i);
+    answers[current] = sel.size > 0 ? [...sel].sort((a, b) => a - b) : null;
+  } else {
+    answers[current] = [i];
+  }
+
+  const picked = answers[current] || [];
   [...els.options.children].forEach((btn, idx) => {
-    const selected = idx === i;
+    const selected = picked.includes(idx);
     btn.classList.toggle("option--selected", selected);
     btn.setAttribute("aria-checked", String(selected));
+    const mark = btn.querySelector(".option__mark"); // casilla de la selección múltiple
+    if (mark) mark.textContent = selected ? "check_box" : "check_box_outline_blank";
   });
   updateNext();
 }
@@ -438,9 +568,18 @@ function goNext() {
 }
 
 // Vuelve a la pregunta anterior (conserva la respuesta ya elegida).
-// [v1.3.0] Solo hasta MAX_BACK (2) preguntas por detrás de la más lejana alcanzada; también rige para la flecha izquierda del teclado
-function goPrev() {
+// [v1.3.0] Solo hasta MAX_BACK (2) preguntas por detrás de la más lejana alcanzada; también rige para la flecha izquierda del teclado.
+// [v1.5.0] Antes de volver pide confirmación en una ventana flotante (la respuesta elegida no se pierde)
+async function goPrev() {
   if (current <= minAllowedIndex()) return;
+  const ok = await askConfirm({
+    icon: "undo",
+    title: "¿Volver a la pregunta anterior?",
+    text: `Vas a volver a la pregunta ${pad(current)} de ${pad(questions.length)}. Tu respuesta actual se conserva y podés cambiarla antes de avanzar.`,
+    okLabel: "Volver",
+    cancelLabel: "Quedarme acá"
+  });
+  if (!ok) return;
   current--;
   renderQuestion();
 }
@@ -452,20 +591,33 @@ function goPrev() {
 // Calcula las notas y abre el float de resultados.
 // [v1.3.0] El test se puede terminar en cualquier momento ("Terminar test"): las preguntas sin contestar suman 0
 // en el promedio general y no cuentan en el promedio de contestadas
-function finishTest() {
+// [v1.5.0] Si quedan preguntas sin contestar, antes de terminar pide confirmación en una ventana flotante
+async function finishTest() {
   if (!quizActive) return; // evita terminar dos veces (por ejemplo, con un doble toque)
+  const unanswered = questions.length - answers.filter((a) => a !== null).length;
+  if (unanswered > 0) {
+    const ok = await askConfirm({
+      icon: "warning",
+      title: "¿Terminar el test antes de tiempo?",
+      text: `Te quedan ${unanswered} ${unanswered === 1 ? "pregunta sin contestar" : "preguntas sin contestar"}. Si terminás ahora, contarán como incorrectas en el promedio general y el resultado quedará como "Incompleto".`,
+      okLabel: "Terminar igual",
+      cancelLabel: "Seguir con el test"
+    });
+    if (!ok) return;
+  }
   quizActive = false;
   setTag("FINALIZADO");
 
   const total = questions.length;
-  const correct = questions.reduce((acc, q, i) => acc + (answers[i] === q.correcta ? 1 : 0), 0);
+  // [v1.4.0] Puntos totales: cada pregunta aporta de 0 a 1 (la selección múltiple puede aportar un valor parcial)
+  const points = questions.reduce((acc, q, i) => acc + questionCredit(q, answers[i]), 0);
   const answered = answers.filter((a) => a !== null).length;   // preguntas contestadas
   const incomplete = answered < total;                         // true si quedó alguna sin contestar
-  const scoreAll = calcScore(correct, total);                  // promedio general: las sin contestar suman 0
-  const scoreAnswered = answered > 0 ? calcScore(correct, answered) : null; // solo contestadas (null si no contestó ninguna)
+  const scoreAll = calcScore(points, total);                   // promedio general: las sin contestar suman 0
+  const scoreAnswered = answered > 0 ? calcScore(points, answered) : null; // solo contestadas (null si no contestó ninguna)
 
   buildReview();
-  showFloat({ scoreAll, scoreAnswered, correct, answered, total, incomplete });
+  showFloat({ scoreAll, scoreAnswered, points, answered, total, incomplete });
 }
 
 // Devuelve un mensaje según la nota
@@ -517,15 +669,26 @@ function descriptionBlock(texto) {
   return box;
 }
 
-// Arma la lista con todas las preguntas y las respuestas elegidas (verde = bien, rojo = mal, gris = sin responder)
+// [v1.4.0] Línea de puntaje parcial ("Puntaje parcial: 0.33 / 1") para las selecciones múltiples respondidas a medias
+function partialNote(credit) {
+  const p = document.createElement("p");
+  p.className = "review__partial";
+  p.textContent = `Puntaje parcial: ${formatPoints(credit)} / 1`;
+  return p;
+}
+
+// Arma la lista con todas las preguntas y las respuestas elegidas
+// (verde = bien, rojo = mal, gris = sin responder, [v1.4.0] amarillo = parcial en selección múltiple)
 function buildReview() {
   els.reviewList.textContent = "";
 
   questions.forEach((q, i) => {
-    const chosen = answers[i];
-    const ok = chosen === q.correcta;
+    const chosen = answers[i];                          // [v1.4.0] lista de posiciones elegidas (o null)
+    const credit = questionCredit(q, chosen);           // [v1.4.0] valor de la respuesta: de 0 a 1
+    const full = credit === 1;                          // acierto completo
     const skipped = chosen === null;                    // pregunta sin responder
-    const tone = ok ? "ok" : skipped ? "skip" : "bad";  // tono: verde / gris / rojo
+    const partial = !skipped && credit > 0 && credit < 1; // [v1.4.0] acierto parcial (solo selección múltiple)
+    const tone = full ? "ok" : skipped ? "skip" : partial ? "partial" : "bad"; // tono: verde / gris / amarillo / rojo
 
     const item = document.createElement("li");
     item.className = `review__item review__item--${tone}`;
@@ -543,22 +706,40 @@ function buildReview() {
     qText.className = "review__q";
     qText.textContent = q.pregunta;
 
-    const status = icon(ok ? "check_circle" : skipped ? "help" : "cancel");
+    const status = icon(full ? "check_circle" : skipped ? "help" : partial ? "rule" : "cancel"); // [v1.4.0] "rule" = a medias
     status.classList.add("review__status");
 
     head.append(num, qText, status);
     item.appendChild(head);
 
-    // Respuesta elegida (verde si acertó, roja si falló, gris si quedó sin responder)
-    const chosenText = skipped ? "Sin responder" : q.opciones[chosen];
-    item.appendChild(answerLine("Tu respuesta", chosenText, tone));
+    if (q.tipo === "multiple") {
+      // [v1.4.0] Selección múltiple: una línea por cada opción marcada (verde si era correcta, roja si no)
+      if (skipped) {
+        item.appendChild(answerLine("Tu respuesta", "Sin responder", "skip"));
+      } else {
+        chosen.forEach((idx) => {
+          item.appendChild(answerLine("Marcaste", q.opciones[idx], q.correctas.includes(idx) ? "ok" : "bad"));
+        });
+      }
+      // ...y las correctas que no se marcaron, en verde ("Faltó"; si no respondió nada, "Correcta")
+      if (!full) {
+        q.correctas
+          .filter((idx) => !(chosen || []).includes(idx))
+          .forEach((idx) => item.appendChild(answerLine(skipped ? "Correcta" : "Faltó", q.opciones[idx], "ok")));
+      }
+      // Si quedó a medias, se aclara cuánto vale la pregunta
+      if (partial) item.appendChild(partialNote(credit));
+    } else {
+      // Normal y verdadero/falso: respuesta elegida (verde si acertó, roja si falló, gris si quedó sin responder)
+      const chosenText = skipped ? "Sin responder" : q.opciones[chosen[0]];
+      item.appendChild(answerLine("Tu respuesta", chosenText, skipped ? "skip" : full ? "ok" : "bad"));
 
-    // Si no acertó, también se muestra la correcta en verde
-    if (!ok) {
-      item.appendChild(answerLine("Correcta", q.opciones[q.correcta], "ok"));
-      // [v1.2.0] y, si la pregunta tiene descripción, la explicación debajo (solo cuando no se acertó)
-      if (q.descripcion) item.appendChild(descriptionBlock(q.descripcion));
+      // Si no acertó, también se muestra la correcta en verde
+      if (!full) item.appendChild(answerLine("Correcta", q.opciones[q.correctas[0]], "ok"));
     }
+
+    // [v1.2.0] Si la pregunta tiene descripción, la explicación va debajo (solo cuando no se acertó del todo)
+    if (!full && q.descripcion) item.appendChild(descriptionBlock(q.descripcion));
 
     els.reviewList.appendChild(item);
   });
@@ -567,7 +748,7 @@ function buildReview() {
 // Abre el float y anima el puntaje (conteo + aro)
 // [v1.3.0] Recibe las dos notas: el aro, el conteo, el mensaje y el color usan la general (scoreAll).
 // Si el test quedó incompleto se muestran además "Incompleto" (naranja) y los 2 promedios
-function showFloat({ scoreAll, scoreAnswered, correct, answered, total, incomplete }) {
+function showFloat({ scoreAll, scoreAnswered, points, answered, total, incomplete }) {
   const score = scoreAll; // el resto de la función (aro y conteo) trabaja con la nota general
   els.scoreMsg.textContent = scoreMessage(score);
   els.scoreBox.dataset.tone = scoreTone(score); // el CSS pinta aro y mensaje según este tono
@@ -575,15 +756,25 @@ function showFloat({ scoreAll, scoreAnswered, correct, answered, total, incomple
   els.scoreAvgs.hidden = !incomplete;
   els.avgAll.textContent = formatScore(scoreAll);
   els.avgAnswered.textContent = scoreAnswered === null ? "—" : formatScore(scoreAnswered); // "—" si no contestó ninguna
+  // [v1.4.0] "points" puede tener decimales por el puntaje parcial (ej.: "3.33 de 5 correctas")
   els.scoreMeta.textContent = incomplete
-    ? `${correct} de ${total} correctas · ${answered} contestadas`
-    : `${correct} de ${total} correctas`;
+    ? `${formatPoints(points)} de ${total} correctas · ${answered} contestadas`
+    : `${formatPoints(points)} de ${total} correctas`;
   els.scoreValue.textContent = "0";
   els.scoreBar.style.strokeDashoffset = RING_LENGTH; // aro vacío antes de animar
 
+  // [v1.5.0] Barra compacta que aparece al scrollear: mismos datos, en versión mínima
+  els.miniValue.textContent = formatScore(scoreAll);
+  els.miniMsg.textContent = scoreMessage(score);
+  els.miniIncomplete.hidden = !incomplete;
+  els.scoreMini.dataset.tone = scoreTone(score); // el CSS colorea el mensaje según el tono
+
+  // [v1.5.0] El float abre siempre en modo completo (la barra mini aparece solo al scrollear)
+  els.floatPanel.classList.remove("float__panel--mini");
+  els.floatBody.scrollTop = 0;
+
   els.float.hidden = false;
   document.body.classList.add("no-scroll");
-  els.float.querySelector(".float__body").scrollTop = 0;
   els.btnRetry.focus({ preventScroll: true });
 
   // Aro: se llena con la transición CSS (esperamos 2 frames para que arranque desde vacío)
@@ -609,6 +800,36 @@ function hideFloat() {
   document.body.classList.remove("no-scroll");
 }
 
+/* =========================================================
+   7b) VENTANA FLOTANTE DE CONFIRMACIÓN  [v1.5.0]
+   ========================================================= */
+
+// Abre la ventana de confirmación (icono, título y texto según el caso) y devuelve una promesa
+// que se resuelve en true si el usuario confirma o en false si cancela
+function askConfirm({ icon: iconName, title, text, okLabel = "Confirmar", cancelLabel = "Cancelar" }) {
+  return new Promise((resolve) => {
+    pendingConfirm = resolve;
+    els.confirmIcon.textContent = iconName;
+    els.confirmTitle.textContent = title;
+    els.confirmText.textContent = text;
+    els.confirmOk.textContent = okLabel;
+    els.confirmCancel.textContent = cancelLabel;
+    els.confirmBox.hidden = false;
+    document.body.classList.add("no-scroll");
+    els.confirmCancel.focus({ preventScroll: true }); // el foco arranca en "Cancelar": la opción segura
+  });
+}
+
+// Cierra la ventana de confirmación y responde la promesa pendiente (true = confirmó, false = canceló)
+function closeConfirm(result) {
+  if (!pendingConfirm) return;
+  els.confirmBox.hidden = true;
+  document.body.classList.remove("no-scroll");
+  const resolve = pendingConfirm;
+  pendingConfirm = null;
+  resolve(result);
+}
+
 // "Reintentar": cierra el float y empieza de nuevo el mismo test
 function retry() {
   hideFloat();
@@ -627,8 +848,35 @@ els.btnFinish.addEventListener("click", finishTest); // [v1.3.0] "Terminar test"
 els.btnRetry.addEventListener("click", retry);
 els.btnHome.addEventListener("click", showMenu);   // [v1.2.0] "Menú" del float: vuelve a elegir test
 
-// Atajos de teclado durante el test: A-Z o 1-9 eligen opción, flechas navegan
+// [v1.5.0] Ventana de confirmación: "Cancelar" (y un toque en el fondo) cierra sin hacer nada
+els.confirmOk.addEventListener("click", () => closeConfirm(true));
+els.confirmCancel.addEventListener("click", () => closeConfirm(false));
+els.confirmBox.addEventListener("click", (e) => {
+  if (e.target === els.confirmBox) closeConfirm(false);
+});
+
+// [v1.5.0] Al scrollear la lista de respuestas, el encabezado del puntaje se minimiza en una barra arriba de todo;
+// al volver al tope, se expande de nuevo
+els.floatBody.addEventListener("scroll", () => {
+  els.floatPanel.classList.toggle("float__panel--mini", els.floatBody.scrollTop > 60);
+});
+
+// [v1.5.0] La página se comporta como un formulario: con un test en curso, el navegador advierte
+// antes de cerrar la pestaña o recargar que el progreso puede perderse
+window.addEventListener("beforeunload", (e) => {
+  if (!quizActive) return;
+  e.preventDefault();        // estándar
+  e.returnValue = "";         // necesario para Chrome y Edge
+});
+
+// Atajos de teclado durante el test: A-Z o 1-9 eligen opción (en verdadero/falso también V y F), flechas navegan.
+// [v1.4.0] En selección múltiple la misma tecla marca o desmarca la opción
+// [v1.5.0] Si la ventana de confirmación está abierta, solo Escape la cierra (no se contesta el test de fondo)
 document.addEventListener("keydown", (e) => {
+  if (pendingConfirm) {
+    if (e.key === "Escape") closeConfirm(false);
+    return;
+  }
   if (!quizActive || e.ctrlKey || e.metaKey || e.altKey) return;
 
   const key = e.key.toLowerCase();
@@ -637,9 +885,9 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "ArrowLeft") { goPrev(); return; }
   if (e.key === "ArrowRight") { goNext(); return; }
 
-  let idx = -1;
-  if (/^[a-z]$/.test(key)) idx = key.charCodeAt(0) - 97; // a=0, b=1...
-  else if (/^[1-9]$/.test(key)) idx = Number(key) - 1;   // 1=0, 2=1...
+  // [v1.4.0] La letra se busca entre las letras de la pregunta (A, B, C... o V y F); si no es letra, se prueba como número
+  let idx = q.letras.findIndex((l) => l.toLowerCase() === key); // a=0, b=1... (v=0, f=1 en verdadero/falso)
+  if (idx === -1 && /^[1-9]$/.test(key)) idx = Number(key) - 1;  // 1=0, 2=1...
 
   if (idx >= 0 && idx < q.opciones.length) selectOption(idx);
 });

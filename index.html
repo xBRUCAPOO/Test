@@ -34,7 +34,7 @@
     <!-- Barra superior: marca y estado actual (MENÚ / LISTO / EN CURSO / FINALIZADO) -->
     <header class="topbar">
       <div class="brand">
-        <span class="brand__mark"><span class="material-symbols-outlined">school</span></span>
+        <span class="brand__mark"><span class="material-symbols-outlined">quiz</span></span>
         <span class="brand__name">Test</span>
       </div>
       <div class="topbar__tag"><span class="topbar__dot"></span><span id="topTag">MENÚ</span></div>
@@ -101,6 +101,9 @@
              Si la pregunta no tiene tema queda vacío y el CSS lo oculta. Lo completa script.js -->
         <p class="qtopic" id="qTopic"></p>
         <h2 class="qtext" id="qText"></h2>
+        <!-- [v1.4.0] Aviso de selección múltiple ("Seleccioná todas las correctas"). Lo completa script.js solo en ese tipo;
+             en las demás preguntas queda vacío y el CSS lo oculta -->
+        <p class="qhint" id="qHint"></p>
         <div class="options" id="options" role="radiogroup" aria-label="Opciones de respuesta"></div>
       </article>
 
@@ -127,11 +130,34 @@
 
   </main>
 
-  <!-- FLOAT DE RESULTADOS: puntaje 0/10 arriba y debajo todas las respuestas elegidas (verde = bien, rojo = mal, gris = sin responder).
+  <!-- [v1.5.0] VENTANA FLOTANTE DE CONFIRMACIÓN: aparece al querer volver a la pregunta anterior
+       o al terminar el test antes de tiempo. El título, el texto y los botones los completa script.js -->
+  <div class="confirm" id="confirmBox" hidden role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+    <div class="confirm__panel">
+      <span class="material-symbols-outlined" id="confirmIcon">help</span>
+      <h2 class="confirm__title" id="confirmTitle"></h2>
+      <p class="confirm__text" id="confirmText"></p>
+      <div class="confirm__actions">
+        <button class="btn btn--ghost" id="confirmCancel" type="button">Cancelar</button>
+        <button class="btn btn--primary" id="confirmOk" type="button">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOAT DE RESULTADOS: ahora ocupa toda la pantalla. Puntaje 0/10 arriba y debajo todas las respuestas
+       elegidas (verde = bien, rojo = mal, gris = sin responder).
        [v1.3.0] Si el test se terminó antes, debajo del puntaje aparece "Incompleto" (naranja) y los 2 promedios.
-       En celular se muestra como panel que sube desde abajo -->
+       [v1.5.0] Al scrollear hacia abajo, el encabezado se minimiza y queda una barra compacta de puntaje
+       arriba de todo para que no estorbe la revisión de las respuestas -->
   <div class="float" id="resultFloat" hidden role="dialog" aria-modal="true" aria-labelledby="resultTitle">
-    <div class="float__panel">
+    <div class="float__panel" id="floatPanel">
+
+      <!-- [v1.5.0] Barra compacta de puntaje: colapsada por defecto; script.js la expande al scrollear -->
+      <div class="float__minibar" id="scoreMini" aria-hidden="true">
+        <span class="minibar__value"><strong id="miniValue">0</strong><span class="minibar__max">/10</span></span>
+        <span class="minibar__msg" id="miniMsg"></span>
+        <span class="minibar__tag" id="miniIncomplete" hidden>Incompleto</span>
+      </div>
 
       <!-- id="scoreBox": script.js le pone data-tone (success / warning / error) para colorear aro y mensaje -->
       <div class="float__head" id="scoreBox" data-tone="success">
@@ -162,7 +188,7 @@
         <p class="score__meta" id="scoreMeta"></p>
       </div>
 
-      <div class="float__body">
+      <div class="float__body" id="floatBody">
         <h2 class="review__title">Tus respuestas</h2>
         <ol class="review" id="reviewList"></ol>
       </div>
@@ -186,8 +212,9 @@
   <footer class="footer">
     <span>Test</span>
     <span class="footer__sep">·</span>
-    <!-- [v1.3.0] versión y fecha actualizadas por los cambios de esta entrega -->
-    <span id="footerVersion">v1.3.0</span>
+    <!-- [v1.5.1] versión y fecha actualizadas por los cambios de esta entrega (elegir "Verdadero" brilla en verde y "Falso" en rojo;
+         incluye lo de v1.5.0: confirmaciones, aviso al cerrar y resultados a pantalla completa) -->
+    <span id="footerVersion">v1.5.1</span>
     <span class="footer__sep">·</span>
     <span id="footerDate">08/10/2026</span>
   </footer>

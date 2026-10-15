@@ -1,5 +1,5 @@
 /* =========================================================
-   TEST — style.css  (v1.3.0)
+   TEST — style.css  (v1.5.1)
    Estética: profesional y sobria. Base neutra oscura (grafito),
    celeste solo en detalles (foco, progreso, selección, marca).
    Colores de estado: success / warning / error / info.
@@ -604,10 +604,25 @@ body.no-scroll {
   overflow-wrap: anywhere;
 }
 
+/* [v1.4.0] Aviso de selección múltiple: pequeño y tenue, entre la pregunta y las opciones.
+   Si está vacío (otros tipos de pregunta) no se muestra */
+.qhint {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: var(--color-text-dim);
+}
+.qhint:empty {
+  display: none;
+}
+
 .options {
   display: grid;
   gap: 10px;
   margin-top: 24px;
+}
+/* [v1.4.0] Con aviso visible, las opciones quedan más cerca de la pregunta */
+.qhint:not(:empty) + .options {
+  margin-top: 14px;
 }
 
 /* Opción de respuesta */
@@ -628,7 +643,7 @@ body.no-scroll {
   border-radius: 12px;
   cursor: pointer;
   animation: optIn 0.5s var(--ease) both;
-  transition: background 0.2s, border-color 0.2s, transform 0.2s var(--ease);
+  transition: background 0.2s, border-color 0.2s, transform 0.2s var(--ease), box-shadow 0.25s;
 }
 
 .option:hover {
@@ -662,6 +677,20 @@ body.no-scroll {
   white-space: pre-wrap;
 }
 
+/* [v1.4.0] Opción de selección múltiple: una tercera columna a la derecha con la casilla (tildada o vacía).
+   Sirve para que se note que se pueden marcar varias */
+.option--multi {
+  grid-template-columns: 34px 1fr auto;
+}
+.option__mark {
+  font-size: 24px;
+  color: var(--color-text-muted);
+  transition: color 0.2s;
+}
+.option--selected .option__mark {
+  color: var(--color-accent);
+}
+
 /* [v1.1.0] Opción elegida: borde y letra en celeste, fondo apenas teñido */
 .option--selected,
 .option--selected:hover {
@@ -672,6 +701,32 @@ body.no-scroll {
 .option--selected .option__letter {
   background: var(--color-accent);
   border-color: var(--color-accent);
+  color: var(--color-on-action);
+}
+
+/* [v1.5.1] Verdadero o falso: la opción elegida se ilumina según el VALOR elegido (no según si es correcta):
+   "Verdadero" brilla en verde (success) y "Falso" en rojo (error), con un resplandor suave.
+   script.js agrega la clase option--vf-v / option--vf-f a cada opción de este tipo de pregunta */
+.option--vf-v.option--selected,
+.option--vf-v.option--selected:hover {
+  border-color: var(--color-success);
+  background: var(--color-success-a10);
+  box-shadow: 0 0 22px var(--color-success-a35);
+}
+.option--vf-v.option--selected .option__letter {
+  background: var(--color-success);
+  border-color: var(--color-success);
+  color: var(--color-on-action);
+}
+.option--vf-f.option--selected,
+.option--vf-f.option--selected:hover {
+  border-color: var(--color-error);
+  background: var(--color-error-a10);
+  box-shadow: 0 0 22px var(--color-error-a35);
+}
+.option--vf-f.option--selected .option__letter {
+  background: var(--color-error);
+  border-color: var(--color-error);
   color: var(--color-on-action);
 }
 
@@ -712,9 +767,9 @@ body.no-scroll {
   inset: 0;
   z-index: 50;
   display: flex;
-  align-items: center;
+  align-items: stretch;      /* [v1.5.0] el panel ocupa toda la pantalla */
   justify-content: center;
-  padding: 16px;
+  padding: 0;                /* [v1.5.0] resultados a pantalla completa, sin margen */
   background: var(--color-backdrop);
   backdrop-filter: blur(6px);
   animation: fadeIn 0.3s ease both;
@@ -724,17 +779,79 @@ body.no-scroll {
 }
 
 .float__panel {
-  width: min(620px, 100%);
-  max-height: 92dvh;
+  width: 100%;               /* [v1.5.0] antes min(620px, 100%): ahora todo el ancho de la pantalla */
+  height: 100dvh;
+  max-height: 100dvh;
   display: flex;
   flex-direction: column;
   background: var(--color-surface);
-  border: 1px solid var(--color-border-strong);
-  border-radius: 20px;
+  border: none;              /* [v1.5.0] a pantalla completa no hacen falta borde ni esquinas */
+  border-radius: 0;
   overflow: hidden;
   box-shadow: 0 30px 80px var(--color-shadow);
   animation: popIn 0.5s var(--ease-spring) both;
 }
+
+/* [v1.5.0] Barra compacta de puntaje: colapsada por defecto (max-height 0). Cuando el panel tiene la clase
+   float__panel--mini (la agrega script.js al scrollear la lista de respuestas), se expande arriba de todo
+   con la nota, el mensaje y el cartel de "Incompleto" en versión mínima */
+.float__minibar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-height: 0;
+  padding: 0 20px;
+  overflow: hidden;
+  opacity: 0;
+  background: var(--color-surface-2);
+  border-bottom: 1px solid transparent;
+  transition: max-height 0.45s var(--ease), padding 0.45s var(--ease), opacity 0.3s, border-color 0.3s;
+}
+.float__panel--mini .float__minibar {
+  max-height: 64px;
+  padding: 12px 20px;
+  opacity: 1;
+  border-bottom-color: var(--color-border);
+}
+.minibar__value {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 3px;
+  font-family: var(--font-title);
+}
+.minibar__value strong {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.minibar__max {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+.minibar__msg {
+  font-family: var(--font-title);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.minibar__tag {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-warning);
+}
+.minibar__tag[hidden] {
+  display: none;
+}
+/* Tono de la barra compacta (lo define script.js con data-tone, igual que el aro) */
+.float__minibar[data-tone="success"] .minibar__msg { color: var(--color-success); }
+.float__minibar[data-tone="warning"] .minibar__msg { color: var(--color-warning); }
+.float__minibar[data-tone="error"] .minibar__msg { color: var(--color-error); }
 
 /* Cabecera del float: puntaje */
 .float__head {
@@ -742,6 +859,20 @@ body.no-scroll {
   padding: 26px 20px 20px;
   text-align: center;
   border-bottom: 1px solid var(--color-border);
+  /* [v1.5.0] permite colapsar la cabecera a altura 0 cuando la barra compacta está activa */
+  max-height: 560px;
+  overflow: hidden;
+  transition: max-height 0.45s var(--ease), padding 0.45s var(--ease), opacity 0.3s, border-color 0.3s;
+}
+/* [v1.5.0] Modo minimizado: la cabecera grande se esconde (queda solo la barra compacta) para que
+   las respuestas incorrectas se puedan leer sin el puntaje estorbando en el medio */
+.float__panel--mini .float__head {
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-bottom-color: transparent;
+  pointer-events: none;
 }
 .float__head .eyebrow {
   justify-content: center;
@@ -932,6 +1063,22 @@ body.no-scroll {
   background: var(--color-gray-a10);
 }
 
+/* [v1.4.0] Selección múltiple respondida a medias (puntaje parcial): amarillo (color de estado warning) */
+.review__item--partial {
+  border-color: var(--color-warning-a35);
+  border-left-color: var(--color-warning);
+  background: var(--color-warning-a10);
+}
+.review__item--partial .review__status { color: var(--color-warning); }
+.review__partial {
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-warning);
+}
+
 .review__head {
   display: flex;
   align-items: flex-start;
@@ -1024,6 +1171,66 @@ body.no-scroll {
   border-top: 1px solid var(--color-border);
 }
 .float__foot .btn {
+  flex: 1;
+}
+
+/* ---------- [v1.5.0] Ventana flotante de confirmación ---------- */
+.confirm {
+  position: fixed;
+  inset: 0;
+  z-index: 60;                 /* por encima del float de resultados */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: var(--color-backdrop);
+  backdrop-filter: blur(6px);
+  animation: fadeIn 0.25s ease both;
+}
+.confirm[hidden] {
+  display: none;
+}
+
+.confirm__panel {
+  width: min(440px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 26px 24px 22px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 18px;
+  box-shadow: 0 30px 80px var(--color-shadow);
+  animation: popIn 0.45s var(--ease-spring) both;
+}
+
+/* Icono de la ventana: amarillo (warning) por defecto, tono de pregunta/aviso */
+.confirm__panel .material-symbols-outlined {
+  font-size: 34px;
+  margin-bottom: 12px;
+  color: var(--color-warning);
+}
+
+.confirm__title {
+  font-family: var(--font-title);
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+.confirm__text {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--color-text-dim);
+  margin-bottom: 20px;
+}
+.confirm__actions {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+.confirm__actions .btn {
   flex: 1;
 }
 
