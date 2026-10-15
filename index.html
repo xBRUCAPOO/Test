@@ -6,6 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <!-- [v1.2.0] Color de la barra del navegador en celular (coincide con --color-bg del CSS) -->
   <meta name="theme-color" content="#0a0b0e">
+  <!-- [v1.6.0] PWA: manifiesto con nombre, íconos y colores. Permite instalar la app en el celular o el escritorio -->
+  <link rel="manifest" href="manifest.json">
+  <!-- [v1.6.0] Ícono de la pestaña (el mismo de la app instalada) -->
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <!-- [v1.6.0] iOS: al agregar la app a la pantalla de inicio, abre a pantalla completa (como una app nativa) -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Test">
   <title>Test</title>
 
   <!-- Conexión previa a Google Fonts: acelera la carga de tipografías e iconos -->
@@ -221,9 +230,9 @@
   <footer class="footer">
     <span>Test</span>
     <span class="footer__sep">·</span>
-    <!-- [v1.5.2] versión y fecha actualizadas por los cambios de esta entrega (flecha "Volver" a la vista previa con confirmación;
-         "Anterior" ya no pide confirmación) -->
-    <span id="footerVersion">v1.5.2</span>
+    <!-- [v1.6.0] versión y fecha actualizadas por los cambios de esta entrega (PWA: instalable en el celular,
+         funciona sin conexión con sw.js; se agregaron manifest.json, sw.js e íconos SVG) -->
+    <span id="footerVersion">v1.6.0</span>
     <span class="footer__sep">·</span>
     <span id="footerDate">15/10/2026</span>
   </footer>

@@ -1,5 +1,5 @@
 /* =========================================================
-   TEST — script.js  (v1.5.2)
+   TEST — script.js  (v1.6.0)
    Lógica de la app de tests multiple choice.
 
    CÓMO AGREGAR UN TEST (las preguntas ya NO se escriben acá):
@@ -48,6 +48,9 @@
    [v1.5.2] "Anterior" ya no pide confirmación (vuelve a la pregunta anterior sin avisos). Para salir del test
    está la flecha "Volver", arriba a la izquierda de la pantalla del test: vuelve a la vista previa y, como
    sales del test, pide confirmación antes (el progreso de la vuelta se pierde).
+   [v1.6.0] La app es una PWA: se puede instalar en el celular o el escritorio (manifest.json + íconos SVG) y
+   funciona sin conexión gracias al service worker (sw.js), que guarda la app y los tests ya cargados.
+   Al cambiar archivos, subir la versión de CACHE en sw.js para que los celulares actualicen.
    ========================================================= */
 
 /* =========================================================
@@ -916,3 +919,14 @@ document.addEventListener("keydown", (e) => {
 renderTitle(els.menuTitle, "Test");
 setTag("MENÚ");
 loadCatalog(); // [v1.2.0] lee tests/index.json y arma el menú
+
+// [v1.6.0] PWA: registra el service worker para poder instalar la app y que funcione sin conexión.
+// Solo se registra si la página se sirve por HTTPS (o localhost); abriendo el archivo directo no hay
+// service worker, pero la app sigue funcionando igual (solo que sin instalación y sin modo offline)
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").catch((err) => {
+      console.warn("[Test] No se pudo registrar el service worker:", err);
+    });
+  });
+}
