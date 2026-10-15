@@ -88,6 +88,15 @@
 
     <!-- PANTALLA 2: test. Progreso, pregunta actual, opciones y navegación -->
     <section class="screen" id="screenQuiz">
+      <!-- [v1.5.2] Flecha "Volver": regresa a la vista previa del test. Como sales del test,
+           pide confirmación antes (el progreso de la vuelta se pierde) -->
+      <div class="quiz__back">
+        <button class="btn btn--ghost btn--sm" id="btnBack" type="button">
+          <span class="material-symbols-outlined">arrow_back</span>
+          <span>Volver</span>
+        </button>
+      </div>
+
       <div class="progress">
         <div class="progress__head">
           <span class="eyebrow">Pregunta</span>
@@ -212,11 +221,11 @@
   <footer class="footer">
     <span>Test</span>
     <span class="footer__sep">·</span>
-    <!-- [v1.5.1] versión y fecha actualizadas por los cambios de esta entrega (elegir "Verdadero" brilla en verde y "Falso" en rojo;
-         incluye lo de v1.5.0: confirmaciones, aviso al cerrar y resultados a pantalla completa) -->
-    <span id="footerVersion">v1.5.1</span>
+    <!-- [v1.5.2] versión y fecha actualizadas por los cambios de esta entrega (flecha "Volver" a la vista previa con confirmación;
+         "Anterior" ya no pide confirmación) -->
+    <span id="footerVersion">v1.5.2</span>
     <span class="footer__sep">·</span>
-    <span id="footerDate">08/10/2026</span>
+    <span id="footerDate">15/10/2026</span>
   </footer>
 
   <!-- Lógica externa -->

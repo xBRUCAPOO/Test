@@ -1,5 +1,5 @@
 /* =========================================================
-   TEST — script.js  (v1.5.1)
+   TEST — script.js  (v1.5.2)
    Lógica de la app de tests multiple choice.
 
    CÓMO AGREGAR UN TEST (las preguntas ya NO se escriben acá):
@@ -40,11 +40,14 @@
    [v1.3.0] "Anterior" solo permite volver hasta 2 preguntas por detrás de la más lejana a la que se llegó.
    [v1.5.0] La página se comporta como un formulario: si hay un test en curso, el navegador advierte
    antes de cerrar o recargar que el progreso puede perderse.
-   [v1.5.0] "Anterior" y "Terminar test" piden confirmación en una ventana flotante antes de actuar.
+   [v1.5.0] "Terminar test" pide confirmación en una ventana flotante antes de actuar.
    [v1.5.0] Los resultados ocupan toda la pantalla; al scrollear las respuestas, el puntaje se minimiza
    en una barra compacta arriba de todo para no estorbar la revisión.
    [v1.5.1] En las preguntas de verdadero o falso, la opción elegida brilla según el valor:
    "Verdadero" en verde (success) y "Falso" en rojo (error), sin importar si la respuesta es correcta.
+   [v1.5.2] "Anterior" ya no pide confirmación (vuelve a la pregunta anterior sin avisos). Para salir del test
+   está la flecha "Volver", arriba a la izquierda de la pantalla del test: vuelve a la vista previa y, como
+   sales del test, pide confirmación antes (el progreso de la vuelta se pierde).
    ========================================================= */
 
 /* =========================================================
@@ -84,6 +87,7 @@ const els = {
   qText: $("qText"),
   qHint: $("qHint"),                     // [v1.4.0] aviso de selección múltiple ("Seleccioná todas las correctas")
   options: $("options"),
+  btnBack: $("btnBack"),                 // [v1.5.2] flecha "Volver": sale del test y vuelve a la vista previa
   btnPrev: $("btnPrev"),
   btnFinish: $("btnFinish"),             // [v1.3.0] "Terminar test": cierra el test en cualquier momento
   btnNext: $("btnNext"),
@@ -569,19 +573,31 @@ function goNext() {
 
 // Vuelve a la pregunta anterior (conserva la respuesta ya elegida).
 // [v1.3.0] Solo hasta MAX_BACK (2) preguntas por detrás de la más lejana alcanzada; también rige para la flecha izquierda del teclado.
-// [v1.5.0] Antes de volver pide confirmación en una ventana flotante (la respuesta elegida no se pierde)
-async function goPrev() {
+// [v1.5.2] Ya no pide confirmación: volver a la pregunta anterior no saca del test ni pierde respuestas
+function goPrev() {
   if (current <= minAllowedIndex()) return;
-  const ok = await askConfirm({
-    icon: "undo",
-    title: "¿Volver a la pregunta anterior?",
-    text: `Vas a volver a la pregunta ${pad(current)} de ${pad(questions.length)}. Tu respuesta actual se conserva y podés cambiarla antes de avanzar.`,
-    okLabel: "Volver",
-    cancelLabel: "Quedarme acá"
-  });
-  if (!ok) return;
   current--;
   renderQuestion();
+}
+
+// [v1.5.2] Flecha "Volver" (arriba a la izquierda): sale del test y regresa a la vista previa
+// (pantalla de inicio del test). Como salir borra el progreso de la vuelta, pide confirmación antes
+async function goBackToPreview() {
+  if (!quizActive) return;
+  const answered = answers.filter((a) => a !== null).length;
+  const ok = await askConfirm({
+    icon: "exit_to_app",
+    title: "¿Volver a la vista previa?",
+    text: answered === 0
+      ? "Vas a salir del test. Todavía no contestaste ninguna pregunta."
+      : `Vas a salir del test y se borran las ${answered} ${answered === 1 ? "respuesta que diste" : "respuestas que diste"}: para volver a hacerlo hay que empezar de nuevo.`,
+    okLabel: "Salir del test",
+    cancelLabel: "Quedarme"
+  });
+  if (!ok) return;
+  quizActive = false;
+  setTag("LISTO");
+  showScreen(els.screenStart);
 }
 
 /* =========================================================
@@ -842,6 +858,7 @@ function retry() {
 
 els.btnStart.addEventListener("click", startTest);
 els.btnChange.addEventListener("click", showMenu); // [v1.2.0] "Cambiar test"
+els.btnBack.addEventListener("click", goBackToPreview); // [v1.5.2] flecha "Volver": sale del test (con confirmación)
 els.btnPrev.addEventListener("click", goPrev);
 els.btnNext.addEventListener("click", goNext);
 els.btnFinish.addEventListener("click", finishTest); // [v1.3.0] "Terminar test": cierra el test cuando se quiera

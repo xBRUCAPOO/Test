@@ -1,5 +1,5 @@
 /* =========================================================
-   TEST — style.css  (v1.5.1)
+   TEST — style.css  (v1.5.2)
    Estética: profesional y sobria. Base neutra oscura (grafito),
    celeste solo en detalles (foco, progreso, selección, marca).
    Colores de estado: success / warning / error / info.
@@ -536,6 +536,13 @@ body.no-scroll {
 }
 
 /* ---------- Pantalla del test ---------- */
+/* [v1.5.2] Flecha "Volver": arriba a la izquierda de la pantalla del test. Sale del test
+   (vuelve a la vista previa), así que script.js pide confirmación antes de salir */
+.quiz__back {
+  display: flex;
+  justify-content: flex-start;
+}
+
 .progress__head {
   display: flex;
   justify-content: space-between;
