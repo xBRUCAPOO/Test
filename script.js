@@ -309,6 +309,8 @@ function parseTest(file, data) {
     file,
     nombre: typeof data.nombre === "string" && data.nombre.trim() ? data.nombre.trim() : file.replace(/\.json$/i, ""),
     tema: typeof data.tema === "string" ? data.tema.trim() : "",
+    // [v1.6.1] Icono del test (nombre de Material Symbols, definido en el JSON). Si falta o es inválido, usa "connected_tv"
+    icono: typeof data.icono === "string" && /^[a-z0-9_]+$/.test(data.icono.trim()) ? data.icono.trim() : "connected_tv",
     preguntas
   };
 }
@@ -390,7 +392,7 @@ function renderMenu() {
 
     const iconBox = document.createElement("span");
     iconBox.className = "test-card__icon";
-    iconBox.appendChild(icon("connected_tv"));
+    iconBox.appendChild(icon(t.icono)); // [v1.6.1] icono definido en el JSON del test
 
     const info = document.createElement("span");
     info.className = "test-card__info";

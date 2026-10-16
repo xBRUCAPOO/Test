@@ -1,6 +1,7 @@
 {
-  "nombre": "Redes y Comunicación",
-  "tema": "Dispositivos de conexión ISP, tipos de redes, protocolos, topologías, comunicaciones, modelo OSI, seguridad, PGP, ASCII y comandos de Windows",
+  "nombre": "Redes y comunicaciones - Protocolos y comandos",
+  "icono": "connected_tv",
+  "tema": "Evaluación de redes, protocolos, comandos de consola y conceptos de comunicación. No incluye preguntas específicas del modelo OSI.",
   "preguntas": [
     {
       "pregunta": "¿Qué significa la sigla ISP?",
@@ -401,29 +402,29 @@
       "tipo": "vf"
     },
     {
-      "pregunta": "¿Qué protocolo se encuentra principalmente en la capa de Transporte del modelo OSI?",
+      "pregunta": "¿Qué protocolo traduce nombres de dominio, como ejemplo.com, a direcciones IP?",
       "opciones": [
-        "IP",
-        "TCP",
+        "DHCP",
         "DNS",
-        "Ethernet"
+        "FTP",
+        "ARP"
       ],
       "correcta": 1,
-      "descripcion": "TCP es un protocolo de transporte y se asocia con la capa 4 del modelo OSI. IP corresponde principalmente a la capa de Red.",
-      "tema": "Modelo OSI: capas y protocolos",
+      "descripcion": "DNS permite consultar la dirección IP asociada a un nombre de dominio.",
+      "tema": "Protocolos de red",
       "tipo": "normal"
     },
     {
-      "pregunta": "¿Qué protocolo se asocia principalmente con la capa de Red del modelo OSI?",
+      "pregunta": "¿Qué protocolo asigna automáticamente parámetros de red, como una dirección IP, a un dispositivo?",
       "opciones": [
-        "TCP",
-        "IP",
-        "DNS",
-        "HTTP"
+        "HTTP",
+        "SMTP",
+        "DHCP",
+        "SSH"
       ],
-      "correcta": 1,
-      "descripcion": "IP se ocupa del direccionamiento lógico y del encaminamiento, funciones asociadas principalmente con la capa 3, Red.",
-      "tema": "Modelo OSI: capas y protocolos",
+      "correcta": 2,
+      "descripcion": "DHCP entrega automáticamente parámetros de configuración de red a los clientes.",
+      "tema": "Protocolos de red",
       "tipo": "normal"
     },
     {
@@ -714,193 +715,186 @@
       "tipo": "vf"
     },
     {
-      "pregunta": "En el modelo OSI, la capa Física se ocupa de transmitir bits mediante señales por el medio físico.",
-      "correcta": true,
-      "descripcion": "La capa Física define aspectos relacionados con la transmisión de bits y las características del medio y las señales. No se ocupa de decidir rutas IP.",
-      "tema": "Modelo OSI: capas y protocolos",
+      "pregunta": "¿Qué protocolo se utiliza para enviar correo electrónico entre servidores?",
+      "opciones": [
+        "SMTP",
+        "IMAP",
+        "DNS",
+        "ICMP"
+      ],
+      "correcta": 0,
+      "descripcion": "SMTP se utiliza para el envío de correo electrónico.",
+      "tema": "Protocolos de red",
+      "tipo": "normal"
+    },
+    {
+      "pregunta": "¿Qué protocolo permite consultar y descargar mensajes de correo manteniéndolos normalmente en el servidor?",
+      "opciones": [
+        "FTP",
+        "ARP",
+        "NTP",
+        "IMAP"
+      ],
+      "correcta": 3,
+      "descripcion": "IMAP permite acceder y sincronizar mensajes almacenados en el servidor de correo.",
+      "tema": "Protocolos de red",
+      "tipo": "normal"
+    },
+    {
+      "pregunta": "¿Qué protocolo se usa para transferir páginas web con una conexión cifrada?",
+      "opciones": [
+        "HTTP",
+        "HTTPS",
+        "TFTP",
+        "Telnet"
+      ],
+      "correcta": 1,
+      "descripcion": "HTTPS protege la comunicación web mediante cifrado TLS.",
+      "tema": "Protocolos de red",
+      "tipo": "normal"
+    },
+    {
+      "pregunta": "UDP garantiza por sí mismo que todos los paquetes lleguen en orden y sin pérdidas.",
+      "correcta": false,
+      "descripcion": "UDP no garantiza la entrega, el orden ni la retransmisión de datos.",
+      "tema": "Protocolos de red",
       "tipo": "vf"
     },
     {
-      "pregunta": "Ethernet y las direcciones MAC se relacionan principalmente con qué capa OSI?",
-      "opciones": [
-        "Física",
-        "Enlace de datos",
-        "Red",
-        "Sesión"
-      ],
-      "correcta": 1,
-      "descripcion": "Ethernet y las direcciones MAC se asocian principalmente con la capa 2, Enlace de datos, que trabaja con tramas y comunicación dentro del enlace.",
-      "tema": "Modelo OSI: capas y protocolos",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "IP se ubica principalmente en qué capa del modelo OSI?",
-      "opciones": [
-        "Enlace",
-        "Red",
-        "Transporte",
-        "Aplicación"
-      ],
-      "correcta": 1,
-      "descripcion": "IP corresponde principalmente a la capa 3, Red. Proporciona direccionamiento lógico y participa en el encaminamiento entre redes.",
-      "tema": "Modelo OSI: capas y protocolos",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "¿Qué protocolos se asocian principalmente con la capa de Transporte del modelo OSI?",
-      "opciones": [
-        "TCP",
-        "UDP",
-        "IP",
-        "Ethernet"
-      ],
-      "descripcion": "TCP y UDP se asocian principalmente con la capa de Transporte. IP se relaciona con la capa de Red y Ethernet principalmente con Enlace de datos.",
-      "tema": "Modelo OSI: capas y protocolos",
-      "tipo": "multiple",
-      "correctas": [
-        0,
-        1
-      ]
-    },
-    {
-      "pregunta": "¿Qué capa OSI se ocupa principalmente de establecer, mantener y gestionar sesiones entre aplicaciones?",
-      "opciones": [
-        "Sesión",
-        "Física",
-        "Red",
-        "Enlace"
-      ],
-      "correcta": 0,
-      "descripcion": "La capa de Sesión se ocupa de funciones relacionadas con el establecimiento, mantenimiento y terminación de sesiones de comunicación entre aplicaciones.",
-      "tema": "Modelo OSI: capas y protocolos",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "¿Qué funciones se relacionan principalmente con la capa de Presentación del modelo OSI?",
-      "opciones": [
-        "Representar o transformar el formato de los datos.",
-        "Realizar tareas conceptuales como compresión o cifrado de datos.",
-        "Encaminar paquetes entre redes usando direcciones IP.",
-        "Transmitir señales por el medio físico."
-      ],
-      "descripcion": "La capa de Presentación se relaciona conceptualmente con la representación, el formato y transformaciones como la compresión o el cifrado. El encaminamiento es de Red y la transmisión de señales es de Física.",
-      "tema": "Modelo OSI: capas y protocolos",
-      "tipo": "multiple",
-      "correctas": [
-        0,
-        1
-      ]
-    },
-    {
-      "pregunta": "HTTP, FTP y SMTP se consideran principalmente protocolos de qué capa del modelo OSI?",
-      "opciones": [
-        "Aplicación",
-        "Transporte",
-        "Red",
-        "Enlace"
-      ],
-      "correcta": 0,
-      "descripcion": "Estos protocolos proporcionan servicios directamente relacionados con aplicaciones y se asocian conceptualmente con la capa 7, Aplicación.",
-      "tema": "Modelo OSI: capas y protocolos",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "En el modelo OSI, Ethernet se relaciona principalmente con Enlace, IP con Red, TCP con Transporte y HTTP con Aplicación.",
+      "pregunta": "ICMP se utiliza, entre otras cosas, para mensajes de control y diagnóstico de red.",
       "correcta": true,
-      "descripcion": "La primera asociación coincide con las funciones principales del modelo OSI: Ethernet en enlace, IP en red, TCP en transporte y HTTP en aplicación.",
-      "tema": "Modelo OSI: capas y protocolos",
+      "descripcion": "ICMP transporta mensajes de control y diagnóstico; herramientas como ping suelen utilizarlo.",
+      "tema": "Protocolos de red",
       "tipo": "vf"
     },
     {
-      "pregunta": "DNS se considera principalmente un protocolo de qué capa OSI?",
+      "pregunta": "¿Cuáles de estos protocolos se relacionan con el acceso seguro o cifrado a servicios?",
       "opciones": [
-        "Aplicación",
-        "Transporte",
-        "Red",
-        "Física"
+        "SSH",
+        "HTTPS",
+        "Telnet",
+        "HTTP"
+      ],
+      "correctas": [
+        0,
+        1
+      ],
+      "descripcion": "SSH permite administración remota segura y HTTPS protege la comunicación web. Telnet y HTTP no cifran por sí mismos la conexión.",
+      "tema": "Protocolos de red",
+      "tipo": "multiple"
+    },
+    {
+      "pregunta": "¿Qué comando de Windows muestra la configuración IP completa, incluidos DNS y puerta de enlace?",
+      "opciones": [
+        "ipconfig /all",
+        "getmac",
+        "tree",
+        "tracert"
       ],
       "correcta": 0,
-      "descripcion": "DNS proporciona un servicio de resolución de nombres para las aplicaciones, por lo que se asocia principalmente con la capa de Aplicación, aunque utilice TCP o UDP como transporte.",
-      "tema": "Modelo OSI: capas y protocolos",
+      "descripcion": "ipconfig /all muestra información detallada de los adaptadores y su configuración IP.",
+      "tema": "Comandos de consola",
       "tipo": "normal"
     },
     {
-      "pregunta": "Un problema afecta a la señal eléctrica del cable, pero las direcciones IP son correctas. ¿Qué capa conviene revisar primero?",
+      "pregunta": "¿Qué comando muestra las direcciones físicas (MAC) de los adaptadores de red?",
       "opciones": [
-        "Física",
-        "Aplicación",
-        "Sesión",
-        "Presentación"
+        "nslookup",
+        "getmac",
+        "netstat",
+        "pwd"
       ],
-      "correcta": 0,
-      "descripcion": "Si el problema está en la señal o en el medio físico, la capa Física es la primera candidata. Que la configuración IP sea correcta no descarta una falla física.",
-      "tema": "Modelo OSI: capas y protocolos",
+      "correcta": 1,
+      "descripcion": "getmac muestra las direcciones MAC asociadas a los adaptadores del equipo.",
+      "tema": "Comandos de consola",
       "tipo": "normal"
     },
     {
-      "pregunta": "Un equipo puede detectar la red Ethernet, pero las comunicaciones entre subredes no funcionan por una ruta incorrecta. ¿Qué capa se relaciona directamente con el problema?",
+      "pregunta": "¿Qué comando permite comprobar la conectividad enviando solicitudes de eco a un destino?",
       "opciones": [
-        "Red",
-        "Presentación",
-        "Sesión",
-        "Aplicación"
+        "dir",
+        "tree",
+        "ping",
+        "getmac"
       ],
-      "correcta": 0,
-      "descripcion": "El encaminamiento entre redes y el direccionamiento IP son funciones asociadas principalmente con la capa de Red.",
-      "tema": "Modelo OSI: capas y protocolos",
+      "correcta": 2,
+      "descripcion": "ping prueba la conectividad IP mediante solicitudes y respuestas de eco, cuando están permitidas.",
+      "tema": "Comandos de consola",
       "tipo": "normal"
     },
     {
-      "pregunta": "Una conexión TCP funciona, pero una aplicación no interpreta correctamente el formato de los datos recibidos. ¿Qué capa conceptual puede estar involucrada?",
+      "pregunta": "¿Qué comando permite consultar qué servidores o direcciones resuelven un nombre DNS?",
       "opciones": [
-        "Presentación",
-        "Física",
-        "Enlace",
-        "Red"
+        "tracert",
+        "netstat",
+        "ipconfig",
+        "nslookup"
       ],
-      "correcta": 0,
-      "descripcion": "La capa de Presentación se ocupa de la representación y transformación de datos. Un problema de formato puede estar relacionado con esta función conceptual.",
-      "tema": "Modelo OSI: capas y protocolos",
+      "correcta": 3,
+      "descripcion": "nslookup consulta información DNS sobre nombres de dominio y registros.",
+      "tema": "Comandos de consola",
       "tipo": "normal"
     },
     {
-      "pregunta": "¿Qué capa OSI se encuentra inmediatamente por encima de Transporte?",
+      "pregunta": "El comando tracert ayuda a observar los saltos que sigue una ruta hacia un destino.",
+      "correcta": true,
+      "descripcion": "tracert muestra los saltos intermedios de una ruta IP según las respuestas recibidas.",
+      "tema": "Comandos de consola",
+      "tipo": "vf"
+    },
+    {
+      "pregunta": "¿Qué información puede mostrar netstat en Windows?",
       "opciones": [
-        "Sesión",
-        "Red",
-        "Enlace",
-        "Física"
+        "Conexiones de red activas",
+        "Puertos en escucha",
+        "Estadísticas de protocolos",
+        "El contenido completo de una página web"
       ],
-      "correcta": 0,
-      "descripcion": "El orden desde abajo es Física, Enlace, Red, Transporte, Sesión, Presentación y Aplicación. Por lo tanto, Sesión está inmediatamente por encima de Transporte.",
-      "tema": "Modelo OSI: capas y protocolos",
+      "correctas": [
+        0,
+        1,
+        2
+      ],
+      "descripcion": "netstat puede mostrar conexiones, puertos en escucha y estadísticas de protocolos; no descarga ni muestra páginas web.",
+      "tema": "Comandos de consola",
+      "tipo": "multiple"
+    },
+    {
+      "pregunta": "En CMD, ¿qué comando lista archivos y carpetas del directorio actual?",
+      "opciones": [
+        "pwd",
+        "dir",
+        "tree",
+        "ping"
+      ],
+      "correcta": 1,
+      "descripcion": "dir muestra los archivos y subdirectorios del directorio actual.",
+      "tema": "Comandos de consola",
       "tipo": "normal"
     },
     {
-      "pregunta": "¿Qué capa OSI se encuentra inmediatamente por debajo de Transporte?",
-      "opciones": [
-        "Red",
-        "Sesión",
-        "Presentación",
-        "Aplicación"
-      ],
-      "correcta": 0,
-      "descripcion": "En el modelo OSI, Transporte es la capa 4 y Red es la capa 3, por lo que Red se encuentra inmediatamente por debajo.",
-      "tema": "Modelo OSI: capas y protocolos",
-      "tipo": "normal"
+      "pregunta": "En PowerShell, pwd muestra la ubicación del directorio de trabajo actual.",
+      "correcta": true,
+      "descripcion": "pwd es un alias de Get-Location en PowerShell y muestra la ubicación actual.",
+      "tema": "Comandos de consola",
+      "tipo": "vf"
     },
     {
-      "pregunta": "Un administrador quiere relacionar un protocolo con la capa 4 y observa TCP. ¿Qué función debe asociar principalmente con él?",
+      "pregunta": "¿Qué comandos se pueden usar para investigar problemas de red desde Windows?",
       "opciones": [
-        "Transporte extremo a extremo y entrega ordenada/confiable",
-        "Direccionamiento físico mediante MAC",
-        "Resolución de nombres de dominio",
-        "Transmisión eléctrica de bits"
+        "ipconfig /all",
+        "ping",
+        "tracert",
+        "tree"
       ],
-      "correcta": 0,
-      "descripcion": "TCP pertenece a Transporte y proporciona mecanismos como control de conexión, ordenamiento y retransmisión para lograr una entrega confiable.",
-      "tema": "Modelo OSI: capas y protocolos",
-      "tipo": "normal"
+      "correctas": [
+        0,
+        1,
+        2
+      ],
+      "descripcion": "ipconfig /all muestra la configuración, ping prueba conectividad y tracert ayuda a examinar la ruta. tree muestra la estructura de carpetas.",
+      "tema": "Comandos de consola",
+      "tipo": "multiple"
     },
     {
       "pregunta": "¿Qué propiedades puede ayudar a comprobar una firma digital correctamente verificada?",
