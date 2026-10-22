@@ -1,0 +1,1189 @@
+{
+  "nombre": "Redes y Comunicaciones",
+  "tema": "Evaluación integral de 100 preguntas sobre redes, protocolos, cifrado y comandos de consola",
+  "preguntas": [
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué significa la sigla LAN en redes de computadoras?",
+      "opciones": [
+        "Local Area Network",
+        "Long Access Node",
+        "Logical Array Network",
+        "Linked Area Node"
+      ],
+      "correcta": 0,
+      "tema": "Tipos de redes y alcances",
+      "descripcion": "LAN significa Local Area Network (Red de Área Local) y cubre distancias cortas como una casa u oficina."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "Una red WAN (Wide Area Network) cubre extensiones geográficas de gran alcance, como países o continentes.",
+      "correcta": true,
+      "tema": "Tipos de redes y alcances",
+      "descripcion": "Las WAN interconectan redes a nivel regional, nacional o global; Internet es el ejemplo más representativo."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "¿Cuáles de las siguientes redes suelen ser consideradas de cobertura PAN (Personal Area Network)?",
+      "opciones": [
+        "Conexión Bluetooth entre smartphone y auriculares",
+        "Red metropolitana entre campus",
+        "Conexión infrarroja o cableada entre smartwatch y teléfono",
+        "Fibra óptica intercontinental"
+      ],
+      "correctas": [
+        0,
+        2
+      ],
+      "tema": "Tipos de redes y alcances",
+      "descripcion": "Las PAN abarcan un alcance personal de pocos metros (Bluetooth, NFC, periféricos personales)."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué tipo de red es habitualmente utilizada para interconectar diferentes sedes dentro de un mismo municipio o ciudad?",
+      "opciones": [
+        "PAN",
+        "LAN",
+        "MAN",
+        "SAN"
+      ],
+      "correcta": 2,
+      "tema": "Tipos de redes y alcances",
+      "descripcion": "MAN (Metropolitan Area Network) cubre el ámbito de una ciudad o municipio."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "La red de área local (LAN) siempre requiere enlaces satelitales para conectar sus computadoras.",
+      "correcta": false,
+      "tema": "Tipos de redes y alcances",
+      "descripcion": "Las LAN se conectan por cables Ethernet o Wi-Fi local; los enlaces satelitales se usan habitualmente en WAN."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "Selecciona las características propias de una red WAN en comparación con una LAN:",
+      "opciones": [
+        "Mayor alcance geográfico",
+        "Uso común de infraestructura de terceros (ISP)",
+        "Propiedad exclusiva y privada de todo el tendido por parte de un único usuario en su casa",
+        "Menor velocidad media/mayor latencia que un enlace local directo"
+      ],
+      "correctas": [
+        0,
+        1,
+        3
+      ],
+      "tema": "Tipos de redes y alcances",
+      "descripcion": "Las WAN usan proveedores públicos o contratados, abarcan amplias distancias y suelen presentar mayor latencia."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Cuál de los siguientes es el mejor ejemplo de una red WAN global?",
+      "opciones": [
+        "La red doméstica de una casa",
+        "Internet",
+        "La red interna de un laboratorio universitario",
+        "Una conexión Bluetooth entre dos mandos"
+      ],
+      "correcta": 1,
+      "tema": "Tipos de redes y alcances",
+      "descripcion": "Internet es la red WAN más masiva y extendida del planeta."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "Una red PAN tiene habitualmente un alcance de decenas de kilómetros.",
+      "correcta": false,
+      "tema": "Tipos de redes y alcances",
+      "descripcion": "Las redes PAN están diseñadas para distancias muy reducidas (pocos metros alrededor del usuario)."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "En términos de cobertura espacial, ordena de menor a mayor alcance:",
+      "opciones": [
+        "PAN < LAN < MAN < WAN",
+        "WAN < MAN < LAN < PAN",
+        "LAN < PAN < MAN < WAN",
+        "MAN < PAN < LAN < WAN"
+      ],
+      "correcta": 0,
+      "tema": "Tipos de redes y alcances",
+      "descripcion": "El orden creciente es Personal (PAN), Local (LAN), Metropolitana (MAN) y Amplia (WAN)."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "¿Qué tecnologías se asocian habitualmente con redes de área local (LAN) o inalámbricas de área local (WLAN)?",
+      "opciones": [
+        "Ethernet (IEEE 802.3)",
+        "Wi-Fi (IEEE 802.11)",
+        "Cables de fibra submarina transoceánica",
+        "Bluetooth de ultra corto alcance únicamente"
+      ],
+      "correctas": [
+        0,
+        1
+      ],
+      "tema": "Tipos de redes y alcances",
+      "descripcion": "Ethernet y Wi-Fi son las tecnologías dominantes en LAN y WLAN."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "Una MAN puede conectar varios edificios de oficinas de un gobierno municipal distribuidos en una ciudad.",
+      "correcta": true,
+      "tema": "Tipos de redes y alcances",
+      "descripcion": "Es el propósito principal de una Red de Área Metropolitana."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué conector es el estándar más común utilizado en cables Ethernet par trenzado (Cat 5e/Cat 6)?",
+      "opciones": [
+        "RJ-11",
+        "RJ-45",
+        "BNC",
+        "USB-C"
+      ],
+      "correcta": 1,
+      "tema": "Wi-Fi y Ethernet",
+      "descripcion": "El conector RJ-45 posee 8 pines y es el utilizado para conexiones Ethernet por par trenzado."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "Las conexiones Ethernet por cable suelen ofrecer menor latencia y mayor estabilidad que las conexiones Wi-Fi.",
+      "correcta": true,
+      "tema": "Wi-Fi y Ethernet",
+      "descripcion": "Al ser un medio guiado (cable), Ethernet evita gran parte de las interferencias electromagnéticas del aire."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "¿Qué elementos o factores provocan frecuentemente degradación e interferencia en señales Wi-Fi?",
+      "opciones": [
+        "Paredes gruesas de hormigón o piedra",
+        "Hornos de microondas funcionando cerca",
+        "Otros routers en el mismo canal o frecuencia",
+        "El cable RJ-45 desconectado"
+      ],
+      "correctas": [
+        0,
+        1,
+        2
+      ],
+      "tema": "Wi-Fi y Ethernet",
+      "descripcion": "Obstáculos físicos, electrodomésticos en la banda de 2.4GHz y saturación de canales degradan el Wi-Fi."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué dispositivo se encarga de emitir la señal inalámbrica para que los clientes (celulares, laptops) se conecten a la red local?",
+      "opciones": [
+        "Punto de Acceso Inalámbrico (AP)",
+        "Switch pasivo no administrable",
+        "Módem analógico dial-up",
+        "Repetidor pasivo de fibra"
+      ],
+      "correcta": 0,
+      "tema": "Wi-Fi y Ethernet",
+      "descripcion": "Un Access Point (AP) o punto de acceso transmite la señal de radiofrecuencia Wi-Fi."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "La banda de frecuencia Wi-Fi de 5 GHz ofrece generalmente mayor alcance a través de paredes que la banda de 2.4 GHz.",
+      "correcta": false,
+      "tema": "Wi-Fi y Ethernet",
+      "descripcion": "A mayor frecuencia (5 GHz), menor es la capacidad de penetración en obstáculos sólidos respecto a 2.4 GHz."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "Son ventajas claras del uso de conexiones Ethernet cableadas sobre Wi-Fi:",
+      "opciones": [
+        "Mayor inmunidad frente a interferencias de radio",
+        "Inexistencia de necesidad de cables físicos hacia cada equipo",
+        "Menor latencia (jitter) en transmisiones críticas",
+        "Tasas de transferencia altas sostenidas y estables"
+      ],
+      "correctas": [
+        0,
+        2,
+        3
+      ],
+      "tema": "Wi-Fi y Ethernet",
+      "descripcion": "Ethernet destaca por estabilidad, baja latencia y alta tasa sostenida, a costa de perder la movilidad del Wi-Fi."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué dispositivo combina comúnmente las funciones de módem/ONT, router, switch local y punto de acceso Wi-Fi en un hogar?",
+      "opciones": [
+        "Router inalámbrico integrado (Home Gateway)",
+        "Hub de capa 1",
+        "Servidor DNS",
+        "Firewall de hardware industrial"
+      ],
+      "correcta": 0,
+      "tema": "Wi-Fi y Ethernet",
+      "descripcion": "El router doméstico integra múltiples funciones en un solo equipo físico."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "El estándar Ethernet utiliza como medio físico exclusivamente enlaces de fibra óptica.",
+      "correcta": false,
+      "tema": "Wi-Fi y Ethernet",
+      "descripcion": "Ethernet se utiliza ampliamente tanto en cable de par trenzado de cobre (UTP) como en fibra óptica."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "¿Cuáles de los siguientes son conectores o normas físicas relacionadas con Ethernet y redes cableadas?",
+      "opciones": [
+        "RJ-45",
+        "Categoría 6 (Cat6)",
+        "802.11ax",
+        "Patch panel"
+      ],
+      "correctas": [
+        0,
+        1,
+        3
+      ],
+      "tema": "Wi-Fi y Ethernet",
+      "descripcion": "RJ-45, Cat6 y Patch panels son elementos del cableado estructurado Ethernet. 802.11ax corresponde a Wi-Fi 6."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Cuál es la principal desventaja del Wi-Fi frente a Ethernet en entornos de alta densidad de usuarios?",
+      "opciones": [
+        "Saturación del espectro radioeléctrico y colisiones de paquetes",
+        "Incapacidad absoluta de usar cifrado de seguridad",
+        "Imposibilidad de conectar teléfonos móviles",
+        "Requiere cambiar los cables de la pared constantemente"
+      ],
+      "correcta": 0,
+      "tema": "Wi-Fi y Ethernet",
+      "descripcion": "El aire es un medio compartido; muchos clientes conectados saturan los canales inalámbricos."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "El conector RJ-11 se utiliza habitualmente para redes Ethernet Gigabit.",
+      "correcta": false,
+      "tema": "Wi-Fi y Ethernet",
+      "descripcion": "RJ-11 es para líneas telefónicas (4 o 6 pines). Ethernet usa RJ-45 (8 pines)."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Cómo se denomina la comunicación en la cual la información fluye en un solo sentido sin posibilidad de respuesta?",
+      "opciones": [
+        "Simplex (Unidireccional)",
+        "Half-Duplex",
+        "Full-Duplex",
+        "Multiplex"
+      ],
+      "correcta": 0,
+      "tema": "Comunicación unidireccional y bidireccional",
+      "descripcion": "Simplex es unidireccional: un emisor transmite y el receptor únicamente recibe (ej. televisión tradicional)."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "Una llamada telefónica habitual en la que ambas personas pueden hablar y escuchar simultáneamente es un ejemplo de Full-Duplex.",
+      "correcta": true,
+      "tema": "Comunicación unidireccional y bidireccional",
+      "descripcion": "Full-Duplex permite transmisión y recepción bidireccional al mismo tiempo."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "¿Cuáles de los siguientes modos permiten comunicación bidireccional (en ambos sentidos)?",
+      "opciones": [
+        "Half-Duplex",
+        "Full-Duplex",
+        "Simplex",
+        "Broadcast pasivo unidireccional"
+      ],
+      "correctas": [
+        0,
+        1
+      ],
+      "tema": "Comunicación unidireccional y bidireccional",
+      "descripcion": "Tanto Half-Duplex (no simultáneo) como Full-Duplex (simultáneo) son modos bidireccionales."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "El uso de walkie-talkies, donde ambos pueden hablar pero no al mismo tiempo (requiere presionar PTT y esperar), es un ejemplo de:",
+      "opciones": [
+        "Half-Duplex",
+        "Full-Duplex",
+        "Simplex",
+        "Asíncrono unidireccional"
+      ],
+      "correcta": 0,
+      "tema": "Comunicación unidireccional y bidireccional",
+      "descripcion": "Half-Duplex permite la comunicación en ambos sentidos pero alternadamente."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "En el modo Simplex, el receptor puede enviar mensajes de confirmación por el mismo canal principal de emisión.",
+      "correcta": false,
+      "tema": "Comunicación unidireccional y bidireccional",
+      "descripcion": "En Simplex el canal es strictly unidireccional."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "Identifica los ejemplos correctos de comunicación unidireccional (Simplex):",
+      "opciones": [
+        "Emisión de radio FM comercial",
+        "Televisión abierta digital por antena",
+        "Chat de WhatsApp",
+        "Monitor de temperatura transmitiendo datos a una pantalla pasiva"
+      ],
+      "correctas": [
+        0,
+        1,
+        3
+      ],
+      "tema": "Comunicación unidireccional y bidireccional",
+      "descripcion": "Radio FM, TV abierta y sensores pasivos envían señal sin canal de retorno del espectador/pantalla."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué ventaja tiene la transmisión Full-Duplex sobre la Half-Duplex en redes de datos?",
+      "opciones": [
+        "Duplica potencialmente la capacidad al enviar y recibir datos simultáneamente sin colisiones en canales dedicados",
+        "No requiere electricidad",
+        "Elimina la necesidad de direccionamiento IP",
+        "Es compatible únicamente con fibra óptica analógica"
+      ],
+      "correcta": 0,
+      "tema": "Comunicación unidireccional y bidireccional",
+      "descripcion": "Full-Duplex permite transmitir y recibir en paralelo, optimizando el rendimiento global del enlace."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "La transmisión Full-Duplex significa que la información solo viaja hacia el servidor pero nunca regresa al cliente.",
+      "correcta": false,
+      "tema": "Comunicación unidireccional y bidireccional",
+      "descripcion": "Eso sería unidireccional. Full-Duplex es bidireccional y simultánea."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿En qué modo de transmisión el emisor puede transmitir y recibir pero alternando en el tiempo (un canal a la vez)?",
+      "opciones": [
+        "Half-Duplex",
+        "Simplex",
+        "Full-Duplex",
+        "Asincrónico simple"
+      ],
+      "correcta": 0,
+      "tema": "Comunicación unidireccional y bidireccional",
+      "descripcion": "Half-Duplex es bidireccional no simultáneo."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "Un altavoz bluetooth reproduciendo música desde una laptop opera en modo bidireccional simultáneo de datos de audio.",
+      "correcta": false,
+      "tema": "Comunicación unidireccional y bidireccional",
+      "descripcion": "El flujo de audio viaja unidireccionalmente desde el emisor hacia el altavoz."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "Selecciona las afirmaciones verdaderas sobre la comunicación Simplex:",
+      "opciones": [
+        "Existe un emisor dedicado y uno o más receptores pasivos",
+        "El receptor no puede responder al emisor por la misma vía",
+        "Es el estándar utilizado en conversaciones telefónicas interactivas",
+        "Se optimiza todo el ancho de banda para la transmisión en un único sentido"
+      ],
+      "correctas": [
+        0,
+        1,
+        3
+      ],
+      "tema": "Comunicación unidireccional y bidireccional",
+      "descripcion": "Simplex es unidireccional puro, reservando todo el canal para emitir datos hacia receptores pasivos."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué significan las siglas IEEE?",
+      "opciones": [
+        "Institute of Electrical and Electronics Engineers",
+        "International Ethernet Enterprise Engineering",
+        "Integrated Electronics and Enterprise Engines",
+        "Institute of Electronics and Ethernet Execution"
+      ],
+      "correcta": 0,
+      "tema": "Estándares IEEE",
+      "descripcion": "IEEE es el Instituto de Ingenieros Eléctricos y Electrónicos, organización internacional de estandarización."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "El estándar IEEE 802.3 define las especificaciones para redes locales cableadas conocidas comercialmente como Ethernet.",
+      "correcta": true,
+      "tema": "Estándares IEEE",
+      "descripcion": "IEEE 802.3 es el estándar del grupo de trabajo para Ethernet cableado."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "Asocia correctamente los estándares IEEE con sus tecnologías representativas:",
+      "opciones": [
+        "IEEE 802.3 -> Ethernet",
+        "IEEE 802.11 -> Wi-Fi",
+        "IEEE 802.15.1 -> Relacionado históricamente con WPAN / Bluetooth",
+        "IEEE 802.11 -> Redes de telefonía celular 5G puras"
+      ],
+      "correctas": [
+        0,
+        1,
+        2
+      ],
+      "tema": "Estándares IEEE",
+      "descripcion": "802.3 es Ethernet, 802.11 es Wi-Fi y 802.15.1 es la base estandarizada de Bluetooth/WPAN."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué estándar de la familia IEEE normaliza las redes locales inalámbricas (WLAN / Wi-Fi)?",
+      "opciones": [
+        "IEEE 802.11",
+        "IEEE 802.3",
+        "IEEE 754",
+        "IEEE 802.1X"
+      ],
+      "correcta": 0,
+      "tema": "Estándares IEEE",
+      "descripcion": "IEEE 802.11 define las tecnologías de red local inalámbrica Wi-Fi."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "Un estándar y un protocolo son exactamente el mismo concepto sin ninguna diferencia teórica.",
+      "correcta": false,
+      "tema": "Estándares IEEE",
+      "descripcion": "Un protocolo es un conjunto de reglas de comunicación; un estándar es una norma formal acordada e industrialmente homologada por organismos reconocidos."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "¿Para qué sirven los estándares en las tecnologías de la comunicación?",
+      "opciones": [
+        "Garantizar la interoperabilidad entre dispositivos de distintos fabricantes",
+        "Permitir que hardware de diversas marcas se entienda correctamente",
+        "Obligar a consumir mayor ancho de banda",
+        "Establecer reglas técnicas uniformes a nivel global"
+      ],
+      "correctas": [
+        0,
+        1,
+        3
+      ],
+      "tema": "Estándares IEEE",
+      "descripcion": "Los estándares aseguran compatibilidad universal, calidad y funcionamiento coordinado entre fabricantes."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿A qué familia de estándares pertenece la tecnología de red personal inalámbrica Bluetooth?",
+      "opciones": [
+        "IEEE 802.15",
+        "IEEE 802.3",
+        "IEEE 802.1",
+        "IEEE 802.5"
+      ],
+      "correcta": 0,
+      "tema": "Estándares IEEE",
+      "descripcion": "El grupo IEEE 802.15 se enfoca en Wireless Personal Area Networks (WPAN), incluyendo Bluetooth."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "IEEE 802.3 contempla las normas para Wi-Fi de alta velocidad.",
+      "correcta": false,
+      "tema": "Estándares IEEE",
+      "descripcion": "802.3 es Ethernet cableado; Wi-Fi utiliza 802.11."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Cuál es la velocidad máxima teórica tradicional del estándar Ethernet original IEEE 802.3 de base?",
+      "opciones": [
+        "10 Mbps",
+        "1 Gbps",
+        "100 Gbps",
+        "100 Mbps"
+      ],
+      "correcta": 0,
+      "tema": "Estándares IEEE",
+      "descripcion": "El estándar Ethernet inicial (10BASE-T) funcionaba a 10 Megabits por segundo."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "Los estándares de la serie IEEE 802 se centran principalmente en las capas física y de enlace de datos del modelo OSI.",
+      "correcta": true,
+      "tema": "Estándares IEEE",
+      "descripcion": "El proyecto IEEE 802 especifica estándares para las capas 1 (Física) y 2 (Enlace de datos)."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué estándar representa el protocolo de redes de área personal inalámbricas (WPAN) relacionado originalmente con Bluetooth?",
+      "opciones": [
+        "IEEE 802.15.1",
+        "IEEE 802.3",
+        "IEEE 802.11",
+        "IEEE 802.1X"
+      ],
+      "correcta": 0,
+      "tema": "Estándares IEEE",
+      "descripcion": "IEEE 802.15.1 es la estandarización para Bluetooth."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Cuál es la función principal del servicio/protocolo DNS?",
+      "opciones": [
+        "Traducir nombres de dominio legibles (ej. google.com) a direcciones IP numéricas",
+        "Asignar contraseñas cifradas a redes Wi-Fi",
+        "Enviar correo electrónico entre servidores",
+        "Medir el ping de una red local"
+      ],
+      "correcta": 0,
+      "tema": "Protocolos de comunicación",
+      "descripcion": "DNS (Domain Name System) resuelve nombres de dominio convirtiéndolos en direcciones IP."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "DHCP es el protocolo encargado de asignar automáticamente parámetros de red (IP, máscara, puerta de enlace) a los clientes.",
+      "correcta": true,
+      "tema": "Protocolos de comunicación",
+      "descripcion": "DHCP (Dynamic Host Configuration Protocol) automatiza la configuración IP de las computadoras."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "Selecciona las afirmaciones verdaderas sobre el protocolo TCP (Transmission Control Protocol):",
+      "opciones": [
+        "Es orientado a conexión",
+        "Garantiza la entrega ordenada y fiable de paquetes de datos",
+        "Usa la verificación de errores y retransmisión si se pierden paquetes",
+        "Es un protocolo no orientado a conexión que no verifica la llegada de datos"
+      ],
+      "correctas": [
+        0,
+        1,
+        2
+      ],
+      "tema": "Protocolos de comunicación",
+      "descripcion": "TCP asegura la entrega correcta, ordenada y confiable mediante la creación de conexión y acuses de recibo."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué protocolo se utiliza principalmente para la transferencia y envío de correo electrónico entre servidores?",
+      "opciones": [
+        "SMTP",
+        "ICMP",
+        "HTTP",
+        "ARP"
+      ],
+      "correcta": 0,
+      "tema": "Protocolos de comunicación",
+      "descripcion": "SMTP (Simple Mail Transfer Protocol) se encarga de enviar y enrutar correos electrónicos."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "HTTPS utiliza cifrado (TLS/SSL) para proteger la confidencialidad de la comunicación web.",
+      "correcta": true,
+      "tema": "Protocolos de comunicación",
+      "descripcion": "HTTPS añade una capa de seguridad cifrada sobre el protocolo HTTP estándar."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "¿Cuáles de los siguientes protocolos operan principalmente en la capa de aplicación o transporte de la pila TCP/IP?",
+      "opciones": [
+        "HTTP / HTTPS",
+        "DNS",
+        "TCP",
+        "Dirección MAC de la tarjeta física"
+      ],
+      "correctas": [
+        0,
+        1,
+        2
+      ],
+      "tema": "Protocolos de comunicación",
+      "descripcion": "HTTP, DNS están en capa de Aplicación y TCP en capa de Transporte. La dirección MAC es de capa de enlace."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué protocolo es empleado por utilidades como `ping` para enviar mensajes de control, eco y diagnóstico de errores?",
+      "opciones": [
+        "ICMP",
+        "DHCP",
+        "FTP",
+        "POP3"
+      ],
+      "correcta": 0,
+      "tema": "Protocolos de comunicación",
+      "descripcion": "ICMP (Internet Control Message Protocol) transporta notificaciones de red y eco (ping)."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "El protocolo IP se encarga de empaquetar, direccionar y encaminar (enrutar) los paquetes de datos a través de las redes.",
+      "correcta": true,
+      "tema": "Protocolos de comunicación",
+      "descripcion": "IP (Internet Protocol) proporciona el direccionamiento lógico e interconexión de redes."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Cuál es el puerto por defecto habitualmente asociado al protocolo web seguro HTTPS?",
+      "opciones": [
+        "443",
+        "80",
+        "25",
+        "53"
+      ],
+      "correcta": 0,
+      "tema": "Protocolos de comunicación",
+      "descripcion": "HTTPS usa por defecto el puerto TCP 443 (mientras que HTTP utiliza el puerto 80)."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "Indica cuáles son protocolos de la pila TCP/IP y sus funciones correctas:",
+      "opciones": [
+        "DNS: Resolución de nombres a direcciones IP",
+        "DHCP: Asignación dinámica de direcciones IP",
+        "SMTP: Cifrado exclusivo de redes inalámbricas",
+        "ICMP: Diagnóstico y mensajería de control en red"
+      ],
+      "correctas": [
+        0,
+        1,
+        3
+      ],
+      "tema": "Protocolos de comunicación",
+      "descripcion": "DNS resuelve nombres, DHCP configura IP y ICMP da mensajes de diagnóstico. SMTP es para e-mail."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "UDP es un protocolo que, a diferencia de TCP, garantiza que todos los paquetes lleguen estrictamente en orden sin perder ninguno.",
+      "correcta": false,
+      "tema": "Protocolos de comunicación",
+      "descripcion": "UDP es no orientado a conexión y no garantiza entrega ni orden; esa es la función de TCP."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué tipo de cifrado utiliza dos claves matemáticamente vinculadas (una clave pública y una clave privada)?",
+      "opciones": [
+        "Cifrado Asimétrico",
+        "Cifrado Simétrico",
+        "Cifrado Cifrante Único",
+        "Hash unidireccional simple"
+      ],
+      "correcta": 0,
+      "tema": "PGP, firma digital y cifrado",
+      "descripcion": "El cifrado asimétrico o de clave pública emplea un par de claves: pública para cifrar/verificar y privada para descifrar/firmar."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "En el cifrado simétrico, la misma clave secreta se utiliza tanto para cifrar como para descifrar el mensaje.",
+      "correcta": true,
+      "tema": "PGP, firma digital y cifrado",
+      "descripcion": "El cifrado simétrico requiere que ambas partes compartan exactamente la misma clave previa."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "¿Qué garantías de seguridad aporta el uso de una firma digital realizada con la clave privada del emisor?",
+      "opciones": [
+        "Autenticidad del emisor",
+        "Integridad del contenido (el mensaje no fue alterado)",
+        "No repudio por parte del firmante",
+        "Aumento inmediato de la velocidad de transmisión del cable"
+      ],
+      "correctas": [
+        0,
+        1,
+        2
+      ],
+      "tema": "PGP, firma digital y cifrado",
+      "descripcion": "La firma digital certifica quién envió los datos (autenticidad), que no fueron modificados (integridad) y evita su negación."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué significa la sigla PGP en seguridad informática?",
+      "opciones": [
+        "Pretty Good Privacy",
+        "Private Global Protection",
+        "Public General Protocol",
+        "Protected Guard Pass"
+      ],
+      "correcta": 0,
+      "tema": "PGP, firma digital y cifrado",
+      "descripcion": "PGP significa Pretty Good Privacy, un sistema de cifrado híbrido para datos y firmas digitales."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "Cifrar un archivo es exactamente lo mismo que firmarlo digitalmente.",
+      "correcta": false,
+      "tema": "PGP, firma digital y cifrado",
+      "descripcion": "Cifrar oculta el contenido (confidencialidad); firmar garantiza la identidad del autor y la integridad del archivo."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "En un esquema de clave pública / clave privada, ¿cuáles de las siguientes reglas son correctas?",
+      "opciones": [
+        "La clave pública se puede compartir abiertamente con cualquier persona",
+        "La clave privada debe mantenerse strictly en secreto por su dueño",
+        "Para enviarle un correo cifrado a Juan, cifro el mensaje con la clave pública de Juan",
+        "Para firmar un correo, el emisor usa la clave pública del destinatario"
+      ],
+      "correctas": [
+        0,
+        1,
+        2
+      ],
+      "tema": "PGP, firma digital y cifrado",
+      "descripcion": "La clave pública cifrará datos para el destinatario. Para firmar, el emisor utiliza su propia clave privada."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué es la 'Armadura ASCII' (ASCII Armor) en el contexto de PGP?",
+      "opciones": [
+        "Un formato que codifica datos binarios cifrados a texto legible de caracteres ASCII de 7 bits para transmisión segura en sistemas de texto",
+        "Un escudo físico de metal alrededor del disco duro",
+        "Un antivirus que revisa la tabla de caracteres",
+        "Un algoritmo de compresión sin pérdida exclusivo de Windows"
+      ],
+      "correcta": 0,
+      "tema": "PGP, firma digital y cifrado",
+      "descripcion": "ASCII Armor convierte bloques binarios cifrados en texto ASCII con delimitadores como '-----BEGIN PGP MESSAGE-----'."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "Si cifro un documento con la clave pública de María, solo María con su clave privada podrá descifrarlo.",
+      "correcta": true,
+      "tema": "PGP, firma digital y cifrado",
+      "descripcion": "Es el principio fundamental de la criptografía asimétrica para garantizar confidencialidad."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué propiedad de la seguridad informática asegura que la información no ha sido modificada por terceros no autorizados durante el tránsito?",
+      "opciones": [
+        "Integridad",
+        "Confidencialidad",
+        "Disponibilidad",
+        "Anonimato"
+      ],
+      "correcta": 0,
+      "tema": "PGP, firma digital y cifrado",
+      "descripcion": "La integridad verifica que los datos lleguen intactos y sin alteraciones."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "Son características o elementos relacionados con la firma digital:",
+      "opciones": [
+        "Uso de funciones hash criptográficas",
+        "Uso de la clave privada del remitente para generar el bloque firmado",
+        "Verificación mediante la clave pública del remitente",
+        "Borrado automático de los correos recibidos"
+      ],
+      "correctas": [
+        0,
+        1,
+        2
+      ],
+      "tema": "PGP, firma digital y cifrado",
+      "descripcion": "La firma calcula el hash del documento y lo cifra con la clave privada; cualquiera valida con la clave pública."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "El cifrado simétrico requiere que el emisor use una clave pública y el receptor use una clave privada distinta.",
+      "correcta": false,
+      "tema": "PGP, firma digital y cifrado",
+      "descripcion": "Eso corresponde al cifrado asimétrico. El cifrado simétrico usa la misma clave para ambos."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué significan las siglas ISP?",
+      "opciones": [
+        "Internet Service Provider",
+        "Internal System Protocol",
+        "Integrated Security Package",
+        "International Signal Path"
+      ],
+      "correcta": 0,
+      "tema": "ISP",
+      "descripcion": "ISP significa Internet Service Provider (Proveedor de Servicios de Internet)."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "Un ISP es la empresa u organización que proporciona acceso y conexión a Internet a clientes y hogares.",
+      "correcta": true,
+      "tema": "ISP",
+      "descripcion": "Su función primordial es brindar infraestructura y acceso a la red mundial de Internet."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "¿Cuáles de las siguientes opciones son funciones típicas desempeñadas por un ISP?",
+      "opciones": [
+        "Asignar direcciones IP públicas a sus clientes",
+        "Proporcionar enrutamiento hacia la red global de Internet",
+        "Fabricar los microprocesadores de las computadoras",
+        "Ofrecer servicios de fibra óptica, ADSL o enlace satelital"
+      ],
+      "correctas": [
+        0,
+        1,
+        3
+      ],
+      "tema": "ISP",
+      "descripcion": "El ISP vende y provee conectividad física, enrutamiento global y direcciones IP públicas."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Cuál es la diferencia fundamental entre un ISP y un router doméstico instalado en una vivienda?",
+      "opciones": [
+        "El ISP es el proveedor comercial que suministra la línea y acceso externo; el router doméstico es el equipo de red local que distribuye esa conexión en la casa",
+        "El router doméstico crea la red mundial e Internet; el ISP solo vende cables físicos sin señal",
+        "No existe diferencia; son el mismo objeto técnico",
+        "El ISP es una aplicación de teléfono y el router un software de consola"
+      ],
+      "correcta": 0,
+      "tema": "ISP",
+      "descripcion": "El ISP da el acceso a la red WAN mundial; el router organiza la red LAN interna de la casa."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "Para conectarse a Internet desde el hogar, no se requiere contratar a ningún ISP si ya se tiene un router comprado en una tienda.",
+      "correcta": false,
+      "tema": "ISP",
+      "descripcion": "El router sin un ISP contratado únicamente creará una red local interna sin salida a Internet."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "¿Cuáles de los siguientes son ejemplos de tecnologías de acceso provistas por un ISP a sus abonados?",
+      "opciones": [
+        "FTTH (Fibra óptica al hogar)",
+        "HFC (Cablemódem coaxial)",
+        "Internet Satelital",
+        "Bluetooth 5.0 local"
+      ],
+      "correctas": [
+        0,
+        1,
+        2
+      ],
+      "tema": "ISP",
+      "descripcion": "FTTH, HFC y enlaces satelitales son medios de acceso a Internet de última milla brindados por ISPs."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué tipo de IP le asigna habitualmente el ISP a la interfaz externa (WAN) de un hogar?",
+      "opciones": [
+        "Dirección IP pública",
+        "Dirección IP privada tipo 192.168.1.1 en todo el mundo sin NAT",
+        "Dirección MAC",
+        "Código ASCII de 7 bits"
+      ],
+      "correcta": 0,
+      "tema": "ISP",
+      "descripcion": "El ISP otorga una IP pública (dinámica o estática) que permite identificar al hogar en la red Internet."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "Las siglas ISP corresponden al protocolo interno de seguridad de routers Cisco.",
+      "correcta": false,
+      "tema": "ISP",
+      "descripcion": "Significa Internet Service Provider."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué servicio esencial suelen ofrecer los ISP en sus servidores para que los clientes puedan navegar usando nombres de dominio?",
+      "opciones": [
+        "Servidores DNS locales",
+        "Servidores PGP públicos obligatorios",
+        "Servidores de correo SMTP no cifrado",
+        "Servidores de base de datos SQL"
+      ],
+      "correcta": 0,
+      "tema": "ISP",
+      "descripcion": "Los ISP proveen sus propios servidores DNS recursivos para resolver nombres a sus abonados."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "Un router WiFi de casa realiza la conversión NAT (Network Address Translation) para permitir que varios dispositivos locales compartan una sola dirección IP pública suministrada por el ISP.",
+      "correcta": true,
+      "tema": "ISP",
+      "descripcion": "NAT mapea las IPs privadas locales hacia la IP pública entregada por el ISP."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "Son ejemplos conocidos de proveedores de servicios de Internet (ISP) en el mercado:",
+      "opciones": [
+        "Compañías de telecomunicaciones nacionales/locales",
+        "Proveedores de enlace satelital comercial",
+        "Operadores de cablevisión y banda ancha",
+        "Fabricantes exclusivos de impresoras"
+      ],
+      "correctas": [
+        0,
+        1,
+        2
+      ],
+      "tema": "ISP",
+      "descripcion": "Los ISP suelen ser empresas de telecomunicaciones, cableoperadores o servicios satelitales."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué representa la sigla ASCII en computación?",
+      "opciones": [
+        "American Standard Code for Information Interchange",
+        "Automated System Code for Internet Integration",
+        "Array Standard Communications International Interface",
+        "Advanced Security Code for Interconnected Information"
+      ],
+      "correcta": 0,
+      "tema": "Tabla ASCII",
+      "descripcion": "ASCII es el Código Estándar Estadounidense para el Intercambio de Información."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "El estándar ASCII original de 7 bits permite representar exactamente 128 caracteres distintos (del 0 al 127).",
+      "correcta": true,
+      "tema": "Tabla ASCII",
+      "descripcion": "2^7 = 128 combinaciones posibles, incluyendo letras sin acento, números, símbolos y códigos de control."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "¿Cuáles son diferencias clave entre la tabla ASCII estándar y el estándar Unicode?",
+      "opciones": [
+        "ASCII usa históricamente 7 u 8 bits por carácter; Unicode abarca múltiples bytes (hasta UTF-8/UTF-16) para miles de símbolos",
+        "ASCII incluye caracteres de casi todos los idiomas del mundo como chino, japonés y emojis",
+        "Unicode es compatible con ASCII en sus primeros 128 valores",
+        "ASCII no fue diseñado originalmente para alfabetos no latinos con tildes, eñes o caracteres especiales"
+      ],
+      "correctas": [
+        0,
+        2,
+        3
+      ],
+      "tema": "Tabla ASCII",
+      "descripcion": "ASCII cubre solo 128 caracteres básicos en inglés. Unicode expande la representación para todos los idiomas de la tierra."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Para qué sirve principalmente la tabla ASCII en los sistemas informáticos?",
+      "opciones": [
+        "Para asignar una representación numérica binaria/decimal a caracteres alfanuméricos y símbolos de control",
+        "Para cifrar contraseñas con clave pública",
+        "Para enrutar paquetes en la capa de red IP",
+        "Para aumentar la velocidad del procesador"
+      ],
+      "correcta": 0,
+      "tema": "Tabla ASCII",
+      "descripcion": "Codifica caracteres (como la letra 'A', el número '0' o el salto de línea) en valores numéricos comprendidos por las máquinas."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "El código ASCII incluye tanto caracteres imprimibles (letras, números) como caracteres de control no imprimibles (ej. Enter, TAB, NULL).",
+      "correcta": true,
+      "tema": "Tabla ASCII",
+      "descripcion": "Los primeros 32 valores (0-31) e instruccionales (127) son códigos de control como LF, CR o BS."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "¿Cuáles de los siguientes elementos forman parte de los caracteres ASCII imprimibles?",
+      "opciones": [
+        "Letras mayúsculas A-Z y minúsculas a-z",
+        "Dígitos numéricos del 0 al 9",
+        "Signos de puntuación como +, -, *, /, @, #",
+        "Emojis dinámicos a color"
+      ],
+      "correctas": [
+        0,
+        1,
+        2
+      ],
+      "tema": "Tabla ASCII",
+      "descripcion": "El conjunto ASCII básico incluye alfabeto latino básico, números y símbolos comunes. Los emojis son de Unicode."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "En la tabla ASCII básica, ¿cuántos valores únicos de caracteres se pueden asignar utilizando exactamente 7 bits?",
+      "opciones": [
+        "128",
+        "256",
+        "64",
+        "512"
+      ],
+      "correcta": 0,
+      "tema": "Tabla ASCII",
+      "descripcion": "2 elevado a la 7 potencia es igual a 128 (del valor 0 al 127)."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "ASCII fue diseñado originalmente en el siglo XXI para unificar el uso de emojis en los teléfonos inteligentes.",
+      "correcta": false,
+      "tema": "Tabla ASCII",
+      "descripcion": "ASCII data de la década de 1960 para teleimpresores y ordenadores primitivos."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "La tabla ASCII estándar utiliza 16 bits para cada carácter primario.",
+      "correcta": false,
+      "tema": "Tabla ASCII",
+      "descripcion": "Utiliza 7 bits (128 caracteres)."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "¿Qué ventajas aporta el estándar Unicode frente a la tabla ASCII estándar de 7 bits?",
+      "opciones": [
+        "Capacidad de representar caracteres de múltiples alfabetos del mundo",
+        "Soporte para símbolos matemáticos avanzados y emojis",
+        "Compatibilidad retroactiva con los caracteres de la tabla ASCII básica",
+        "Eliminación completa del uso de bytes en la memoria"
+      ],
+      "correctas": [
+        0,
+        1,
+        2
+      ],
+      "tema": "Tabla ASCII",
+      "descripcion": "Unicode unifica los caracteres mundiales y mantiene compatibilidad con la tabla ASCII en su rango inicial."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿En qué rango numérico decimal se ubican los caracteres de control no imprimibles en ASCII?",
+      "opciones": [
+        "Del 0 al 31 (y el 127)",
+        "Del 65 al 90",
+        "Del 97 al 122",
+        "Del 128 al 255"
+      ],
+      "correcta": 0,
+      "tema": "Tabla ASCII",
+      "descripcion": "Los códigos 0-31 más el 127 representan funciones de control (NUL, CR, LF, TAB, etc.)."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "En la consola de Windows (CMD), ¿qué comando muestra la configuración básica de IP de los adaptadores de red?",
+      "opciones": [
+        "ipconfig",
+        "ifconfig",
+        "netstat",
+        "ping"
+      ],
+      "correcta": 0,
+      "tema": "Comandos de consola",
+      "descripcion": "ipconfig muestra direcciones IP, máscaras de subred y puertas de enlace en sistemas Windows."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "El comando `ipconfig /all` muestra información detallada de red, incluyendo las direcciones físicas MAC y servidores DNS asignados.",
+      "correcta": true,
+      "tema": "Comandos de consola",
+      "descripcion": "El parámetro `/all` expande el reporte de ipconfig detallando la MAC, DNS, DHCP, etc."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "¿Qué comandos permiten consultar o verificar la dirección física (MAC) de las tarjetas de red en Windows?",
+      "opciones": [
+        "getmac",
+        "ipconfig /all",
+        "tree",
+        "pwd"
+      ],
+      "correctas": [
+        0,
+        1
+      ],
+      "tema": "Comandos de consola",
+      "descripcion": "`getmac` y `ipconfig /all` despliegan las direcciones MAC fijadas en el hardware de red."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué comando de consola diagnostica la ruta que siguen los paquetes mostrando cada salto (router) hasta llegar a un destino remoto?",
+      "opciones": [
+        "tracert",
+        "ping",
+        "nslookup",
+        "dir"
+      ],
+      "correcta": 0,
+      "tema": "Comandos de consola",
+      "descripcion": "`tracert` (Trace Route) muestra todos los saltos de enrutadores intermedios hasta la IP de destino."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "El comando `ping` utiliza mensajes del protocolo ICMP para comprobar la conectividad entre dos nodos.",
+      "correcta": true,
+      "tema": "Comandos de consola",
+      "descripcion": "Envía un ICMP Echo Request y espera un ICMP Echo Reply midiendo el tiempo de respuesta."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "¿Cuáles de los siguientes comandos de consola sirven para examinar o listar archivos y estructuras de directorios?",
+      "opciones": [
+        "dir",
+        "tree",
+        "nslookup",
+        "ping"
+      ],
+      "correctas": [
+        0,
+        1
+      ],
+      "tema": "Comandos de consola",
+      "descripcion": "`dir` lista archivos y carpetas de un directorio; `tree` dibuja gráficamente el árbol de directorios."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué utilidad de consola permite realizar consultas manuales a servidores DNS para resolver un dominio o averiguar registros de red?",
+      "opciones": [
+        "nslookup",
+        "getmac",
+        "netstat",
+        "tree"
+      ],
+      "correcta": 0,
+      "tema": "Comandos de consola",
+      "descripcion": "`nslookup` (Name Server Lookup) realiza consultas directas a los servidores DNS."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "El comando `netstat` muestra la lista de conexiones de red activas, puertos abiertos y estadísticas del protocolo TCP/IP.",
+      "correcta": true,
+      "tema": "Comandos de consola",
+      "descripcion": "`netstat` (Network Statistics) lista puertos escuchando y conexiones activas."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "En PowerShell / Linux (o con alias), ¿qué comando muestra la ruta del directorio de trabajo actual (Print Working Directory)?",
+      "opciones": [
+        "pwd",
+        "dir",
+        "cd ..",
+        "ipconfig"
+      ],
+      "correcta": 0,
+      "tema": "Comandos de consola",
+      "descripcion": "`pwd` significa Print Working Directory y devuelve la ruta absoluta del directorio actual."
+    },
+    {
+      "tipo": "multiple",
+      "pregunta": "Selecciona los comandos de consola que están vinculados directamente al análisis y diagnóstico de redes:",
+      "opciones": [
+        "ping",
+        "tracert",
+        "nslookup",
+        "tree"
+      ],
+      "correctas": [
+        0,
+        1,
+        2
+      ],
+      "tema": "Comandos de consola",
+      "descripcion": "Ping, Tracert y Nslookup son herramientas clave de análisis de red. Tree es para el sistema de archivos local."
+    },
+    {
+      "tipo": "vf",
+      "pregunta": "El comando `ping 127.0.0.1` realiza una prueba de bucle local (loopback) a la propia pila de red de la máquina.",
+      "correcta": true,
+      "tema": "Comandos de consola",
+      "descripcion": "127.0.0.1 es la dirección IP de loopback estándar del sistema informático."
+    },
+    {
+      "tipo": "normal",
+      "pregunta": "¿Qué comando de Windows muestra gráficamente la estructura jerárquica de carpetas de la unidad o directorio actual?",
+      "opciones": [
+        "tree",
+        "dir",
+        "path",
+        "route"
+      ],
+      "correcta": 0,
+      "tema": "Comandos de consola",
+      "descripcion": "El comando `tree` genera la vista en árbol de las subcarpetas."
+    }
+  ]
+}
