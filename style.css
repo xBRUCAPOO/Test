@@ -1,5 +1,5 @@
 /* =========================================================
-   TEST — style.css  (v1.6.0)
+   TEST — style.css  (v1.7.0)
    Estética: profesional y sobria. Base neutra oscura (grafito),
    celeste solo en detalles (foco, progreso, selección, marca).
    Colores de estado: success / warning / error / info.
@@ -46,6 +46,14 @@
   --color-gray-a10: rgba(142, 149, 161, 0.1);
   --color-gray-a30: rgba(142, 149, 161, 0.3);
 
+  /* [v1.7.0] Pregunta difícil: el rojo que reemplaza a TODOS los celestes (acento) mientras se resuelve una pregunta
+     marcada como difícil. Se activa con la clase body.is-hard (más abajo redefine las variables --color-accent) */
+  --color-hard: var(--color-error);
+  --color-hard-a10: var(--color-error-a10);
+  --color-hard-a20: rgba(239, 68, 68, 0.2);
+  --color-hard-a40: rgba(239, 68, 68, 0.4);
+  --color-hard-glow: rgba(239, 68, 68, 0.07);
+
   /* [v1.1.0] Botón principal neutro (claro sobre fondo oscuro) */
   --color-action: #f2f4f7;
   --color-action-hover: #ffffff;
@@ -82,6 +90,22 @@
 html {
   color-scheme: dark;
   -webkit-text-size-adjust: 100%; /* [v1.2.0] celular: evita que el navegador agrande los textos al girar la pantalla */
+}
+
+/* [v1.7.0] El atributo hidden siempre oculta, aunque el elemento tenga un display propio (grid, flex...).
+   Lo usan el cartel de corrección, la etiqueta de pregunta difícil, el armado de palabras y los botones ocultos */
+[hidden] {
+  display: none !important;
+}
+
+/* [v1.7.0] PREGUNTA DIFÍCIL: mientras se resuelve una pregunta difícil, todo lo que era celeste pasa a rojo.
+   script.js agrega esta clase al body en esas preguntas y la saca al terminar o salir del test */
+body.is-hard {
+  --color-accent: var(--color-hard);
+  --color-accent-a10: var(--color-hard-a10);
+  --color-accent-a20: var(--color-hard-a20);
+  --color-accent-a40: var(--color-hard-a40);
+  --color-glow: var(--color-hard-glow);
 }
 
 /* [v1.2.0] Celular: sin el destello gris al tocar y sin zoom por doble toque en botones */
@@ -458,6 +482,44 @@ body.no-scroll {
   transition: transform 0.25s var(--ease), color 0.2s;
 }
 
+/* [v1.7.0] Tarjeta del historial: igual a la de un test, pero a la izquierda lleva la nota (verde / amarillo / rojo
+   según el resultado) en lugar del icono */
+.hist-card {
+  grid-template-columns: 64px 1fr auto;
+}
+.hist-card__score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 56px;
+  font-family: var(--font-title);
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 12px;
+}
+.hist-card__score strong {
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1;
+}
+.hist-card__score small {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--color-text-muted);
+}
+.hist-card__score--success { border-color: var(--color-success-a35); }
+.hist-card__score--success strong { color: var(--color-success); }
+.hist-card__score--warning { border-color: var(--color-warning-a35); }
+.hist-card__score--warning strong { color: var(--color-warning); }
+.hist-card__score--error { border-color: var(--color-error-a35); }
+.hist-card__score--error strong { color: var(--color-error); }
+/* "Incompleto" dentro de la tarjeta (color warning, como en los resultados) */
+.hist-card__tag {
+  color: var(--color-warning);
+}
+
 /* Hover solo en dispositivos con mouse (en celular el hover queda "pegado" tras tocar) */
 @media (hover: hover) {
   .test-card:hover {
@@ -535,6 +597,84 @@ body.no-scroll {
   margin-top: 6px;
 }
 
+/* [v1.7.0] Botón de ancho completo (Historial y Borrar historial) */
+.btn--block {
+  width: 100%;
+}
+
+/* ---------- [v1.7.0] Switch de modo de corrección (vista previa del test) ----------
+   Dos opciones en un solo control: la "pastilla" (::before) se desliza hacia la opción elegida.
+   script.js cambia data-mode ("final" / "instant") y aria-checked de cada botón */
+.modes {
+  display: grid;
+  gap: 12px;
+}
+.modeswitch {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 4px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+}
+.modeswitch::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  background: var(--color-surface-3);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 10px;
+  transition: transform 0.35s var(--ease);
+}
+.modeswitch[data-mode="instant"]::before {
+  transform: translateX(100%);
+}
+.mode {
+  position: relative;          /* queda por encima de la pastilla */
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 52px;            /* cómodo para tocar con el dedo */
+  padding: 8px 10px;
+  text-align: center;
+  font-family: var(--font-title);
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--color-text-dim);
+  background: var(--color-transparent);
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: color 0.25s;
+}
+.mode .material-symbols-outlined {
+  font-size: 20px;
+  flex-shrink: 0;
+  transition: color 0.25s;
+}
+.mode[aria-checked="true"] {
+  color: var(--color-text);
+}
+.mode[aria-checked="true"] .material-symbols-outlined {
+  color: var(--color-accent);
+}
+.mode:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+.modedesc {
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--color-text-dim);
+}
+
 /* ---------- Pantalla del test ---------- */
 /* [v1.5.2] Flecha "Volver": arriba a la izquierda de la pantalla del test. Sale del test
    (vuelve a la vista previa), así que script.js pide confirmación antes de salir */
@@ -598,6 +738,31 @@ body.no-scroll {
 }
 .qtopic:empty {
   display: none;
+}
+
+/* [v1.7.0] Etiqueta "Pregunta difícil" (calavera + texto) arriba de la pregunta, en rojo.
+   Solo se ve en las preguntas con "dificil": true; el borde de la tarjeta también se vuelve rojo (body.is-hard) */
+.qbadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-hard);
+  background: var(--color-hard-a10);
+  border: 1px solid var(--color-hard-a40);
+  border-radius: 999px;
+}
+.qbadge .material-symbols-outlined {
+  font-size: 16px;
+}
+body.is-hard .qcard {
+  border-color: var(--color-hard-a40);
 }
 
 /* pre-wrap respeta saltos de línea (útil para preguntas con código) */
@@ -737,6 +902,201 @@ body.no-scroll {
   color: var(--color-on-action);
 }
 
+/* [v1.7.0] Verdadero y falso: en vez de las letras "V" y "F" llevan los iconos check (verde) y close (rojo).
+   Al elegir una opción el icono pasa a ser oscuro sobre fondo de color (reglas de arriba) */
+.option__letter .material-symbols-outlined {
+  font-size: 20px;
+}
+.option--vf-v .option__letter {
+  color: var(--color-success);
+}
+.option--vf-f .option__letter {
+  color: var(--color-error);
+}
+
+/* [v1.7.0] CORRECCIÓN INSTANTÁNEA: después de responder las opciones quedan bloqueadas y se pintan según el resultado.
+   script.js agrega options--locked al contenedor y a cada opción option--right (elegida y correcta, verde),
+   option--wrong (elegida e incorrecta, roja) u option--missed (era correcta y no se eligió, verde con línea cortada).
+   Llevan el prefijo .options--locked para ganarle en especificidad a los colores de verdadero/falso */
+.options--locked .option {
+  pointer-events: none;
+}
+.options--locked .option.option--right,
+.options--locked .option.option--right:hover {
+  border-color: var(--color-success);
+  background: var(--color-success-a10);
+  box-shadow: 0 0 22px var(--color-success-a35);
+}
+.options--locked .option.option--right .option__letter {
+  background: var(--color-success);
+  border-color: var(--color-success);
+  color: var(--color-on-action);
+}
+.options--locked .option.option--right .option__mark {
+  color: var(--color-success);
+}
+.options--locked .option.option--wrong,
+.options--locked .option.option--wrong:hover {
+  border-color: var(--color-error);
+  background: var(--color-error-a10);
+  box-shadow: 0 0 22px var(--color-error-a35);
+}
+.options--locked .option.option--wrong .option__letter {
+  background: var(--color-error);
+  border-color: var(--color-error);
+  color: var(--color-on-action);
+}
+.options--locked .option.option--wrong .option__mark {
+  color: var(--color-error);
+}
+.options--locked .option.option--missed,
+.options--locked .option.option--missed:hover {
+  border-color: var(--color-success);
+  border-style: dashed;
+  background: var(--color-success-a10);
+  box-shadow: none;
+}
+.options--locked .option.option--missed .option__letter {
+  background: var(--color-transparent);
+  border-color: var(--color-success);
+  color: var(--color-success);
+}
+
+/* ---------- [v1.7.0] Formación de palabras (estilo Duolingo) ----------
+   Arriba la respuesta que se va armando; abajo el banco de palabras. Al tocar una palabra del banco se "va" a la
+   respuesta (en el banco queda su hueco punteado para que no se mueva el resto); al tocar una palabra de la
+   respuesta vuelve al banco */
+.wordbuild {
+  display: grid;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+/* Zona de la respuesta: si está vacía muestra el texto de data-placeholder ("Tu respuesta") */
+.wordbuild__answer {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 8px;
+  min-height: 72px;
+  padding: 12px;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 12px;
+  transition: border-color 0.25s, background 0.25s;
+}
+.wordbuild__answer:empty::before {
+  content: attr(data-placeholder);
+  align-self: center;
+  padding-left: 4px;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+}
+/* Corrección instantánea: la respuesta armada se pinta de verde o rojo */
+.wordbuild__answer--right {
+  border-color: var(--color-success);
+  background: var(--color-success-a10);
+}
+.wordbuild__answer--wrong {
+  border-color: var(--color-error);
+  background: var(--color-error-a10);
+}
+
+.wordbuild__bank {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Ficha de palabra: botón con borde inferior más grueso (efecto "en relieve") y alto cómodo para el dedo */
+.wordchip {
+  min-height: 44px;
+  padding: 9px 16px;
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.25;
+  color: var(--color-text);
+  background: var(--color-surface-3);
+  border: 1px solid var(--color-border-strong);
+  border-bottom-width: 3px;
+  border-radius: 10px;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+  transition: border-color 0.2s, transform 0.15s var(--ease), background 0.2s;
+}
+.wordchip:active:not(:disabled) {
+  transform: translateY(2px);
+}
+.wordchip:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+@media (hover: hover) {
+  .wordchip:hover:not(:disabled) {
+    border-color: var(--color-accent);
+  }
+}
+/* Fichas bloqueadas (ya corregida la pregunta): se ven normales pero no se pueden tocar */
+.wordchip:disabled {
+  color: var(--color-text);
+  cursor: default;
+}
+/* Hueco que queda en el banco cuando la palabra ya está en la respuesta */
+.wordchip--used,
+.wordchip--used:disabled {
+  color: var(--color-transparent);
+  background: var(--color-transparent);
+  border-color: var(--color-border);
+  border-style: dashed;
+  border-bottom-width: 1px;
+  pointer-events: none;
+  user-select: none;
+}
+/* Entrada de la palabra recién puesta en la respuesta */
+.wordchip--pop {
+  animation: chipPop 0.28s var(--ease-spring) both;
+}
+
+/* ---------- [v1.7.0] Cartel de corrección (modo instantáneo) ----------
+   Aparece bajo la pregunta apenas se responde: verde (correcto), amarillo (parcial) o rojo (incorrecto).
+   Adentro reutiliza las líneas de respuesta y la explicación de los resultados */
+.feedback {
+  margin-top: 18px;
+  padding: 14px 16px;
+  border: 1px solid var(--color-border);
+  border-left-width: 3px;
+  border-radius: 12px;
+  animation: fadeUp 0.4s var(--ease) both;
+}
+.feedback--ok {
+  border-color: var(--color-success-a35);
+  border-left-color: var(--color-success);
+  background: var(--color-success-a10);
+}
+.feedback--partial {
+  border-color: var(--color-warning-a35);
+  border-left-color: var(--color-warning);
+  background: var(--color-warning-a10);
+}
+.feedback--bad {
+  border-color: var(--color-error-a35);
+  border-left-color: var(--color-error);
+  background: var(--color-error-a10);
+}
+.feedback__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-title);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+.feedback--ok .feedback__head { color: var(--color-success); }
+.feedback--partial .feedback__head { color: var(--color-warning); }
+.feedback--bad .feedback__head { color: var(--color-error); }
+
 /* Navegación Anterior / Siguiente */
 .quiz__nav {
   display: flex;
@@ -749,6 +1109,13 @@ body.no-scroll {
 }
 .quiz__nav #btnNext {
   margin-left: auto;
+}
+/* [v1.7.0] Modo instantáneo: sin "Anterior", el botón principal ocupa todo el ancho */
+.quiz__nav--single .btn {
+  max-width: none;
+}
+.quiz__nav--single #btnNext {
+  margin-left: 0;
 }
 
 /* [v1.3.0] Botón "Terminar test": fila propia debajo de la navegación, discreto (texto tenue y más chico)
@@ -953,6 +1320,17 @@ body.no-scroll {
   letter-spacing: 0.06em;
   color: var(--color-text-dim);
 }
+/* [v1.7.0] Test, modo y fecha del resultado (ej.: "Modelo OSI · Corrección final · 22/10/2026, 21:30") */
+.score__source {
+  margin-top: 6px;
+  font-size: 0.8rem;
+  line-height: 1.35;
+  color: var(--color-text-muted);
+  overflow-wrap: anywhere;
+}
+.score__source:empty {
+  display: none;
+}
 
 /* [v1.3.0] "Incompleto": aparece bajo el puntaje cuando el test se terminó con preguntas sin contestar.
    Usa el color de estado warning (script.js lo muestra u oculta con el atributo hidden) */
@@ -1114,6 +1492,22 @@ body.no-scroll {
 /* [v1.3.0] En las sin contestar también el número y el texto de la pregunta van en gris */
 .review__item--skip .review__num,
 .review__item--skip .review__q { color: var(--color-gray); }
+
+/* [v1.7.0] Marca "Pregunta difícil" (calavera) bajo el enunciado en los resultados y en el historial */
+.review__hardtag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-hard);
+}
+.review__hardtag .material-symbols-outlined {
+  font-size: 16px;
+}
 
 /* Líneas "Tu respuesta" y "Correcta" */
 .review__ans {
@@ -1287,6 +1681,12 @@ body.no-scroll {
 @keyframes selectPulse {
   0% { transform: scale(0.99); }
   100% { transform: scale(1); }
+}
+
+/* [v1.7.0] Palabra que entra a la respuesta (formación de palabras) */
+@keyframes chipPop {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 @keyframes glowBreath {

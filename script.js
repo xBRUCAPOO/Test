@@ -1,5 +1,5 @@
 /* =========================================================
-   TEST — script.js  (v1.6.0)
+   TEST — script.js  (v1.7.0)
    Lógica de la app de tests multiple choice.
 
    CÓMO AGREGAR UN TEST (las preguntas ya NO se escriben acá):
@@ -12,6 +12,7 @@
    {
      "nombre": "Historia Argentina",          // nombre que se ve en el menú (si falta, se usa el del archivo)
      "tema": "Texto opcional bajo el nombre",  // opcional
+     "icono": "lan",                           // [v1.7.0] opcional: icono del test en el menú (nombre de fonts.google.com/icons; por defecto "connected_tv")
      "preguntas": [
        {
          "pregunta": "Texto de la pregunta",
@@ -51,6 +52,27 @@
    [v1.6.0] La app es una PWA: se puede instalar en el celular o el escritorio (manifest.json + íconos SVG) y
    funciona sin conexión gracias al service worker (sw.js), que guarda la app y los tests ya cargados.
    Al cambiar archivos, subir la versión de CACHE en sw.js para que los celulares actualicen.
+
+   [v1.7.0] NOVEDADES
+   • "dificil": true en cualquier pregunta (de cualquier tipo) la marca como PREGUNTA DIFÍCIL: aparece la etiqueta con
+     calavera (icono "skull") y todos los celestes de la pantalla pasan a rojo mientras se resuelve. También se marca en los resultados.
+       { "pregunta": "...", "opciones": ["A", "B", "C"], "correcta": 1, "dificil": true }
+   • NUEVO TIPO "palabras" (formación de palabras, estilo Duolingo). "pregunta" es la oración incompleta o el problema;
+     "correcta" es la LISTA DE PALABRAS en el orden correcto y "extras" (opcional) son palabras de más para confundir.
+     El banco se mezcla solo en cada intento. Cada elemento puede ser una palabra o una frase corta. Vale 1 si la
+     respuesta armada es exactamente la correcta y en orden; si no, 0 (no hay puntaje parcial).
+       { "tipo": "palabras", "pregunta": "Completá: el modelo OSI tiene...", "correcta": ["siete", "capas"], "extras": ["cinco", "niveles"] }
+     (si "correcta" es una lista de textos, el tipo "palabras" también se detecta solo)
+   • Verdadero o falso ahora muestra los iconos "check" y "close" en lugar de las letras V y F (se sigue pudiendo
+     contestar con las teclas V y F).
+   • MODO DE CORRECCIÓN: en la vista previa del test hay un switch para elegir entre "Corrección final" (el de siempre) y
+     "Corrección instantánea": sin botón "Anterior"; al responder se muestra enseguida si estuvo bien (en verde/rojo),
+     la respuesta correcta y la explicación, y recién con "Continuar" se pasa a la siguiente. En normal y verdadero/falso
+     tocar una opción ya es responder; en selección múltiple y en palabras se responde con "Comprobar". Al terminar
+     todas se muestran los resultados finales igual que siempre. Una pregunta marcada pero sin comprobar no cuenta.
+   • HISTORIAL: al terminar un test (también si se terminó antes) el resultado completo se guarda en este dispositivo
+     (localStorage). Se conservan los últimos 10; se ven desde el botón "Historial" del menú y al tocar uno se abre el
+     mismo panel de resultados. Para vaciarlo está el botón "Borrar historial".
    ========================================================= */
 
 /* =========================================================
@@ -63,6 +85,18 @@ const MAX_SCORE = 10;                     // Puntaje máximo del test
 const MAX_BACK = 2;                       // [v1.3.0] cuántas preguntas se puede volver con "Anterior" (respecto de la más lejana alcanzada)
 const VF_OPCIONES = ["Verdadero", "Falso"]; // [v1.4.0] opciones fijas de las preguntas de verdadero o falso (posición 0 = Verdadero)
 const RING_LENGTH = 2 * Math.PI * 52;     // Circunferencia del aro de puntaje (coincide con style.css)
+const HISTORY_KEY = "test.historial.v1";  // [v1.7.0] clave de localStorage donde se guardan los últimos resultados (solo en este dispositivo)
+const HISTORY_MAX = 10;                   // [v1.7.0] cuántos resultados se conservan en el historial (los más viejos se descartan)
+const MODOS = {                           // [v1.7.0] modos de corrección: nombre y descripción que se muestra en el switch
+  final: {
+    label: "Corrección final",
+    desc: "Ves los resultados cuando terminás el test y podés volver a preguntas anteriores."
+  },
+  instant: {
+    label: "Corrección instantánea",
+    desc: "Ves si acertaste apenas respondés, con la explicación, y recién ahí pasás a la siguiente. No se puede volver atrás."
+  }
+};
 
 // Atajo para obtener elementos por id
 const $ = (id) => document.getElementById(id);
@@ -122,7 +156,29 @@ const els = {
   scoreMini: $("scoreMini"),
   miniValue: $("miniValue"),
   miniMsg: $("miniMsg"),
-  miniIncomplete: $("miniIncomplete")
+  miniIncomplete: $("miniIncomplete"),
+  // [v1.7.0] etiqueta "Pregunta difícil", armado de palabras, cartel de corrección y barra de navegación
+  qBadge: $("qBadge"),
+  wordBuild: $("wordBuild"),
+  wordAnswer: $("wordAnswer"),
+  wordBank: $("wordBank"),
+  feedback: $("feedback"),
+  quizNav: $("quizNav"),
+  // [v1.7.0] switch de modo de corrección (vista previa del test)
+  modeSwitch: $("modeSwitch"),
+  modeBtns: [...document.querySelectorAll("#modeSwitch .mode")],
+  modeDesc: $("modeDesc"),
+  // [v1.7.0] historial (botón del menú, pantalla de historial y datos extra del panel de resultados)
+  btnHistory: $("btnHistory"),
+  btnHistoryLabel: $("btnHistoryLabel"),
+  screenHistory: $("screenHistory"),
+  btnHistoryBack: $("btnHistoryBack"),
+  btnHistoryClear: $("btnHistoryClear"),
+  histNotice: $("histNotice"),
+  histList: $("histList"),
+  scoreSource: $("scoreSource"),
+  btnHomeIcon: $("btnHomeIcon"),
+  btnHomeLabel: $("btnHomeLabel")
 };
 
 let catalog = [];       // [v1.2.0] tests cargados desde los JSON: { file, nombre, tema, preguntas }
@@ -133,6 +189,10 @@ let answers = [];       // [v1.4.0] Respuesta por pregunta: lista de posiciones 
 let quizActive = false; // true mientras se está resolviendo el test
 let maxReached = 0;     // [v1.3.0] índice de la pregunta más lejana a la que se llegó (límite para "Anterior")
 let pendingConfirm = null; // [v1.5.0] función que espera la respuesta de la ventana de confirmación (null = cerrada)
+let mode = "final";        // [v1.7.0] modo de corrección elegido: "final" (resultados al terminar) o "instant" (corrige cada pregunta)
+let checked = [];          // [v1.7.0] modo instantáneo: true en las preguntas ya corregidas (quedan bloqueadas)
+let bankOrders = [];       // [v1.7.0] palabras: orden mezclado del banco de cada pregunta de formación de palabras (null en las demás)
+let floatFromHistory = false; // [v1.7.0] true si el panel de resultados se abrió desde el historial (y no al terminar un test)
 
 /* =========================================================
    2) UTILIDADES
@@ -154,6 +214,8 @@ const calcScore = (points, base) => Math.round((points / base) * MAX_SCORE * 10)
 //    (así marcar todas las opciones no da puntos). Con una sola correcta la fórmula también da 1 o 0.
 function questionCredit(q, ans) {
   if (!ans || ans.length === 0) return 0;
+  // [v1.7.0] Formación de palabras: vale 1 solo si las palabras puestas son EXACTAMENTE la solución y en el mismo orden
+  if (q.tipo === "palabras") return sameSequence(ans.map((i) => q.opciones[i]), q.solucion) ? 1 : 0;
   const hits = ans.filter((i) => q.correctas.includes(i)).length; // correctas marcadas
   const wrong = ans.length - hits;                                // incorrectas marcadas
   return Math.max(0, (hits - wrong) / q.correctas.length);
@@ -161,6 +223,36 @@ function questionCredit(q, ans) {
 
 // [v1.4.0] Formatea puntos, que pueden ser fraccionarios: 3 -> "3", 2.6667 -> "2.67"
 const formatPoints = (v) => String(Math.round(v * 100) / 100);
+
+// [v1.7.0] true si dos listas tienen los mismos elementos en el mismo orden
+const sameSequence = (a, b) => a.length === b.length && a.every((v, i) => v === b[i]);
+
+// [v1.7.0] Mezcla el banco de palabras de una pregunta de formación de palabras (Fisher-Yates) y devuelve la lista de
+// posiciones del banco en orden aleatorio. Si por casualidad queda igual que el orden de la solución, se vuelve a mezclar
+function shuffleBank(q) {
+  const ids = q.opciones.map((_, i) => i);
+  for (let intento = 0; intento < 6; intento++) {
+    for (let i = ids.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [ids[i], ids[j]] = [ids[j], ids[i]];
+    }
+    if (ids.length < 2 || ids.some((id, i) => id !== i)) break;
+  }
+  return ids;
+}
+
+// [v1.7.0] Pregunta difícil: pone o saca la clase del body que cambia todos los celestes por rojo
+// (style.css redefine las variables de acento en body.is-hard)
+function setHardTheme(on) {
+  document.body.classList.toggle("is-hard", !!on);
+}
+
+// [v1.7.0] Fecha y hora legibles para el historial: "22/10/2026, 21:30"
+function formatDate(iso) {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return "";
+  return d.toLocaleString("es-AR", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" });
+}
 
 // [v1.3.0] Índice más bajo al que se puede volver: hasta MAX_BACK preguntas por detrás de la más lejana alcanzada
 const minAllowedIndex = () => Math.max(0, maxReached - MAX_BACK);
@@ -184,8 +276,10 @@ function icon(name) {
 // Muestra una pantalla y oculta las demás (reinicia la animación de entrada)
 // [v1.2.0] Ahora son 3 pantallas (menú, inicio del test, test) y sube al tope de la página (útil en celular)
 function showScreen(screen) {
-  [els.screenMenu, els.screenStart, els.screenQuiz].forEach((s) => s.classList.remove("screen--active"));
+  // [v1.7.0] Ahora son 4 pantallas (menú, historial, inicio del test, test); el tema rojo de "pregunta difícil" solo rige en la del test
+  [els.screenMenu, els.screenHistory, els.screenStart, els.screenQuiz].forEach((s) => s.classList.remove("screen--active"));
   screen.classList.add("screen--active");
+  if (screen !== els.screenQuiz) setHardTheme(false);
   window.scrollTo(0, 0);
 }
 
@@ -232,10 +326,12 @@ function detectType(q) {
     const t = q.tipo.toLowerCase().normalize("NFD").replace(/[̀-ͯ\s_-]/g, ""); // sin tildes, espacios ni guiones
     if (t === "vf" || t.startsWith("verdadero")) return "vf";
     if (t.startsWith("multi") || t.startsWith("seleccionmultiple")) return "multiple";
+    if (t.startsWith("palabra") || t.startsWith("formacion")) return "palabras"; // [v1.7.0] formación de palabras
     if (t === "normal") return "normal";
     return null;
   }
   if (Array.isArray(q.correctas)) return "multiple";
+  if (Array.isArray(q.correcta)) return "palabras"; // [v1.7.0] "correcta" es una lista de palabras
   if (typeof q.correcta === "boolean") return "vf";
   return "normal";
 }
@@ -249,7 +345,21 @@ function normalizeQuestion(q) {
   if (!tipo) return null;
 
   let opciones, correctas, letras;
-  if (tipo === "vf") {
+  let solucion = []; // [v1.7.0] solo en "palabras": la respuesta correcta como lista de palabras en orden
+  if (tipo === "palabras") {
+    // [v1.7.0] Formación de palabras: "correcta" = palabras en el orden correcto (1 a 30); "extras" (opcional) = palabras de más.
+    // El banco queda como [...solución, ...extras]; el orden en que se muestra se mezcla en cada intento (ver shuffleBank)
+    const extras = q.extras === undefined ? [] : q.extras;
+    if (!Array.isArray(q.correcta) || q.correcta.length < 1 || q.correcta.length > 30) return null;
+    if (!Array.isArray(extras) || extras.length > 20) return null;
+    const limpiar = (lista) => lista.map((w) => (typeof w === "string" || typeof w === "number" ? String(w).trim() : ""));
+    solucion = limpiar(q.correcta);
+    const sobrantes = limpiar(extras);
+    if (solucion.concat(sobrantes).some((w) => w === "")) return null; // no se aceptan palabras vacías ni que no sean texto
+    opciones = solucion.concat(sobrantes);
+    correctas = solucion.map((_, i) => i); // posiciones de la solución dentro del banco, en orden
+    letras = [];                            // el armado de palabras no usa letras ni atajos de teclado
+  } else if (tipo === "vf") {
     // Verdadero o falso: las opciones son fijas; "correcta" es true/false (también se acepta el texto "verdadero" / "falso")
     let valor = q.correcta;
     if (typeof valor === "string") valor = { verdadero: true, v: true, falso: false, f: false }[valor.trim().toLowerCase()];
@@ -279,6 +389,9 @@ function normalizeQuestion(q) {
     opciones,
     correctas,
     letras,
+    solucion,
+    // [v1.7.0] Pregunta difícil (cualquier tipo): "dificil": true en el JSON (también se acepta "si" / "sí" / "true" como texto)
+    dificil: q.dificil === true || (typeof q.dificil === "string" && ["true", "si", "sí", "1"].includes(q.dificil.trim().toLowerCase())),
     // [v1.3.0] Tema opcional de la pregunta: se muestra en gris arriba de la pregunta mientras se resuelve
     tema: typeof q.tema === "string" ? q.tema.trim() : "",
     // Descripción opcional: se muestra solo en los resultados, bajo una respuesta incorrecta
@@ -309,7 +422,7 @@ function parseTest(file, data) {
     file,
     nombre: typeof data.nombre === "string" && data.nombre.trim() ? data.nombre.trim() : file.replace(/\.json$/i, ""),
     tema: typeof data.tema === "string" ? data.tema.trim() : "",
-    // [v1.6.1] Icono del test (nombre de Material Symbols, definido en el JSON). Si falta o es inválido, usa "connected_tv"
+    // [v1.7.0] Icono del test (nombre de Material Symbols, definido en el JSON). Si falta o es inválido, usa "connected_tv"
     icono: typeof data.icono === "string" && /^[a-z0-9_]+$/.test(data.icono.trim()) ? data.icono.trim() : "connected_tv",
     preguntas
   };
@@ -392,7 +505,7 @@ function renderMenu() {
 
     const iconBox = document.createElement("span");
     iconBox.className = "test-card__icon";
-    iconBox.appendChild(icon(t.icono)); // [v1.6.1] icono definido en el JSON del test
+    iconBox.appendChild(icon(t.icono)); // [v1.7.0] icono definido en el JSON del test
 
     const info = document.createElement("span");
     info.className = "test-card__info";
@@ -432,6 +545,7 @@ function showMenu() {
   renderTitle(els.menuTitle, "Test");
   document.title = "Test";
   setTag("MENÚ");
+  updateHistoryButton(); // [v1.7.0] actualiza la cantidad de resultados guardados en el botón "Historial"
   showScreen(els.screenMenu);
 }
 
@@ -439,8 +553,17 @@ function showMenu() {
 function selectTest(t) {
   currentTest = t;
   questions = t.preguntas;
+  setMode("final"); // [v1.7.0] cada test arranca en el modo de siempre (corrección final)
   setupStart();
   showScreen(els.screenStart);
+}
+
+// [v1.7.0] Cambia el modo de corrección (switch de la vista previa) y actualiza el switch y su descripción
+function setMode(m) {
+  mode = m === "instant" ? "instant" : "final";
+  els.modeSwitch.dataset.mode = mode; // el CSS desliza la pastilla hacia la opción elegida
+  els.modeBtns.forEach((b) => b.setAttribute("aria-checked", String(b.dataset.mode === mode)));
+  els.modeDesc.textContent = MODOS[mode].desc;
 }
 
 /* =========================================================
@@ -466,6 +589,12 @@ function startTest() {
   current = 0;
   maxReached = 0; // [v1.3.0] reinicia el límite de "Anterior"
   answers = new Array(questions.length).fill(null);
+  checked = new Array(questions.length).fill(false); // [v1.7.0] ninguna pregunta corregida todavía (modo instantáneo)
+  // [v1.7.0] Formación de palabras: el banco de cada pregunta se mezcla de nuevo en cada intento
+  bankOrders = questions.map((q) => (q.tipo === "palabras" ? shuffleBank(q) : null));
+  // [v1.7.0] Modo instantáneo: no hay botón "Anterior" y el botón principal ocupa todo el ancho
+  els.btnPrev.hidden = mode === "instant";
+  els.quizNav.classList.toggle("quiz__nav--single", mode === "instant");
   quizActive = true;
   setTag("EN CURSO");
   showScreen(els.screenQuiz);
@@ -473,6 +602,8 @@ function startTest() {
 }
 
 // Dibuja la pregunta actual con sus opciones
+// [v1.7.0] Ahora también: etiqueta "Pregunta difícil" (todo en rojo), iconos check/close en verdadero/falso,
+// armado de palabras (tipo "palabras") y limpieza del cartel de corrección del modo instantáneo
 function renderQuestion() {
   const q = questions[current];
 
@@ -482,45 +613,70 @@ function renderQuestion() {
   els.qTopic.textContent = q.tema;    // [v1.3.0] tema opcional: si está vacío, el CSS oculta el párrafo
   maxReached = Math.max(maxReached, current); // [v1.3.0] recuerda la pregunta más lejana alcanzada (límite de "Anterior")
 
+  // [v1.7.0] Pregunta difícil: aparece la etiqueta con calavera y los celestes pasan a rojo mientras dure la pregunta
+  els.qBadge.hidden = !q.dificil;
+  setHardTheme(q.dificil);
+
+  // [v1.7.0] Pregunta nueva: se oculta el cartel de corrección y se desbloquean las opciones
+  els.feedback.hidden = true;
+  els.feedback.textContent = "";
+  els.options.classList.remove("options--locked");
+
   // [v1.4.0] Según el tipo: normal y verdadero/falso eligen UNA opción (radio); selección múltiple permite marcar varias (casillas)
   const multi = q.tipo === "multiple";
+  const words = q.tipo === "palabras"; // [v1.7.0] formación de palabras: se arma con fichas, no con opciones
   const picked = answers[current] || []; // posiciones ya elegidas (al volver a una pregunta se conservan)
-  els.qHint.textContent = multi ? "Seleccioná todas las correctas" : ""; // aviso fijo solo en múltiple (vacío = oculto por CSS)
+  els.qHint.textContent = multi
+    ? "Seleccioná todas las correctas" // aviso fijo solo en múltiple (vacío = oculto por CSS)
+    : words
+      ? "Armá la respuesta tocando las palabras. Tocá una palabra ya puesta para sacarla."
+      : "";
   els.options.setAttribute("role", multi ? "group" : "radiogroup");
+  els.options.hidden = words;
+  els.wordBuild.hidden = !words;
 
   els.options.textContent = "";
-  q.opciones.forEach((texto, i) => {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    // [v1.5.1] En verdadero/falso cada opción lleva la clase de su valor ("option--vf-v" = Verdadero,
-    // "option--vf-f" = Falso): el CSS ilumina la elegida en verde o rojo según ese valor
-    const vfSide = q.tipo === "vf" ? (i === 0 ? " option--vf-v" : " option--vf-f") : "";
-    btn.className = multi ? "option option--multi" : "option" + vfSide;
-    btn.setAttribute("role", multi ? "checkbox" : "radio");
-    btn.setAttribute("aria-checked", String(picked.includes(i)));
-    btn.style.animationDelay = `${i * 70}ms`;
-    if (picked.includes(i)) btn.classList.add("option--selected");
+  if (words) {
+    els.wordAnswer.classList.remove("wordbuild__answer--right", "wordbuild__answer--wrong");
+    renderWords();
+  } else {
+    q.opciones.forEach((texto, i) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      // [v1.5.1] En verdadero/falso cada opción lleva la clase de su valor ("option--vf-v" = Verdadero,
+      // "option--vf-f" = Falso): el CSS ilumina la elegida en verde o rojo según ese valor
+      const vfSide = q.tipo === "vf" ? (i === 0 ? " option--vf-v" : " option--vf-f") : "";
+      btn.className = multi ? "option option--multi" : "option" + vfSide;
+      btn.setAttribute("role", multi ? "checkbox" : "radio");
+      btn.setAttribute("aria-checked", String(picked.includes(i)));
+      btn.style.animationDelay = `${i * 70}ms`;
+      if (picked.includes(i)) btn.classList.add("option--selected");
 
-    const letter = document.createElement("span");
-    letter.className = "option__letter";
-    letter.textContent = q.letras[i]; // A, B, C, D... (en verdadero/falso: V y F)
+      const letter = document.createElement("span");
+      letter.className = "option__letter";
+      if (q.tipo === "vf") {
+        letter.appendChild(icon(i === 0 ? "check" : "close")); // [v1.7.0] iconos check / close en lugar de "V" y "F"
+      } else {
+        letter.textContent = q.letras[i]; // A, B, C, D...
+      }
 
-    const label = document.createElement("span");
-    label.className = "option__text";
-    label.textContent = texto;
+      const label = document.createElement("span");
+      label.className = "option__text";
+      label.textContent = texto;
 
-    btn.append(letter, label);
+      btn.append(letter, label);
 
-    // [v1.4.0] En múltiple se agrega una casilla a la derecha que se tilda al marcar la opción
-    if (multi) {
-      const mark = icon(picked.includes(i) ? "check_box" : "check_box_outline_blank");
-      mark.classList.add("option__mark");
-      btn.appendChild(mark);
-    }
+      // [v1.4.0] En múltiple se agrega una casilla a la derecha que se tilda al marcar la opción
+      if (multi) {
+        const mark = icon(picked.includes(i) ? "check_box" : "check_box_outline_blank");
+        mark.classList.add("option__mark");
+        btn.appendChild(mark);
+      }
 
-    btn.addEventListener("click", () => selectOption(i));
-    els.options.appendChild(btn);
-  });
+      btn.addEventListener("click", () => selectOption(i));
+      els.options.appendChild(btn);
+    });
+  }
 
   // Reinicia la animación de entrada de la tarjeta en cada pregunta
   els.qCard.classList.remove("qcard--in");
@@ -533,11 +689,69 @@ function renderQuestion() {
   updateNext();
 }
 
+// [v1.7.0] Crea una ficha de palabra (botón). "used" = es el hueco que queda en el banco cuando la palabra ya está
+// en la respuesta; "locked" = la pregunta ya fue corregida (modo instantáneo) y no se puede tocar
+function wordChip(texto, { used = false, locked = false, onClick = null } = {}) {
+  const b = document.createElement("button");
+  b.type = "button";
+  b.className = "wordchip" + (used ? " wordchip--used" : "");
+  b.textContent = texto;
+  if (used || locked) b.disabled = true;
+  if (used) {
+    b.tabIndex = -1;
+    b.setAttribute("aria-hidden", "true");
+  }
+  if (onClick && !used && !locked) b.addEventListener("click", onClick);
+  return b;
+}
+
+// [v1.7.0] Dibuja la respuesta armada (arriba) y el banco de palabras (abajo) de la pregunta de formación de palabras actual.
+// answers[current] guarda las posiciones del banco ya puestas, en orden; popLast anima la última palabra puesta
+function renderWords(popLast = false) {
+  const q = questions[current];
+  const placed = answers[current] || [];
+  const locked = mode === "instant" && checked[current];
+
+  els.wordAnswer.textContent = "";
+  placed.forEach((id, pos) => {
+    const chip = wordChip(q.opciones[id], { locked, onClick: () => removeWord(pos) });
+    if (popLast && pos === placed.length - 1) chip.classList.add("wordchip--pop");
+    els.wordAnswer.appendChild(chip);
+  });
+
+  els.wordBank.textContent = "";
+  bankOrders[current].forEach((id) => {
+    els.wordBank.appendChild(wordChip(q.opciones[id], { used: placed.includes(id), locked, onClick: () => addWord(id) }));
+  });
+}
+
+// [v1.7.0] Pasa una palabra del banco a la respuesta
+function addWord(id) {
+  if (!quizActive || (mode === "instant" && checked[current])) return;
+  const placed = answers[current] || [];
+  if (placed.includes(id)) return;
+  answers[current] = [...placed, id];
+  renderWords(true);
+  updateNext();
+}
+
+// [v1.7.0] Saca una palabra de la respuesta (vuelve al banco); si no queda ninguna, la pregunta vuelve a estar sin responder
+function removeWord(pos) {
+  if (!quizActive || (mode === "instant" && checked[current])) return;
+  const placed = [...(answers[current] || [])];
+  placed.splice(pos, 1);
+  answers[current] = placed.length > 0 ? placed : null;
+  renderWords();
+  updateNext();
+}
+
 // Guarda la opción elegida y la resalta (se puede cambiar antes de avanzar).
 // [v1.4.0] En normal y verdadero/falso reemplaza la elección; en selección múltiple marca o desmarca la opción tocada
 // (si no queda ninguna marcada, la pregunta vuelve a estar sin responder)
 function selectOption(i) {
   const q = questions[current];
+  if (q.tipo === "palabras") return;                    // [v1.7.0] las palabras se arman con las fichas
+  if (mode === "instant" && checked[current]) return;   // [v1.7.0] pregunta ya corregida: no se puede cambiar
   if (q.tipo === "multiple") {
     const sel = new Set(answers[current] || []);
     if (sel.has(i)) sel.delete(i); else sel.add(i);
@@ -555,19 +769,96 @@ function selectOption(i) {
     if (mark) mark.textContent = selected ? "check_box" : "check_box_outline_blank";
   });
   updateNext();
+
+  // [v1.7.0] Corrección instantánea: en normal y verdadero/falso, tocar una opción ya es responder
+  if (mode === "instant" && q.tipo !== "multiple") checkAnswer();
+}
+
+// [v1.7.0] CORRECCIÓN INSTANTÁNEA: corrige la pregunta actual apenas se responde. Bloquea la pregunta, pinta las opciones
+// (verde = correcta, rojo = elegida y mal, verde con línea cortada = era correcta y faltó) y muestra el cartel con el resultado
+function checkAnswer() {
+  if (mode !== "instant" || checked[current] || answers[current] === null) return;
+  const q = questions[current];
+  const chosen = answers[current];
+  const credit = questionCredit(q, chosen);
+  checked[current] = true;
+
+  if (q.tipo === "palabras") {
+    renderWords(); // se vuelve a dibujar con las fichas bloqueadas
+    els.wordAnswer.classList.add(credit === 1 ? "wordbuild__answer--right" : "wordbuild__answer--wrong");
+  } else {
+    els.options.classList.add("options--locked");
+    [...els.options.children].forEach((btn, idx) => {
+      const isCorrect = q.correctas.includes(idx);
+      if (chosen.includes(idx)) btn.classList.add(isCorrect ? "option--right" : "option--wrong");
+      else if (isCorrect) btn.classList.add("option--missed");
+      btn.setAttribute("aria-disabled", "true");
+    });
+  }
+
+  showFeedback(q, chosen, credit);
+  updateNext();
+  els.btnNext.scrollIntoView({ block: "nearest", behavior: "smooth" }); // en celular, deja a la vista el cartel y "Continuar"
+}
+
+// [v1.7.0] Arma el cartel de corrección: ¡Correcto! / Parcialmente correcto / Incorrecto, y si no se acertó del todo,
+// la respuesta correcta (o lo que faltó) y la explicación de la pregunta si la tiene
+function showFeedback(q, chosen, credit) {
+  const tone = credit === 1 ? "ok" : credit > 0 ? "partial" : "bad";
+  const box = els.feedback;
+  box.className = `feedback feedback--${tone}`;
+  box.textContent = "";
+
+  const head = document.createElement("div");
+  head.className = "feedback__head";
+  const title = document.createElement("span");
+  title.textContent = tone === "ok" ? "¡Correcto!" : tone === "partial" ? "Parcialmente correcto" : "Incorrecto";
+  head.append(icon(tone === "ok" ? "check_circle" : tone === "partial" ? "rule" : "cancel"), title);
+  box.appendChild(head);
+  box.hidden = false;
+  if (credit === 1) return;
+
+  if (q.tipo === "palabras") {
+    box.appendChild(answerLine("Correcta", q.solucion.join(" "), "ok"));
+  } else if (q.tipo === "multiple") {
+    q.correctas.filter((idx) => !chosen.includes(idx))
+      .forEach((idx) => box.appendChild(answerLine("Faltó", q.opciones[idx], "ok")));
+  } else {
+    box.appendChild(answerLine("Correcta", q.opciones[q.correctas[0]], "ok"));
+  }
+  if (tone === "partial") box.appendChild(partialNote(credit));
+  if (q.descripcion) box.appendChild(descriptionBlock(q.descripcion));
 }
 
 // Habilita "Siguiente" solo si hay respuesta; en la última pregunta cambia a "Finalizar"
+// [v1.7.0] En el modo instantáneo el botón cambia de función: "Comprobar" (selección múltiple y palabras, antes de corregir),
+// y después de corregir "Continuar" / "Finalizar". En normal y verdadero/falso se corrige al tocar la opción
 function updateNext() {
   const isLast = current === questions.length - 1;
-  els.btnNext.disabled = answers[current] === null;
+  const hasAnswer = answers[current] !== null;
+
+  if (mode === "instant") {
+    const tipo = questions[current].tipo;
+    const needsCheck = !checked[current] && (tipo === "multiple" || tipo === "palabras");
+    els.btnNext.disabled = needsCheck ? !hasAnswer : !checked[current];
+    els.btnNextLabel.textContent = needsCheck ? "Comprobar" : isLast ? "Finalizar" : "Continuar";
+    els.btnNextIcon.textContent = needsCheck ? "check" : isLast ? "flag" : "arrow_forward";
+    return;
+  }
+
+  els.btnNext.disabled = !hasAnswer;
   els.btnNextLabel.textContent = isLast ? "Finalizar" : "Siguiente";
   els.btnNextIcon.textContent = isLast ? "flag" : "arrow_forward";
 }
 
 // Avanza a la siguiente pregunta o termina el test
+// [v1.7.0] En el modo instantáneo, si la pregunta todavía no se corrigió el botón la corrige ("Comprobar")
 function goNext() {
-  if (answers[current] === null) return;
+  if (!quizActive || answers[current] === null) return;
+  if (mode === "instant" && !checked[current]) {
+    checkAnswer();
+    return;
+  }
   if (current < questions.length - 1) {
     current++;
     renderQuestion();
@@ -579,8 +870,9 @@ function goNext() {
 // Vuelve a la pregunta anterior (conserva la respuesta ya elegida).
 // [v1.3.0] Solo hasta MAX_BACK (2) preguntas por detrás de la más lejana alcanzada; también rige para la flecha izquierda del teclado.
 // [v1.5.2] Ya no pide confirmación: volver a la pregunta anterior no saca del test ni pierde respuestas
+// [v1.7.0] En el modo instantáneo no se puede volver atrás
 function goPrev() {
-  if (current <= minAllowedIndex()) return;
+  if (mode === "instant" || current <= minAllowedIndex()) return;
   current--;
   renderQuestion();
 }
@@ -613,9 +905,12 @@ async function goBackToPreview() {
 // [v1.3.0] El test se puede terminar en cualquier momento ("Terminar test"): las preguntas sin contestar suman 0
 // en el promedio general y no cuentan en el promedio de contestadas
 // [v1.5.0] Si quedan preguntas sin contestar, antes de terminar pide confirmación en una ventana flotante
+// [v1.7.0] Al terminar guarda el resultado completo en el historial. En el modo instantáneo solo cuentan las preguntas
+// ya corregidas: una respuesta marcada pero sin "Comprobar" se toma como sin contestar
 async function finishTest() {
   if (!quizActive) return; // evita terminar dos veces (por ejemplo, con un doble toque)
-  const unanswered = questions.length - answers.filter((a) => a !== null).length;
+  const effective = mode === "instant" ? answers.map((a, i) => (checked[i] ? a : null)) : answers;
+  const unanswered = questions.length - effective.filter((a) => a !== null).length;
   if (unanswered > 0) {
     const ok = await askConfirm({
       icon: "warning",
@@ -626,8 +921,10 @@ async function finishTest() {
     });
     if (!ok) return;
   }
+  answers = effective;
   quizActive = false;
   setTag("FINALIZADO");
+  setHardTheme(false); // [v1.7.0] los resultados vuelven al celeste
 
   const total = questions.length;
   // [v1.4.0] Puntos totales: cada pregunta aporta de 0 a 1 (la selección múltiple puede aportar un valor parcial)
@@ -637,8 +934,19 @@ async function finishTest() {
   const scoreAll = calcScore(points, total);                   // promedio general: las sin contestar suman 0
   const scoreAnswered = answered > 0 ? calcScore(points, answered) : null; // solo contestadas (null si no contestó ninguna)
 
-  buildReview();
-  showFloat({ scoreAll, scoreAnswered, points, answered, total, incomplete });
+  // [v1.7.0] Qué test fue, en qué modo y cuándo (se muestra en los resultados y se guarda en el historial)
+  const origen = { nombre: currentTest.nombre, modo: mode, fecha: new Date().toISOString() };
+  addToHistory({
+    id: Date.now(),
+    ...origen,
+    file: currentTest.file,
+    scoreAll, scoreAnswered, points, answered, total, incomplete,
+    preguntas: questions, // copia de las preguntas tal como se hicieron: el historial las muestra aunque el JSON cambie después
+    respuestas: answers
+  });
+
+  buildReview(questions, answers);
+  showFloat({ scoreAll, scoreAnswered, points, answered, total, incomplete, origen });
 }
 
 // Devuelve un mensaje según la nota
@@ -700,11 +1008,13 @@ function partialNote(credit) {
 
 // Arma la lista con todas las preguntas y las respuestas elegidas
 // (verde = bien, rojo = mal, gris = sin responder, [v1.4.0] amarillo = parcial en selección múltiple)
-function buildReview() {
+// [v1.7.0] Ahora recibe las preguntas y las respuestas a mostrar (así sirve tanto para un test recién terminado como
+// para uno del historial) y suma la marca "Pregunta difícil" y el tipo de formación de palabras
+function buildReview(qs, ans) {
   els.reviewList.textContent = "";
 
-  questions.forEach((q, i) => {
-    const chosen = answers[i];                          // [v1.4.0] lista de posiciones elegidas (o null)
+  qs.forEach((q, i) => {
+    const chosen = ans[i];                              // [v1.4.0] lista de posiciones elegidas (o null)
     const credit = questionCredit(q, chosen);           // [v1.4.0] valor de la respuesta: de 0 a 1
     const full = credit === 1;                          // acierto completo
     const skipped = chosen === null;                    // pregunta sin responder
@@ -733,6 +1043,14 @@ function buildReview() {
     head.append(num, qText, status);
     item.appendChild(head);
 
+    // [v1.7.0] Pregunta difícil: marca con calavera bajo el enunciado
+    if (q.dificil) {
+      const hard = document.createElement("p");
+      hard.className = "review__hardtag";
+      hard.append(icon("skull"), document.createTextNode("Pregunta difícil"));
+      item.appendChild(hard);
+    }
+
     if (q.tipo === "multiple") {
       // [v1.4.0] Selección múltiple: una línea por cada opción marcada (verde si era correcta, roja si no)
       if (skipped) {
@@ -750,6 +1068,11 @@ function buildReview() {
       }
       // Si quedó a medias, se aclara cuánto vale la pregunta
       if (partial) item.appendChild(partialNote(credit));
+    } else if (q.tipo === "palabras") {
+      // [v1.7.0] Formación de palabras: la respuesta armada (las palabras en el orden en que se pusieron) y, si falló, la correcta
+      const armada = skipped ? "Sin responder" : chosen.map((id) => q.opciones[id]).join(" ");
+      item.appendChild(answerLine("Tu respuesta", armada, skipped ? "skip" : full ? "ok" : "bad"));
+      if (!full) item.appendChild(answerLine("Correcta", q.solucion.join(" "), "ok"));
     } else {
       // Normal y verdadero/falso: respuesta elegida (verde si acertó, roja si falló, gris si quedó sin responder)
       const chosenText = skipped ? "Sin responder" : q.opciones[chosen[0]];
@@ -769,7 +1092,9 @@ function buildReview() {
 // Abre el float y anima el puntaje (conteo + aro)
 // [v1.3.0] Recibe las dos notas: el aro, el conteo, el mensaje y el color usan la general (scoreAll).
 // Si el test quedó incompleto se muestran además "Incompleto" (naranja) y los 2 promedios
-function showFloat({ scoreAll, scoreAnswered, points, answered, total, incomplete }) {
+// [v1.7.0] También recibe "origen" (nombre del test, modo y fecha) y "fromHistory" (true si se abrió desde el historial:
+// en ese caso el botón "Menú" pasa a ser "Cerrar" y se oculta "Reintentar")
+function showFloat({ scoreAll, scoreAnswered, points, answered, total, incomplete, origen = null, fromHistory = false }) {
   const score = scoreAll; // el resto de la función (aro y conteo) trabaja con la nota general
   els.scoreMsg.textContent = scoreMessage(score);
   els.scoreBox.dataset.tone = scoreTone(score); // el CSS pinta aro y mensaje según este tono
@@ -784,6 +1109,17 @@ function showFloat({ scoreAll, scoreAnswered, points, answered, total, incomplet
   els.scoreValue.textContent = "0";
   els.scoreBar.style.strokeDashoffset = RING_LENGTH; // aro vacío antes de animar
 
+  // [v1.7.0] De qué test es, en qué modo se hizo y cuándo ("Modelo OSI · Corrección final · 22/10/2026, 21:30")
+  els.scoreSource.textContent = origen
+    ? [origen.nombre, (MODOS[origen.modo] || MODOS.final).label, formatDate(origen.fecha)].filter(Boolean).join(" · ")
+    : "";
+
+  // [v1.7.0] Abierto desde el historial: "Cerrar" en lugar de "Menú" y sin "Reintentar"
+  floatFromHistory = fromHistory;
+  els.btnRetry.hidden = fromHistory;
+  els.btnHomeIcon.textContent = fromHistory ? "close" : "apps";
+  els.btnHomeLabel.textContent = fromHistory ? "Cerrar" : "Menú";
+
   // [v1.5.0] Barra compacta que aparece al scrollear: mismos datos, en versión mínima
   els.miniValue.textContent = formatScore(scoreAll);
   els.miniMsg.textContent = scoreMessage(score);
@@ -796,7 +1132,7 @@ function showFloat({ scoreAll, scoreAnswered, points, answered, total, incomplet
 
   els.float.hidden = false;
   document.body.classList.add("no-scroll");
-  els.btnRetry.focus({ preventScroll: true });
+  (fromHistory ? els.btnHome : els.btnRetry).focus({ preventScroll: true }); // [v1.7.0] el foco va al botón que está visible
 
   // Aro: se llena con la transición CSS (esperamos 2 frames para que arranque desde vacío)
   requestAnimationFrame(() => requestAnimationFrame(() => {
@@ -819,6 +1155,152 @@ function showFloat({ scoreAll, scoreAnswered, points, answered, total, incomplet
 function hideFloat() {
   els.float.hidden = true;
   document.body.classList.remove("no-scroll");
+}
+
+/* =========================================================
+   7c) HISTORIAL  [v1.7.0]
+   Los últimos HISTORY_MAX resultados se guardan en este dispositivo (localStorage), con una copia de las preguntas
+   y de las respuestas, así que al abrirlos se ve exactamente el mismo panel de resultados del momento de terminar.
+   ========================================================= */
+
+// ¿Es un resultado guardado válido? Protege contra datos viejos o dañados en localStorage
+function isValidRecord(r) {
+  return !!r && typeof r === "object"
+    && typeof r.scoreAll === "number" && typeof r.total === "number"
+    && Array.isArray(r.preguntas) && r.preguntas.length > 0
+    && Array.isArray(r.respuestas) && r.respuestas.length === r.preguntas.length;
+}
+
+// Lee el historial guardado (el más nuevo primero). Si localStorage no está disponible o los datos están rotos, devuelve []
+function loadHistory() {
+  try {
+    const raw = localStorage.getItem(HISTORY_KEY);
+    const list = raw ? JSON.parse(raw) : [];
+    return Array.isArray(list) ? list.filter(isValidRecord).slice(0, HISTORY_MAX) : [];
+  } catch (err) {
+    return [];
+  }
+}
+
+// Guarda el historial. Si no hay espacio en el dispositivo, prueba con un resultado menos (descarta el más viejo)
+function saveHistory(list) {
+  for (let n = list.length; n >= 1; n--) {
+    try {
+      localStorage.setItem(HISTORY_KEY, JSON.stringify(list.slice(0, n)));
+      return;
+    } catch (err) {
+      // sin espacio o almacenamiento bloqueado: se vuelve a intentar con uno menos
+    }
+  }
+  console.warn("[Test] No se pudo guardar el historial en este dispositivo.");
+}
+
+// Agrega un resultado al principio del historial y conserva solo los últimos HISTORY_MAX
+function addToHistory(record) {
+  saveHistory([record, ...loadHistory()].slice(0, HISTORY_MAX));
+}
+
+// Escribe la cantidad de resultados guardados en el botón "Historial" del menú
+function updateHistoryButton() {
+  const n = loadHistory().length;
+  els.btnHistoryLabel.textContent = n > 0 ? `Historial · ${n}` : "Historial";
+}
+
+// Abre la pantalla de historial
+function showHistory() {
+  hideFloat();
+  quizActive = false;
+  setTag("HISTORIAL");
+  document.title = "Historial · Test";
+  renderHistory();
+  showScreen(els.screenHistory);
+}
+
+// Dibuja una tarjeta por cada resultado guardado: nota (verde / amarillo / rojo), test, fecha, modo y cantidad de correctas
+function renderHistory() {
+  const list = loadHistory();
+  els.histNotice.hidden = list.length > 0;        // aviso "todavía no hay resultados"
+  els.btnHistoryClear.hidden = list.length === 0; // sin resultados no hace falta "Borrar historial"
+  els.histList.textContent = "";
+
+  list.forEach((rec, i) => {
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "test-card hist-card";
+    card.style.animationDelay = `${i * 60}ms`;
+
+    // Nota sobre 10, con el color del resultado
+    const score = document.createElement("span");
+    score.className = `hist-card__score hist-card__score--${scoreTone(rec.scoreAll)}`;
+    const value = document.createElement("strong");
+    value.textContent = formatScore(rec.scoreAll);
+    const max = document.createElement("small");
+    max.textContent = "/10";
+    score.append(value, max);
+
+    // Nombre del test, fecha · modo, y cantidad de correctas (+ "Incompleto" si quedó alguna sin contestar)
+    const info = document.createElement("span");
+    info.className = "test-card__info";
+
+    const name = document.createElement("strong");
+    name.className = "test-card__name";
+    name.textContent = rec.nombre || "Test";
+    info.appendChild(name);
+
+    const when = document.createElement("span");
+    when.className = "test-card__topic";
+    when.textContent = [formatDate(rec.fecha), (MODOS[rec.modo] || MODOS.final).label].filter(Boolean).join(" · ");
+    info.appendChild(when);
+
+    const meta = document.createElement("small");
+    meta.className = "test-card__meta";
+    meta.textContent = `${formatPoints(rec.points)} de ${rec.total} correctas`;
+    if (rec.incomplete) {
+      const tag = document.createElement("span");
+      tag.className = "hist-card__tag";
+      tag.textContent = " · Incompleto";
+      meta.appendChild(tag);
+    }
+    info.appendChild(meta);
+
+    const chev = icon("chevron_right");
+    chev.classList.add("test-card__chev");
+
+    card.append(score, info, chev);
+    card.addEventListener("click", () => openHistoryItem(rec));
+    els.histList.appendChild(card);
+  });
+}
+
+// Abre un resultado guardado en el mismo panel de resultados que aparece al terminar un test
+function openHistoryItem(rec) {
+  buildReview(rec.preguntas, rec.respuestas);
+  showFloat({
+    scoreAll: rec.scoreAll,
+    scoreAnswered: typeof rec.scoreAnswered === "number" ? rec.scoreAnswered : null,
+    points: rec.points,
+    answered: rec.answered,
+    total: rec.total,
+    incomplete: !!rec.incomplete,
+    origen: { nombre: rec.nombre, modo: rec.modo, fecha: rec.fecha },
+    fromHistory: true
+  });
+}
+
+// Borra todo el historial de este dispositivo (con confirmación)
+async function clearHistory() {
+  const n = loadHistory().length;
+  if (n === 0) return;
+  const ok = await askConfirm({
+    icon: "delete",
+    title: "¿Borrar el historial?",
+    text: `Se ${n === 1 ? "borra el resultado guardado" : `borran los ${n} resultados guardados`} en este dispositivo. No se puede deshacer.`,
+    okLabel: "Borrar",
+    cancelLabel: "Cancelar"
+  });
+  if (!ok) return;
+  try { localStorage.removeItem(HISTORY_KEY); } catch (err) { /* almacenamiento bloqueado: no hay nada que borrar */ }
+  renderHistory();
 }
 
 /* =========================================================
@@ -868,7 +1350,16 @@ els.btnPrev.addEventListener("click", goPrev);
 els.btnNext.addEventListener("click", goNext);
 els.btnFinish.addEventListener("click", finishTest); // [v1.3.0] "Terminar test": cierra el test cuando se quiera
 els.btnRetry.addEventListener("click", retry);
-els.btnHome.addEventListener("click", showMenu);   // [v1.2.0] "Menú" del float: vuelve a elegir test
+// [v1.2.0] "Menú" del float: vuelve a elegir test. [v1.7.0] Si el resultado se abrió desde el historial es "Cerrar": solo cierra el panel
+els.btnHome.addEventListener("click", () => (floatFromHistory ? hideFloat() : showMenu()));
+
+// [v1.7.0] Historial: abrir desde el menú, volver al menú y borrar
+els.btnHistory.addEventListener("click", showHistory);
+els.btnHistoryBack.addEventListener("click", showMenu);
+els.btnHistoryClear.addEventListener("click", clearHistory);
+
+// [v1.7.0] Switch de modo de corrección (vista previa del test)
+els.modeBtns.forEach((b) => b.addEventListener("click", () => setMode(b.dataset.mode)));
 
 // [v1.5.0] Ventana de confirmación: "Cancelar" (y un toque en el fondo) cierra sin hacer nada
 els.confirmOk.addEventListener("click", () => closeConfirm(true));
@@ -907,6 +1398,13 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "ArrowLeft") { goPrev(); return; }
   if (e.key === "ArrowRight") { goNext(); return; }
 
+  // [v1.7.0] Formación de palabras: no hay letras; "Retroceso" saca la última palabra puesta
+  if (q.tipo === "palabras") {
+    const placed = answers[current];
+    if (e.key === "Backspace" && placed) removeWord(placed.length - 1);
+    return;
+  }
+
   // [v1.4.0] La letra se busca entre las letras de la pregunta (A, B, C... o V y F); si no es letra, se prueba como número
   let idx = q.letras.findIndex((l) => l.toLowerCase() === key); // a=0, b=1... (v=0, f=1 en verdadero/falso)
   if (idx === -1 && /^[1-9]$/.test(key)) idx = Number(key) - 1;  // 1=0, 2=1...
@@ -920,6 +1418,8 @@ document.addEventListener("keydown", (e) => {
 
 renderTitle(els.menuTitle, "Test");
 setTag("MENÚ");
+setMode("final");      // [v1.7.0] deja escrito el modo por defecto (corrección final) en el switch de la vista previa
+updateHistoryButton(); // [v1.7.0] cantidad de resultados guardados en el botón "Historial"
 loadCatalog(); // [v1.2.0] lee tests/index.json y arma el menú
 
 // [v1.6.0] PWA: registra el service worker para poder instalar la app y que funcione sin conexión.

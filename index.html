@@ -63,6 +63,42 @@
 
       <!-- Tarjetas de los tests (las crea script.js) -->
       <div class="menu" id="menuList"></div>
+
+      <!-- [v1.7.0] Historial: abre la lista de los últimos 10 resultados guardados en este dispositivo.
+           script.js le agrega la cantidad al texto (ej.: "Historial · 3") -->
+      <button class="btn btn--ghost btn--block" id="btnHistory" type="button">
+        <span class="material-symbols-outlined">history</span>
+        <span id="btnHistoryLabel">Historial</span>
+      </button>
+    </section>
+
+    <!-- [v1.7.0] PANTALLA DE HISTORIAL: los últimos 10 resultados (se guardan en este dispositivo, en localStorage).
+         Al tocar uno se abre el mismo panel de resultados que aparece al terminar un test. Lo arma script.js -->
+    <section class="screen" id="screenHistory">
+      <div class="quiz__back">
+        <button class="btn btn--ghost btn--sm" id="btnHistoryBack" type="button">
+          <span class="material-symbols-outlined">arrow_back</span>
+          <span>Menú</span>
+        </button>
+      </div>
+
+      <p class="eyebrow">Últimos 10 resultados</p>
+      <h1 class="title">Historial</h1>
+
+      <!-- Aviso cuando todavía no hay resultados guardados -->
+      <div class="notice notice--info" id="histNotice" hidden>
+        <span class="material-symbols-outlined">info</span>
+        <p>Todavía no hay resultados guardados. Cuando termines un test, va a aparecer acá.</p>
+      </div>
+
+      <!-- Tarjetas de resultados (las crea script.js) -->
+      <div class="menu" id="histList"></div>
+
+      <!-- Borra el historial de este dispositivo (pide confirmación antes) -->
+      <button class="btn btn--ghost btn--block" id="btnHistoryClear" type="button">
+        <span class="material-symbols-outlined">delete</span>
+        <span>Borrar historial</span>
+      </button>
     </section>
 
     <!-- PANTALLA 1: inicio del test elegido. Muestra nombre, tema, cantidad de preguntas y el botón para comenzar -->
@@ -80,6 +116,24 @@
           <span class="material-symbols-outlined">grade</span>
           <div><strong>10</strong><small>puntaje máx.</small></div>
         </div>
+      </div>
+
+      <!-- [v1.7.0] Switch de modo de corrección: "Corrección final" (el de siempre: los resultados se ven al terminar)
+           o "Corrección instantánea" (se corrige cada pregunta apenas se responde y no se puede volver atrás).
+           script.js maneja el cambio y escribe la descripción del modo elegido en #modeDesc -->
+      <div class="modes">
+        <p class="eyebrow">Modo de corrección</p>
+        <div class="modeswitch" id="modeSwitch" data-mode="final" role="radiogroup" aria-label="Modo de corrección">
+          <button class="mode" type="button" role="radio" aria-checked="true" data-mode="final">
+            <span class="material-symbols-outlined">fact_check</span>
+            <span>Corrección final</span>
+          </button>
+          <button class="mode" type="button" role="radio" aria-checked="false" data-mode="instant">
+            <span class="material-symbols-outlined">bolt</span>
+            <span>Corrección instantánea</span>
+          </button>
+        </div>
+        <p class="modedesc" id="modeDesc"></p>
       </div>
 
       <!-- [v1.2.0] Botones: Comenzar + Cambiar test (vuelve al menú) -->
@@ -115,6 +169,12 @@
       </div>
 
       <article class="qcard" id="qCard">
+        <!-- [v1.7.0] Etiqueta "Pregunta difícil" (con calavera): solo aparece en las preguntas marcadas con "dificil": true
+             en el JSON, y en esas preguntas todos los celestes de la pantalla pasan a rojo. La muestra u oculta script.js -->
+        <p class="qbadge" id="qBadge" hidden>
+          <span class="material-symbols-outlined">skull</span>
+          <span>Pregunta difícil</span>
+        </p>
         <!-- [v1.3.0] Tema de la pregunta: texto pequeño gris, opcional (campo "tema" de cada pregunta en el JSON).
              Si la pregunta no tiene tema queda vacío y el CSS lo oculta. Lo completa script.js -->
         <p class="qtopic" id="qTopic"></p>
@@ -123,9 +183,22 @@
              en las demás preguntas queda vacío y el CSS lo oculta -->
         <p class="qhint" id="qHint"></p>
         <div class="options" id="options" role="radiogroup" aria-label="Opciones de respuesta"></div>
+
+        <!-- [v1.7.0] Formación de palabras (estilo Duolingo): arriba va la respuesta que se va armando y abajo el banco
+             de palabras. Al tocar una palabra del banco pasa a la respuesta (y en el banco queda su hueco); al tocar una
+             palabra de la respuesta vuelve al banco. Solo se muestra en las preguntas de tipo "palabras" -->
+        <div class="wordbuild" id="wordBuild" hidden>
+          <div class="wordbuild__answer" id="wordAnswer" data-placeholder="Tu respuesta" role="group" aria-label="Tu respuesta"></div>
+          <div class="wordbuild__bank" id="wordBank" role="group" aria-label="Palabras disponibles"></div>
+        </div>
+
+        <!-- [v1.7.0] Cartel de corrección del modo instantáneo: aparece bajo la pregunta apenas se responde
+             (¡Correcto! / Parcial / Incorrecto, la respuesta correcta y la explicación si la hay). Lo arma script.js -->
+        <div class="feedback" id="feedback" hidden role="status" aria-live="polite"></div>
       </article>
 
-      <div class="quiz__nav">
+      <!-- [v1.7.0] id="quizNav": en el modo instantáneo script.js oculta "Anterior" (no se puede volver atrás) -->
+      <div class="quiz__nav" id="quizNav">
         <button class="btn btn--ghost" id="btnPrev" type="button">
           <span class="material-symbols-outlined">arrow_back</span>
           <span>Anterior</span>
@@ -204,6 +277,8 @@
           </span>
         </div>
         <p class="score__meta" id="scoreMeta"></p>
+        <!-- [v1.7.0] De qué test es el resultado, en qué modo se hizo y cuándo (también se ve al abrirlo desde el historial) -->
+        <p class="score__source" id="scoreSource"></p>
       </div>
 
       <div class="float__body" id="floatBody">
@@ -211,11 +286,13 @@
         <ol class="review" id="reviewList"></ol>
       </div>
 
-      <!-- [v1.2.0] "Menú" reemplaza a "Inicio": vuelve a la lista para elegir otro test -->
+      <!-- [v1.2.0] "Menú" reemplaza a "Inicio": vuelve a la lista para elegir otro test.
+           [v1.7.0] Si el resultado se abrió desde el historial, este botón pasa a ser "Cerrar" y "Reintentar" se oculta
+           (script.js cambia el icono y el texto con los ids btnHomeIcon y btnHomeLabel) -->
       <div class="float__foot">
         <button class="btn btn--ghost" id="btnHome" type="button">
-          <span class="material-symbols-outlined">apps</span>
-          <span>Menú</span>
+          <span class="material-symbols-outlined" id="btnHomeIcon">apps</span>
+          <span id="btnHomeLabel">Menú</span>
         </button>
         <button class="btn btn--primary" id="btnRetry" type="button">
           <span class="material-symbols-outlined">replay</span>
@@ -230,11 +307,11 @@
   <footer class="footer">
     <span>Test</span>
     <span class="footer__sep">·</span>
-    <!-- [v1.6.0] versión y fecha actualizadas por los cambios de esta entrega (PWA: instalable en el celular,
-         funciona sin conexión con sw.js; se agregaron manifest.json, sw.js e íconos SVG) -->
-    <span id="footerVersion">v1.6.0</span>
+    <!-- [v1.7.0] versión y fecha actualizadas por los cambios de esta entrega (historial, pregunta difícil,
+         formación de palabras, iconos en verdadero/falso y modo de corrección instantánea) -->
+    <span id="footerVersion">v1.7.0</span>
     <span class="footer__sep">·</span>
-    <span id="footerDate">15/10/2026</span>
+    <span id="footerDate">23/10/2026</span>
   </footer>
 
   <!-- Lógica externa -->
