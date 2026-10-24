@@ -1,5 +1,5 @@
 /* =========================================================
-   TEST — script.js  (v1.8.2)
+   TEST — script.js  (v1.9.0)
    Lógica de la app de tests multiple choice.
 
    CÓMO AGREGAR UN TEST (las preguntas ya NO se escriben acá):
@@ -13,6 +13,11 @@
      "nombre": "Historia Argentina",          // nombre que se ve en el menú (si falta, se usa el del archivo)
      "tema": "Texto opcional bajo el nombre",  // opcional
      "icono": "lan",                           // [v1.7.0] opcional: icono del test en el menú (nombre de fonts.google.com/icons; por defecto "connected_tv")
+     "dificultades": {                         // [v1.9.0] opcional: el mismo test dividido por dificultad. Cada una es opcional
+       "facil":   [ { ...pregunta... } ],       // y solo aparecen en el switch las que existan. Si queda una sola (o solo "preguntas"),
+       "normal":  [ { ...pregunta... } ],       // no hay switch. El "preguntas" de arriba equivale a la dificultad "normal".
+       "dificil": [ { ...pregunta... } ]        // Con "dificultades" no hace falta poner "preguntas".
+     },
      "contrasena": "clave123",                 // [v1.8.0] opcional: contraseña para hacer el test (4 a 15 caracteres). Al elegir el test se
                                                // piden con un cuadrito por carácter. Si el largo no es válido, el test no se carga.
                                                // Ojo: el JSON es público (se descarga con la página), así que frena a curiosos pero no es seguridad real
@@ -89,6 +94,13 @@ const MAX_BACK = 2;                       // [v1.3.0] cuántas preguntas se pued
 const VF_OPCIONES = ["Verdadero", "Falso"]; // [v1.4.0] opciones fijas de las preguntas de verdadero o falso (posición 0 = Verdadero)
 const RING_LENGTH = 2 * Math.PI * 52;     // Circunferencia del aro de puntaje (coincide con style.css)
 const HISTORY_KEY = "test.historial.v1";  // [v1.7.0] clave de localStorage donde se guardan los últimos resultados (solo en este dispositivo)
+// [v1.9.0] Dificultades de un test, de menor a mayor: nombre que se ve y orden. "normal" es la predeterminada
+const NIVELES = {
+  facil: { label: "Fácil", icon: "mood " },
+  normal: { label: "Normal", icon: "sentiment_satisfied" },
+  dificil: { label: "Difícil", icon: "skull" }
+};
+const NIVEL_ORDEN = ["facil", "normal", "dificil"];
 const PASS_MIN = 4;  // [v1.8.0] largo mínimo de la contraseña de un test
 const PASS_MAX = 15; // [v1.8.0] largo máximo
 const unlockedTests = new Set(); // [v1.8.0] tests ya desbloqueados en esta sesión (se pierde al recargar la página)
@@ -121,6 +133,9 @@ const els = {
   testTopic: $("testTopic"),
   statCount: $("statCount"),
   btnStart: $("btnStart"),
+  levels: $("levels"),                   // [v1.9.0] bloque del switch de dificultad (arriba del título)
+  levelSwitch: $("levelSwitch"),
+  levelBtns: [...document.querySelectorAll("#levelSwitch .mode")],
   lockBox: $("lockBox"),                 // [v1.8.0] aviso de "test protegido" en la vista previa
   lockIcon: $("lockIcon"),
   lockInfo: $("lockInfo"),               // [v1.8.1]
@@ -204,6 +219,7 @@ let current = 0;        // Índice de la pregunta actual
 let answers = [];       // [v1.4.0] Respuesta por pregunta: lista de posiciones elegidas (1 en normal y V/F, varias en múltiple); null = sin responder
 let quizActive = false; // true mientras se está resolviendo el test
 let maxReached = 0;     // [v1.3.0] índice de la pregunta más lejana a la que se llegó (límite para "Anterior")
+let level = "normal"; // [v1.9.0] dificultad elegida del test actual (facil | normal | dificil)
 let pendingConfirm = null; // [v1.5.0] función que espera la respuesta de la ventana de confirmación (null = cerrada)
 let mode = "final";        // [v1.7.0] modo de corrección elegido: "final" (resultados al terminar) o "instant" (corrige cada pregunta)
 let checked = [];          // [v1.7.0] modo instantáneo: true en las preguntas ya corregidas (quedan bloqueadas)
@@ -431,9 +447,30 @@ function sanitizeQuestions(raw, origen) {
 
 // Valida el contenido de un JSON de test y lo convierte al formato interno
 function parseTest(file, data) {
-  if (!data || !Array.isArray(data.preguntas)) throw new Error("falta el array \"preguntas\"");
-  const preguntas = sanitizeQuestions(data.preguntas, file);
-  if (preguntas.length === 0) throw new Error("no tiene preguntas válidas");
+  // [v1.9.0] Dificultades: "dificultades": { "facil": [...], "normal": [...], "dificil": [...] }. Cada una es opcional.
+  // El "preguntas" de siempre (sin dificultades) cuenta como la dificultad "normal", así los tests viejos siguen andando
+  const niveles = {};
+  if (data && data.dificultades !== undefined) {
+    if (!data.dificultades || typeof data.dificultades !== "object" || Array.isArray(data.dificultades)) {
+      throw new Error("\"dificultades\" debe ser un objeto con facil, normal y/o dificil");
+    }
+    Object.entries(data.dificultades).forEach(([clave, lista]) => {
+      // se acepta con o sin tilde y en cualquier mayúscula ("Fácil", "dificil"...)
+      const key = clave.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+      if (!NIVELES[key]) { console.warn(`[Test] ${file}: la dificultad "${clave}" no existe (usá facil, normal o dificil) y se omitió.`); return; }
+      if (!Array.isArray(lista)) { console.warn(`[Test] ${file}: la dificultad "${clave}" debe ser una lista de preguntas.`); return; }
+      niveles[key] = sanitizeQuestions(lista, `${file} (${NIVELES[key].label})`);
+    });
+  }
+  if (Array.isArray(data && data.preguntas)) {
+    if (niveles.normal && niveles.normal.length) console.warn(`[Test] ${file}: tiene "preguntas" y "dificultades.normal"; se usa "dificultades.normal".`);
+    else niveles.normal = sanitizeQuestions(data.preguntas, file);
+  }
+  // Las dificultades sin preguntas válidas no aparecen
+  NIVEL_ORDEN.forEach((k) => { if (niveles[k] && niveles[k].length === 0) delete niveles[k]; });
+  const lista = NIVEL_ORDEN.filter((k) => niveles[k]);
+  if (lista.length === 0) throw new Error("no tiene preguntas válidas (falta \"preguntas\" o \"dificultades\")");
+  const nivelBase = niveles.normal ? "normal" : lista[0]; // predeterminada: normal; si no hay, la primera que exista
   return {
     file,
     nombre: typeof data.nombre === "string" && data.nombre.trim() ? data.nombre.trim() : file.replace(/\.json$/i, ""),
@@ -443,7 +480,10 @@ function parseTest(file, data) {
     // [v1.8.0] Contraseña opcional: entre 4 y 15 caracteres. Si está mal definida el test NO se carga (así nunca queda
     // abierto por error un test que debía estar protegido)
     contrasena: parsePassword(data.contrasena),
-    preguntas
+    niveles,                    // [v1.9.0] preguntas de cada dificultad existente
+    nivelesLista: lista,        // [v1.9.0] dificultades disponibles, de fácil a difícil
+    nivelBase,                  // [v1.9.0] dificultad con la que arranca la vista previa
+    preguntas: niveles[nivelBase] // preguntas de la dificultad base (el menú cuenta con estas)
   };
 }
 
@@ -553,6 +593,8 @@ function renderMenu() {
     const meta = document.createElement("small");
     meta.className = "test-card__meta";
     meta.textContent = `${t.preguntas.length} ${t.preguntas.length === 1 ? "pregunta" : "preguntas"}`;
+    // [v1.9.0] si el test tiene varias dificultades, el menú lo avisa (el conteo es el de la dificultad base)
+    if (t.nivelesLista.length > 1) meta.textContent += ` · ${t.nivelesLista.length} dificultades`;
     if (t.contrasena) {
       const lock = icon(unlockedTests.has(t.file) ? "lock_open" : "lock"); // [v1.8.0] candado: el test tiene contraseña
       lock.classList.add("test-card__lock");
@@ -585,10 +627,32 @@ function showMenu() {
 // Elige un test del menú y muestra su pantalla de inicio
 function selectTest(t) {
   currentTest = t;
-  questions = t.preguntas;
+  setLevel(t.nivelBase); // [v1.9.0] cada test arranca en su dificultad base (normal por defecto)
   setMode("final"); // [v1.7.0] cada test arranca en el modo de siempre (corrección final)
   setupStart();
   showScreen(els.screenStart);
+}
+
+// [v1.9.0] Cambia la dificultad (switch de la vista previa): carga las preguntas de ese nivel y actualiza el conteo.
+// El switch solo se ve si el test tiene 2 o 3 dificultades, y solo muestra las que existen
+function setLevel(l) {
+  const lista = currentTest.nivelesLista;
+  level = lista.includes(l) ? l : currentTest.nivelBase;
+  questions = currentTest.niveles[level];
+  els.levels.hidden = lista.length < 2;
+  els.levelBtns.forEach((b) => { // oculta las dificultades que el test no tiene y marca la elegida
+    b.hidden = !lista.includes(b.dataset.level);
+    b.setAttribute("aria-checked", String(b.dataset.level === level));
+  });
+  els.levelSwitch.dataset.level = level; // [v1.9.1] el CSS colorea el switch según la dificultad (verde / celeste / rojo)
+  els.levelSwitch.style.setProperty("--n", lista.length);          // cantidad de opciones visibles
+  els.levelSwitch.style.setProperty("--i", lista.indexOf(level));  // posición de la pastilla
+  els.statCount.textContent = questions.length;
+}
+
+// [v1.9.0] Nombre de una dificultad para mostrar ("" si no hay o no existe: así el .filter(Boolean) la salta)
+function levelLabel(k) {
+  return NIVELES[k] ? NIVELES[k].label : "";
 }
 
 // [v1.7.0] Cambia el modo de corrección (switch de la vista previa) y actualiza el switch y su descripción
@@ -607,7 +671,6 @@ function setMode(m) {
 function setupStart() {
   renderTitle(els.mainTitle, currentTest.nombre);
   els.testTopic.textContent = currentTest.tema;
-  els.statCount.textContent = questions.length;
   document.title = `${currentTest.nombre} · Test`;
   setTag("LISTO");
   setupLock(); // [v1.8.0] muestra los cuadritos de contraseña si el test está protegido
@@ -1100,7 +1163,9 @@ async function finishTest() {
   const scoreAnswered = answered > 0 ? calcScore(points, answered) : null; // solo contestadas (null si no contestó ninguna)
 
   // [v1.7.0] Qué test fue, en qué modo y cuándo (se muestra en los resultados y se guarda en el historial)
+  // [v1.9.0] La dificultad solo se guarda si el test tiene más de una (si no, no aporta nada)
   const origen = { nombre: currentTest.nombre, modo: mode, fecha: new Date().toISOString() };
+  if (currentTest.nivelesLista.length > 1) origen.dificultad = level;
   addToHistory({
     id: Date.now(),
     ...origen,
@@ -1116,24 +1181,18 @@ async function finishTest() {
 
 // Devuelve un mensaje según la nota
 function scoreMessage(score) {
-  if (score >= 10) return "GENIO!";
+  if (score >= 10) return "¡Perfecto!";
   if (score >= 9) return "¡Excelente!";
-  if (score >= 8) return "Nada mal";
-  if (score >= 7) return "Con las justas"
-  if (score >= 6) return "Al palo";
-  if (score >= 5) return "A mitad de camino";
-  if (score >= 4) return "Una mierda";
-  if (score >= 3) return "Pobre de vo";
-  if (score >= 2) return "Pobre waso";
-  if (score >= 1) return "Puff, quiero pensar que fue a propósito";
-  if (score >= 0) return "Ni lo has intentado";
-  return "Sos una verga";
+  if (score >= 7) return "Muy bien";
+  if (score >= 6) return "Aprobado";
+  if (score >= 4) return "Hay que repasar";
+  return "Seguí practicando";
 }
 
 // Devuelve el tono de color de la nota (success / warning / error) para pintar el aro y el mensaje
 function scoreTone(score) {
-  if (score >= 8) return "success"; // aprobado
-  if (score >= 7) return "warning"; // hay que repasar
+  if (score >= 6) return "success"; // aprobado
+  if (score >= 4) return "warning"; // hay que repasar
   return "error";                   // desaprobado
 }
 
@@ -1282,7 +1341,7 @@ function showFloat({ scoreAll, scoreAnswered, points, answered, total, incomplet
 
   // [v1.7.0] De qué test es, en qué modo se hizo y cuándo ("Modelo OSI · Corrección final · 22/10/2026, 21:30")
   els.scoreSource.textContent = origen
-    ? [origen.nombre, (MODOS[origen.modo] || MODOS.final).label, formatDate(origen.fecha)].filter(Boolean).join(" · ")
+    ? [origen.nombre, levelLabel(origen.dificultad), (MODOS[origen.modo] || MODOS.final).label, formatDate(origen.fecha)].filter(Boolean).join(" · ")
     : "";
 
   // [v1.7.0] Abierto desde el historial: "Cerrar" en lugar de "Menú" y sin "Reintentar"
@@ -1420,7 +1479,7 @@ function renderHistory() {
 
     const when = document.createElement("span");
     when.className = "test-card__topic";
-    when.textContent = [formatDate(rec.fecha), (MODOS[rec.modo] || MODOS.final).label].filter(Boolean).join(" · ");
+    when.textContent = [formatDate(rec.fecha), levelLabel(rec.dificultad), (MODOS[rec.modo] || MODOS.final).label].filter(Boolean).join(" · ");
     info.appendChild(when);
 
     const meta = document.createElement("small");
@@ -1514,6 +1573,7 @@ function retry() {
    8) EVENTOS
    ========================================================= */
 
+els.levelBtns.forEach((b) => b.addEventListener("click", () => setLevel(b.dataset.level))); // [v1.9.0] switch de dificultad
 els.btnStart.addEventListener("click", onStartClick); // [v1.8.1] pide la contraseña si el test la tiene
 els.passToggle.addEventListener("click", () => setPinVisible(els.passToggle.getAttribute("aria-pressed") !== "true")); // [v1.8.1] ojo
 els.passCancel.addEventListener("click", closePasswordModal); // [v1.8.1] cancelar la contraseña

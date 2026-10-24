@@ -612,7 +612,9 @@ body.no-scroll {
 .modeswitch {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  --n: 2; /* [v1.9.0] cantidad de opciones y posición de la pastilla (el switch de dificultad las cambia desde script.js) */
+  --i: 0;
+  grid-template-columns: repeat(var(--n), 1fr);
   padding: 4px;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -624,14 +626,60 @@ body.no-scroll {
   top: 4px;
   bottom: 4px;
   left: 4px;
-  width: calc(50% - 4px);
+  width: calc((100% - 8px) / var(--n));
   background: var(--color-surface-3);
   border: 1px solid var(--color-border-strong);
   border-radius: 10px;
   transition: transform 0.35s var(--ease);
 }
-.modeswitch[data-mode="instant"]::before {
-  transform: translateX(100%);
+.modeswitch[data-mode="instant"] {
+  --i: 1; /* modo instantáneo: la pastilla pasa a la segunda opción */
+}
+.modeswitch::before {
+  transform: translateX(calc(var(--i) * 100%));
+}
+/* [v1.9.0] Switch de dificultad (arriba del título de la vista previa) */
+.levels {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+.levels .mode {
+  min-height: 46px;
+}
+
+/* [v1.9.1] Colores del switch de dificultad según la opción elegida: fácil = verde, normal = celeste (el de siempre),
+   difícil = rojo. script.js escribe la dificultad elegida en data-level; cada una define 3 colores (texto/icono, fondo y
+   borde de la pastilla) usando solo variables del :root */
+#levelSwitch[data-level="facil"] {
+  --level: var(--color-success);
+  --level-bg: var(--color-success-a10);
+  --level-line: var(--color-success-a35);
+}
+#levelSwitch[data-level="normal"] {
+  --level: var(--color-accent);
+  --level-bg: var(--color-accent-a10);
+  --level-line: var(--color-accent-a40);
+}
+#levelSwitch[data-level="dificil"] {
+  --level: var(--color-error);
+  --level-bg: var(--color-error-a10);
+  --level-line: var(--color-error-a35);
+}
+#levelSwitch::before {
+  background: var(--level-bg);
+  border-color: var(--level-line);
+  transition: transform 0.35s var(--ease), background 0.3s, border-color 0.3s;
+}
+#levelSwitch .mode[aria-checked="true"] {
+  color: var(--level);
+}
+#levelSwitch .mode[aria-checked="true"] .material-symbols-outlined {
+  color: var(--level);
+}
+#levelSwitch .mode:focus-visible {
+  outline-color: var(--level);
 }
 .mode {
   position: relative;          /* queda por encima de la pastilla */
@@ -739,7 +787,7 @@ body.no-scroll {
   font-size: 1rem;
   vertical-align: -3px;
   margin-left: 6px;
-  color: var(--color-accent);
+  color: var(--color-warning);
 }
 @keyframes pinShake {
   0%, 100% { transform: translateX(0); }

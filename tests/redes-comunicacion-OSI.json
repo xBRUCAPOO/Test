@@ -2,621 +2,1250 @@
   "nombre": "Redes y comunicaciones - Modelo OSI",
   "icono": "device_hub",
   "tema": "Evaluación específica del modelo OSI: siete capas, funciones, protocolos relacionados, encapsulación y diagnóstico.",
-  "preguntas": [
-    {
-      "pregunta": "¿Cuántas capas componen el modelo OSI?",
-      "opciones": [
-        "5",
-        "6",
-        "7",
-        "8"
-      ],
-      "correcta": 2,
-      "descripcion": "El modelo de referencia OSI está compuesto por siete capas.",
-      "tema": "Fundamentos del modelo OSI",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "¿Cuál es el orden correcto de las capas desde la más cercana al medio físico hasta la más cercana al usuario?",
-      "opciones": [
-        "Física, Enlace, Red, Transporte, Sesión, Presentación, Aplicación",
-        "Aplicación, Presentación, Sesión, Transporte, Red, Enlace, Física",
-        "Física, Red, Enlace, Sesión, Transporte, Aplicación, Presentación",
-        "Enlace, Física, Transporte, Red, Aplicación, Sesión, Presentación"
-      ],
-      "correcta": 0,
-      "descripcion": "De abajo hacia arriba: Física, Enlace, Red, Transporte, Sesión, Presentación y Aplicación.",
-      "tema": "Fundamentos del modelo OSI",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "¿Qué capa OSI transmite bits mediante señales por el medio físico?",
-      "opciones": [
-        "Red",
-        "Física",
-        "Enlace",
-        "Transporte"
-      ],
-      "correcta": 1,
-      "descripcion": "La capa Física define la transmisión de bits y las características físicas de la señal y el medio.",
-      "tema": "Capa Física",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "¿Qué unidad de datos se asocia comúnmente con la capa Física?",
-      "opciones": [
-        "Trama",
-        "Paquete",
-        "Segmento",
-        "Bits"
-      ],
-      "correcta": 3,
-      "descripcion": "En la capa Física se transmiten bits por el medio.",
-      "tema": "Capa Física",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "¿Qué aspecto corresponde principalmente a la capa Física?",
-      "opciones": [
-        "Direcciones IP",
-        "Señales eléctricas, ópticas o de radio",
-        "Puertos TCP",
-        "Nombres de dominio"
-      ],
-      "correcta": 1,
-      "descripcion": "La capa Física se ocupa de señales, conectores, medios y transmisión de bits.",
-      "tema": "Capa Física",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "La capa Física decide la ruta IP que deben seguir los paquetes.",
-      "correcta": false,
-      "descripcion": "El encaminamiento corresponde principalmente a la capa de Red; la Física transmite bits.",
-      "tema": "Capa Física",
-      "tipo": "vf"
-    },
-    {
-      "pregunta": "¿Qué capa se ocupa principalmente de las tramas y del direccionamiento MAC?",
-      "opciones": [
-        "Enlace de datos",
-        "Sesión",
-        "Presentación",
-        "Aplicación"
-      ],
-      "correcta": 0,
-      "descripcion": "La capa de Enlace organiza datos en tramas y maneja funciones de acceso al medio y direcciones MAC.",
-      "tema": "Capa de Enlace",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "¿Qué tecnología se asocia principalmente con la capa de Enlace?",
-      "opciones": [
-        "DNS",
-        "Ethernet",
-        "SMTP",
-        "TLS"
-      ],
-      "correcta": 1,
-      "descripcion": "Ethernet define funciones de enlace y acceso al medio en redes locales.",
-      "tema": "Capa de Enlace",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "¿Qué dispositivo tradicionalmente opera principalmente en la capa de Enlace al reenviar tramas según MAC?",
-      "opciones": [
-        "Switch de capa 2",
-        "Router IP",
-        "Servidor DNS",
-        "Repetidor simple"
-      ],
-      "correcta": 0,
-      "descripcion": "Un switch de capa 2 reenvía tramas según direcciones MAC.",
-      "tema": "Capa de Enlace",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "La capa de Enlace puede detectar ciertos errores en las tramas, según la tecnología utilizada.",
-      "correcta": true,
-      "descripcion": "Muchas tecnologías de enlace incluyen mecanismos de detección de errores, como FCS en Ethernet.",
-      "tema": "Capa de Enlace",
-      "tipo": "vf"
-    },
-    {
-      "pregunta": "¿Qué capa se encarga principalmente del direccionamiento lógico y el encaminamiento entre redes?",
-      "opciones": [
-        "Transporte",
-        "Red",
-        "Sesión",
-        "Física"
-      ],
-      "correcta": 1,
-      "descripcion": "La capa de Red se relaciona con direcciones lógicas y selección de rutas.",
-      "tema": "Capa de Red",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "¿Qué protocolo se asocia principalmente con la capa de Red?",
-      "opciones": [
-        "IP",
-        "HTTP",
-        "SMTP",
-        "Bluetooth audio"
-      ],
-      "correcta": 0,
-      "descripcion": "IP proporciona direccionamiento y entrega de paquetes entre redes.",
-      "tema": "Capa de Red",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "¿Qué unidad de datos se asocia habitualmente con la capa de Red?",
-      "opciones": [
-        "Bit",
-        "Trama",
-        "Paquete",
-        "Mensaje de aplicación"
-      ],
-      "correcta": 2,
-      "descripcion": "La unidad de datos de la capa de Red suele denominarse paquete o datagrama IP.",
-      "tema": "Capa de Red",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "Un paquete debe viajar desde una subred a otra. ¿Qué capa participa directamente en el encaminamiento?",
-      "opciones": [
-        "Presentación",
-        "Red",
-        "Sesión",
-        "Aplicación"
-      ],
-      "correcta": 1,
-      "descripcion": "La capa de Red es responsable del encaminamiento entre redes.",
-      "tema": "Capa de Red",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "IP garantiza que todos los paquetes lleguen a destino y en el mismo orden en que salieron.",
-      "correcta": false,
-      "descripcion": "IP ofrece un servicio de mejor esfuerzo y no garantiza por sí mismo entrega ni orden.",
-      "tema": "Capa de Red",
-      "tipo": "vf"
-    },
-    {
-      "pregunta": "¿Qué capa OSI administra la comunicación extremo a extremo y puede usar puertos para distinguir servicios?",
-      "opciones": [
-        "Transporte",
-        "Física",
-        "Enlace",
-        "Presentación"
-      ],
-      "correcta": 0,
-      "descripcion": "La capa de Transporte ofrece comunicación entre procesos y usa números de puerto en protocolos como TCP y UDP.",
-      "tema": "Capa de Transporte",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "¿Qué protocolos se asocian principalmente con la capa de Transporte?",
-      "opciones": [
-        "TCP y UDP",
-        "IP y ARP",
-        "HTTP y DNS",
-        "Ethernet y Wi-Fi"
-      ],
-      "correcta": 0,
-      "descripcion": "TCP y UDP son protocolos de transporte.",
-      "tema": "Capa de Transporte",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "¿Qué características corresponden a TCP?",
-      "opciones": [
-        "Establece una conexión antes de intercambiar datos en su uso habitual",
-        "Ofrece entrega fiable mediante confirmaciones y retransmisiones",
-        "No utiliza números de puerto",
-        "Garantiza cifrado por sí mismo"
-      ],
-      "correctas": [
-        0,
-        1
-      ],
-      "descripcion": "TCP es orientado a conexión y ofrece mecanismos de entrega fiable; no cifra automáticamente la comunicación.",
-      "tema": "Capa de Transporte",
-      "tipo": "multiple"
-    },
-    {
-      "pregunta": "¿Qué afirmaciones describen correctamente a UDP?",
-      "opciones": [
-        "Tiene menos mecanismos de control que TCP",
-        "No garantiza por sí mismo la entrega ni el orden",
-        "Se utiliza en aplicaciones sensibles a la latencia, según el caso",
-        "Siempre retransmite paquetes perdidos"
-      ],
-      "correctas": [
-        0,
-        1,
-        2
-      ],
-      "descripcion": "UDP es un protocolo de transporte ligero que no garantiza entrega, orden ni retransmisión.",
-      "tema": "Capa de Transporte",
-      "tipo": "multiple"
-    },
-    {
-      "pregunta": "Los números de puerto ayudan a identificar los servicios o procesos de origen y destino en la comunicación de transporte.",
-      "correcta": true,
-      "descripcion": "Los puertos permiten distinguir comunicaciones de aplicaciones en protocolos como TCP y UDP.",
-      "tema": "Capa de Transporte",
-      "tipo": "vf"
-    },
-    {
-      "pregunta": "¿Qué capa se relaciona con el establecimiento y la administración de sesiones entre aplicaciones?",
-      "opciones": [
-        "Red",
-        "Sesión",
-        "Física",
-        "Enlace"
-      ],
-      "correcta": 1,
-      "descripcion": "La capa de Sesión conceptualiza el establecimiento, mantenimiento y cierre de sesiones.",
-      "tema": "Capa de Sesión",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "¿Cuál de estas funciones se asocia a la capa de Sesión en el modelo OSI?",
-      "opciones": [
-        "Controlar el diálogo entre aplicaciones",
-        "Transmitir impulsos eléctricos",
-        "Asignar direcciones MAC a fabricantes",
-        "Encaminar paquetes IP"
-      ],
-      "correcta": 0,
-      "descripcion": "La capa de Sesión coordina diálogos y sesiones entre aplicaciones.",
-      "tema": "Capa de Sesión",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "La capa de Sesión se ocupa principalmente de convertir nombres de dominio en direcciones IP.",
-      "correcta": false,
-      "descripcion": "La resolución de nombres es una función asociada a DNS; la capa de Sesión gestiona sesiones.",
-      "tema": "Capa de Sesión",
-      "tipo": "vf"
-    },
-    {
-      "pregunta": "¿Qué capa conceptual puede encargarse de la representación, codificación o transformación del formato de datos?",
-      "opciones": [
-        "Presentación",
-        "Red",
-        "Enlace",
-        "Física"
-      ],
-      "correcta": 0,
-      "descripcion": "La capa de Presentación trata la representación de los datos, como formatos y transformaciones.",
-      "tema": "Capa de Presentación",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "¿Qué tareas se relacionan con la capa de Presentación?",
-      "opciones": [
-        "Conversión de formatos de datos",
-        "Codificación de caracteres",
-        "Compresión o cifrado como funciones conceptuales",
-        "Elección de la ruta IP entre routers"
-      ],
-      "correctas": [
-        0,
-        1,
-        2
-      ],
-      "descripcion": "La Presentación se relaciona con la representación, codificación, compresión y cifrado conceptual; las rutas son de Red.",
-      "tema": "Capa de Presentación",
-      "tipo": "multiple"
-    },
-    {
-      "pregunta": "En el modelo OSI, la capa de Presentación puede representar funciones de cifrado y compresión de datos.",
-      "correcta": true,
-      "descripcion": "Estas funciones se suelen describir en la capa de Presentación del modelo OSI.",
-      "tema": "Capa de Presentación",
-      "tipo": "vf"
-    },
-    {
-      "pregunta": "¿Qué capa ofrece servicios de red directamente a las aplicaciones del usuario?",
-      "opciones": [
-        "Aplicación",
-        "Transporte",
-        "Física",
-        "Enlace"
-      ],
-      "correcta": 0,
-      "descripcion": "La capa de Aplicación proporciona servicios de red utilizados por las aplicaciones.",
-      "tema": "Capa de Aplicación",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "¿En qué capa se ubica principalmente HTTP en el modelo OSI?",
-      "opciones": [
-        "Red",
-        "Aplicación",
-        "Física",
-        "Enlace"
-      ],
-      "correcta": 1,
-      "descripcion": "HTTP es un protocolo de aplicación utilizado para transferir recursos web.",
-      "tema": "Capa de Aplicación",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "¿Qué protocolo de aplicación se utiliza para consultar nombres de dominio?",
-      "opciones": [
-        "DNS",
-        "IP",
-        "ARP",
-        "Ethernet"
-      ],
-      "correcta": 0,
-      "descripcion": "DNS es un protocolo de aplicación para consultas del sistema de nombres de dominio.",
-      "tema": "Capa de Aplicación",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "¿Cuáles son protocolos o servicios comúnmente asociados con la capa de Aplicación?",
-      "opciones": [
-        "HTTP",
-        "SMTP",
-        "DNS",
-        "IP"
-      ],
-      "correctas": [
-        0,
-        1,
-        2
-      ],
-      "descripcion": "HTTP, SMTP y DNS se clasifican habitualmente en la capa de Aplicación; IP corresponde a Red.",
-      "tema": "Capa de Aplicación",
-      "tipo": "multiple"
-    },
-    {
-      "pregunta": "FTP se utiliza para transferir archivos y se clasifica normalmente en la capa de Aplicación.",
-      "correcta": true,
-      "descripcion": "FTP es un protocolo de aplicación para la transferencia de archivos.",
-      "tema": "Capa de Aplicación",
-      "tipo": "vf"
-    },
-    {
-      "pregunta": "¿Qué capa se encuentra inmediatamente por encima de Transporte?",
-      "opciones": [
-        "Red",
-        "Sesión",
-        "Presentación",
-        "Aplicación"
-      ],
-      "correcta": 1,
-      "descripcion": "El orden ascendente es Transporte, Sesión, Presentación y Aplicación.",
-      "tema": "Relación entre capas",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "¿Qué capa se encuentra inmediatamente por debajo de Transporte?",
-      "opciones": [
-        "Red",
-        "Enlace",
-        "Sesión",
-        "Física"
-      ],
-      "correcta": 0,
-      "descripcion": "La capa de Red se ubica justo debajo de Transporte.",
-      "tema": "Relación entre capas",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "¿Cuál es la capa 1 del modelo OSI?",
-      "opciones": [
-        "Enlace",
-        "Física",
-        "Red",
-        "Transporte"
-      ],
-      "correcta": 1,
-      "descripcion": "La capa 1 es Física.",
-      "tema": "Relación entre capas",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "¿Cuál es la capa 2 del modelo OSI?",
-      "opciones": [
-        "Enlace de datos",
-        "Red",
-        "Sesión",
-        "Aplicación"
-      ],
-      "correcta": 0,
-      "descripcion": "La capa 2 es Enlace de datos.",
-      "tema": "Relación entre capas",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "¿Cuál es la capa 3 del modelo OSI?",
-      "opciones": [
-        "Transporte",
-        "Red",
-        "Presentación",
-        "Física"
-      ],
-      "correcta": 1,
-      "descripcion": "La capa 3 es Red.",
-      "tema": "Relación entre capas",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "¿Cuál es la capa 4 del modelo OSI?",
-      "opciones": [
-        "Sesión",
-        "Aplicación",
-        "Transporte",
-        "Enlace"
-      ],
-      "correcta": 2,
-      "descripcion": "La capa 4 es Transporte.",
-      "tema": "Relación entre capas",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "¿Cuál es la capa 5 del modelo OSI?",
-      "opciones": [
-        "Sesión",
-        "Red",
-        "Física",
-        "Presentación"
-      ],
-      "correcta": 0,
-      "descripcion": "La capa 5 es Sesión.",
-      "tema": "Relación entre capas",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "¿Cuál es la capa 6 del modelo OSI?",
-      "opciones": [
-        "Aplicación",
-        "Presentación",
-        "Enlace",
-        "Transporte"
-      ],
-      "correcta": 1,
-      "descripcion": "La capa 6 es Presentación.",
-      "tema": "Relación entre capas",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "¿Cuál es la capa 7 del modelo OSI?",
-      "opciones": [
-        "Red",
-        "Sesión",
-        "Aplicación",
-        "Física"
-      ],
-      "correcta": 2,
-      "descripcion": "La capa 7 es Aplicación.",
-      "tema": "Relación entre capas",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "La capa de Transporte está por encima de la capa de Red y por debajo de la capa de Sesión.",
-      "correcta": true,
-      "descripcion": "En el orden OSI, Red (3), Transporte (4) y Sesión (5) son consecutivas.",
-      "tema": "Relación entre capas",
-      "tipo": "vf"
-    },
-    {
-      "pregunta": "¿Qué asociaciones de capas y protocolos son correctas de manera general?",
-      "opciones": [
-        "IP — Red",
-        "TCP — Transporte",
-        "Ethernet — Enlace",
-        "HTTP — Física"
-      ],
-      "correctas": [
-        0,
-        1,
-        2
-      ],
-      "descripcion": "IP se asocia con Red, TCP con Transporte, Ethernet con Enlace y HTTP con Aplicación.",
-      "tema": "Protocolos y capas",
-      "tipo": "multiple"
-    },
-    {
-      "pregunta": "Un cable está desconectado y no se transmite ninguna señal. ¿Qué capa conviene revisar primero?",
-      "opciones": [
-        "Física",
-        "Transporte",
-        "Sesión",
-        "Aplicación"
-      ],
-      "correcta": 0,
-      "descripcion": "El cable y la señal pertenecen al ámbito de la capa Física.",
-      "tema": "Diagnóstico por capas",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "Los equipos de una LAN se comunican por MAC, pero una trama no llega al puerto correcto de un switch. ¿Qué capa revisarías?",
-      "opciones": [
-        "Presentación",
-        "Enlace",
-        "Sesión",
-        "Aplicación"
-      ],
-      "correcta": 1,
-      "descripcion": "El reenvío de tramas según direcciones MAC corresponde a Enlace.",
-      "tema": "Diagnóstico por capas",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "Un equipo tiene dirección IP y enlace local, pero no logra alcanzar una red remota por una ruta incorrecta. ¿Qué capa está más relacionada?",
-      "opciones": [
-        "Física",
-        "Red",
-        "Presentación",
-        "Sesión"
-      ],
-      "correcta": 1,
-      "descripcion": "El encaminamiento entre redes es una función de la capa de Red.",
-      "tema": "Diagnóstico por capas",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "Una aplicación no logra establecer una conexión TCP con el servidor en el puerto esperado. ¿Qué capa conviene revisar además de la aplicación?",
-      "opciones": [
-        "Transporte",
-        "Física únicamente",
-        "Presentación únicamente",
-        "Sesión únicamente"
-      ],
-      "correcta": 0,
-      "descripcion": "TCP y los puertos pertenecen principalmente a Transporte; también puede haber otras causas, pero esa capa es relevante.",
-      "tema": "Diagnóstico por capas",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "Una aplicación recibe bytes, pero no interpreta correctamente la codificación de texto o el formato de los datos. ¿Qué capa conceptual ayuda a describir este problema?",
-      "opciones": [
-        "Red",
-        "Presentación",
-        "Física",
-        "Enlace"
-      ],
-      "correcta": 1,
-      "descripcion": "La capa de Presentación se ocupa conceptualmente de la representación y codificación de los datos.",
-      "tema": "Diagnóstico por capas",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "¿Qué describe mejor la encapsulación en una comunicación de red?",
-      "opciones": [
-        "Cada capa añade información de control a los datos al enviarlos hacia capas inferiores",
-        "Cada router convierte siempre todos los datos en texto",
-        "Las capas eliminan todas las direcciones antes de transmitir",
-        "Solo la capa Física modifica los datos"
-      ],
-      "correcta": 0,
-      "descripcion": "Durante la encapsulación, las capas agregan información de control apropiada, como cabeceras, a medida que los datos bajan por la pila.",
-      "tema": "Encapsulación",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "Al recibir datos, ¿qué proceso complementa a la encapsulación?",
-      "opciones": [
-        "Fragmentación de nombres",
-        "Desencapsulación",
-        "Resolución de colores",
-        "Multiplexación de archivos"
-      ],
-      "correcta": 1,
-      "descripcion": "El receptor procesa y retira la información de control de las capas en el proceso de desencapsulación.",
-      "tema": "Encapsulación",
-      "tipo": "normal"
-    },
-    {
-      "pregunta": "El modelo OSI es un modelo de referencia que ayuda a organizar y comprender las funciones de comunicación en redes.",
-      "correcta": true,
-      "descripcion": "OSI es un marco conceptual por capas; no es en sí mismo un único protocolo de red.",
-      "tema": "Fundamentos del modelo OSI",
-      "tipo": "vf"
-    }
-  ]
+  "dificultades": {
+    "facil": [
+      {
+        "pregunta": "¿Cuántas capas componen el modelo de referencia OSI?",
+        "opciones": ["5", "6", "7", "8"],
+        "correcta": 2,
+        "descripcion": "El modelo OSI consta exactamente de siete capas.",
+        "tema": "Fundamentos",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Cuál es la capa número 1 del modelo OSI?",
+        "opciones": ["Enlace de datos", "Física", "Red", "Transporte"],
+        "correcta": 1,
+        "descripcion": "La capa 1 es la capa Física.",
+        "tema": "Capas",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Cuál es la capa superior (capa 7) del modelo OSI?",
+        "opciones": ["Presentación", "Sesión", "Aplicación", "Transporte"],
+        "correcta": 2,
+        "descripcion": "La capa 7 es la capa de Aplicación.",
+        "tema": "Capas",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "El modelo OSI es un estándar de arquitectura de red obligatorio implementado físicamente en todo hardware moderno.",
+        "correcta": false,
+        "descripcion": "El modelo OSI es un marco conceptual de referencia, no un estándar obligatorio de implementación estricta.",
+        "tema": "Fundamentos",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué capa transmite bits a través de un medio físico?",
+        "opciones": ["Red", "Física", "Enlace", "Transporte"],
+        "correcta": 1,
+        "descripcion": "La capa Física maneja los voltajes, cables y la transmisión de bits.",
+        "tema": "Capa Física",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué dispositivo opera tradicionalmente en la capa 1 repitiendo señales?",
+        "opciones": ["Router", "Hub / Repetidor", "Switch administrable", "Firewall de aplicación"],
+        "correcta": 1,
+        "descripcion": "Un hub o repetidor opera en la capa Física amplificando y reenviando señales eléctricas u ópticas.",
+        "tema": "Capa Física",
+        "dificil": true,
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Cuál es la unidad de datos fundamental de la capa Física?",
+        "opciones": ["Trama", "Paquete", "Bit", "Segmento"],
+        "correcta": 2,
+        "descripcion": "La capa Física procesa y transmite flujos de bits.",
+        "tema": "Capa Física",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "Los cables de par trenzado UTP pertenecen al ámbito de estudio de la capa Física.",
+        "correcta": true,
+        "descripcion": "Los medios de transmisión guiados y no guiados forman parte de la capa 1.",
+        "tema": "Capa Física",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué capa se encarga del direccionamiento físico mediante direcciones MAC?",
+        "opciones": ["Enlace de datos", "Red", "Transporte", "Sesión"],
+        "correcta": 0,
+        "descripcion": "La capa de Enlace de datos utiliza direcciones MAC para la entrega en redes locales.",
+        "tema": "Capa de Enlace",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué unidad de datos se maneja en la capa de Enlace de datos?",
+        "opciones": ["Bits", "Tramas", "Paquetes", "Segmentos"],
+        "correcta": 1,
+        "descripcion": "La capa de Enlace agrupa los bits en tramas (frames).",
+        "tema": "Capa de Enlace",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué dispositivo opera principalmente en la capa 2 del modelo OSI?",
+        "opciones": ["Switch de capa 2", "Router", "Hub", "Antena analógica"],
+        "correcta": 0,
+        "descripcion": "Un switch de capa 2 toma decisiones de reenvío basándose en las direcciones MAC de las tramas.",
+        "tema": "Capa de Enlace",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué tecnología de red local predomina en la capa de Enlace de datos?",
+        "opciones": ["Ethernet", "IP", "TCP", "HTTP"],
+        "correcta": 0,
+        "descripcion": "Ethernet es el estándar predominante en las capas física y de enlace para redes locales.",
+        "tema": "Capa de Enlace",
+        "dificil": true,
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "La capa de Enlace de datos incluye subcapas como LLC y MAC en redes LAN.",
+        "correcta": true,
+        "descripcion": "IEEE divide la capa de Enlace en las subcapas LLC (Logical Link Control) y MAC (Medium Access Control).",
+        "tema": "Capa de Enlace",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué capa se encarga del direccionamiento lógico (IP) y del encaminamiento?",
+        "opciones": ["Red", "Transporte", "Enlace", "Física"],
+        "correcta": 0,
+        "descripcion": "La capa de Red maneja el direccionamiento IP y determina la mejor ruta para los paquetes.",
+        "tema": "Capa de Red",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Cuál es la unidad de datos principal en la capa de Red?",
+        "opciones": ["Trama", "Paquete / Datagrama", "Segmento", "Bit"],
+        "correcta": 1,
+        "descripcion": "La capa de Red encapsula los segmentos en paquetes o datagramas.",
+        "tema": "Capa de Red",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué dispositivo opera fundamentalmente en la capa 3 del modelo OSI?",
+        "opciones": ["Router", "Switch básico", "Hub", "Repetidor"],
+        "correcta": 0,
+        "descripcion": "Los routers operan en la capa de Red encaminando paquetes entre distintas redes lógicas.",
+        "tema": "Capa de Red",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué protocolo principal opera en la capa de Red para la entrega de paquetes?",
+        "opciones": ["TCP", "IP", "HTTP", "Ethernet"],
+        "correcta": 1,
+        "descripcion": "El Protocolo de Internet (IP) es el protocolo fundamental de la capa de Red.",
+        "tema": "Capa de Red",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "El protocolo IP garantiza una entrega de paquetes altamente fiable, ordenada y sin pérdidas.",
+        "correcta": false,
+        "descripcion": "IP ofrece un servicio de entrega no fiable y de mejor esfuerzo (best-effort).",
+        "tema": "Capa de Red",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué capa del modelo OSI gestiona la comunicación extremo a extremo y el control de flujo?",
+        "opciones": ["Transporte", "Red", "Sesión", "Aplicación"],
+        "correcta": 0,
+        "descripcion": "La capa de Transporte asegura la transferencia fiable o no fiable de datos entre procesos de extremo a extremo.",
+        "tema": "Capa de Transporte",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Cuáles son los dos protocolos principales de la capa de Transporte en TCP/IP?",
+        "opciones": ["HTTP y HTTPS", "TCP y UDP", "IPv4 e IPv6", "ARP y RARP"],
+        "correcta": 1,
+        "descripcion": "TCP (orientado a conexión) y UDP (no orientado a conexión) son los protocolos clave de transporte.",
+        "tema": "Capa de Transporte",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué unidad de datos se asocia habitualmente a la capa de Transporte cuando se usa TCP?",
+        "opciones": ["Trama", "Segmento", "Paquete", "Bit"],
+        "correcta": 1,
+        "descripcion": "En la capa de Transporte, los datos se estructuran en segmentos (en TCP) o datagramas (en UDP).",
+        "tema": "Capa de Transporte",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "TCP utiliza un proceso de establecimiento de conexión de tres vías (three-way handshake).",
+        "correcta": true,
+        "descripcion": "El intercambio SYN, SYN-ACK y ACK establece la conexión TCP.",
+        "tema": "Capa de Transporte",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué capa del modelo OSI establece, gestiona y finaliza las conexiones entre aplicaciones?",
+        "opciones": ["Sesión", "Presentación", "Aplicación", "Transporte"],
+        "correcta": 0,
+        "descripcion": "La capa de Sesión coordina la interacción y el diálogo entre aplicaciones.",
+        "tema": "Capa de Sesión",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "La capa de Sesión permite mantener puntos de control (checkpoints) para reanudar transmisiones grandes interrumpidas.",
+        "correcta": true,
+        "descripcion": "La gestión de diálogos y puntos de sincronización es una función típica de la capa de Sesión.",
+        "tema": "Capa de Sesión",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué capa se ocupa de la sintaxis, el formato, la codificación, compresión y cifrado de los datos?",
+        "opciones": ["Presentación", "Aplicación", "Sesión", "Red"],
+        "correcta": 0,
+        "descripcion": "La capa de Presentación traduce los formatos de datos para que sean comprensibles por la aplicación.",
+        "tema": "Capa de Presentación",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "Formatos de imagen como JPEG o estándares de compresión de texto forman parte conceptual de la capa de Presentación.",
+        "correcta": true,
+        "descripcion": "La representación de datos y su codificación se gestionan en la capa 6.",
+        "tema": "Capa de Presentación",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué capa interactúa directamente con el software de usuario final y los servicios de red?",
+        "opciones": ["Aplicación", "Presentación", "Sesión", "Transporte"],
+        "correcta": 0,
+        "descripcion": "La capa de Aplicación proporciona la interfaz directa entre las aplicaciones de software y la red.",
+        "tema": "Capa de Aplicación",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué protocolo de la capa de Aplicación se utiliza para transferir páginas web?",
+        "opciones": ["HTTP", "SMTP", "FTP", "DNS"],
+        "correcta": 0,
+        "descripcion": "HTTP (Hypertext Transfer Protocol) transfiere documentos web.",
+        "tema": "Capa de Aplicación",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué protocolo de Aplicación resuelve nombres de dominio a direcciones IP?",
+        "opciones": ["DNS", "DHCP", "SNMP", "POP3"],
+        "correcta": 0,
+        "descripcion": "DNS (Domain Name System) traduce nombres legibles en direcciones IP.",
+        "tema": "Capa de Aplicación",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "El correo electrónico utiliza protocolos de capa de aplicación como SMTP para enviar mensajes.",
+        "correcta": true,
+        "descripcion": "SMTP opera en la capa de Aplicación para la transferencia de correo saliente.",
+        "tema": "Capa de Aplicación",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Cuál es el orden ascendente correcto de las capas del modelo OSI desde la 1 hasta la 7?",
+        "opciones": [
+          "Física, Enlace, Red, Transporte, Sesión, Presentación, Aplicación",
+          "Aplicación, Presentación, Sesión, Transporte, Red, Enlace, Física",
+          "Física, Red, Enlace, Sesión, Transporte, Aplicación, Presentación",
+          "Enlace, Física, Transporte, Red, Aplicación, Sesión, Presentación"
+        ],
+        "correcta": 0,
+        "descripcion": "El flujo estándar va desde la capa Física (1) hasta la Aplicación (7).",
+        "tema": "Fundamentos",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "Durante el proceso de transmisión, los datos descienden por la pila de protocolos agregando cabeceras en cada capa. ¿Cómo se llama este proceso?",
+        "opciones": ["Encapsulación", "Fragmentación", "Descompresión", "Modulación"],
+        "correcta": 0,
+        "descripcion": "La encapsulación añade la información de control correspondiente de cada capa a medida que baja.",
+        "tema": "Encapsulación",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "Al recibir datos en el destino, las cabeceras añadidas por cada capa se van retirando sucesivamente. ¿Cómo se denomina este proceso?",
+        "opciones": ["Desencapsulación", "Encapsulación inversa", "Multiplexación", "Conmutación"],
+        "correcta": 0,
+        "descripcion": "La desencapsulación es el proceso inverso donde el receptor procesa y elimina las cabeceras capa por capa.",
+        "tema": "Encapsulación",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "El modelo OSI fue desarrollado por la Organización Internacional de Normalización (ISO).",
+        "correcta": true,
+        "descripcion": "ISO propuso el modelo de referencia de interconexión de sistemas abiertos (OSI) a finales de los 70 / principios de los 80.",
+        "tema": "Fundamentos",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué capa procesa los números de puerto para identificar aplicaciones o servicios específicos?",
+        "opciones": ["Transporte", "Red", "Física", "Enlace"],
+        "correcta": 0,
+        "descripcion": "Los puertos lógicos (como el 80 para HTTP) se gestionan en la capa de Transporte.",
+        "tema": "Capa de Transporte",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "UDP es un protocolo de transporte orientado a conexión que verifica la entrega de cada datagrama.",
+        "correcta": false,
+        "descripcion": "UDP no está orientado a conexión y no garantiza la entrega ni el orden de los paquetes.",
+        "tema": "Capa de Transporte",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué capa usarías para diagnosticar un cable de red cortado?",
+        "opciones": ["Física", "Aplicación", "Sesión", "Presentación"],
+        "correcta": 0,
+        "descripcion": "Un problema con cables o conectores físicos se investiga en la capa 1.",
+        "tema": "Diagnóstico",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué capa comprobarías si hay un fallo en la resolución de una dirección IP o en la configuración de la puerta de enlace?",
+        "opciones": ["Red", "Física", "Presentación", "Sesión"],
+        "correcta": 0,
+        "descripcion": "El direccionamiento IP y las rutas corresponden a la capa de Red.",
+        "tema": "Diagnóstico",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "Un switch gestiona el tráfico basándose en direcciones físicas MAC.",
+        "correcta": true,
+        "descripcion": "Los switches de capa 2 leen las direcciones MAC de las tramas para conmutarlas al puerto correcto.",
+        "tema": "Capa de Enlace",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué protocolo asigna dinámicamente direcciones IP a los dispositivos en una red local?",
+        "opciones": ["DHCP", "DNS", "HTTP", "TCP"],
+        "correcta": 0,
+        "descripcion": "DHCP opera en la capa de Aplicación/Proceso para la configuración automática de IP.",
+        "tema": "Capa de Aplicación",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "La capa de Red asegura que los paquetes lleguen sin errores mediante acuses de recibo automáticos.",
+        "correcta": false,
+        "descripcion": "IP no maneja control de errores ni acuses de recibo; de eso se encarga habitualmente TCP en la capa superior.",
+        "tema": "Capa de Red",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué capa se encarga de controlar el acceso al medio compartido para evitar colisiones de tramas?",
+        "opciones": ["Enlace de datos (subcapa MAC)", "Capa Física", "Capa de Red", "Capa de Transporte"],
+        "correcta": 0,
+        "descripcion": "La subcapa MAC de la capa de Enlace gestiona cómo comparten los nodos el medio físico.",
+        "tema": "Capa de Enlace",
+        "dificil": true,
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "El comando 'ping' utiliza mensajes ICMP, los cuales operan apoyándose directamente en la capa de Red.",
+        "correcta": true,
+        "descripcion": "ICMP es un protocolo auxiliar de la capa de Red utilizado para diagnóstico y control.",
+        "tema": "Capa de Red",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué capa del modelo OSI gestiona la compresión y el cifrado conceptual de los datos antes de enviarlos a la sesión?",
+        "opciones": ["Presentación", "Aplicación", "Transporte", "Física"],
+        "correcta": 0,
+        "descripcion": "La capa de Presentación maneja la transformación, compresión y cifrado de la estructura de datos.",
+        "tema": "Capa de Presentación",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "El modelo OSI tiene exactamente 5 capas principales.",
+        "correcta": false,
+        "descripcion": "El modelo OSI está compuesto por 7 capas.",
+        "tema": "Fundamentos",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué capa del modelo OSI se ubica inmediatamente debajo de la capa de Sesión?",
+        "opciones": ["Transporte", "Red", "Presentación", "Enlace"],
+        "correcta": 0,
+        "descripcion": "El orden de abajo arriba es: Red -> Transporte -> Sesión -> Presentación.",
+        "tema": "Capas",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué capa se ubica inmediatamente arriba de la capa de Red?",
+        "opciones": ["Transporte", "Enlace", "Física", "Sesión"],
+        "correcta": 0,
+        "descripcion": "La capa de Transporte se sitúa justo por encima de la capa de Red.",
+        "tema": "Capas",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "Los repetidores inalámbricos y puntos de acceso Wi-Fi operan parcialmente en la capa Física y en la capa de Enlace.",
+        "correcta": true,
+        "descripcion": "Manejan ondas de radio (Física) y gestión de tramas inalámbricas (Enlace).",
+        "tema": "Capa Física",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Cuál es la función principal del modelo OSI?",
+        "opciones": [
+          "Proveer un marco de referencia estándar para entender y diseñar arquitecturas de red",
+          "Sustituir por completo al modelo TCP/IP en Internet",
+          "Definir únicamente los voltajes de los cables de fibra óptica",
+          "Controlar los sistemas operativos de los servidores web"
+        ],
+        "correcta": 0,
+        "descripcion": "Su propósito es servir como guía conceptual y modelo de referencia para la interoperabilidad de redes.",
+        "tema": "Fundamentos",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "En el modelo OSI, cada capa ofrece servicios a la capa superior y solicita servicios a la capa inferior.",
+        "correcta": true,
+        "descripcion": "Esta es la regla fundamental de comunicación estructurada por capas.",
+        "tema": "Fundamentos",
+        "tipo": "vf"
+      }
+    ],
+    "normal": [
+      {
+        "pregunta": "¿Cuántas capas componen el modelo de referencia OSI?",
+        "opciones": ["5", "6", "7", "8"],
+        "correcta": 2,
+        "descripcion": "El modelo OSI consta de 7 capas.",
+        "tema": "Fundamentos",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Cuál es el orden correcto de las capas desde la más cercana al medio físico hasta la más cercana al usuario?",
+        "opciones": [
+          "Física, Enlace, Red, Transporte, Sesión, Presentación, Aplicación",
+          "Aplicación, Presentación, Sesión, Transporte, Red, Enlace, Física",
+          "Física, Red, Enlace, Sesión, Transporte, Aplicación, Presentación",
+          "Enlace, Física, Transporte, Red, Aplicación, Sesión, Presentación"
+        ],
+        "correcta": 0,
+        "descripcion": "El orden ascendente estándar es: Física (1), Enlace (2), Red (3), Transporte (4), Sesión (5), Presentación (6) y Aplicación (7).",
+        "tema": "Fundamentos",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué capa OSI transmite bits mediante señales eléctricas, ópticas o de radio por el medio físico?",
+        "opciones": ["Red", "Física", "Enlace", "Transporte"],
+        "correcta": 1,
+        "descripcion": "La capa Física define las especificaciones eléctricas, mecánicas y procedurales de la señal.",
+        "tema": "Capa Física",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué unidad de datos se asocia típicamente con la capa Física?",
+        "opciones": ["Trama", "Paquete", "Segmento", "Bits"],
+        "correcta": 3,
+        "descripcion": "En la capa Física se transportan flujos brutos de bits.",
+        "tema": "Capa Física",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué capa se ocupa principalmente de las tramas y del control de acceso al medio mediante direcciones MAC?",
+        "opciones": ["Enlace de datos", "Sesión", "Presentación", "Aplicación"],
+        "correcta": 0,
+        "descripcion": "La capa de Enlace organiza los datos en tramas y gestiona las direcciones físicas MAC.",
+        "tema": "Capa de Enlace",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué tecnología se asocia principalmente con la subcapa de acceso al medio en redes de área local (LAN)?",
+        "opciones": ["DNS", "Ethernet", "SMTP", "TLS"],
+        "correcta": 1,
+        "descripcion": "Ethernet define los estándares de la capa de Enlace y Física para redes LAN.",
+        "tema": "Capa de Enlace",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué dispositivo opera tradicionalmente en la capa de Enlace retransmitiendo tramas según su dirección MAC?",
+        "opciones": ["Switch de capa 2", "Router IP", "Servidor DNS", "Repetidor analógico"],
+        "correcta": 0,
+        "descripcion": "Un switch de capa 2 utiliza tablas MAC para conmutar tramas entre puertos.",
+        "tema": "Capa de Enlace",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "La capa de Enlace de datos puede detectar errores en las tramas mediante códigos de redundancia como el FCS (Frame Check Sequence).",
+        "correcta": true,
+        "descripcion": "El campo FCS permite comprobar si la trama sufrió alteraciones durante la transmisión física.",
+        "tema": "Capa de Enlace",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué capa se encarga principalmente del direccionamiento lógico (como IPv4/IPv6) y el encaminamiento entre redes?",
+        "opciones": ["Transporte", "Red", "Sesión", "Física"],
+        "correcta": 1,
+        "descripcion": "La capa de Red gestiona el direccionamiento lógico y determina las rutas óptimas.",
+        "tema": "Capa de Red",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué protocolo es el pilar principal de la capa de Red en Internet?",
+        "opciones": ["IP", "HTTP", "SMTP", "Bluetooth"],
+        "correcta": 0,
+        "descripcion": "El Protocolo de Internet (IP) proporciona direccionamiento y entrega de paquetes en la capa 3.",
+        "tema": "Capa de Red",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué unidad de datos se asocia habitualmente con la capa de Red?",
+        "opciones": ["Bit", "Trama", "Paquete / Datagrama", "Mensaje de aplicación"],
+        "correcta": 2,
+        "descripcion": "La unidad de datos de la capa de Red se denomina paquete o datagrama.",
+        "tema": "Capa de Red",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "El protocolo IP garantiza al 100% que todos los paquetes llegarán a destino sin duplicados ni alteraciones.",
+        "correcta": false,
+        "descripcion": "IP ofrece un servicio de entrega no fiable (best-effort); la fiabilidad se delega en protocolos de transporte como TCP.",
+        "tema": "Capa de Red",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué capa OSI administra la comunicación extremo a extremo y utiliza números de puerto para distinguir servicios?",
+        "opciones": ["Transporte", "Física", "Enlace", "Presentación"],
+        "correcta": 0,
+        "descripcion": "La capa de Transporte maneja la entrega extremo a extremo entre procesos usando puertos TCP/UDP.",
+        "tema": "Capa de Transporte",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Cuáles son los dos protocolos fundamentales de la capa de Transporte?",
+        "opciones": ["TCP y UDP", "IP y ARP", "HTTP y DNS", "Ethernet y Wi-Fi"],
+        "correcta": 0,
+        "descripcion": "TCP y UDP son los protocolos de transporte más extendidos.",
+        "tema": "Capa de Transporte",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "TCP es un protocolo orientado a conexión que proporciona entrega fiable mediante acuses de recibo y retransmisiones.",
+        "correcta": true,
+        "descripcion": "TCP verifica la recepción correcta de los segmentos y retransmite los perdidos.",
+        "tema": "Capa de Transporte",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "UDP ofrece un servicio rápido y sin conexión, ideal para streaming o juegos en tiempo real donde la velocidad importa más que la retransmisión de paquetes perdidos.",
+        "correcta": true,
+        "descripcion": "UDP prioriza la baja latencia prescindiendo de controles de flujo estrictos y retransmisiones.",
+        "tema": "Capa de Transporte",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué capa se relaciona con el establecimiento, mantenimiento y cierre de sesiones de diálogo entre aplicaciones?",
+        "opciones": ["Red", "Sesión", "Física", "Enlace"],
+        "correcta": 1,
+        "descripcion": "La capa de Sesión administra las sesiones de comunicación interactiva.",
+        "tema": "Capa de Sesión",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Cuál de estas funciones se asocia específicamente a la capa de Sesión?",
+        "opciones": ["Controlar el diálogo y sincronizar puntos de control", "Transmitir impulsos eléctricos", "Asignar direcciones MAC", "Encaminar paquetes IP"],
+        "correcta": 0,
+        "descripcion": "La capa de Sesión gestiona el control de diálogo (simplex, semi-duplex, duplex) y puntos de sincronización.",
+        "tema": "Capa de Sesión",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué capa conceptual se encarga de la representación, codificación, compresión y transformación de formatos de datos?",
+        "opciones": ["Presentación", "Red", "Enlace", "Física"],
+        "correcta": 0,
+        "descripcion": "La capa de Presentación asegura que la información enviada por la aplicación de un sistema sea legible por el otro.",
+        "tema": "Capa de Presentación",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "En el modelo OSI, las funciones de cifrado y compresión de datos suelen describirse en la capa de Presentación.",
+        "correcta": true,
+        "descripcion": "La representación y seguridad de formato (como SSL/TLS en su visión clásica de capa 6) se ubican aquí.",
+        "tema": "Capa de Presentación",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué capa ofrece servicios de red directamente a los programas y aplicaciones del usuario?",
+        "opciones": ["Aplicación", "Transporte", "Física", "Enlace"],
+        "correcta": 0,
+        "descripcion": "La capa de Aplicación provee servicios de red para las aplicaciones de software.",
+        "tema": "Capa de Aplicación",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿En qué capa se ubica el protocolo HTTP utilizado para la navegación web?",
+        "opciones": ["Red", "Aplicación", "Física", "Enlace"],
+        "correcta": 1,
+        "descripcion": "HTTP es un protocolo de la capa de Aplicación.",
+        "tema": "Capa de Aplicación",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué protocolo de Aplicación se utiliza para traducir nombres de dominio a direcciones IP?",
+        "opciones": ["DNS", "IP", "ARP", "Ethernet"],
+        "correcta": 0,
+        "descripcion": "DNS opera en la capa de Aplicación para la resolución de nombres.",
+        "tema": "Capa de Aplicación",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué describe mejor el proceso de encapsulación en una red?",
+        "opciones": [
+          "Cada capa añade su propia información de control (cabecera/tráiler) a los datos al pasarlos hacia abajo",
+          "Los routers convierten todos los datos en texto plano",
+          "Las capas eliminan las direcciones IP antes de salir al exterior",
+          "Solo la capa Física modifica los datos"
+        ],
+        "correcta": 0,
+        "descripcion": "Durante la encapsulación, cada capa adjunta su cabecera correspondiente mientras los datos descienden.",
+        "tema": "Encapsulación",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "Al recibir datos en el nodo destino, se realiza el proceso inverso a la encapsulación, denominado desencapsulación.",
+        "correcta": true,
+        "descripcion": "La desencapsulación procesa y retira las cabeceras capa por capa a medida que ascienden los datos.",
+        "tema": "Encapsulación",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Cuál es el tamaño estándar mínimo de la cabecera IPv4 sin opciones adicionales?",
+        "opciones": ["12 bytes", "20 bytes", "32 bytes", "64 bytes"],
+        "correcta": 1,
+        "descripcion": "La cabecera base de IPv4 mide exactamente 20 bytes.",
+        "tema": "Capa de Red",
+        "dificil": true,
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué campo de la trama Ethernet de capa 2 detecta errores mediante una verificación de redundancia cíclica (CRC)?",
+        "opciones": ["Preamble", "FCS (Frame Check Sequence)", "EtherType", "Destination MAC"],
+        "correcta": 1,
+        "descripcion": "El campo FCS al final de la trama Ethernet contiene el código CRC para comprobar la integridad.",
+        "tema": "Capa de Enlace",
+        "dificil": true,
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Cuál es la capa número 3 del modelo OSI?",
+        "opciones": ["Enlace", "Red", "Transporte", "Sesión"],
+        "correcta": 1,
+        "descripcion": "La capa 3 corresponde a la capa de Red.",
+        "tema": "Capas",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Cuál es la capa número 4 del modelo OSI?",
+        "opciones": ["Transporte", "Red", "Sesión", "Aplicación"],
+        "correcta": 0,
+        "descripcion": "La capa 4 es la capa de Transporte.",
+        "tema": "Capas",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Cuál es la capa número 5 del modelo OSI?",
+        "opciones": ["Sesión", "Presentación", "Aplicación", "Física"],
+        "correcta": 0,
+        "descripcion": "La capa 5 es la capa de Sesión.",
+        "tema": "Capas",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Cuál es la capa número 6 del modelo OSI?",
+        "opciones": ["Presentación", "Aplicación", "Enlace", "Transporte"],
+        "correcta": 0,
+        "descripcion": "La capa 6 es la capa de Presentación.",
+        "tema": "Capas",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "Un cable de red desconectado impide la comunicación, debiendo revisarse primeramente la capa Física.",
+        "correcta": true,
+        "descripcion": "Los medios físicos y señales pertenecen enteramente a la capa 1.",
+        "tema": "Diagnóstico",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "Si los equipos de una LAN se comunican mediante MAC pero una trama no llega al puerto correcto de un switch, ¿qué capa debe revisarse?",
+        "opciones": ["Enlace de datos", "Presentación", "Sesión", "Aplicación"],
+        "correcta": 0,
+        "descripcion": "El manejo de tramas y direcciones MAC corresponde a la capa de Enlace.",
+        "tema": "Diagnóstico",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "Un equipo tiene conectividad local pero no puede alcanzar una red remota por una ruta IP incorrecta. ¿Qué capa está involucrada?",
+        "opciones": ["Red", "Física", "Presentación", "Sesión"],
+        "correcta": 0,
+        "descripcion": "El enrutamiento entre redes es una función primordial de la capa de Red.",
+        "tema": "Diagnóstico",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "Si una aplicación no logra establecer una conexión TCP en el puerto esperado, ¿qué capa debe analizarse junto con la aplicación?",
+        "opciones": ["Transporte", "Física", "Presentación", "Sesión"],
+        "correcta": 0,
+        "descripcion": "Los puertos y la gestión de conexiones TCP corresponden a la capa de Transporte.",
+        "tema": "Diagnóstico",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "FTP es un protocolo de capa de aplicación utilizado para la transferencia eficiente de archivos.",
+        "correcta": true,
+        "descripcion": "FTP opera en la capa 7 para gestionar la subida y bajada de archivos.",
+        "tema": "Capa de Aplicación",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "El modelo OSI es un protocolo propietario exclusivo de una sola marca de routers.",
+        "correcta": false,
+        "descripcion": "El modelo OSI es un marco abierto de la ISO y no pertenece a ningún fabricante específico.",
+        "tema": "Fundamentos",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué protocolo auxiliar de la capa de Red mapea direcciones IP a direcciones MAC en redes locales?",
+        "opciones": ["ARP", "TCP", "DNS", "HTTP"],
+        "correcta": 0,
+        "descripcion": "ARP (Address Resolution Protocol) opera en la frontera entre la capa de Red y la de Enlace.",
+        "tema": "Capa de Red",
+        "dificil": true,
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "El direccionamiento MAC opera en la capa 2, mientras que el direccionamiento IP opera en la capa 3.",
+        "correcta": true,
+        "descripcion": "MAC es físico de enlace e IP es lógico de red.",
+        "tema": "Capas",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué dispositivo interconector opera en la capa de Red analizando paquetes IP?",
+        "opciones": ["Router", "Hub", "Switch simple", "Patch panel"],
+        "correcta": 0,
+        "descripcion": "Los routers toman decisiones de salto a salto leyendo las cabeceras IP de capa 3.",
+        "tema": "Capa de Red",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "La capa de Transporte garantiza que los segmentos lleguen libres de errores mediante sumas de verificación (checksums).",
+        "correcta": true,
+        "descripcion": "Tanto TCP como UDP incluyen sumas de verificación para validar la integridad del segmento.",
+        "tema": "Capa de Transporte",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué estándar define el formato de las tramas Ethernet en la capa de Enlace?",
+        "opciones": ["IEEE 802.3", "IEEE 802.11", "ISO 7498", "RFC 793"],
+        "correcta": 0,
+        "descripcion": "IEEE 802.3 especifica el estándar Ethernet para redes cableadas de área local.",
+        "tema": "Capa de Enlace",
+        "dificil": true,
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "IEEE 802.11 es el estándar que define las redes inalámbricas Wi-Fi en las capas Física y de Enlace.",
+        "correcta": true,
+        "descripcion": "802.11 regula las transmisiones inalámbricas WLAN.",
+        "tema": "Capa Física",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Cuál es la longitud de una dirección MAC física expresada en bits?",
+        "opciones": ["32 bits", "48 bits", "64 bits", "128 bits"],
+        "correcta": 1,
+        "descripcion": "Las direcciones MAC estándar constan de 48 bits (6 bytes).",
+        "tema": "Capa de Enlace",
+        "dificil": true,
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Cuál es la longitud de una dirección IPv4 estándar expresada en bits?",
+        "opciones": ["32 bits", "48 bits", "64 bits", "128 bits"],
+        "correcta": 0,
+        "descripcion": "IPv4 utiliza direcciones lógicas de 32 bits.",
+        "tema": "Capa de Red",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "Una dirección IPv6 utiliza un espacio de direcciones de 128 bits.",
+        "correcta": true,
+        "descripcion": "IPv6 amplía el direccionamiento de red a 128 bits.",
+        "tema": "Capa de Red",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué capa maneja la multiplexación de múltiples aplicaciones en una sola conexión IP mediante puertos?",
+        "opciones": ["Transporte", "Red", "Enlace", "Sesión"],
+        "correcta": 0,
+        "descripcion": "La capa de Transporte multiplexa flujos de distintas aplicaciones usando números de puerto.",
+        "tema": "Capa de Transporte",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "El modelo OSI facilita la resolución de problemas de red aislando fallos por capas específicas.",
+        "correcta": true,
+        "descripcion": "Permite a los administradores determinar si un problema es físico, de enrutamiento o de aplicación.",
+        "tema": "Diagnóstico",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "La capa de Sesión y la capa de Presentación son estrictamente necesarias y obligatorias en cualquier pila de protocolos minimalista moderna como TCP/IP.",
+        "correcta": false,
+        "descripcion": "En el modelo TCP/IP práctico, estas funciones están integradas o son gestionadas directamente por las aplicaciones, a diferencia del modelo OSI teórico.",
+        "tema": "Fundamentos",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué campo de la cabecera IPv4 se utiliza para fragmentación indicando la posición del fragmento respecto al inicio del paquete original?",
+        "opciones": ["Fragment Offset", "Identification", "Total Length", "TTL"],
+        "correcta": 0,
+        "descripcion": "El campo Fragment Offset (Desplazamiento de Fragmento) indica en múltiplos de 8 bytes la posición del fragmento en el paquete completo.",
+        "tema": "Capa de Red",
+        "dificil": true,
+        "tipo": "normal"
+      }
+    ],
+    "dificil": [
+      {
+        "pregunta": "¿Qué campo específico de la cabecera TCP de 32 bits identifica el número de secuencia para garantizar la entrega ordenada de segmentos?",
+        "opciones": [
+          "Número de Acuse de Recibo (Acknowledgment Number)",
+          "Número de Secuencia (Sequence Number)",
+          "Ventana de Recepción (Window Size)",
+          "Puerto de Destino (Destination Port)"
+        ],
+        "correcta": 1,
+        "descripcion": "El Número de Secuencia indica el byte inicial de los datos transportados en el segmento dentro de la sesión TCP.",
+        "tema": "Capa de Transporte",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Cuál es el tamaño exacto en bytes de la cabecera fija de un segmento TCP sin opciones adicionales?",
+        "opciones": ["16 bytes", "20 bytes", "24 bytes", "32 bytes"],
+        "correcta": 1,
+        "descripcion": "La cabecera fija de TCP tiene una longitud mínima de 20 bytes.",
+        "tema": "Capa de Transporte",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "En un entorno de conmutación de etiquetas MPLS, ¿en qué capa del modelo OSI o subcapa híbrida se suele insertar y procesar la etiqueta de 4 bytes situada entre la capa 2 y la capa 3?",
+        "opciones": [
+          "Capa Física pura (Capa 1)",
+          "Capa de Enlace de datos (Capa 2.5)",
+          "Capa de Red pura (Capa 3)",
+          "Capa de Transporte (Capa 4)"
+        ],
+        "correcta": 1,
+        "descripcion": "MPLS opera a menudo conceptualmente entre la capa 2 y la capa 3 (conocida informalmente como capa 2.5).",
+        "tema": "Capa de Red",
+        "dificil": true,
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "Durante el establecimiento de conexión TCP de tres vías (3-way handshake), si un host recibe un segmento con los flags SYN y ACK activados simultáneamente, ¿qué estado transitorio abandona para pasar a ESTABLISHED al enviar el ACK final?",
+        "opciones": ["LISTEN", "SYN_SENT", "FIN_WAIT_1", "CLOSE_WAIT"],
+        "correcta": 1,
+        "descripcion": "El host emisor inicial se encuentra en estado SYN_SENT y, al recibir SYN-ACK y responder con ACK, transiciona a ESTABLISHED.",
+        "tema": "Capa de Transporte",
+        "dificil": true,
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Cuál es la longitud máxima de la carga útil (payload / MTU estándar Ethernet sin tramas gigantes) antes de la fragmentación IP obligatoria en redes IPv4 tradicionales?",
+        "opciones": ["512 bytes", "1480 bytes", "1500 bytes", "9000 bytes"],
+        "correcta": 1,
+        "descripcion": "Restando los 20 bytes de cabecera IPv4 a la MTU de Ethernet de 1500 bytes, el payload IP puro máximo es 1480 bytes.",
+        "tema": "Encapsulación",
+        "dificil": true,
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué campo de la cabecera IPv4 se decrementa en cada salto de router y descarta el paquete si su valor llega a cero para evitar bucles infinitos?",
+        "opciones": ["Time to Live (TTL)", "Header Length", "Type of Service", "Protocol ID"],
+        "correcta": 0,
+        "descripcion": "El campo TTL (Tiempo de Vida) evita que los paquetes circulen indefinidamente en bucles de enrutamiento.",
+        "tema": "Capa de Red",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "En el protocolo ARP, ¿cuál es el tipo de dirección MAC destino utilizada para enviar una solicitud ARP broadcast solicitando una IP en la LAN?",
+        "opciones": ["FF:FF:FF:FF:FF:FF", "00:00:00:00:00:00", "01:00:5E:00:00:01", "33:33:00:00:00:01"],
+        "correcta": 0,
+        "descripcion": "Las tramas de difusión (broadcast) en Ethernet utilizan la dirección MAC FF:FF:FF:FF:FF:FF.",
+        "tema": "Capa de Enlace",
+        "dificil": true,
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué flag de control en la cabecera TCP se utiliza para finalizar elegantemente una conexión establecida de forma bidireccional?",
+        "opciones": ["SYN", "FIN", "RST", "PSH"],
+        "correcta": 1,
+        "descripcion": "El flag FIN indica que el emisor ha terminado de enviar datos y desea cerrar la conexión.",
+        "tema": "Capa de Transporte",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué mecanismo de control de flujo en TCP evita que un emisor sature el búfer de recepción de un host remoto mediante ventanas deslizantes?",
+        "opciones": ["Control de congestión de Jacobson", "Ventana deslizante (Window Size / Flow Control)", "Retransmisión selectiva", "Suma de verificación CRC"],
+        "correcta": 1,
+        "descripcion": "El campo Window Size en la cabecera TCP indica cuántos bytes puede recibir el receptor antes de desbordarse.",
+        "tema": "Capa de Transporte",
+        "dificil": true,
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "En redes IPv6, ¿cómo se denomina al campo que reemplaza al TTL de IPv4 limitando el número de saltos permitidos?",
+        "opciones": ["Hop Limit", "Traffic Class", "Next Header", "Flow Label"],
+        "correcta": 0,
+        "descripcion": "IPv6 renombra el TTL a Hop Limit con idéntico propósito funcional en la capa 3.",
+        "tema": "Capa de Red",
+        "dificil": true,
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué subcapa de la capa de Enlace de datos gestiona el control lógico de enlace (LLC) independientemente del medio físico?",
+        "opciones": ["IEEE 802.2 (LLC)", "IEEE 802.3 (MAC)", "IEEE 802.11", "EIA/TIA-232"],
+        "correcta": 0,
+        "descripcion": "La subcapa LLC (IEEE 802.2) se encarga de la comunicación con la capa de Red.",
+        "tema": "Capa de Enlace",
+        "dificil": true,
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "El protocolo BGP (Border Gateway Protocol), utilizado para enrutamiento entre sistemas autónomos en Internet, opera lógicamente apoyándose en qué protocolo de transporte?",
+        "opciones": ["UDP", "TCP (Puerto 179)", "ICMP directamente", "SCTP"],
+        "correcta": 1,
+        "descripcion": "BGP utiliza TCP en el puerto 179 para asegurar la fiabilidad en el intercambio de rutas entre AS.",
+        "tema": "Capa de Transporte",
+        "dificil": true,
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué protocolo de la capa de Aplicación utiliza tanto UDP como TCP en el puerto 53 para operaciones de consulta y transferencia de zona?",
+        "opciones": ["DNS", "DHCP", "SNMP", "TFTP"],
+        "correcta": 0,
+        "descripcion": "DNS utiliza UDP 53 para consultas rápidas y TCP 53 para transferencias de zona grandes.",
+        "tema": "Capa de Aplicación",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "En la encapsulación OSI, el bloque de datos que recibe la capa de Enlace desde la capa de Red se encapsula añadiendo una cabecera y un tráiler, formando formalmente una:",
+        "opciones": ["Trama (Frame)", "Segmento", "Datagrama IP", "PDU de sesión"],
+        "correcta": 0,
+        "descripcion": "La PDU de la capa de Enlace de datos es la trama.",
+        "tema": "Encapsulación",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué protocolo de gestión de red opera sobre UDP en el puerto 161 para monitorear dispositivos?",
+        "opciones": ["SNMP", "SMTP", "FTP", "SSH"],
+        "correcta": 0,
+        "descripcion": "SNMP (Simple Network Management Protocol) utiliza UDP para supervisar equipos de red.",
+        "tema": "Capa de Aplicación",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "El mecanismo de 'Slow Start' y prevención de congestión en TCP ajusta la ventana de congestión de forma exponencial al inicio.",
+        "correcta": true,
+        "descripcion": "Es parte fundamental de los algoritmos de control de congestión implementados en la capa de Transporte.",
+        "tema": "Capa de Transporte",
+        "dificil": true,
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué tipo de dirección IP representa una transmisión simultánea a un grupo específico de nodos en una subred (multicast)?",
+        "opciones": ["Clase D (ej. rangos 224.0.0.0 a 239.255.255.255)", "Dirección Loopback (127.0.0.1)", "Dirección Broadcast (255.255.255.255)", "IP APIPA (169.254.x.x)"],
+        "correcta": 0,
+        "descripcion": "El direccionamiento multicast en IPv4 se ubica en el rango de Clase D.",
+        "tema": "Capa de Red",
+        "dificil": true,
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué capa del modelo OSI gestiona las interrupciones de sesión y la recuperación tras fallos de transporte mediante tokens de diálogo?",
+        "opciones": ["Sesión", "Presentación", "Transporte", "Aplicación"],
+        "correcta": 0,
+        "descripcion": "La capa de Sesión administra tokens de control de turno y recuperación.",
+        "tema": "Capa de Sesión",
+        "dificil": true,
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "En las redes Ethernet modernas de alta velocidad conmutadas mediante switches full-duplex, el protocolo CSMA/CD de la capa de Enlace ya no es necesario para evitar colisiones.",
+        "correcta": true,
+        "descripcion": "El modo full-duplex dedicado elimina las colisiones en enlaces punto a punto con switches.",
+        "tema": "Capa de Enlace",
+        "dificil": true,
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué campo de la cabecera UDP de 8 bytes especifica la longitud total del datagrama UDP incluyendo su cabecera?",
+        "opciones": ["UDP Length", "Source Port", "Checksum", "Sequence ID"],
+        "correcta": 0,
+        "descripcion": "El campo Length de UDP especifica los bytes totales del datagrama (mínimo 8 bytes).",
+        "tema": "Capa de Transporte",
+        "dificil": true,
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué protocolo de cifrado de capa de transporte (o híbrido sesión/transporte histórico) securiza conexiones web modernas como HTTPS?",
+        "opciones": ["TLS (Transport Layer Security)", "IPsec", "DES", "MD5"],
+        "correcta": 0,
+        "descripcion": "TLS opera protegiendo la capa de transporte para aplicaciones seguras.",
+        "tema": "Capa de Transporte",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "El estándar IEEE 802.1Q define la encapsulación de etiquetas VLAN (Virtual Local Area Network) dentro de la trama Ethernet de capa 2.",
+        "correcta": true,
+        "descripcion": "802.1Q añade una etiqueta de 4 bytes a la trama para segmentar VLANs lógicamente.",
+        "tema": "Capa de Enlace",
+        "dificil": true,
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Cuál es el propósito del campo 'Protocol' en la cabecera IPv4 (o 'Next Header' en IPv6)?",
+        "opciones": [
+          "Indicar qué protocolo de capa superior (ej. TCP, UDP, ICMP) transporta la carga útil del paquete",
+          "Señalar la velocidad del puerto del switch físico",
+          "Definir el idioma de la aplicación web",
+          "Establecer la máscara de subred"
+        ],
+        "correcta": 0,
+        "descripcion": "Este campo informa al receptor de capa 3 a qué protocolo de capa 4 debe entregar el paquete.",
+        "tema": "Capa de Red",
+        "dificil": true,
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "El protocolo IGMP (Internet Group Management Protocol) opera en la capa de Red gestionando membresías a grupos multicast.",
+        "correcta": true,
+        "descripcion": "IGMP asiste a IP en la gestión de flujos multicast locales.",
+        "tema": "Capa de Red",
+        "dificil": true,
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué técnica de la capa de Enlace divide flujos de datos binarios continuos en secuencias delimitadas mediante patrones de bits especiales (como flag 01111110 en HDLC)?",
+        "opciones": ["Delimitación por banderas o Framing (Bit-stuffing)", "Encapsulación IP", "Segmentación TCP", "Modulación QAM"],
+        "correcta": 0,
+        "descripcion": "El bit-stuffing y el enmarcado por banderas permiten delimitar tramas en enlaces seriales.",
+        "tema": "Capa de Enlace",
+        "dificil": true,
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "El modelo OSI es idéntico en número y asignación de capas al modelo TCP/IP de la suite de Internet.",
+        "correcta": false,
+        "descripcion": "TCP/IP tiene 4 capas (o 5 según la bibliografía) y agrupa de forma distinta las capas superiores del modelo OSI.",
+        "tema": "Fundamentos",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué componente de hardware de capa Física regenera y retransmite señales eléctricas atenuadas en cables de gran longitud?",
+        "opciones": ["Repetidor o Amplificador físico", "Router de núcleo", "Switch multicapa", "Gateway de aplicación"],
+        "correcta": 0,
+        "descripcion": "Los repetidores físicos restauran la amplitud y forma de la señal eléctrica degradada.",
+        "tema": "Capa Física",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué protocolo de la capa de Red se utiliza para enviar mensajes de error y operational control (como 'Destination Unreachable')",
+        "opciones": ["ICMP", "TCP", "ARP", "UDP"],
+        "correcta": 0,
+        "descripcion": "ICMP reporta incidencias y estados de control en la capa de Red.",
+        "tema": "Capa de Red",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "En la arquitectura OSI, la conversión de un formato de codificación de caracteres (por ejemplo, de EBCDIC a ASCII) se considera una tarea típica de la capa de Presentación.",
+        "correcta": true,
+        "descripcion": "La transformación y traducción sintáctica de datos es labor de la capa 6.",
+        "tema": "Capa de Presentación",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué método utiliza TCP para confirmar la recepción ordenada de bloques de datos mediante el desplazamiento del puntero de secuencia?",
+        "opciones": ["Acuses de recibo acumulativos (ACKs)", "Broadcast incondicional", "Rotación de direcciones MAC", "Conmutación de circuitos"],
+        "correcta": 0,
+        "descripcion": "TCP utiliza ACKs acumulativos para confirmar los bytes recibidos correctamente.",
+        "tema": "Capa de Transporte",
+        "dificil": true,
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "El direccionamiento IP de clase A, B y C basado en límites fijos de octetos ha sido completamente reemplazado en el enrutamiento moderno por CIDR (Classless Inter-Domain Routing).",
+        "correcta": true,
+        "descripcion": "CIDR eliminó las clases fijas permitiendo máscaras de subred de longitud variable.",
+        "tema": "Capa de Red",
+        "dificil": true,
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué protocolo de enrutamiento interno (IGP) basado en estado de enlace (Link-State) utiliza el algoritmo de Dijkstra para calcular rutas óptimas en la capa de Red?",
+        "opciones": ["OSPF (Open Shortest Path First)", "RIP (Routing Information Protocol)", "BGP", "PPP"],
+        "correcta": 0,
+        "descripcion": "OSPF es un protocolo de estado de enlace que emplea el algoritmo de Dijkstra.",
+        "tema": "Capa de Red",
+        "dificil": true,
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué protocolo clásico de vector distancia basado en conteo de saltos (limitado a un máximo de 15 saltos) opera en la capa de Red?",
+        "opciones": ["RIP (Routing Information Protocol)", "OSPF", "BGP", "ARP"],
+        "correcta": 0,
+        "descripcion": "RIP utiliza el número de saltos como métrica con un límite estricto de 15 saltos.",
+        "tema": "Capa de Red",
+        "dificil": true,
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "La fragmentación de paquetes IP ocurre obligatoriamente en un router intermediario si el datagrama supera la MTU del siguiente enlace de salida.",
+        "correcta": true,
+        "descripcion": "Los routers fragmentan los paquetes IPv4 si superan la MTU del enlace subsiguiente (siempre que el flag DF no esté activo).",
+        "tema": "Capa de Red",
+        "dificil": true,
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué flag de la cabecera IP de 3 bits prohíbe explícitamente que un router fragmente el datagrama?",
+        "opciones": ["Don't Fragment (DF)", "More Fragments (MF)", "Acknowledgment Flag", "Syn Flag"],
+        "correcta": 0,
+        "descripcion": "El flag DF (No Fragmentar) indica al router que no debe fragmentar el paquete bajo ninguna circunstancia.",
+        "tema": "Capa de Red",
+        "dificil": true,
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "El protocolo DHCP opera sobre los puertos UDP 67 (servidor) y 68 (cliente) en la arquitectura de protocolos de red.",
+        "correcta": true,
+        "descripcion": "DHCP utiliza UDP en dichos puertos para la asignación dinámica de parámetros IP.",
+        "tema": "Capa de Aplicación",
+        "dificil": true,
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué servicio de capa de aplicación traduce nombres de correo y administra la entrega entre servidores mediante el puerto TCP 25?",
+        "opciones": ["SMTP", "POP3", "IMAP", "HTTP"],
+        "correcta": 0,
+        "descripcion": "SMTP (Simple Mail Transfer Protocol) utiliza el puerto 25 para la transferencia de correo entre servidores.",
+        "tema": "Capa de Aplicación",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "El modelo OSI define explícitamente la interfaz de programación de aplicaciones (API) que los desarrolladores deben utilizar en cada sistema operativo.",
+        "correcta": false,
+        "descripcion": "El modelo OSI especifica funciones lógicas por capas, pero no define APIs de programación propietarias.",
+        "tema": "Fundamentos",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Cuál es la función del campo 'Checksum' en la cabecera del segmento TCP?",
+        "opciones": [
+          "Verificar la integridad tanto de la cabecera como de los datos del segmento TCP mediante suma de comprobación",
+          "Acelerar la velocidad de transmisión de los paquetes de fibra óptica",
+          "Cifrar el contenido del mensaje contra escuchas ilegales",
+          "Calcular el número de saltos de los routers intermedios"
+        ],
+        "correcta": 0,
+        "descripcion": "El checksum de TCP protege la integridad del segmento contra corrupción de datos en tránsito.",
+        "tema": "Capa de Transporte",
+        "dificil": true,
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "En las redes de comunicaciones modernas, el modelo OSI sigue utilizándose principalmente como marco teórico de enseñanza y diagnóstico conceptual.",
+        "correcta": true,
+        "descripcion": "Aunque el stack práctico es TCP/IP, el desglose de capas OSI es la herramienta pedagógica y analítica estándar de la industria.",
+        "tema": "Fundamentos",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué capa del modelo OSI es responsable de garantizar que los datos transmitidos por un sistema sean legibles por la sintaxis del sistema receptor?",
+        "opciones": ["Presentación", "Sesión", "Aplicación", "Transporte"],
+        "correcta": 0,
+        "descripcion": "La capa de Presentación resuelve las diferencias de sintaxis y representación de datos entre sistemas heterogéneos.",
+        "tema": "Capa de Presentación",
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "¿Qué protocolo de transporte orientado a mensajes y con soporte multi-streaming nativo fue diseñado para la telefonía IP y señalización SS7 sobre IP?",
+        "opciones": ["SCTP (Stream Control Transmission Protocol)", "UDP", "ARP", "ICMP"],
+        "correcta": 0,
+        "descripcion": "SCTP es un protocolo de transporte de capa 4 alternativo con características avanzadas de fiabilidad.",
+        "tema": "Capa de Transporte",
+        "dificil": true,
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "Una dirección IP de bucle local (Loopback) clásica en IPv4 es 127.0.0.1, permitiendo pruebas internas sin salir al medio físico de red.",
+        "correcta": true,
+        "descripcion": "El rango 127.0.0.0/8 se reserva para el tráfico de bucle local interno del host.",
+        "tema": "Capa de Red",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué tipo de multiplexación física se emplea comúnmente en la capa 1 sobre cables de fibra óptica para transmitir múltiples señales de luz con distintas longitudes de onda?",
+        "opciones": ["WDM (Wavelength Division Multiplexing)", "CSMA/CD", "Three-way handshake", "Control de flujo por ventana"],
+        "correcta": 0,
+        "descripcion": "WDM multiplexa diferentes longitudes de onda de luz a través de una sola fibra óptica en la capa Física.",
+        "tema": "Capa Física",
+        "dificil": true,
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "El modelo OSI consta de 8 capas en su especificación original redactada en 1984.",
+        "correcta": false,
+        "descripcion": "El modelo OSI siempre ha constado exactamente de 7 capas.",
+        "tema": "Fundamentos",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Qué dispositivo opera en la capa superior (Aplicación) inspeccionando contenido web avanzado, filtrando URLs y aplicando políticas de seguridad detalladas?",
+        "opciones": ["Firewall de Nueva Generación / Proxy de Aplicación (Capa 7)", "Hub pasivo", "Repetidor de cable coaxial", "Switch no administrable"],
+        "correcta": 0,
+        "descripcion": "Los proxys y firewalls de capa 7 analizan el contenido específico de las aplicaciones web.",
+        "tema": "Capa de Aplicación",
+        "dificil": true,
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "La encapsulación de datos implica que cada capa añade su propia cabecera a la PDU proveniente de la capa superior.",
+        "correcta": true,
+        "descripcion": "Cada capa trata la PDU recibida como una simple carga útil (payload), añadiendo su propia cabecera de control.",
+        "tema": "Encapsulación",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "¿Cuál es la función del campo 'EtherType' en la cabecera de la trama Ethernet de capa 2?",
+        "opciones": [
+          "Indicar qué protocolo de capa superior (ej. IPv4, IPv6, ARP) transporta la carga útil dentro de la trama",
+          "Establecer la contraseña de cifrado Wi-Fi",
+          "Medir la atenuación eléctrica del cable UTP",
+          "Configurar la velocidad del procesador del router"
+        ],
+        "correcta": 0,
+        "descripcion": "EtherType especifica el protocolo de capa de Red que procesará los datos contenidos en la trama.",
+        "tema": "Capa de Enlace",
+        "dificil": true,
+        "tipo": "normal"
+      },
+      {
+        "pregunta": "En resumen, el modelo de referencia OSI estandariza la comunicación de redes dividiéndola en siete capas modulares interdependientes.",
+        "correcta": true,
+        "descripcion": "La modularidad por capas es la esencia conceptual del modelo OSI.",
+        "tema": "Fundamentos",
+        "tipo": "vf"
+      },
+      {
+        "pregunta": "En el mecanismo de BGP Path Vector, ¿qué atributo obligatorio de capa de aplicación/enrutamiento se utiliza para detectar y evitar bucles entre Sistemas Autónomos (AS)?",
+        "opciones": ["AS_PATH", "NEXT_HOP", "LOCAL_PREF", "MED"],
+        "correcta": 0,
+        "descripcion": "Si un router BGP ve su propio número de AS dentro del atributo AS_PATH, descarta el anuncio de la ruta para prevenir bucles de enrutamiento.",
+        "tema": "Capa de Red",
+        "dificil": true,
+        "tipo": "normal"
+      }
+    ]
+  }
 }

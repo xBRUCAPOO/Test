@@ -2,75 +2,238 @@
   "nombre": "Testing",
   "icono": "build",
   "contrasena": "39302271",
-  "tema": "Encuesta de prueba para testear la applicación",
-  "preguntas": [    
-    {
-      "tipo": "vf",
-      "pregunta": "Verdadero +1 / Falso -1",
-      "correcta": true,
-      "tema": "Testeando la app",
-      "descripcion": "Verdadero +1 / Falso -1."
-    },
-    {
-      "tipo": "vf",
-      "pregunta": "Verdadero +1 / Falso -1",
-      "correcta": true,
-      "tema": "Testeando la app",
-      "descripcion": "Verdadero +1 / Falso -1."
-    },
-   {
-      "tipo": "vf",
-      "pregunta": "Verdadero +1 / Falso -1",
-      "correcta": true,
-      "tema": "Testeando la app",
-      "descripcion": "Verdadero +1 / Falso -1."
-    },
-       {
-      "tipo": "vf",
-      "pregunta": "Verdadero +1 / Falso -1",
-      "correcta": true,
-      "tema": "Testeando la app",
-      "descripcion": "Verdadero +1 / Falso -1."
-    },   {
-      "tipo": "vf",
-      "pregunta": "Verdadero +1 / Falso -1",
-      "correcta": true,
-      "tema": "Testeando la app",
-      "descripcion": "Verdadero +1 / Falso -1."
-    },   {
-      "tipo": "vf",
-      "pregunta": "Verdadero +1 / Falso -1",
-      "correcta": true,
-      "tema": "Testeando la app",
-      "descripcion": "Verdadero +1 / Falso -1."
-    },
-       {
-      "tipo": "vf",
-      "pregunta": "Verdadero +1 / Falso -1",
-      "correcta": true,
-      "tema": "Testeando la app",
-      "descripcion": "Verdadero +1 / Falso -1."
-    },
-       {
-      "tipo": "vf",
-      "pregunta": "Verdadero +1 / Falso -1",
-      "correcta": true,
-      "tema": "Testeando la app",
-      "descripcion": "Verdadero +1 / Falso -1."
-    },
-       {
-      "tipo": "vf",
-      "pregunta": "Verdadero +1 / Falso -1",
-      "correcta": true,
-      "tema": "Testeando la app",
-      "descripcion": "Verdadero +1 / Falso -1."
-    },
-       {
-      "tipo": "vf",
-      "pregunta": "Verdadero +1 / Falso -1",
-      "correcta": true,
-      "tema": "Testeando la app",
-      "descripcion": "Verdadero +1 / Falso -1."
-    }
-  ]
+  "tema": "Encuesta de prueba para testear la aplicación",
+  "dificultades": {
+    "facil": [
+      {
+        "tipo": "vf",
+        "pregunta": "Verdadero +1 / Falso -1",
+        "correcta": true,
+        "tema": "Testeando la app",
+        "descripcion": "Verdadero +1 / Falso -1."
+      },
+      {
+        "tipo": "vf",
+        "pregunta": "Verdadero +1 / Falso -1",
+        "correcta": true,
+        "tema": "Testeando la app",
+        "descripcion": "Verdadero +1 / Falso -1."
+      },
+      {
+        "tipo": "vf",
+        "pregunta": "Verdadero +1 / Falso -1",
+        "correcta": true,
+        "tema": "Testeando la app",
+        "descripcion": "Verdadero +1 / Falso -1."
+      },
+      {
+        "tipo": "vf",
+        "pregunta": "Verdadero +1 / Falso -1",
+        "correcta": true,
+        "tema": "Testeando la app",
+        "descripcion": "Verdadero +1 / Falso -1."
+      },
+      {
+        "tipo": "vf",
+        "pregunta": "Verdadero +1 / Falso -1",
+        "correcta": true,
+        "tema": "Testeando la app",
+        "descripcion": "Verdadero +1 / Falso -1."
+      },
+      {
+        "tipo": "vf",
+        "pregunta": "Verdadero +1 / Falso -1",
+        "correcta": true,
+        "tema": "Testeando la app",
+        "descripcion": "Verdadero +1 / Falso -1."
+      },
+      {
+        "tipo": "vf",
+        "pregunta": "Verdadero +1 / Falso -1",
+        "correcta": true,
+        "tema": "Testeando la app",
+        "descripcion": "Verdadero +1 / Falso -1."
+      },
+      {
+        "tipo": "vf",
+        "pregunta": "Verdadero +1 / Falso -1",
+        "correcta": true,
+        "tema": "Testeando la app",
+        "descripcion": "Verdadero +1 / Falso -1."
+      },
+      {
+        "tipo": "vf",
+        "pregunta": "Verdadero +1 / Falso -1",
+        "correcta": true,
+        "tema": "Testeando la app",
+        "descripcion": "Verdadero +1 / Falso -1."
+      },
+      {
+        "tipo": "vf",
+        "pregunta": "Verdadero +1 / Falso -1",
+        "correcta": true,
+        "tema": "Testeando la app",
+        "descripcion": "Verdadero +1 / Falso -1."
+      }
+    ],
+    "normal": [
+      {
+        "tipo": "vf",
+        "pregunta": "Verdadero +1 / Falso -1",
+        "correcta": true,
+        "tema": "Testeando la app",
+        "descripcion": "Verdadero +1 / Falso -1."
+      },
+      {
+        "tipo": "vf",
+        "pregunta": "Verdadero +1 / Falso -1",
+        "correcta": true,
+        "tema": "Testeando la app",
+        "descripcion": "Verdadero +1 / Falso -1."
+      },
+      {
+        "tipo": "vf",
+        "pregunta": "Verdadero +1 / Falso -1",
+        "correcta": true,
+        "tema": "Testeando la app",
+        "descripcion": "Verdadero +1 / Falso -1."
+      },
+      {
+        "tipo": "vf",
+        "pregunta": "Verdadero +1 / Falso -1",
+        "correcta": true,
+        "tema": "Testeando la app",
+        "descripcion": "Verdadero +1 / Falso -1."
+      },
+      {
+        "tipo": "vf",
+        "pregunta": "Verdadero +1 / Falso -1",
+        "correcta": true,
+        "tema": "Testeando la app",
+        "descripcion": "Verdadero +1 / Falso -1."
+      },
+      {
+        "tipo": "vf",
+        "pregunta": "Verdadero +1 / Falso -1",
+        "correcta": true,
+        "tema": "Testeando la app",
+        "descripcion": "Verdadero +1 / Falso -1.",
+        "dificil": true
+      },
+      {
+        "tipo": "vf",
+        "pregunta": "Verdadero +1 / Falso -1",
+        "correcta": true,
+        "tema": "Testeando la app",
+        "descripcion": "Verdadero +1 / Falso -1.",
+        "dificil": true
+      },
+      {
+        "tipo": "vf",
+        "pregunta": "Verdadero +1 / Falso -1",
+        "correcta": true,
+        "tema": "Testeando la app",
+        "descripcion": "Verdadero +1 / Falso -1.",
+        "dificil": true
+      },
+      {
+        "tipo": "vf",
+        "pregunta": "Verdadero +1 / Falso -1",
+        "correcta": true,
+        "tema": "Testeando la app",
+        "descripcion": "Verdadero +1 / Falso -1.",
+        "dificil": true
+      },
+      {
+        "tipo": "vf",
+        "pregunta": "Verdadero +1 / Falso -1",
+        "correcta": true,
+        "tema": "Testeando la app",
+        "descripcion": "Verdadero +1 / Falso -1.",
+        "dificil": true
+      }
+    ],
+    "dificil": [
+      {
+        "tipo": "vf",
+        "pregunta": "Verdadero +1 / Falso -1",
+        "correcta": true,
+        "tema": "Testeando la app",
+        "descripcion": "Verdadero +1 / Falso -1.",
+        "dificil": true
+      },
+      {
+        "tipo": "vf",
+        "pregunta": "Verdadero +1 / Falso -1",
+        "correcta": true,
+        "tema": "Testeando la app",
+        "descripcion": "Verdadero +1 / Falso -1.",
+        "dificil": true
+      },
+      {
+        "tipo": "vf",
+        "pregunta": "Verdadero +1 / Falso -1",
+        "correcta": true,
+        "tema": "Testeando la app",
+        "descripcion": "Verdadero +1 / Falso -1.",
+        "dificil": true
+      },
+      {
+        "tipo": "vf",
+        "pregunta": "Verdadero +1 / Falso -1",
+        "correcta": true,
+        "tema": "Testeando la app",
+        "descripcion": "Verdadero +1 / Falso -1.",
+        "dificil": true
+      },
+      {
+        "tipo": "vf",
+        "pregunta": "Verdadero +1 / Falso -1",
+        "correcta": true,
+        "tema": "Testeando la app",
+        "descripcion": "Verdadero +1 / Falso -1.",
+        "dificil": true
+      },
+      {
+        "tipo": "vf",
+        "pregunta": "Verdadero +1 / Falso -1",
+        "correcta": true,
+        "tema": "Testeando la app",
+        "descripcion": "Verdadero +1 / Falso -1.",
+        "dificil": true
+      },
+      {
+        "tipo": "vf",
+        "pregunta": "Verdadero +1 / Falso -1",
+        "correcta": true,
+        "tema": "Testeando la app",
+        "descripcion": "Verdadero +1 / Falso -1.",
+        "dificil": true
+      },
+      {
+        "tipo": "vf",
+        "pregunta": "Verdadero +1 / Falso -1",
+        "correcta": true,
+        "tema": "Testeando la app",
+        "descripcion": "Verdadero +1 / Falso -1.",
+        "dificil": true
+      },
+      {
+        "tipo": "vf",
+        "pregunta": "Verdadero +1 / Falso -1",
+        "correcta": true,
+        "tema": "Testeando la app",
+        "descripcion": "Verdadero +1 / Falso -1.",
+        "dificil": true
+      },
+      {
+        "tipo": "vf",
+        "pregunta": "Verdadero +1 / Falso -1",
+        "correcta": true,
+        "tema": "Testeando la app",
+        "descripcion": "Verdadero +1 / Falso -1.",
+        "dificil": true
+      }
+    ]
+  }
 }

@@ -106,6 +106,26 @@
 
     <!-- PANTALLA 1: inicio del test elegido. Muestra nombre, tema, cantidad de preguntas y el botón para comenzar -->
     <section class="screen" id="screenStart">
+      <!-- [v1.9.0] Switch de dificultad: Fácil < Normal < Difícil. Solo se ve si el test tiene 2 o 3 dificultades en su JSON
+           (y solo muestra las que existen). script.js oculta lo que no corresponde y mueve la pastilla -->
+      <div class="levels" id="levels" hidden>
+        <p class="eyebrow">Dificultad</p>
+        <div class="modeswitch" id="levelSwitch" role="radiogroup" aria-label="Dificultad">
+          <button class="mode" type="button" role="radio" aria-checked="false" data-level="facil">
+            <span class="material-symbols-outlined">mood</span>
+            <span>Fácil</span>
+          </button>
+          <button class="mode" type="button" role="radio" aria-checked="true" data-level="normal">
+            <span class="material-symbols-outlined">sentiment_satisfied</span>
+            <span>Normal</span>
+          </button>
+          <button class="mode" type="button" role="radio" aria-checked="false" data-level="dificil">
+            <span class="material-symbols-outlined">skull</span>
+            <span>Difícil</span>
+          </button>
+        </div>
+      </div>
+
       <p class="eyebrow">Evaluación</p>
       <h1 class="title" id="mainTitle">Test</h1>
       <p class="subtitle" id="testTopic"></p>
@@ -336,9 +356,9 @@
   <footer class="footer">
     <span>Test</span>
     <span class="footer__sep">·</span>
-    <!-- [v1.8.3] versión y fecha actualizadas: PWA arreglado (manifest, service worker e íconos nuevos con el logo "school")
-         (antes: v1.8.2 ojo gris y botón "Cancelar" compacto; v1.8.1 contraseña en ventana flotante) -->
-    <span id="footerVersion">v1.8.3</span>
+    <!-- [v1.9.0] versión y fecha actualizadas: switch de dificultad (fácil / normal / difícil) en la vista previa
+         (antes: v1.8.3 PWA con íconos nuevos; v1.8.2 ojo gris en la contraseña) -->
+    <span id="footerVersion">v1.9.0</span>
     <span class="footer__sep">·</span>
     <span id="footerDate">24/10/2026</span>
   </footer>
@@ -346,4 +366,4 @@
   <!-- Lógica externa -->
   <script src="script.js"></script>
 </body>
-</html>
+</html>
