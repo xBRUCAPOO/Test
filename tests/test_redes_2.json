@@ -1,5 +1,6 @@
 {
   "nombre": "Redes y Comunicaciones",
+  "icono": "connected_tv",
   "tema": "Evaluación integral de 100 preguntas sobre redes, protocolos, cifrado y comandos de consola",
   "preguntas": [
     {

@@ -136,6 +136,12 @@
         <p class="modedesc" id="modeDesc"></p>
       </div>
 
+      <!-- [v1.8.1] Aviso de test protegido: solo aparece si el JSON del test tiene "contrasena". La contraseña se pide
+           en una ventana flotante (#passBox) al apretar "Comenzar" -->
+      <div class="lock" id="lockBox" hidden>
+        <p class="eyebrow"><span class="material-symbols-outlined" id="lockIcon">lock</span> <span id="lockInfo"></span></p>
+      </div>
+
       <!-- [v1.2.0] Botones: Comenzar + Cambiar test (vuelve al menú) -->
       <div class="actions">
         <button class="btn btn--primary" id="btnStart" type="button">
@@ -235,6 +241,26 @@
     </div>
   </div>
 
+  <!-- [v1.8.1] VENTANA FLOTANTE DE CONTRASEÑA: aparece al apretar "Comenzar" en un test con contraseña (4 a 15 caracteres).
+       script.js crea un cuadrito por carácter dentro de #pinBoxes; el botón de ojo muestra u oculta lo escrito -->
+  <div class="confirm" id="passBox" hidden role="dialog" aria-modal="true" aria-labelledby="passTitle">
+    <div class="confirm__panel">
+      <span class="material-symbols-outlined">lock</span>
+      <h2 class="confirm__title" id="passTitle">Test protegido</h2>
+      <p class="confirm__text" id="passText"></p>
+      <!-- [v1.8.2] Fila de contraseña: los cuadritos a la izquierda y el ojo gris a la derecha (muestra/oculta lo escrito) -->
+      <div class="pinrow">
+        <div class="pin" id="pinBoxes" role="group" aria-label="Contraseña del test"></div>
+        <button class="pinrow__eye" id="passToggle" type="button" aria-pressed="false" aria-label="Mostrar contraseña">
+          <span class="material-symbols-outlined" id="passToggleIcon">visibility</span>
+        </button>
+      </div>
+      <p class="lock__msg" id="lockMsg" role="status"></p>
+      <!-- [v1.8.2] Único botón de la ventana: cancelar (compacto) -->
+      <button class="passcancel" id="passCancel" type="button">Cancelar</button>
+    </div>
+  </div>
+
   <!-- FLOAT DE RESULTADOS: ahora ocupa toda la pantalla. Puntaje 0/10 arriba y debajo todas las respuestas
        elegidas (verde = bien, rojo = mal, gris = sin responder).
        [v1.3.0] Si el test se terminó antes, debajo del puntaje aparece "Incompleto" (naranja) y los 2 promedios.
@@ -307,9 +333,9 @@
   <footer class="footer">
     <span>Test</span>
     <span class="footer__sep">·</span>
-    <!-- [v1.7.0] versión y fecha actualizadas por los cambios de esta entrega (historial, pregunta difícil,
-         formación de palabras, iconos en verdadero/falso y modo de corrección instantánea) -->
-    <span id="footerVersion">v1.7.0</span>
+    <!-- [v1.8.2] versión y fecha actualizadas: ojo gris a la derecha de la contraseña y botón "Cancelar" compacto
+         (antes: v1.8.1 contraseña en ventana flotante y corrección con "Comprobar"; v1.8.0 tests con contraseña) -->
+    <span id="footerVersion">v1.8.2</span>
     <span class="footer__sep">·</span>
     <span id="footerDate">23/10/2026</span>
   </footer>

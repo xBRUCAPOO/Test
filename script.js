@@ -1,5 +1,5 @@
 /* =========================================================
-   TEST — script.js  (v1.7.0)
+   TEST — script.js  (v1.8.2)
    Lógica de la app de tests multiple choice.
 
    CÓMO AGREGAR UN TEST (las preguntas ya NO se escriben acá):
@@ -13,6 +13,9 @@
      "nombre": "Historia Argentina",          // nombre que se ve en el menú (si falta, se usa el del archivo)
      "tema": "Texto opcional bajo el nombre",  // opcional
      "icono": "lan",                           // [v1.7.0] opcional: icono del test en el menú (nombre de fonts.google.com/icons; por defecto "connected_tv")
+     "contrasena": "clave123",                 // [v1.8.0] opcional: contraseña para hacer el test (4 a 15 caracteres). Al elegir el test se
+                                               // piden con un cuadrito por carácter. Si el largo no es válido, el test no se carga.
+                                               // Ojo: el JSON es público (se descarga con la página), así que frena a curiosos pero no es seguridad real
      "preguntas": [
        {
          "pregunta": "Texto de la pregunta",
@@ -86,6 +89,9 @@ const MAX_BACK = 2;                       // [v1.3.0] cuántas preguntas se pued
 const VF_OPCIONES = ["Verdadero", "Falso"]; // [v1.4.0] opciones fijas de las preguntas de verdadero o falso (posición 0 = Verdadero)
 const RING_LENGTH = 2 * Math.PI * 52;     // Circunferencia del aro de puntaje (coincide con style.css)
 const HISTORY_KEY = "test.historial.v1";  // [v1.7.0] clave de localStorage donde se guardan los últimos resultados (solo en este dispositivo)
+const PASS_MIN = 4;  // [v1.8.0] largo mínimo de la contraseña de un test
+const PASS_MAX = 15; // [v1.8.0] largo máximo
+const unlockedTests = new Set(); // [v1.8.0] tests ya desbloqueados en esta sesión (se pierde al recargar la página)
 const HISTORY_MAX = 10;                   // [v1.7.0] cuántos resultados se conservan en el historial (los más viejos se descartan)
 const MODOS = {                           // [v1.7.0] modos de corrección: nombre y descripción que se muestra en el switch
   final: {
@@ -94,7 +100,7 @@ const MODOS = {                           // [v1.7.0] modos de corrección: nomb
   },
   instant: {
     label: "Corrección instantánea",
-    desc: "Ves si acertaste apenas respondés, con la explicación, y recién ahí pasás a la siguiente. No se puede volver atrás."
+    desc: "Respondés, apretás \"Comprobar\" y ves si acertaste, con la explicación; recién ahí pasás a la siguiente. No se puede volver atrás."
   }
 };
 
@@ -115,6 +121,16 @@ const els = {
   testTopic: $("testTopic"),
   statCount: $("statCount"),
   btnStart: $("btnStart"),
+  lockBox: $("lockBox"),                 // [v1.8.0] aviso de "test protegido" en la vista previa
+  lockIcon: $("lockIcon"),
+  lockInfo: $("lockInfo"),               // [v1.8.1]
+  passBox: $("passBox"),                 // [v1.8.1] ventana flotante de contraseña
+  passText: $("passText"),
+  pinBoxes: $("pinBoxes"),
+  lockMsg: $("lockMsg"),
+  passToggle: $("passToggle"),           // [v1.8.1] botón de ojo: muestra/oculta la contraseña
+  passToggleIcon: $("passToggleIcon"),
+  passCancel: $("passCancel"),
   btnChange: $("btnChange"),             // [v1.2.0] "Cambiar test": vuelve al menú
   topTag: $("topTag"),
   qCounter: $("qCounter"),
@@ -424,8 +440,20 @@ function parseTest(file, data) {
     tema: typeof data.tema === "string" ? data.tema.trim() : "",
     // [v1.7.0] Icono del test (nombre de Material Symbols, definido en el JSON). Si falta o es inválido, usa "connected_tv"
     icono: typeof data.icono === "string" && /^[a-z0-9_]+$/.test(data.icono.trim()) ? data.icono.trim() : "connected_tv",
+    // [v1.8.0] Contraseña opcional: entre 4 y 15 caracteres. Si está mal definida el test NO se carga (así nunca queda
+    // abierto por error un test que debía estar protegido)
+    contrasena: parsePassword(data.contrasena),
     preguntas
   };
+}
+
+// [v1.8.0] Valida el campo "contrasena" del JSON: devuelve "" si no hay, o el texto (4 a 15 caracteres); si no sirve, lanza error
+function parsePassword(v) {
+  if (v === undefined || v === null || v === "") return "";
+  if (typeof v !== "string" || [...v].length < PASS_MIN || [...v].length > PASS_MAX) {
+    throw new Error(`"contrasena" debe ser un texto de ${PASS_MIN} a ${PASS_MAX} caracteres`);
+  }
+  return v;
 }
 
 // Muestra un aviso en el menú. tono: "info" | "warning" | "error"
@@ -525,6 +553,11 @@ function renderMenu() {
     const meta = document.createElement("small");
     meta.className = "test-card__meta";
     meta.textContent = `${t.preguntas.length} ${t.preguntas.length === 1 ? "pregunta" : "preguntas"}`;
+    if (t.contrasena) {
+      const lock = icon(unlockedTests.has(t.file) ? "lock_open" : "lock"); // [v1.8.0] candado: el test tiene contraseña
+      lock.classList.add("test-card__lock");
+      meta.appendChild(lock);
+    }
     info.appendChild(meta);
 
     const chev = icon("chevron_right");
@@ -577,6 +610,137 @@ function setupStart() {
   els.statCount.textContent = questions.length;
   document.title = `${currentTest.nombre} · Test`;
   setTag("LISTO");
+  setupLock(); // [v1.8.0] muestra los cuadritos de contraseña si el test está protegido
+}
+
+// [v1.8.1] Prepara el aviso de la vista previa: si el test tiene contraseña, muestra el candado (cerrado o abierto).
+// La contraseña se pide en una ventana flotante al apretar "Comenzar" (openPasswordModal)
+function setupLock() {
+  const unlocked = unlockedTests.has(currentTest.file);
+  els.lockBox.hidden = !currentTest.contrasena;
+  els.lockIcon.textContent = unlocked ? "lock_open" : "lock";
+  els.lockInfo.textContent = unlocked ? "Test desbloqueado." : "Este test pide una contraseña al comenzar.";
+}
+
+// [v1.8.1] Botón "Comenzar": si el test está protegido y todavía no se desbloqueó, abre la ventana de contraseña;
+// si no, empieza el test
+function onStartClick() {
+  if (currentTest.contrasena && !unlockedTests.has(currentTest.file)) openPasswordModal();
+  else startTest();
+}
+
+// [v1.8.1] Abre la ventana flotante de contraseña: un cuadrito por carácter (como el código de ÉLIX), con un botón de
+// ojo para mostrar u ocultar lo escrito
+function openPasswordModal() {
+  const chars = [...currentTest.contrasena];
+  els.pinBoxes.textContent = "";
+  els.pinBoxes.className = "pin";
+  chars.forEach((_, i) => {
+    const b = document.createElement("input");
+    b.type = "password"; // por defecto los caracteres quedan ocultos
+    b.className = "pin__box";
+    b.placeholder = " "; // permite el estilo :placeholder-shown para saber si el cuadrito tiene algo
+    b.maxLength = 1;
+    b.autocomplete = "off";
+    b.autocapitalize = "off";
+    b.spellcheck = false;
+    b.setAttribute("aria-label", `Carácter ${i + 1} de ${chars.length}`);
+    b.addEventListener("input", () => onPinInput(i));
+    b.addEventListener("keydown", (e) => onPinKey(e, i));
+    b.addEventListener("focus", () => b.select());
+    b.addEventListener("paste", (e) => onPinPaste(e, i));
+    els.pinBoxes.appendChild(b);
+  });
+  setPinVisible(false);
+  els.passText.textContent = `Ingresá la contraseña de ${chars.length} caracteres para hacer este test.`;
+  els.lockMsg.className = "lock__msg";
+  els.lockMsg.textContent = "";
+  els.passBox.hidden = false;
+  document.body.classList.add("no-scroll");
+  els.pinBoxes.firstElementChild.focus({ preventScroll: true });
+}
+
+// [v1.8.1] Cierra la ventana de contraseña sin desbloquear nada
+function closePasswordModal() {
+  els.passBox.hidden = true;
+  document.body.classList.remove("no-scroll");
+}
+
+// [v1.8.1] Muestra (true) u oculta (false) los caracteres de los cuadritos y actualiza el botón de ojo
+function setPinVisible(visible) {
+  [...els.pinBoxes.children].forEach((b) => { b.type = visible ? "text" : "password"; });
+  els.passToggle.setAttribute("aria-pressed", String(visible));
+  els.passToggle.setAttribute("aria-label", visible ? "Ocultar contraseña" : "Mostrar contraseña");
+  els.passToggleIcon.textContent = visible ? "visibility_off" : "visibility";
+}
+
+// Cambia el aspecto de los cuadritos (ok / error) y su mensaje
+function setLockState(state, msg) {
+  els.pinBoxes.classList.toggle("pin--ok", state === "ok");
+  els.pinBoxes.classList.toggle("pin--error", state === "error");
+  els.lockMsg.className = `lock__msg lock__msg--${state}`;
+  els.lockMsg.textContent = msg;
+}
+
+// Escribió en un cuadrito: pasa al siguiente y, cuando están todos completos, verifica
+function onPinInput(i) {
+  const boxes = [...els.pinBoxes.children];
+  els.pinBoxes.classList.remove("pin--error");
+  if (boxes[i].value && i < boxes.length - 1) boxes[i + 1].focus();
+  if (boxes.every((b) => b.value)) checkPassword();
+}
+
+// Teclas especiales: Borrar vuelve al cuadrito anterior, flechas se mueven, Enter verifica
+function onPinKey(e, i) {
+  const boxes = [...els.pinBoxes.children];
+  if (e.key === "Backspace" && !boxes[i].value && i > 0) {
+    boxes[i - 1].value = "";
+    boxes[i - 1].focus();
+    e.preventDefault();
+  } else if (e.key === "ArrowLeft" && i > 0) {
+    boxes[i - 1].focus();
+    e.preventDefault();
+  } else if (e.key === "ArrowRight" && i < boxes.length - 1) {
+    boxes[i + 1].focus();
+    e.preventDefault();
+  } else if (e.key === "Enter" && boxes.every((b) => b.value)) {
+    checkPassword();
+  }
+}
+
+// Pegar texto: reparte los caracteres entre los cuadritos desde el actual
+function onPinPaste(e, i) {
+  e.preventDefault();
+  const boxes = [...els.pinBoxes.children];
+  const text = [...(e.clipboardData.getData("text") || "")];
+  text.slice(0, boxes.length - i).forEach((c, k) => { boxes[i + k].value = c; });
+  els.pinBoxes.classList.remove("pin--error");
+  boxes[Math.min(i + text.length, boxes.length - 1)].focus();
+  if (boxes.every((b) => b.value)) checkPassword();
+}
+
+// Compara lo escrito con la contraseña: si acierta desbloquea el test, cierra la ventana y lo comienza;
+// si no, sacude y vacía los cuadritos para reintentar
+function checkPassword() {
+  const boxes = [...els.pinBoxes.children];
+  const typed = boxes.map((b) => b.value).join("");
+  if (typed === currentTest.contrasena) {
+    unlockedTests.add(currentTest.file);
+    boxes.forEach((b) => { b.disabled = true; });
+    setLockState("ok", "Contraseña correcta.");
+    setTimeout(() => { // pausa breve para que se vea el verde
+      closePasswordModal();
+      setupLock();
+      startTest();
+    }, 450);
+  } else {
+    setLockState("error", "Contraseña incorrecta. Probá de nuevo.");
+    setTimeout(() => {
+      boxes.forEach((b) => { b.value = ""; });
+      els.pinBoxes.classList.remove("pin--error");
+      boxes[0].focus();
+    }, 450);
+  }
 }
 
 /* =========================================================
@@ -586,6 +750,7 @@ function setupStart() {
 // Comienza (o reinicia) el test desde la primera pregunta
 function startTest() {
   if (questions.length === 0) return;
+  if (currentTest.contrasena && !unlockedTests.has(currentTest.file)) return; // [v1.8.0] test protegido sin desbloquear
   current = 0;
   maxReached = 0; // [v1.3.0] reinicia el límite de "Anterior"
   answers = new Array(questions.length).fill(null);
@@ -769,9 +934,8 @@ function selectOption(i) {
     if (mark) mark.textContent = selected ? "check_box" : "check_box_outline_blank";
   });
   updateNext();
-
-  // [v1.7.0] Corrección instantánea: en normal y verdadero/falso, tocar una opción ya es responder
-  if (mode === "instant" && q.tipo !== "multiple") checkAnswer();
+  // [v1.8.1] Corrección instantánea: tocar una opción YA NO corrige; solo la marca. La corrección ocurre al apretar
+  // "Comprobar", así un toque equivocado se puede cambiar antes de corregir
 }
 
 // [v1.7.0] CORRECCIÓN INSTANTÁNEA: corrige la pregunta actual apenas se responde. Bloquea la pregunta, pinta las opciones
@@ -838,8 +1002,8 @@ function updateNext() {
   const hasAnswer = answers[current] !== null;
 
   if (mode === "instant") {
-    const tipo = questions[current].tipo;
-    const needsCheck = !checked[current] && (tipo === "multiple" || tipo === "palabras");
+    // [v1.8.1] Todas las preguntas (normal, verdadero/falso, múltiple y palabras) se corrigen con "Comprobar"
+    const needsCheck = !checked[current];
     els.btnNext.disabled = needsCheck ? !hasAnswer : !checked[current];
     els.btnNextLabel.textContent = needsCheck ? "Comprobar" : isLast ? "Finalizar" : "Continuar";
     els.btnNextIcon.textContent = needsCheck ? "check" : isLast ? "flag" : "arrow_forward";
@@ -894,6 +1058,7 @@ async function goBackToPreview() {
   if (!ok) return;
   quizActive = false;
   setTag("LISTO");
+  setupLock(); // [v1.8.1] actualiza el aviso del candado (puede haberse desbloqueado durante el test)
   showScreen(els.screenStart);
 }
 
@@ -1343,7 +1508,9 @@ function retry() {
    8) EVENTOS
    ========================================================= */
 
-els.btnStart.addEventListener("click", startTest);
+els.btnStart.addEventListener("click", onStartClick); // [v1.8.1] pide la contraseña si el test la tiene
+els.passToggle.addEventListener("click", () => setPinVisible(els.passToggle.getAttribute("aria-pressed") !== "true")); // [v1.8.1] ojo
+els.passCancel.addEventListener("click", closePasswordModal); // [v1.8.1] cancelar la contraseña
 els.btnChange.addEventListener("click", showMenu); // [v1.2.0] "Cambiar test"
 els.btnBack.addEventListener("click", goBackToPreview); // [v1.5.2] flecha "Volver": sale del test (con confirmación)
 els.btnPrev.addEventListener("click", goPrev);
@@ -1386,6 +1553,10 @@ window.addEventListener("beforeunload", (e) => {
 // [v1.4.0] En selección múltiple la misma tecla marca o desmarca la opción
 // [v1.5.0] Si la ventana de confirmación está abierta, solo Escape la cierra (no se contesta el test de fondo)
 document.addEventListener("keydown", (e) => {
+  if (!els.passBox.hidden) { // [v1.8.1] con la ventana de contraseña abierta, solo Escape la cierra
+    if (e.key === "Escape") closePasswordModal();
+    return;
+  }
   if (pendingConfirm) {
     if (e.key === "Escape") closeConfirm(false);
     return;

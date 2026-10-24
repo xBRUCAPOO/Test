@@ -675,6 +675,78 @@ body.no-scroll {
   color: var(--color-text-dim);
 }
 
+/* [v1.8.0] Contraseña del test: un cuadrito por carácter (estilo código de verificación). Estados: normal, error (sacude),
+   correcta (verde). Solo usa variables del :root */
+.lock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.lock .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.pin {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.pin__box {
+  width: 40px;
+  height: 52px;
+  padding: 0;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--color-text);
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 10px;
+  outline: none;
+  caret-color: var(--color-accent);
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease), background 0.2s var(--ease);
+}
+.pin__box:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-a20);
+}
+.pin__box:not(:placeholder-shown) {
+  border-color: var(--color-accent-a40);
+  background: var(--color-surface-3);
+}
+.pin--error .pin__box {
+  border-color: var(--color-error);
+  background: var(--color-error-a10);
+}
+.pin--error {
+  animation: pinShake 0.4s var(--ease);
+}
+.pin--ok .pin__box {
+  border-color: var(--color-success);
+  background: var(--color-success-a10);
+  color: var(--color-success);
+}
+.lock__msg {
+  font-size: 0.9rem;
+  color: var(--color-text-dim);
+}
+.lock__msg--error { color: var(--color-error); }
+.lock__msg--ok { color: var(--color-success); }
+/* Candado en la tarjeta del menú */
+.test-card__lock {
+  font-size: 1rem;
+  vertical-align: -3px;
+  margin-left: 6px;
+  color: var(--color-accent);
+}
+@keyframes pinShake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
 /* ---------- Pantalla del test ---------- */
 /* [v1.5.2] Flecha "Volver": arriba a la izquierda de la pantalla del test. Sale del test
    (vuelve a la vista previa), así que script.js pide confirmación antes de salir */
@@ -1635,6 +1707,82 @@ body.is-hard .qcard {
   flex: 1;
 }
 
+/* [v1.8.2] Ventana flotante de contraseña (reusa .confirm): fila con los cuadritos y el ojo gris a la derecha,
+   mensaje y un único botón "Cancelar" compacto */
+.pinrow {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pinrow .pin {
+  flex: 1;
+  min-width: 0;
+  justify-content: center;
+  flex-wrap: nowrap; /* una sola fila: los cuadritos se achican hasta caber (hasta 15 con el ojo al lado) */
+  gap: 4px;
+}
+#passBox .confirm__panel {
+  padding-inline: 16px; /* más lugar para los cuadritos en celular */
+}
+/* Los cuadritos se achican para que quepan hasta 15 junto al ojo */
+.pinrow .pin__box {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 40px;
+  height: 46px;
+  font-size: 1.1rem;
+}
+/* Ojo: icono gris, sin fondo ni borde */
+.pinrow__eye {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background: var(--color-transparent);
+  border: 0;
+  border-radius: 8px;
+  color: var(--color-gray);
+  cursor: pointer;
+  transition: color 0.2s var(--ease), background 0.2s var(--ease);
+}
+.pinrow__eye:hover {
+  color: var(--color-text);
+  background: var(--color-gray-a10);
+}
+.pinrow__eye:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+.confirm__panel .pinrow__eye .material-symbols-outlined {
+  font-size: 22px;
+  margin: 0;
+  color: inherit; /* hereda el gris del botón (y no el amarillo del icono de la ventana) */
+}
+.confirm__panel .lock__msg {
+  min-height: 1.3em;
+  margin: 12px 0 14px;
+}
+/* Botón "Cancelar": bajo y del ancho de su texto */
+.passcancel {
+  padding: 8px 22px;
+  font-family: var(--font-title);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-dim);
+  background: var(--color-transparent);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
+}
+.passcancel:hover {
+  color: var(--color-text);
+  border-color: var(--color-gray);
+}
+
 /* ---------- Footer ---------- */
 .footer {
   position: relative;
@@ -1733,4 +1881,5 @@ body.is-hard .qcard {
   .title__char {
     opacity: 1;
   }
+  .pin--error { animation: none; } /* [v1.8.0] sin sacudida si se pidió reducir movimiento */
 }
