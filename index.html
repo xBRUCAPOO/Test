@@ -10,6 +10,9 @@
   <link rel="manifest" href="manifest.json">
   <!-- [v1.6.0] Ícono de la pestaña (el mismo de la app instalada) -->
   <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <!-- [v1.8.3] Íconos PNG: respaldo de la pestaña e ícono de la pantalla de inicio en iOS (que no usa el manifiesto para eso) -->
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <!-- [v1.6.0] iOS: al agregar la app a la pantalla de inicio, abre a pantalla completa (como una app nativa) -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -20,7 +23,6 @@
   <!-- Conexión previa a Google Fonts: acelera la carga de tipografías e iconos -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="icon" href="icono.png">
 
   <!-- Tipografías (Google Fonts): Space Grotesk (textos y títulos) e IBM Plex Mono (etiquetas y números) -->
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
@@ -334,14 +336,14 @@
   <footer class="footer">
     <span>Test</span>
     <span class="footer__sep">·</span>
-    <!-- [v1.8.2] versión y fecha actualizadas: ojo gris a la derecha de la contraseña y botón "Cancelar" compacto
-         (antes: v1.8.1 contraseña en ventana flotante y corrección con "Comprobar"; v1.8.0 tests con contraseña) -->
-    <span id="footerVersion">v1.8.2</span>
+    <!-- [v1.8.3] versión y fecha actualizadas: PWA arreglado (manifest, service worker e íconos nuevos con el logo "school")
+         (antes: v1.8.2 ojo gris y botón "Cancelar" compacto; v1.8.1 contraseña en ventana flotante) -->
+    <span id="footerVersion">v1.8.3</span>
     <span class="footer__sep">·</span>
-    <span id="footerDate">23/10/2026</span>
+    <span id="footerDate">24/10/2026</span>
   </footer>
 
   <!-- Lógica externa -->
   <script src="script.js"></script>
 </body>
-</html>
+</html>
