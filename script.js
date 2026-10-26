@@ -1181,18 +1181,23 @@ async function finishTest() {
 
 // Devuelve un mensaje según la nota
 function scoreMessage(score) {
+  if (score >= 10) return "GENIO!";
   if (score >= 10) return "¡Perfecto!";
   if (score >= 9) return "¡Excelente!";
-  if (score >= 7) return "Muy bien";
-  if (score >= 6) return "Aprobado";
-  if (score >= 4) return "Hay que repasar";
-  return "Seguí practicando";
-}
-
+  if (score >= 8) return "Nada mal";
+  if (score >= 7) return "Con las justas"
+  if (score >= 6) return "Al palo";
+  if (score >= 5) return "A mitad de camino";
+  if (score >= 4) return "Una mierda";
+  if (score >= 3) return "Pobre de vo";
+  if (score >= 2) return "Pobre waso";
+  if (score >= 1) return "Puff, quiero pensar que fue a propósito";
+  if (score >= 0) return "Ni lo has intentado";
+  return "Sos una verga";}
 // Devuelve el tono de color de la nota (success / warning / error) para pintar el aro y el mensaje
 function scoreTone(score) {
-  if (score >= 6) return "success"; // aprobado
-  if (score >= 4) return "warning"; // hay que repasar
+  if (score >= 8) return "success"; // aprobado
+  if (score >= 7) return "warning"; // hay que repasar
   return "error";                   // desaprobado
 }
 

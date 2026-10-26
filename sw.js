@@ -6,7 +6,7 @@
    ========================================================= */
 
 // Nombre de la caché de esta versión: al cambiarlo se borran las cachés viejas
-const CACHE = "test-v1.9.1";
+const CACHE = "test-v1.9.2";
 
 // Archivos de la app que se guardan al instalar (la "carcasa" de la app)
 const SHELL = [
