@@ -1,0 +1,607 @@
+{
+  "nombre": "Redes y comunicaciones - ñRefuerzo del modelo OSI",
+  "tema": "50 preguntas sobre señales, MAC/LLC, rutas IP, TCP/UDP, sesiones, codificación, cifrado y protocolos de aplicación.",
+  "icono": "lan",
+  "preguntas": [
+    {
+      "tipo": "normal",
+      "tema": "Capa física y señales",
+      "pregunta": "Una interfaz transmite el patrón binario 10110010 por fibra óptica. ¿Qué representa físicamente cada bit durante la transmisión?",
+      "opciones": [
+        "Un número de puerto incluido en el encabezado TCP",
+        "Una dirección MAC grabada en cada pulso",
+        "Un estado o símbolo de señal definido por el sistema de transmisión",
+        "Una trama Ethernet completa"
+      ],
+      "correcta": 2,
+      "descripcion": "La capa física representa los bits mediante señales o símbolos; en fibra se usan pulsos o estados de luz según la tecnología."
+    },
+    {
+      "tipo": "vf",
+      "tema": "Capa física y señales",
+      "pregunta": "Un conector RJ-45 define por sí solo las reglas de direccionamiento MAC y el formato completo de las tramas Ethernet.",
+      "correcta": false,
+      "descripcion": "El conector es un componente físico. El direccionamiento MAC y el formato de trama corresponden a funciones de enlace de datos."
+    },
+    {
+      "tipo": "multiple",
+      "tema": "Capa física y señales",
+      "pregunta": "Un enlace de cobre deja de funcionar. ¿Qué elementos pertenecen claramente al ámbito físico y conviene revisar primero?",
+      "opciones": [
+        "Integridad de los conductores y conectores",
+        "Tabla de rutas IP del router",
+        "Nivel y calidad de la señal eléctrica",
+        "Número de secuencia TCP"
+      ],
+      "correctas": [
+        0,
+        2
+      ],
+      "descripcion": "El medio, los conectores y la señal son físicos; las rutas IP y los números de secuencia pertenecen a capas superiores."
+    },
+    {
+      "tipo": "vf",
+      "tema": "Capa física y señales",
+      "pregunta": "La capa física se ocupa de cómo se transmiten los bits por el medio, incluidas características de señalización y temporización.",
+      "correcta": true,
+      "descripcion": "La capa física define aspectos eléctricos, ópticos o de radio y la representación/transmisión de bits."
+    },
+    {
+      "tipo": "multiple",
+      "tema": "Capa física y señales",
+      "pregunta": "¿Cuáles afirmaciones describen correctamente medios de transmisión?",
+      "opciones": [
+        "La fibra óptica transporta información mediante señales luminosas",
+        "El cobre puede transportar señales eléctricas",
+        "Wi-Fi transmite datos mediante ondas de radio",
+        "Ethernet siempre requiere que los datos viajen por el aire"
+      ],
+      "correctas": [
+        0,
+        1,
+        2
+      ],
+      "descripcion": "Cobre, fibra y radio pueden transportar señales. Ethernet no implica necesariamente transmisión inalámbrica."
+    },
+    {
+      "tipo": "normal",
+      "tema": "Capa de enlace: MAC y tramas",
+      "pregunta": "Un switch Ethernet recibe una trama y ya conoce la MAC de destino en su tabla. ¿Qué acción realiza normalmente?",
+      "opciones": [
+        "Cambia la dirección IP de destino para elegir una ruta",
+        "Reenvía la trama por el puerto asociado a esa MAC, según la VLAN",
+        "Convierte el texto de la aplicación de ASCII a UTF-8",
+        "Retransmite cada segmento TCP hasta recibir un ACK"
+      ],
+      "correcta": 1,
+      "descripcion": "Un switch de capa 2 aprende direcciones MAC y reenvía tramas según su tabla de conmutación y el contexto de VLAN."
+    },
+    {
+      "tipo": "vf",
+      "tema": "Capa de enlace: MAC y tramas",
+      "pregunta": "Una dirección MAC identifica normalmente una interfaz de red, pero no debe tratarse como una identidad infalible: puede cambiarse o suplantarse.",
+      "correcta": true,
+      "descripcion": "Las MAC suelen asignarse a interfaces, pero pueden modificarse por software y pueden existir duplicados."
+    },
+    {
+      "tipo": "multiple",
+      "tema": "Capa de enlace: MAC y tramas",
+      "pregunta": "¿Qué tareas se asocian correctamente con la subcapa MAC?",
+      "opciones": [
+        "Gestionar el acceso al medio compartido según la tecnología",
+        "Definir la dirección IP de la puerta de enlace",
+        "Participar en el direccionamiento físico de las tramas",
+        "Realizar el cifrado de extremo a extremo de HTTPS"
+      ],
+      "correctas": [
+        0,
+        2
+      ],
+      "descripcion": "MAC está relacionada con el acceso al medio y el direccionamiento de enlace; IP y TLS cumplen otras funciones."
+    },
+    {
+      "tipo": "normal",
+      "tema": "Capa de enlace: MAC y tramas",
+      "pregunta": "¿Cuál describe mejor la función de LLC en el modelo IEEE 802?",
+      "opciones": [
+        "Convertir directamente pulsos ópticos en bits",
+        "Seleccionar la ruta entre redes usando direcciones IP",
+        "Gestionar la entrega de bytes de una aplicación mediante puertos",
+        "Ofrecer una interfaz de enlace para identificar o multiplexar protocolos de capas superiores"
+      ],
+      "correcta": 3,
+      "descripcion": "LLC forma parte de la capa de enlace y ayuda a ofrecer servicios a capas superiores; la interpretación de la señal física ocurre en la capa física."
+    },
+    {
+      "tipo": "vf",
+      "tema": "Capa de enlace: MAC y tramas",
+      "pregunta": "Si una trama Ethernet contiene un FCS/CRC incorrecto, cualquier switch debe reparar automáticamente sus bits y retransmitir la trama corregida.",
+      "correcta": false,
+      "descripcion": "Ethernet normalmente permite detectar errores con FCS/CRC; un switch suele descartar la trama dañada, no reconstruirla ni garantizar una retransmisión."
+    },
+    {
+      "tipo": "multiple",
+      "tema": "Capa de enlace: MAC y tramas",
+      "pregunta": "Un administrador observa que un switch reenvía una trama por un puerto inesperado. ¿Qué datos son relevantes para entender la decisión de capa 2?",
+      "opciones": [
+        "La dirección MAC de destino de la trama",
+        "La tabla de direcciones MAC aprendidas",
+        "El puerto TCP de origen del navegador como criterio principal del switch",
+        "La VLAN a la que pertenece el tráfico"
+      ],
+      "correctas": [
+        0,
+        1,
+        3
+      ],
+      "descripcion": "La MAC de destino, la tabla de conmutación y la VLAN influyen en el reenvío normal de una trama."
+    },
+    {
+      "tipo": "vf",
+      "tema": "Capa de enlace: MAC y tramas",
+      "pregunta": "IEEE 802.3 se asocia con Ethernet y IEEE 802.11 con las redes inalámbricas Wi-Fi.",
+      "correcta": true,
+      "descripcion": "Es la asociación general correcta entre ambas familias de estándares."
+    },
+    {
+      "tipo": "normal",
+      "tema": "Capa de enlace: MAC y tramas",
+      "pregunta": "Un dispositivo conecta dos segmentos Ethernet y reenvía tramas según direcciones MAC. ¿Qué tipo de dispositivo describe mejor esa función?",
+      "opciones": [
+        "Un puente (bridge)",
+        "Un servidor DNS recursivo",
+        "Un router que solo toma decisiones IP",
+        "Un proxy HTTP"
+      ],
+      "correcta": 0,
+      "descripcion": "Un puente opera en la capa de enlace y reenvía tramas según información MAC."
+    },
+    {
+      "tipo": "multiple",
+      "tema": "Capa de red: IP y rutas",
+      "pregunta": "Un router debe enviar un paquete hacia una red remota. ¿Qué información puede influir en la decisión de reenvío?",
+      "opciones": [
+        "La tabla de enrutamiento",
+        "La dirección IP de destino",
+        "La tabla de secuencias ACK de cada navegador",
+        "La coincidencia exacta del nombre del archivo descargado"
+      ],
+      "correctas": [
+        0,
+        1
+      ],
+      "descripcion": "El router consulta la dirección IP de destino y su tabla de rutas para decidir el siguiente salto."
+    },
+    {
+      "tipo": "normal",
+      "tema": "Capa de red: IP y rutas",
+      "pregunta": "Una computadora envía datos a un servidor fuera de su subred. ¿A qué equipo entrega normalmente el paquete IP encapsulado en una trama local?",
+      "opciones": [
+        "Al servidor DNS obligatoriamente, aunque no esté en esa ruta",
+        "A cualquier dispositivo con una MAC parecida",
+        "Al switch para que este determine toda la ruta de Internet",
+        "A la puerta de enlace predeterminada"
+      ],
+      "correcta": 3,
+      "descripcion": "Para destinos fuera de la subred, el equipo suele enviar la trama a la MAC de su puerta de enlace predeterminada."
+    },
+    {
+      "tipo": "vf",
+      "tema": "Capa de red: IP y rutas",
+      "pregunta": "IP garantiza por sí mismo que cada paquete llegue a destino, en orden y sin duplicados.",
+      "correcta": false,
+      "descripcion": "IP ofrece un servicio de entrega de mejor esfuerzo; no garantiza entrega, orden ni ausencia de duplicados."
+    },
+    {
+      "tipo": "multiple",
+      "tema": "Capa de red: IP y rutas",
+      "pregunta": "¿Cuáles afirmaciones distinguen correctamente IP y MAC?",
+      "opciones": [
+        "IP se usa para direccionamiento lógico y encaminamiento entre redes",
+        "Una MAC siempre reemplaza a la dirección IP al cruzar routers",
+        "La MAC se utiliza en el enlace local para entregar tramas",
+        "Un router normalmente reescribe la IP de origen y destino en cada salto, incluso sin NAT"
+      ],
+      "correctas": [
+        0,
+        2
+      ],
+      "descripcion": "IP sirve para direccionamiento lógico y encaminamiento; MAC sirve para la entrega de enlace. Las IP normalmente se conservan de extremo a extremo salvo mecanismos como NAT."
+    },
+    {
+      "tipo": "normal",
+      "tema": "Capa de red: IP y rutas",
+      "pregunta": "Un paquete llega a un router, pero no existe una ruta adecuada para su dirección IP de destino ni una ruta predeterminada aplicable. ¿Qué puede ocurrir?",
+      "opciones": [
+        "El router consulta ASCII para reconstruir el destino",
+        "El router siempre lo entrega al switch más cercano",
+        "El paquete puede descartarse y, en algunos casos, generarse un mensaje ICMP",
+        "TCP cambia automáticamente la IP de destino"
+      ],
+      "correcta": 2,
+      "descripcion": "Sin una ruta válida, el router puede descartar el paquete y eventualmente informar el problema mediante ICMP."
+    },
+    {
+      "tipo": "vf",
+      "tema": "Capa de red: IP y rutas",
+      "pregunta": "Un punto de acceso Wi-Fi doméstico siempre es exclusivamente un dispositivo de capa 3 porque conecta dispositivos a Internet.",
+      "correcta": false,
+      "descripcion": "Un punto de acceso tradicional realiza principalmente funciones de capa 2; los routers Wi-Fi domésticos suelen integrar punto de acceso, switch y router."
+    },
+    {
+      "tipo": "multiple",
+      "tema": "Capa de red: IP y rutas",
+      "pregunta": "Al configurar manualmente una computadora en una LAN IPv4, ¿qué valores cumplen funciones de capa de red?",
+      "opciones": [
+        "Dirección IPv4 del equipo",
+        "Máscara o prefijo de subred",
+        "Dirección MAC del siguiente switch como sustituto de la máscara",
+        "Puerta de enlace predeterminada"
+      ],
+      "correctas": [
+        0,
+        1,
+        3
+      ],
+      "descripcion": "La dirección IP, el prefijo y la puerta de enlace son parámetros de capa de red. La MAC no sustituye al prefijo IP."
+    },
+    {
+      "tipo": "normal",
+      "tema": "Capa de red: IP y rutas",
+      "pregunta": "¿Cuál es la diferencia principal entre una tabla MAC de un switch y una tabla de enrutamiento de un router?",
+      "opciones": [
+        "Ambas guardan únicamente nombres de dominio",
+        "La tabla MAC relaciona MAC con puertos/VLAN; la tabla de rutas relaciona prefijos IP con siguientes saltos o interfaces",
+        "La tabla de rutas almacena claves TLS y la tabla MAC almacena contraseñas",
+        "La tabla MAC ordena segmentos TCP y la tabla de rutas convierte caracteres"
+      ],
+      "correcta": 1,
+      "descripcion": "Las tablas sirven a decisiones distintas: reenvío de tramas en capa 2 y reenvío de paquetes IP en capa 3."
+    },
+    {
+      "tipo": "normal",
+      "tema": "Capa de transporte: TCP y UDP",
+      "pregunta": "Una aplicación necesita que los bytes lleguen en orden y que se retransmitan datos perdidos mientras la conexión siga siendo recuperable. ¿Qué opción encaja mejor?",
+      "opciones": [
+        "UDP, porque cada datagrama incluye una garantía de entrega",
+        "IP, porque ordena los paquetes por dirección",
+        "ARP, porque confirma cada byte recibido",
+        "TCP, porque proporciona un flujo fiable y ordenado"
+      ],
+      "correcta": 3,
+      "descripcion": "TCP ofrece un flujo de bytes fiable y ordenado, usando confirmaciones, números de secuencia y retransmisiones."
+    },
+    {
+      "tipo": "vf",
+      "tema": "Capa de transporte: TCP y UDP",
+      "pregunta": "UDP siempre transmite exactamente 8 bits por datagrama porque su encabezado tiene campos de ocho bits.",
+      "correcta": false,
+      "descripcion": "UDP puede transportar cargas útiles de distintos tamaños. Que el encabezado tenga campos definidos no significa que la carga sea de 8 bits."
+    },
+    {
+      "tipo": "multiple",
+      "tema": "Capa de transporte: TCP y UDP",
+      "pregunta": "¿Qué afirmaciones sobre TCP son correctas?",
+      "opciones": [
+        "Usa números de secuencia para ordenar el flujo de datos",
+        "Puede usar confirmaciones y retransmisiones para recuperar pérdidas",
+        "Garantiza que una conexión jamás falle aunque el destino esté desconectado",
+        "Incluye números de puerto para identificar procesos de origen y destino"
+      ],
+      "correctas": [
+        0,
+        1,
+        3
+      ],
+      "descripcion": "TCP mejora la fiabilidad y el orden, pero no puede garantizar el éxito ante cualquier fallo. Los puertos ayudan a identificar procesos."
+    },
+    {
+      "tipo": "normal",
+      "tema": "Capa de transporte: TCP y UDP",
+      "pregunta": "Una aplicación de voz en tiempo real prefiere que los datos recientes sigan llegando aunque se pierda algún paquete anterior. ¿Por qué podría elegir UDP?",
+      "opciones": [
+        "Porque UDP garantiza la entrega de cada datagrama más rápido que TCP",
+        "Porque UDP corrige todos los errores físicos de la señal",
+        "Porque UDP evita las garantías de entrega y orden de TCP, reduciendo ciertas esperas y dejando el tratamiento a la aplicación",
+        "Porque UDP cifra automáticamente el audio"
+      ],
+      "correcta": 2,
+      "descripcion": "UDP no ofrece por sí mismo fiabilidad ni orden, lo que puede ser útil en aplicaciones sensibles a la latencia."
+    },
+    {
+      "tipo": "vf",
+      "tema": "Capa de transporte: TCP y UDP",
+      "pregunta": "Los puertos 80 y 443 son números que pertenecen al encabezado IP y son asignados exclusivamente por la capa de red.",
+      "correcta": false,
+      "descripcion": "Los puertos se encuentran en encabezados de protocolos de transporte como TCP y UDP; 80 y 443 son los valores habituales para HTTP y HTTPS."
+    },
+    {
+      "tipo": "multiple",
+      "tema": "Capa de transporte: TCP y UDP",
+      "pregunta": "Un servidor web recibe conexiones de muchos clientes al mismo tiempo. ¿Qué información ayuda al sistema a distinguir las comunicaciones?",
+      "opciones": [
+        "Solo la dirección MAC del router de salida",
+        "Direcciones IP y puertos de los extremos, junto con el protocolo de transporte",
+        "El color del cable utilizado por cada cliente",
+        "Únicamente el nombre visible de la página"
+      ],
+      "correctas": [
+        1
+      ],
+      "descripcion": "Las direcciones IP, los puertos y el protocolo permiten identificar flujos y sockets; la MAC solo es relevante en el enlace local."
+    },
+    {
+      "tipo": "normal",
+      "tema": "Capa de transporte: TCP y UDP",
+      "pregunta": "Un navegador abre una web HTTP/1.1 tradicional. ¿Qué combinación es la más habitual?",
+      "opciones": [
+        "HTTP sobre TCP, normalmente con puerto de servidor 80",
+        "HTTP sobre ARP, puerto 443",
+        "HTTP directamente sobre Ethernet, puerto TCP 53",
+        "HTTP sobre ICMP, puerto UDP 25"
+      ],
+      "correcta": 0,
+      "descripcion": "HTTP/1.1 normalmente usa TCP; el puerto de servidor habitual para HTTP es 80."
+    },
+    {
+      "tipo": "vf",
+      "tema": "Capa de transporte: TCP y UDP",
+      "pregunta": "HTTP/3 utiliza QUIC, que funciona sobre UDP; por eso no es correcto afirmar que todo tráfico web moderno usa TCP.",
+      "correcta": true,
+      "descripcion": "HTTP/3 usa QUIC sobre UDP, a diferencia de HTTP/1.1 y HTTP/2, que normalmente usan TCP."
+    },
+    {
+      "tipo": "multiple",
+      "tema": "Capa de transporte: TCP y UDP",
+      "pregunta": "¿Qué tareas corresponden razonablemente a la capa de transporte?",
+      "opciones": [
+        "Multiplexar comunicaciones mediante puertos",
+        "Determinar la ruta entre redes usando prefijos IP",
+        "Ofrecer fiabilidad y orden en TCP",
+        "Definir el voltaje de la señal en un cable"
+      ],
+      "correctas": [
+        0,
+        2
+      ],
+      "descripcion": "Los puertos y las funciones de TCP pertenecen a transporte; las rutas son de red y las señales físicas son de capa 1."
+    },
+    {
+      "tipo": "normal",
+      "tema": "Capa de transporte: TCP y UDP",
+      "pregunta": "Una descarga TCP se pausa mientras el emisor espera confirmación de datos que parecen haberse perdido. ¿Qué mecanismo explica mejor este comportamiento?",
+      "opciones": [
+        "La tabla MAC obliga a cambiar el dominio DNS",
+        "El cifrado ASCII solicita una nueva dirección IP",
+        "El router convierte todos los segmentos en datagramas UDP",
+        "TCP puede detectar la falta de confirmación y retransmitir datos"
+      ],
+      "correcta": 3,
+      "descripcion": "TCP usa ACK, temporizadores y otros mecanismos para detectar pérdidas y retransmitir datos cuando corresponde."
+    },
+    {
+      "tipo": "normal",
+      "tema": "Capa de transporte: TCP y UDP",
+      "pregunta": "Un servicio está escuchando en el puerto TCP 443. ¿Qué conclusión es la más precisa?",
+      "opciones": [
+        "Todo paquete dirigido al puerto 443 está necesariamente cifrado",
+        "El puerto es una forma de identificar el servicio o socket; el número por sí solo no demuestra que la comunicación esté cifrada",
+        "El puerto 443 es una dirección MAC de 48 bits",
+        "El puerto 443 indica que el paquete viajó por fibra óptica"
+      ],
+      "correcta": 1,
+      "descripcion": "443 se asocia habitualmente con HTTPS, pero un número de puerto por sí solo no prueba que el contenido esté cifrado ni que el servicio sea legítimo."
+    },
+    {
+      "tipo": "vf",
+      "tema": "Capa de sesión",
+      "pregunta": "Una sesión lógica y una conexión TCP son conceptos idénticos y siempre tienen una relación uno a uno.",
+      "correcta": false,
+      "descripcion": "Una sesión lógica puede abarcar varias conexiones o gestionarse en la aplicación; el modelo OSI separa conceptualmente ambas ideas."
+    },
+    {
+      "tipo": "multiple",
+      "tema": "Capa de sesión",
+      "pregunta": "En el sentido conceptual del modelo OSI, ¿qué funciones se asocian con la capa de sesión?",
+      "opciones": [
+        "Coordinar el diálogo entre participantes",
+        "Administrar el inicio y cierre de una sesión lógica",
+        "Elegir la señal eléctrica que representa cada bit",
+        "Sincronizar intercambios y, en ciertos sistemas, puntos de recuperación"
+      ],
+      "correctas": [
+        0,
+        1,
+        3
+      ],
+      "descripcion": "La capa de sesión se asocia con administración de sesiones, diálogo y sincronización; las señales pertenecen a la capa física."
+    },
+    {
+      "tipo": "normal",
+      "tema": "Capa de sesión",
+      "pregunta": "Una aplicación mantiene el estado de una conversación de usuario incluso cuando una conexión de transporte se interrumpe y se establece otra. ¿Qué conclusión es más razonable?",
+      "opciones": [
+        "La sesión lógica de la aplicación puede ser distinta de una conexión de transporte concreta",
+        "La dirección MAC garantiza la continuidad de la sesión",
+        "La capa física conserva el historial de la conversación",
+        "Una sesión siempre equivale a un único segmento TCP"
+      ],
+      "correcta": 0,
+      "descripcion": "El estado de sesión puede ser administrado por la aplicación y no tiene por qué coincidir con una sola conexión TCP."
+    },
+    {
+      "tipo": "vf",
+      "tema": "Capa de sesión",
+      "pregunta": "En las redes modernas, todas las funciones descritas por la capa de sesión OSI siempre se implementan como un protocolo independiente y visible entre transporte y presentación.",
+      "correcta": false,
+      "descripcion": "El modelo OSI las distingue conceptualmente, pero en muchas arquitecturas reales las implementan las aplicaciones o sus bibliotecas."
+    },
+    {
+      "tipo": "normal",
+      "tema": "Capa de presentación: codificación y cifrado",
+      "pregunta": "Un mensaje contiene la letra A codificada como el valor decimal 65 en ASCII. ¿Qué describe esa transformación?",
+      "opciones": [
+        "Cifrado con una clave secreta",
+        "Enrutamiento entre dos redes",
+        "Codificación de caracteres",
+        "Corrección de errores TCP"
+      ],
+      "correcta": 2,
+      "descripcion": "ASCII asigna valores numéricos a caracteres. No oculta el contenido ni lo cifra."
+    },
+    {
+      "tipo": "vf",
+      "tema": "Capa de presentación: codificación y cifrado",
+      "pregunta": "Si un archivo está codificado en UTF-8, su contenido queda secreto frente a cualquier persona que lo intercepte.",
+      "correcta": false,
+      "descripcion": "UTF-8 es una codificación de caracteres, no un mecanismo de confidencialidad."
+    },
+    {
+      "tipo": "multiple",
+      "tema": "Capa de presentación: codificación y cifrado",
+      "pregunta": "¿Qué pares de concepto y ejemplo están correctamente relacionados?",
+      "opciones": [
+        "Cifrado — transformar datos usando un algoritmo y una clave para proteger su confidencialidad",
+        "Compresión — reducir el tamaño de los datos mediante una representación más eficiente",
+        "Codificación de caracteres — representar texto mediante valores según reglas como UTF-8",
+        "DNS — convertir automáticamente texto claro en texto cifrado"
+      ],
+      "correctas": [
+        0,
+        1,
+        2
+      ],
+      "descripcion": "Cifrado, compresión y codificación de caracteres son operaciones distintas. DNS resuelve nombres y no cifra automáticamente el contenido."
+    },
+    {
+      "tipo": "normal",
+      "tema": "Capa de presentación: codificación y cifrado",
+      "pregunta": "Un texto puede leerse sin clave después de convertirlo de UTF-8 a otra codificación conocida. ¿Qué indica esto?",
+      "opciones": [
+        "El texto fue cifrado con AES y descifrado sin clave",
+        "Se modificó la representación de los caracteres, pero no necesariamente se protegió la confidencialidad",
+        "Se creó una nueva ruta IP",
+        "Se verificó una firma digital obligatoriamente"
+      ],
+      "correcta": 1,
+      "descripcion": "Cambiar la codificación modifica cómo se representan los caracteres; no equivale a cifrar."
+    },
+    {
+      "tipo": "vf",
+      "tema": "Capa de presentación: codificación y cifrado",
+      "pregunta": "TLS protege datos en tránsito mediante criptografía; en una explicación práctica de redes no debe afirmarse que HTTPS es exclusivamente un protocolo de capa 6.",
+      "correcta": true,
+      "descripcion": "TLS suele describirse entre la aplicación y el transporte, y la asignación exacta de protocolos modernos a las capas OSI es una simplificación conceptual."
+    },
+    {
+      "tipo": "multiple",
+      "tema": "Capa de presentación: codificación y cifrado",
+      "pregunta": "Una empresa quiere enviar un archivo pequeño, legible solo por el destinatario que posee la clave apropiada. ¿Qué acciones cumplen objetivos diferentes y pueden combinarse?",
+      "opciones": [
+        "Comprimir el archivo para reducir su tamaño",
+        "Cifrar el archivo para proteger la confidencialidad",
+        "Codificarlo en ASCII para garantizar que nadie lo lea",
+        "Usar un formato de archivo conocido como sustituto de una clave"
+      ],
+      "correctas": [
+        0,
+        1
+      ],
+      "descripcion": "La compresión reduce tamaño y el cifrado protege la confidencialidad. Una codificación o un formato conocido no sustituye al cifrado."
+    },
+    {
+      "tipo": "normal",
+      "tema": "Capa de aplicación: protocolos y servicios",
+      "pregunta": "Un usuario escribe un nombre de dominio en el navegador. ¿Qué servicio suele ayudar a obtener la dirección IP asociada antes de conectarse al servidor?",
+      "opciones": [
+        "DNS",
+        "FCS",
+        "LLC",
+        "ARP, que resuelve nombres públicos de Internet"
+      ],
+      "correcta": 0,
+      "descripcion": "DNS resuelve nombres de dominio a registros como direcciones IP. ARP se utiliza para resolver direcciones IPv4 locales a direcciones de enlace."
+    },
+    {
+      "tipo": "vf",
+      "tema": "Capa de aplicación: protocolos y servicios",
+      "pregunta": "SMTP se utiliza habitualmente para enviar correo electrónico, mientras que DNS permite consultar registros de nombres de dominio.",
+      "correcta": true,
+      "descripcion": "SMTP es un protocolo de envío de correo y DNS permite consultar registros como A, AAAA y MX."
+    },
+    {
+      "tipo": "multiple",
+      "tema": "Capa de aplicación: protocolos y servicios",
+      "pregunta": "¿Qué afirmaciones describen correctamente protocolos o mecanismos de aplicación?",
+      "opciones": [
+        "HTTP define intercambios de solicitudes y respuestas web",
+        "DNS puede ayudar a localizar servidores de correo mediante registros MX",
+        "PGP puede proporcionar cifrado y firmas digitales para mensajes o archivos",
+        "SMTP determina la señal eléctrica exacta que representa cada bit del cable"
+      ],
+      "correctas": [
+        0,
+        1,
+        2
+      ],
+      "descripcion": "HTTP, DNS y PGP tienen funciones de aplicación o criptográficas usadas por aplicaciones; la señalización pertenece a la capa física."
+    },
+    {
+      "tipo": "normal",
+      "tema": "Capa de aplicación: protocolos y servicios",
+      "pregunta": "Una persona ve un candado en el navegador y la URL comienza con HTTPS. ¿Cuál es la interpretación más precisa?",
+      "opciones": [
+        "El candado demuestra que el sitio es honesto y no puede ser fraudulento",
+        "HTTPS impide que el equipo del usuario tenga malware",
+        "HTTPS significa que el servidor está conectado directamente por fibra",
+        "La conexión utiliza TLS para proteger el canal, pero eso no garantiza que el sitio sea confiable en todos los demás aspectos"
+      ],
+      "correcta": 3,
+      "descripcion": "HTTPS protege la conexión y permite autenticar el servidor mediante certificados, pero un sitio malicioso también puede usar HTTPS."
+    },
+    {
+      "tipo": "vf",
+      "tema": "Capa de aplicación: protocolos y servicios",
+      "pregunta": "Un protocolo de aplicación es lo mismo que la interfaz gráfica que ve el usuario, por lo que toda aplicación con botones propios define necesariamente un protocolo de red.",
+      "correcta": false,
+      "descripcion": "La interfaz gráfica es la parte visible del software. Un protocolo establece reglas para intercambiar mensajes; no toda aplicación define uno propio."
+    },
+    {
+      "tipo": "multiple",
+      "tema": "Integración entre capas",
+      "pregunta": "Una computadora abre una página web de un servidor en otra red. ¿Qué asociaciones entre capa y función son correctas?",
+      "opciones": [
+        "Aplicación: HTTP define solicitudes y respuestas web",
+        "Transporte: TCP puede proporcionar un flujo fiable para HTTP/1.1",
+        "Red: IP permite encaminar paquetes hacia otra red",
+        "Física: la dirección MAC decide la ruta global por Internet"
+      ],
+      "correctas": [
+        0,
+        1,
+        2
+      ],
+      "descripcion": "HTTP opera en aplicación, TCP en transporte e IP en red. La capa física transmite señales; la MAC no decide rutas globales."
+    },
+    {
+      "tipo": "normal",
+      "tema": "Integración entre capas",
+      "pregunta": "Un paquete IP viaja desde una computadora a través de varios routers. ¿Qué ocurre normalmente con las direcciones MAC de la trama en cada enlace?",
+      "opciones": [
+        "Se conservan siempre idénticas desde el origen hasta el servidor remoto",
+        "Se reemplazan por los números de puerto TCP al cruzar el primer router",
+        "La trama de cada enlace usa direcciones MAC apropiadas para ese salto; el paquete IP normalmente mantiene sus direcciones de origen y destino, salvo mecanismos como NAT",
+        "Las direcciones MAC se convierten en nombres DNS en cada router"
+      ],
+      "correcta": 2,
+      "descripcion": "Los routers desencapsulan la trama entrante y crean otra para el siguiente enlace; las direcciones MAC cambian por salto, mientras las IP normalmente permanecen."
+    },
+    {
+      "tipo": "vf",
+      "tema": "Integración entre capas",
+      "pregunta": "En una comunicación web, las capas OSI representan funciones conceptuales; los protocolos reales pueden combinar funciones y no siempre encajan de forma perfecta en una sola capa.",
+      "correcta": true,
+      "descripcion": "OSI es un modelo de referencia. Las implementaciones modernas distribuyen o combinan algunas funciones entre aplicaciones, bibliotecas y protocolos."
+    }
+  ]
+}
