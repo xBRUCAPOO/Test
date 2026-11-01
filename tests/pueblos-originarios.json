@@ -1,0 +1,739 @@
+{
+  "nombre": "Pueblos Originarios de Argentina",
+  "tema": "Historia, cultura, cosmovisión, derechos y situación actual",
+  "icono": "lan",
+  "preguntas": [
+    {
+      "pregunta": "¿Qué característica define mejor a los pueblos originarios de Argentina?",
+      "opciones": [
+        "Todos comparten una misma lengua y religión",
+        "Son comunidades diversas, con culturas, lenguas e historias propias",
+        "Todos habitan exclusivamente zonas rurales",
+        "Comparten una única organización política",
+        "Son comunidades que surgieron después de la formación del Estado argentino"
+      ],
+      "correcta": 1,
+      "tema": "Diversidad cultural",
+      "descripcion": "Los pueblos originarios son diversos. Cada pueblo posee su propia historia, lengua, costumbres y formas de organización."
+    },
+    {
+      "pregunta": "¿Cuál de los siguientes grupos es un pueblo originario de Argentina?",
+      "opciones": [
+        "Qom",
+        "Vikingos",
+        "Romanos",
+        "Espartanos",
+        "Persas",
+        "Egipcios"
+      ],
+      "correcta": 0,
+      "tema": "Pueblos originarios",
+      "descripcion": "El pueblo Qom, también conocido como Toba, tiene presencia histórica en el Gran Chaco argentino."
+    },
+    {
+      "pregunta": "¿Qué significa que los pueblos originarios tienen preexistencia étnica y cultural?",
+      "opciones": [
+        "Que aparecieron después de la independencia argentina",
+        "Que sus culturas fueron creadas por las provincias",
+        "Que existían como pueblos y culturas antes de la formación del Estado argentino",
+        "Que todos pertenecían a un mismo imperio",
+        "Que su identidad depende del reconocimiento de una institución estatal"
+      ],
+      "correcta": 2,
+      "tema": "Historia y derechos",
+      "descripcion": "La preexistencia reconoce que estos pueblos ya existían con sus propias identidades, organizaciones y culturas antes de la conformación del Estado argentino."
+    },
+    {
+      "pregunta": "¿Qué fue la Conquista del Desierto?",
+      "opciones": [
+        "Una expedición científica para estudiar la Patagonia",
+        "Una campaña militar estatal para expandir el control sobre territorios indígenas de la región pampeana y patagónica",
+        "Un acuerdo de paz entre todos los pueblos originarios",
+        "Una política destinada exclusivamente a construir escuelas",
+        "Una migración voluntaria de comunidades indígenas hacia las ciudades"
+      ],
+      "correcta": 1,
+      "tema": "Historia argentina",
+      "descripcion": "Entre 1878 y 1885, el Estado argentino realizó campañas militares para extender su control territorial, provocando muertes, desplazamientos y despojos."
+    },
+    {
+      "pregunta": "¿Qué afirmación es incorrecta sobre los territorios patagónicos antes de la Conquista del Desierto?",
+      "opciones": [
+        "Estaban habitados por diferentes pueblos indígenas",
+        "Existían organizaciones sociales y formas propias de vida",
+        "Había comunidades con vínculos territoriales históricos",
+        "Eran territorios completamente deshabitados y sin organización social"
+      ],
+      "correcta": 3,
+      "tema": "Historia argentina",
+      "descripcion": "La Patagonia no estaba deshabitada. Diversos pueblos indígenas vivían allí y mantenían relaciones sociales, económicas y culturales."
+    },
+    {
+      "pregunta": "¿Cuál fue una consecuencia de las campañas militares contra los pueblos indígenas?",
+      "opciones": [
+        "El reconocimiento inmediato de todas sus tierras",
+        "La desaparición de todos los conflictos territoriales",
+        "El desplazamiento de comunidades y la pérdida de territorios",
+        "La creación de gobiernos indígenas independientes en todo el país",
+        "La eliminación de las diferencias culturales"
+      ],
+      "correcta": 2,
+      "tema": "Historia argentina",
+      "descripcion": "Las campañas militares produjeron muertes, desplazamientos, capturas, separación de familias y pérdida de territorios."
+    },
+    {
+      "pregunta": "¿Qué ocurrió durante las campañas militares en la región del Gran Chaco?",
+      "opciones": [
+        "El Estado amplió su control territorial sobre regiones habitadas por pueblos como los Qom, Wichí y Moqoit",
+        "Se estableció un territorio independiente para cada comunidad",
+        "Se suspendieron todas las actividades económicas de la región",
+        "Los pueblos indígenas conquistaron Buenos Aires",
+        "Se reconocieron automáticamente todos los territorios comunitarios"
+      ],
+      "correcta": 0,
+      "tema": "Historia argentina",
+      "descripcion": "Las campañas militares en el Gran Chaco buscaron incorporar esos territorios al control estatal y afectaron profundamente a sus habitantes originarios."
+    },
+    {
+      "pregunta": "¿En qué año ocurrió la Masacre de Napalpí?",
+      "opciones": [
+        "1810",
+        "1853",
+        "1879",
+        "1924",
+        "1947",
+        "1983"
+      ],
+      "correcta": 3,
+      "tema": "Masacre de Napalpí",
+      "descripcion": "La Masacre de Napalpí ocurrió el 19 de julio de 1924, en el entonces Territorio Nacional del Chaco."
+    },
+    {
+      "pregunta": "¿Qué pueblos fueron las principales víctimas indígenas de la Masacre de Napalpí?",
+      "opciones": [
+        "Mapuche y Tehuelche",
+        "Qom y Moqoit",
+        "Kolla y Diaguita",
+        "Guaraní y Wichí",
+        "Pilagá y Ranquel"
+      ],
+      "correcta": 1,
+      "tema": "Masacre de Napalpí",
+      "descripcion": "Las principales víctimas pertenecían a los pueblos Qom y Moqoit, aunque también hubo otras personas afectadas."
+    },
+    {
+      "pregunta": "¿En qué provincia actual se encuentra el lugar donde ocurrió la Masacre de Napalpí?",
+      "opciones": [
+        "Formosa",
+        "Salta",
+        "Chaco",
+        "Misiones",
+        "Jujuy",
+        "Santa Fe"
+      ],
+      "correcta": 2,
+      "tema": "Masacre de Napalpí",
+      "descripcion": "La masacre ocurrió en el territorio que actualmente pertenece a la provincia del Chaco."
+    },
+    {
+      "pregunta": "¿Qué contexto estaba relacionado con los reclamos de las comunidades en Napalpí?",
+      "opciones": [
+        "La exigencia de independencia política de toda Argentina",
+        "Las condiciones de explotación laboral y las restricciones impuestas a las comunidades",
+        "La disputa por el control de los puertos marítimos",
+        "La oposición a la construcción de universidades",
+        "La intención de abandonar voluntariamente sus territorios"
+      ],
+      "correcta": 1,
+      "tema": "Masacre de Napalpí",
+      "descripcion": "Las comunidades sufrían condiciones de explotación y restricciones. Sus reclamos estaban vinculados con esas condiciones de vida y trabajo."
+    },
+    {
+      "pregunta": "¿Quiénes llevaron adelante el ataque contra la población indígena en Napalpí?",
+      "opciones": [
+        "Un ejército extranjero",
+        "Fuerzas policiales y otros participantes vinculados al poder estatal",
+        "Una organización indígena rival",
+        "Una expedición científica",
+        "Un grupo de trabajadores ferroviarios"
+      ],
+      "correcta": 1,
+      "tema": "Masacre de Napalpí",
+      "descripcion": "El ataque fue realizado por fuerzas policiales y otros participantes, en un contexto de responsabilidad estatal."
+    },
+    {
+      "pregunta": "¿Qué reconoció el juicio por la verdad realizado en 2022 sobre la Masacre de Napalpí?",
+      "opciones": [
+        "Que los hechos nunca ocurrieron",
+        "Que fue un conflicto exclusivamente privado",
+        "La responsabilidad estatal y la existencia de crímenes de lesa humanidad en el marco de un proceso de genocidio",
+        "Que las comunidades habían organizado el ataque",
+        "Que no existieron víctimas indígenas"
+      ],
+      "correcta": 2,
+      "tema": "Masacre de Napalpí",
+      "descripcion": "El juicio por la verdad reconoció la responsabilidad del Estado y calificó los hechos como crímenes de lesa humanidad en el marco de un proceso de genocidio."
+    },
+    {
+      "pregunta": "¿Por qué el juicio por la verdad de Napalpí no terminó con condenas penales a los responsables originales?",
+      "opciones": [
+        "Porque la justicia determinó que no hubo víctimas",
+        "Porque los responsables originales habían fallecido",
+        "Porque las comunidades retiraron todas sus denuncias",
+        "Porque el hecho ocurrió fuera del territorio argentino",
+        "Porque la legislación argentina no contempla estos delitos"
+      ],
+      "correcta": 1,
+      "tema": "Masacre de Napalpí",
+      "descripcion": "Al tratarse de un juicio por la verdad y haber fallecido los responsables originales, no se dictaron condenas penales contra ellos."
+    },
+    {
+      "pregunta": "¿En qué año ocurrió la Masacre de Rincón Bomba?",
+      "opciones": [
+        "1816",
+        "1879",
+        "1924",
+        "1947",
+        "1976",
+        "2001"
+      ],
+      "correcta": 3,
+      "tema": "Masacre de Rincón Bomba",
+      "descripcion": "La Masacre de Rincón Bomba ocurrió en octubre de 1947, en la provincia de Formosa."
+    },
+    {
+      "pregunta": "¿Qué pueblo originario fue principalmente víctima de la Masacre de Rincón Bomba?",
+      "opciones": [
+        "Qom",
+        "Pilagá",
+        "Mapuche",
+        "Guaraní",
+        "Diaguita",
+        "Ranquel"
+      ],
+      "correcta": 1,
+      "tema": "Masacre de Rincón Bomba",
+      "descripcion": "La comunidad Pilagá fue la principal víctima de los ataques ocurridos en 1947."
+    },
+    {
+      "pregunta": "¿Qué fuerza estatal tuvo un papel central en la Masacre de Rincón Bomba?",
+      "opciones": [
+        "La Armada Argentina",
+        "La Gendarmería Nacional",
+        "La Policía Federal de Brasil",
+        "El Ejército de Chile",
+        "La Prefectura Naval Uruguaya"
+      ],
+      "correcta": 1,
+      "tema": "Masacre de Rincón Bomba",
+      "descripcion": "La Gendarmería Nacional participó en los ataques y persecuciones contra la comunidad Pilagá."
+    },
+    {
+      "pregunta": "¿En qué provincia argentina ocurrió la Masacre de Rincón Bomba?",
+      "opciones": [
+        "Chaco",
+        "Corrientes",
+        "Formosa",
+        "Salta",
+        "Santiago del Estero"
+      ],
+      "correcta": 2,
+      "tema": "Masacre de Rincón Bomba",
+      "descripcion": "Los hechos ocurrieron en La Bomba, cerca de Las Lomitas, en la provincia de Formosa."
+    },
+    {
+      "pregunta": "¿Qué tipo de hechos sufrieron las comunidades Pilagá durante Rincón Bomba?",
+      "opciones": [
+        "Únicamente restricciones comerciales",
+        "Asesinatos, persecuciones, desapariciones y separación de familias",
+        "Solamente el cierre de escuelas",
+        "Una disputa electoral sin violencia",
+        "Una migración voluntaria organizada por el Estado"
+      ],
+      "correcta": 1,
+      "tema": "Masacre de Rincón Bomba",
+      "descripcion": "La comunidad sufrió graves violaciones de derechos humanos, incluyendo asesinatos, persecuciones, desapariciones y separación familiar."
+    },
+    {
+      "pregunta": "¿Qué reconoció la sentencia civil de 2019 sobre Rincón Bomba?",
+      "opciones": [
+        "Que el Estado no tuvo ninguna responsabilidad",
+        "La responsabilidad estatal y el carácter de lesa humanidad de los hechos",
+        "Que la comunidad Pilagá no existía",
+        "Que los hechos ocurrieron en otro país",
+        "Que se trató de un accidente natural"
+      ],
+      "correcta": 1,
+      "tema": "Masacre de Rincón Bomba",
+      "descripcion": "La sentencia civil reconoció la responsabilidad estatal y calificó los hechos como crímenes de lesa humanidad. Posteriormente, la Cámara Federal confirmó la decisión e incorporó la calificación de genocidio."
+    },
+    {
+      "pregunta": "¿Qué tienen en común las masacres de Napalpí y Rincón Bomba?",
+      "opciones": [
+        "Ambas ocurrieron durante la Conquista del Desierto",
+        "Ambas fueron ataques de fuerzas estatales contra comunidades indígenas durante el siglo XX",
+        "Ambas ocurrieron en la provincia de Buenos Aires",
+        "Ambas tuvieron como víctimas principales al pueblo Mapuche",
+        "Ambas fueron conflictos entre países"
+      ],
+      "correcta": 1,
+      "tema": "Comparación histórica",
+      "descripcion": "Las dos masacres evidencian violencia estatal contra pueblos originarios durante el siglo XX."
+    },
+    {
+      "pregunta": "¿Cuál es una diferencia importante entre Napalpí y Rincón Bomba?",
+      "opciones": [
+        "Napalpí ocurrió en 1924 y estuvo relacionado con condiciones de explotación y control laboral; Rincón Bomba ocurrió en 1947 y afectó principalmente a la comunidad Pilagá",
+        "Napalpí ocurrió en Formosa y Rincón Bomba en Chaco",
+        "Napalpí afectó exclusivamente a inmigrantes europeos",
+        "Rincón Bomba ocurrió durante la independencia argentina",
+        "No existe ninguna diferencia histórica entre ambas"
+      ],
+      "correcta": 0,
+      "tema": "Comparación histórica",
+      "descripcion": "Aunque ambas fueron masacres con responsabilidad estatal, tuvieron contextos, fechas y comunidades principalmente afectadas diferentes."
+    },
+    {
+      "pregunta": "¿Qué representa el territorio para muchas comunidades indígenas?",
+      "opciones": [
+        "Únicamente un recurso que puede venderse",
+        "Un espacio sin relación con su identidad",
+        "Un lugar vinculado con su historia, cultura, espiritualidad y forma de vida",
+        "Solamente una división administrativa",
+        "Un espacio que pierde importancia cuando se construyen ciudades"
+      ],
+      "correcta": 2,
+      "tema": "Cosmovisión",
+      "descripcion": "Para muchas comunidades, el territorio está relacionado con la identidad, los antepasados, la memoria y la continuidad cultural."
+    },
+    {
+      "pregunta": "¿Qué significa cosmovisión?",
+      "opciones": [
+        "La forma en que una persona o comunidad comprende e interpreta el mundo",
+        "Una ley que regula exclusivamente la propiedad privada",
+        "Un sistema de escritura universal",
+        "Una técnica agrícola específica",
+        "Una organización militar"
+      ],
+      "correcta": 0,
+      "tema": "Cosmovisión",
+      "descripcion": "La cosmovisión es la manera de comprender el mundo, la naturaleza, la sociedad, la espiritualidad y las relaciones entre las personas."
+    },
+    {
+      "pregunta": "¿Cuál de estas ideas aparece en algunas cosmovisiones de pueblos originarios?",
+      "opciones": [
+        "La naturaleza carece completamente de valor",
+        "La comunidad y el entorno natural mantienen relaciones de interdependencia",
+        "El territorio solo tiene importancia económica",
+        "La historia de los antepasados debe olvidarse",
+        "La cooperación perjudica necesariamente a la comunidad"
+      ],
+      "correcta": 1,
+      "tema": "Cosmovisión",
+      "descripcion": "En diversas comunidades existe una relación estrecha entre las personas, la naturaleza y la vida colectiva. Esto no significa que todas compartan exactamente las mismas creencias."
+    },
+    {
+      "pregunta": "¿Qué valor representa la reciprocidad en algunas comunidades indígenas?",
+      "opciones": [
+        "La obligación de competir permanentemente",
+        "El intercambio y la ayuda mutua entre personas y comunidades",
+        "La eliminación de toda forma de cooperación",
+        "La acumulación individual como único objetivo",
+        "La prohibición de compartir conocimientos"
+      ],
+      "correcta": 1,
+      "tema": "Valores comunitarios",
+      "descripcion": "La reciprocidad implica colaborar, compartir y mantener relaciones de ayuda mutua."
+    },
+    {
+      "pregunta": "¿Qué representa la Pachamama en diversas comunidades andinas?",
+      "opciones": [
+        "Una figura relacionada con la Madre Tierra y la vida",
+        "Una autoridad militar",
+        "Una técnica de construcción",
+        "Una celebración exclusiva de las ciudades",
+        "Un sistema de escritura"
+      ],
+      "correcta": 0,
+      "tema": "Costumbres y espiritualidad",
+      "descripcion": "La Pachamama es una figura central en diversas tradiciones andinas, vinculada con la Tierra, la fertilidad y la vida."
+    },
+    {
+      "pregunta": "¿Qué es el Wiñoy Tripantu para el pueblo Mapuche?",
+      "opciones": [
+        "Una ceremonia de elección de autoridades nacionales",
+        "La celebración del retorno del sol y el comienzo de un nuevo ciclo",
+        "Una técnica de pesca",
+        "Una festividad exclusivamente cristiana",
+        "Una conmemoración de la independencia argentina"
+      ],
+      "correcta": 1,
+      "tema": "Costumbres y espiritualidad",
+      "descripcion": "El Wiñoy Tripantu está relacionado con el nuevo ciclo de la naturaleza y el retorno del sol durante el solsticio de invierno."
+    },
+    {
+      "pregunta": "¿Qué lengua está históricamente vinculada con el pueblo Mapuche?",
+      "opciones": [
+        "Mapuzungun",
+        "Latín",
+        "Quechua como única lengua",
+        "Guaraní como única lengua",
+        "Aymara como única lengua"
+      ],
+      "correcta": 0,
+      "tema": "Lenguas originarias",
+      "descripcion": "El mapuzungun es la lengua del pueblo Mapuche y forma parte fundamental de su identidad cultural."
+    },
+    {
+      "pregunta": "¿Qué actividad cultural es reconocida en muchas comunidades Wichí?",
+      "opciones": [
+        "La fabricación industrial de automóviles",
+        "La cestería y los conocimientos vinculados al monte",
+        "La construcción de barcos militares",
+        "La producción de instrumentos electrónicos",
+        "La minería submarina"
+      ],
+      "correcta": 1,
+      "tema": "Costumbres y cultura",
+      "descripcion": "La cestería Wichí es una expresión cultural importante, relacionada con materiales y conocimientos del entorno natural."
+    },
+    {
+      "pregunta": "¿Qué aspecto de la cultura Qom contribuye a transmitir conocimientos entre generaciones?",
+      "opciones": [
+        "La eliminación de las historias familiares",
+        "La oralidad, los relatos y las expresiones culturales",
+        "La prohibición de enseñar la lengua",
+        "La sustitución de todas las tradiciones por documentos extranjeros",
+        "La ausencia de actividades comunitarias"
+      ],
+      "correcta": 1,
+      "tema": "Costumbres y cultura",
+      "descripcion": "La transmisión oral, los relatos, la música y otras expresiones culturales ayudan a conservar conocimientos e identidad."
+    },
+    {
+      "pregunta": "¿Qué afirmación describe correctamente las prácticas culturales de los pueblos originarios?",
+      "opciones": [
+        "Todos realizan exactamente las mismas ceremonias",
+        "Las costumbres son idénticas en todas las provincias",
+        "Cada pueblo y comunidad puede tener prácticas, lenguas y tradiciones propias",
+        "Las tradiciones no pueden cambiar con el tiempo",
+        "Las culturas indígenas no admiten nuevas tecnologías"
+      ],
+      "correcta": 2,
+      "tema": "Diversidad cultural",
+      "descripcion": "Las culturas son diversas y dinámicas. Pueden conservar tradiciones y también incorporar cambios a lo largo del tiempo."
+    },
+    {
+      "pregunta": "¿Qué necesidad aparece frecuentemente entre los reclamos de comunidades indígenas?",
+      "opciones": [
+        "La eliminación de sus lenguas",
+        "El acceso al agua potable y a servicios de salud",
+        "La prohibición de organizarse comunitariamente",
+        "La pérdida de sus territorios",
+        "La eliminación de la educación intercultural"
+      ],
+      "correcta": 1,
+      "tema": "Situación actual",
+      "descripcion": "El acceso al agua potable, la salud, la vivienda y otros servicios básicos forma parte de las necesidades y reclamos de distintas comunidades."
+    },
+    {
+      "pregunta": "¿Por qué muchas comunidades reclaman la titularización de sus tierras?",
+      "opciones": [
+        "Para evitar cualquier forma de educación",
+        "Para obtener seguridad jurídica sobre territorios vinculados con su historia y vida comunitaria",
+        "Para impedir que existan otras provincias",
+        "Para abandonar sus tradiciones",
+        "Para eliminar la protección ambiental"
+      ],
+      "correcta": 1,
+      "tema": "Conflictos territoriales",
+      "descripcion": "La titularización comunitaria busca dar reconocimiento y seguridad jurídica a los territorios tradicionalmente ocupados."
+    },
+    {
+      "pregunta": "¿Qué problema puede generar la deforestación en territorios indígenas?",
+      "opciones": [
+        "Mejora automáticamente la disponibilidad de agua",
+        "Puede destruir ecosistemas y afectar recursos necesarios para la vida comunitaria",
+        "Garantiza la conservación de las especies",
+        "Elimina todos los conflictos territoriales",
+        "No tiene consecuencias sobre las comunidades"
+      ],
+      "correcta": 1,
+      "tema": "Ambiente y territorio",
+      "descripcion": "La deforestación puede afectar los bosques, la biodiversidad, las fuentes de agua y las actividades tradicionales de las comunidades."
+    },
+    {
+      "pregunta": "¿Qué significa la educación intercultural bilingüe?",
+      "opciones": [
+        "Una educación que prohíbe las lenguas indígenas",
+        "Una educación que reconoce la diversidad cultural y promueve el aprendizaje en dos lenguas cuando corresponde",
+        "Una educación exclusiva para personas extranjeras",
+        "Una educación que reemplaza todos los contenidos nacionales por ceremonias",
+        "Una enseñanza que no permite aprender español"
+      ],
+      "correcta": 1,
+      "tema": "Derechos",
+      "descripcion": "La educación intercultural bilingüe busca respetar las identidades culturales y lingüísticas de los pueblos indígenas."
+    },
+    {
+      "pregunta": "¿Qué establece el artículo 75, inciso 17, de la Constitución Nacional argentina?",
+      "opciones": [
+        "La prohibición de las comunidades indígenas",
+        "El reconocimiento de la preexistencia étnica y cultural de los pueblos indígenas argentinos",
+        "La obligación de abandonar las lenguas originarias",
+        "La eliminación de la propiedad comunitaria",
+        "La prohibición de participar en decisiones públicas"
+      ],
+      "correcta": 1,
+      "tema": "Legislación argentina",
+      "descripcion": "Este artículo reconoce la preexistencia de los pueblos indígenas y establece derechos relacionados con su identidad, educación, tierras y participación."
+    },
+    {
+      "pregunta": "¿Qué derecho territorial reconoce la Constitución Nacional en su artículo 75, inciso 17?",
+      "opciones": [
+        "La propiedad exclusiva de todas las tierras rurales del país",
+        "La posesión y propiedad comunitaria de las tierras que tradicionalmente ocupan",
+        "La propiedad individual obligatoria para cada integrante",
+        "El derecho a ocupar cualquier propiedad privada sin condiciones",
+        "La prohibición de utilizar recursos naturales"
+      ],
+      "correcta": 1,
+      "tema": "Legislación argentina",
+      "descripcion": "La Constitución reconoce la posesión y propiedad comunitaria de las tierras tradicionalmente ocupadas y la entrega de otras aptas y suficientes para el desarrollo humano."
+    },
+    {
+      "pregunta": "¿Qué establece el Convenio 169 de la Organización Internacional del Trabajo sobre los pueblos indígenas?",
+      "opciones": [
+        "Que deben abandonar sus instituciones tradicionales",
+        "Que sus derechos culturales y territoriales deben ser respetados",
+        "Que solamente pueden vivir en reservas",
+        "Que no pueden participar en decisiones políticas",
+        "Que sus lenguas no tienen reconocimiento cultural"
+      ],
+      "correcta": 1,
+      "tema": "Legislación internacional",
+      "descripcion": "El Convenio 169 reconoce derechos de los pueblos indígenas y tribales, incluyendo su identidad, instituciones, tierras y participación."
+    },
+    {
+      "pregunta": "¿Qué implica el derecho a la consulta previa establecido en el Convenio 169 de la OIT?",
+      "opciones": [
+        "Que el Estado puede decidir sin informar a las comunidades",
+        "Que las comunidades deben ser consultadas de buena fe mediante sus instituciones representativas cuando una medida pueda afectarlas directamente",
+        "Que las comunidades deben aceptar automáticamente cualquier proyecto",
+        "Que las empresas reemplazan a las autoridades indígenas",
+        "Que cualquier decisión comunitaria tiene automáticamente alcance nacional"
+      ],
+      "correcta": 1,
+      "tema": "Legislación internacional",
+      "descripcion": "La consulta previa busca que los pueblos participen mediante sus instituciones representativas antes de adoptar medidas que puedan afectarlos directamente."
+    },
+    {
+      "pregunta": "¿La consulta previa significa que una comunidad indígena tiene un veto automático sobre cualquier proyecto?",
+      "opciones": [
+        "Sí, en absolutamente todos los casos",
+        "No, la consulta exige participación y diálogo de buena fe, pero no equivale automáticamente a un veto general",
+        "Sí, pero solamente cuando el proyecto es privado",
+        "No, porque las comunidades no tienen derecho a participar",
+        "Depende exclusivamente de la decisión de una empresa"
+      ],
+      "correcta": 1,
+      "tema": "Legislación internacional",
+      "descripcion": "El derecho a la consulta obliga a realizar un proceso adecuado de participación, pero no establece un veto automático para todos los casos."
+    },
+    {
+      "pregunta": "¿Cuál fue el objetivo principal de la Ley Nacional 26.160, sancionada en 2006?",
+      "opciones": [
+        "Eliminar la propiedad comunitaria",
+        "Declarar una emergencia territorial indígena y realizar relevamientos de tierras",
+        "Prohibir las lenguas originarias",
+        "Eliminar las organizaciones comunitarias",
+        "Transferir todos los territorios indígenas a empresas privadas"
+      ],
+      "correcta": 1,
+      "tema": "Legislación argentina",
+      "descripcion": "La Ley 26.160 declaró la emergencia en materia de posesión y propiedad de las tierras ocupadas tradicionalmente por comunidades indígenas y estableció mecanismos de relevamiento."
+    },
+    {
+      "pregunta": "¿Qué establecía la suspensión de desalojos prevista por la Ley 26.160 mientras se encontraba vigente?",
+      "opciones": [
+        "Que ningún propietario podía reclamar una tierra",
+        "Que se suspendían determinados desalojos de las tierras tradicionalmente ocupadas por comunidades indígenas",
+        "Que todas las tierras pasaban automáticamente a propiedad individual",
+        "Que las comunidades debían abandonar sus territorios",
+        "Que se prohibían todos los procesos judiciales del país"
+      ],
+      "correcta": 1,
+      "tema": "Legislación argentina",
+      "descripcion": "La ley estableció una protección temporal frente a determinados desalojos mientras se realizaba el relevamiento territorial."
+    },
+    {
+      "pregunta": "¿Qué ocurrió con la emergencia territorial prevista por la Ley 26.160 a partir del Decreto 1083/2024?",
+      "opciones": [
+        "Se amplió indefinidamente",
+        "Se declaró finalizada la emergencia y la suspensión de desalojos prevista por esa ley",
+        "Se reconocieron automáticamente todos los títulos comunitarios",
+        "Se eliminó el artículo 75, inciso 17, de la Constitución",
+        "Se prohibió la existencia de comunidades indígenas"
+      ],
+      "correcta": 1,
+      "tema": "Legislación argentina",
+      "descripcion": "El Decreto 1083/2024 declaró finalizada la emergencia territorial y la suspensión de desalojos previstas por la Ley 26.160. Esto no eliminó los derechos constitucionales indígenas."
+    },
+    {
+      "pregunta": "¿La finalización de la emergencia de la Ley 26.160 eliminó los derechos indígenas reconocidos por la Constitución Nacional?",
+      "opciones": [
+        "Sí, eliminó todos los derechos territoriales",
+        "Sí, porque los decretos pueden eliminar cualquier derecho constitucional",
+        "No, los derechos constitucionales continúan vigentes",
+        "No, pero solamente en la provincia de Chaco",
+        "Sí, aunque únicamente para las comunidades rurales"
+      ],
+      "correcta": 2,
+      "tema": "Legislación argentina",
+      "descripcion": "Un decreto no elimina los derechos reconocidos por la Constitución Nacional. Los derechos del artículo 75, inciso 17, siguen vigentes."
+    },
+    {
+      "pregunta": "¿Qué significa la propiedad comunitaria indígena?",
+      "opciones": [
+        "Que cada integrante debe vender su parte individualmente",
+        "Que el territorio puede pertenecer jurídicamente a una comunidad como colectivo",
+        "Que las tierras pertenecen automáticamente a una empresa",
+        "Que el Estado no puede reconocer ningún derecho territorial",
+        "Que todos los habitantes del país comparten la misma propiedad"
+      ],
+      "correcta": 1,
+      "tema": "Derechos territoriales",
+      "descripcion": "La propiedad comunitaria reconoce una relación jurídica colectiva entre una comunidad y su territorio."
+    },
+    {
+      "pregunta": "¿Qué problema puede aparecer cuando una comunidad indígena reclama un territorio ocupado tradicionalmente?",
+      "opciones": [
+        "La inexistencia de cualquier vínculo histórico con la tierra",
+        "Los conflictos con intereses privados o estatales y la falta de reconocimiento legal de la ocupación",
+        "La imposibilidad de conservar sus costumbres",
+        "La obligación de trasladarse a otro país",
+        "La desaparición automática de las leyes nacionales"
+      ],
+      "correcta": 1,
+      "tema": "Conflictos territoriales",
+      "descripcion": "Los conflictos territoriales pueden involucrar intereses económicos, disputas sobre títulos de propiedad y dificultades para obtener reconocimiento jurídico."
+    },
+    {
+      "pregunta": "¿Qué significa la criminalización de los reclamos indígenas?",
+      "opciones": [
+        "El reconocimiento de todos sus derechos",
+        "El tratamiento de sus reclamos o formas de protesta como hechos delictivos, en determinados contextos",
+        "La enseñanza de sus lenguas en las escuelas",
+        "La protección de sus territorios",
+        "La transmisión de sus tradiciones"
+      ],
+      "correcta": 1,
+      "tema": "Situación actual",
+      "descripcion": "La criminalización ocurre cuando reclamos o protestas comunitarias son tratados mediante respuestas penales que pueden afectar el ejercicio de sus derechos."
+    },
+    {
+      "pregunta": "¿Cuál de estas situaciones puede afectar la vida de comunidades indígenas en la actualidad?",
+      "opciones": [
+        "La falta de acceso a servicios básicos y los conflictos territoriales",
+        "La ausencia de cualquier relación con el medioambiente",
+        "La prohibición general de utilizar tecnología",
+        "La inexistencia de reclamos por tierras",
+        "La desaparición de toda diversidad cultural"
+      ],
+      "correcta": 0,
+      "tema": "Situación actual",
+      "descripcion": "Distintas comunidades enfrentan problemas relacionados con el acceso a servicios, la tierra, el ambiente, la discriminación y la participación."
+    },
+    {
+      "pregunta": "¿Qué relación existe entre la pérdida de territorios y la continuidad cultural de una comunidad?",
+      "opciones": [
+        "Ninguna, porque la cultura no tiene relación con el territorio",
+        "La pérdida territorial puede afectar prácticas, recursos, memoria e identidad comunitaria",
+        "La pérdida territorial garantiza la conservación de las tradiciones",
+        "El territorio solamente influye en la economía nacional",
+        "La cultura desaparece automáticamente cuando alguien se muda"
+      ],
+      "correcta": 1,
+      "tema": "Territorio e identidad",
+      "descripcion": "El territorio puede ser fundamental para las actividades, los conocimientos, la memoria y las prácticas culturales de una comunidad."
+    },
+    {
+      "pregunta": "¿Qué significa preservar una lengua originaria?",
+      "opciones": [
+        "Impedir que sus hablantes aprendan otros idiomas",
+        "Mantener su transmisión, enseñanza y uso entre generaciones",
+        "Reemplazarla por una lengua extranjera",
+        "Utilizarla solamente en documentos antiguos",
+        "Evitar que los jóvenes la aprendan"
+      ],
+      "correcta": 1,
+      "tema": "Lenguas originarias",
+      "descripcion": "La preservación de una lengua implica mantener su uso y transmisión, además de generar espacios para que las nuevas generaciones puedan aprenderla."
+    },
+    {
+      "pregunta": "¿Qué afirmación sobre los pueblos originarios y la tecnología es correcta?",
+      "opciones": [
+        "Los pueblos originarios no pueden utilizar tecnología moderna",
+        "La identidad indígena es incompatible con vivir en una ciudad",
+        "Las personas indígenas pueden vivir en ciudades, utilizar tecnología y conservar su identidad cultural",
+        "El uso de internet elimina automáticamente una identidad cultural",
+        "Las tradiciones solamente pueden mantenerse en comunidades aisladas"
+      ],
+      "correcta": 2,
+      "tema": "Identidad y actualidad",
+      "descripcion": "La identidad indígena no depende de vivir aislado ni de rechazar la tecnología. Las comunidades y sus integrantes pueden combinar tradiciones y formas de vida contemporáneas."
+    },
+    {
+      "pregunta": "¿Qué significa la autodeterminación de los pueblos indígenas?",
+      "opciones": [
+        "El derecho a decidir sus prioridades y formas de organización dentro del marco de sus derechos",
+        "La obligación de adoptar una única religión",
+        "La prohibición de relacionarse con el Estado",
+        "La eliminación de todas las leyes nacionales",
+        "La obligación de abandonar sus instituciones propias"
+      ],
+      "correcta": 0,
+      "tema": "Derechos colectivos",
+      "descripcion": "La autodeterminación se relaciona con la capacidad de los pueblos para definir sus prioridades, mantener sus instituciones y participar en las decisiones que los afectan."
+    },
+    {
+      "pregunta": "¿Por qué es importante la memoria histórica sobre las masacres indígenas?",
+      "opciones": [
+        "Porque permite justificar la violencia del pasado",
+        "Porque ayuda a reconocer a las víctimas, comprender las injusticias y evitar su repetición",
+        "Porque elimina la necesidad de estudiar historia",
+        "Porque reemplaza todos los derechos actuales",
+        "Porque permite olvidar las responsabilidades estatales"
+      ],
+      "correcta": 1,
+      "tema": "Memoria y justicia",
+      "descripcion": "La memoria histórica permite reconocer a las víctimas, visibilizar las responsabilidades y transmitir lo ocurrido a las nuevas generaciones."
+    },
+    {
+      "pregunta": "¿Qué busca una reparación colectiva para una comunidad indígena afectada por una masacre?",
+      "opciones": [
+        "Que la comunidad abandone su identidad",
+        "Reconocer el daño sufrido y establecer medidas de reparación para la comunidad",
+        "Eliminar los registros históricos",
+        "Impedir que las nuevas generaciones conozcan los hechos",
+        "Reemplazar las lenguas originarias"
+      ],
+      "correcta": 1,
+      "tema": "Memoria y justicia",
+      "descripcion": "La reparación colectiva puede incluir reconocimiento público, memoria, medidas simbólicas y acciones destinadas a reparar daños sufridos por la comunidad."
+    },
+    {
+      "pregunta": "¿Cuál de estas afirmaciones refleja mejor la situación de los pueblos originarios en Argentina?",
+      "opciones": [
+        "Sus problemas terminaron completamente después de la independencia",
+        "Todos tienen las mismas necesidades y reclamos",
+        "Existen avances en el reconocimiento de derechos, pero persisten desigualdades, conflictos territoriales y demandas de cumplimiento",
+        "No existen comunidades indígenas en la actualidad",
+        "Sus derechos dependen exclusivamente de las costumbres de cada provincia"
+      ],
+      "correcta": 2,
+      "tema": "Situación actual",
+      "descripcion": "Aunque existen reconocimientos legales importantes, muchas comunidades continúan reclamando el cumplimiento efectivo de sus derechos."
+    }
+  ]
+}

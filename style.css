@@ -48,6 +48,10 @@
 
   /* [v1.7.0] Pregunta difícil: el rojo que reemplaza a TODOS los celestes (acento) mientras se resuelve una pregunta
      marcada como difícil. Se activa con la clase body.is-hard (más abajo redefine las variables --color-accent) */
+  /* [v1.9.4] Celeste "fijo" de la dificultad normal: se resuelve acá, así NO se vuelve rojo dentro de las preguntas
+     difíciles (body.is-hard redefine --color-accent pero no estas variables) */
+  --color-normal: var(--color-accent);
+  --color-normal-a10: var(--color-accent-a10);
   --color-hard: var(--color-error);
   --color-hard-a10: var(--color-error-a10);
   --color-hard-a20: rgba(239, 68, 68, 0.2);
@@ -783,12 +787,30 @@ body.no-scroll {
 .lock__msg--error { color: var(--color-error); }
 .lock__msg--ok { color: var(--color-success); }
 /* Candado en la tarjeta del menú */
+/* [v1.9.3] El candado es una columna propia de la tarjeta, a la izquierda de la flecha (antes iba pegado al texto) */
+.test-card--locked {
+  grid-template-columns: 44px 1fr auto auto;
+}
 .test-card__lock {
-  font-size: 1rem;
-  vertical-align: -3px;
-  margin-left: 6px;
+  font-size: 1.25rem;
   color: var(--color-warning);
 }
+/* [v1.9.3] Iconos de las dificultades disponibles, junto a la cantidad de preguntas: verde / celeste / rojo como el switch */
+.test-card__levels {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 10px;
+  vertical-align: -4px;
+}
+.test-card__level {
+  font-size: 1.1rem;
+}
+/* [v1.9.4] En el menú los iconos de dificultad son todos celestes (el color de la página); los colores por dificultad
+   quedan solo en el switch y en el cuadro del test */
+.test-card__level--facil,
+.test-card__level--normal,
+.test-card__level--dificil { color: var(--color-accent); }
 @keyframes pinShake {
   0%, 100% { transform: translateX(0); }
   20%, 60% { transform: translateX(-6px); }
@@ -800,7 +822,9 @@ body.no-scroll {
    (vuelve a la vista previa), así que script.js pide confirmación antes de salir */
 .quiz__back {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
+  align-items: stretch; /* [v1.10.0] el cuadro de dificultad mide lo mismo que el botón "Volver" */
+  gap: 12px;
 }
 
 .progress__head {
@@ -816,6 +840,66 @@ body.no-scroll {
   color: var(--color-text-dim);
   letter-spacing: 0.08em;
 }
+
+/* [v1.9.3] Marcas de preguntas difíciles: capa sobre la barra con una calavera roja por pregunta difícil */
+.progress__wrap {
+  position: relative;
+}
+/* [v1.10.0] Las marcas ahora van SOBRE la barra: la capa queda centrada en el alto de la barra y cada marca se centra en
+   ella; su posición horizontal es justo donde termina la barra al llegar a esa pregunta */
+.progress__marks {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 0;
+  pointer-events: none;
+}
+.progress--marks .progress__head {
+  margin-bottom: 20px; /* deja lugar para el círculo, que sobresale por arriba de la barra */
+}
+/* [v1.9.4] Marca = círculo negro con contorno rojo y la calavera roja adentro */
+.progress__mark {
+  position: absolute;
+  top: 0;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  font-size: 13px;
+  line-height: 1;
+  color: var(--color-error);
+  background: var(--color-bg);
+  border: 1.5px solid var(--color-error);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s var(--ease);
+}
+.progress__mark--now { transform: translate(-50%, -50%) scale(1.25); } /* es la pregunta actual */
+
+/* [v1.9.4] Cuadro de dificultad sobre el contador de preguntas: contorno, icono y texto del color de la dificultad
+   (fácil = verde, normal = celeste fijo, difícil = rojo). Solo se ve en tests con más de una dificultad */
+.lvbadge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 0 auto; /* [v1.10.0] a la derecha de la fila de "Volver" */
+  padding: 0 14px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--lb);
+  border: 1px solid var(--lb);
+  border-radius: 8px;
+  background: var(--lb-bg);
+}
+.lvbadge .material-symbols-outlined {
+  font-size: 16px;
+}
+.lvbadge--facil { --lb: var(--color-success); --lb-bg: var(--color-success-a10); }
+.lvbadge--normal { --lb: var(--color-normal); --lb-bg: var(--color-normal-a10); }
+.lvbadge--dificil { --lb: var(--color-error); --lb-bg: var(--color-error-a10); }
 
 .progress__track {
   height: 4px;
@@ -1614,19 +1698,33 @@ body.is-hard .qcard {
 .review__item--skip .review__q { color: var(--color-gray); }
 
 /* [v1.7.0] Marca "Pregunta difícil" (calavera) bajo el enunciado en los resultados y en el historial */
+/* [v1.10.0] En los resultados la marca usa el mismo cuadro redondeado (.qbadge) que en la pregunta; solo se ajusta el margen */
 .review__hardtag {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  margin-top: 8px;
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--color-hard);
+  margin: 10px 0 0;
 }
-.review__hardtag .material-symbols-outlined {
-  font-size: 16px;
+/* [v1.10.0] Formato de las explicaciones (*negrita*, _cursiva_) */
+.review__desc strong { font-weight: 700; color: var(--color-text); }
+.review__desc em { font-style: italic; }
+
+/* [v1.10.0] Animación de pregunta difícil: capa a pantalla completa que bloquea los toques mientras dura */
+.hardintro {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hardintro__bg {
+  position: absolute;
+  inset: 0;
+  background: var(--color-backdrop);
+}
+.hardintro__tag {
+  position: relative;
+  margin: 0; /* sin el margen de la etiqueta de la tarjeta, así queda justo en el centro */
+  white-space: nowrap;
+  transform-origin: center;
 }
 
 /* Líneas "Tu respuesta" y "Correcta" */
@@ -1917,17 +2015,5 @@ body.is-hard .qcard {
   .score__avgs { margin-top: 8px; }
 }
 
-/* ---------- Accesibilidad: sin animaciones si el usuario lo pide ---------- */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-  .title__char {
-    opacity: 1;
-  }
-  .pin--error { animation: none; } /* [v1.8.0] sin sacudida si se pidió reducir movimiento */
-}
+/* [v1.9.4] Se quitó el bloque "prefers-reduced-motion": apagaba TODAS las animaciones en las computadoras con
+   "Mostrar animaciones" desactivado en Windows (por eso se veían en el celular y no en la PC) */

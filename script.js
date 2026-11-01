@@ -96,7 +96,7 @@ const RING_LENGTH = 2 * Math.PI * 52;     // Circunferencia del aro de puntaje (
 const HISTORY_KEY = "test.historial.v1";  // [v1.7.0] clave de localStorage donde se guardan los últimos resultados (solo en este dispositivo)
 // [v1.9.0] Dificultades de un test, de menor a mayor: nombre que se ve y orden. "normal" es la predeterminada
 const NIVELES = {
-  facil: { label: "Fácil", icon: "mood " },
+  facil: { label: "Fácil", icon: "mood" },
   normal: { label: "Normal", icon: "sentiment_satisfied" },
   dificil: { label: "Difícil", icon: "skull" }
 };
@@ -150,6 +150,12 @@ const els = {
   topTag: $("topTag"),
   qCounter: $("qCounter"),
   progressBar: $("progressBar"),
+  progress: document.querySelector(".progress"), // [v1.9.3] contenedor de la barra (recibe la clase si hay marcas)
+  hardIntro: $("hardIntro"),                     // [v1.10.0] capa de la animación "Pregunta difícil" (centro de la pantalla)
+  qLevel: $("qLevel"),                           // [v1.9.4] cuadro de dificultad sobre el contador
+  qLevelIcon: $("qLevelIcon"),
+  qLevelText: $("qLevelText"),
+  progressMarks: $("progressMarks"),            // [v1.9.3] capa con las calaveras rojas de preguntas difíciles
   qCard: $("qCard"),
   qTopic: $("qTopic"),                   // [v1.3.0] tema de la pregunta (texto pequeño gris)
   qText: $("qText"),
@@ -223,6 +229,8 @@ let level = "normal"; // [v1.9.0] dificultad elegida del test actual (facil | no
 let pendingConfirm = null; // [v1.5.0] función que espera la respuesta de la ventana de confirmación (null = cerrada)
 let mode = "final";        // [v1.7.0] modo de corrección elegido: "final" (resultados al terminar) o "instant" (corrige cada pregunta)
 let checked = [];          // [v1.7.0] modo instantáneo: true en las preguntas ya corregidas (quedan bloqueadas)
+let hardSeen = new Set();  // [v1.10.0] preguntas difíciles cuya animación de entrada ya se mostró (solo se ve una vez por pregunta)
+let introBusy = false;     // [v1.10.0] true mientras corre la animación de "Pregunta difícil": bloquea toques y teclas
 let bankOrders = [];       // [v1.7.0] palabras: orden mezclado del banco de cada pregunta de formación de palabras (null en las demás)
 let floatFromHistory = false; // [v1.7.0] true si el panel de resultados se abrió desde el historial (y no al terminar un test)
 
@@ -287,7 +295,8 @@ function formatDate(iso) {
 }
 
 // [v1.3.0] Índice más bajo al que se puede volver: hasta MAX_BACK preguntas por detrás de la más lejana alcanzada
-const minAllowedIndex = () => Math.max(0, maxReached - MAX_BACK);
+// [v1.10.0] En corrección instantánea se puede volver hasta la primera pregunta (solo para ver, no se pueden cambiar)
+const minAllowedIndex = () => (mode === "instant" ? 0 : Math.max(0, maxReached - MAX_BACK));
 
 // Curva de suavizado para la animación de conteo del puntaje
 const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
@@ -593,19 +602,33 @@ function renderMenu() {
     const meta = document.createElement("small");
     meta.className = "test-card__meta";
     meta.textContent = `${t.preguntas.length} ${t.preguntas.length === 1 ? "pregunta" : "preguntas"}`;
-    // [v1.9.0] si el test tiene varias dificultades, el menú lo avisa (el conteo es el de la dificultad base)
-    if (t.nivelesLista.length > 1) meta.textContent += ` · ${t.nivelesLista.length} dificultades`;
-    if (t.contrasena) {
-      const lock = icon(unlockedTests.has(t.file) ? "lock_open" : "lock"); // [v1.8.0] candado: el test tiene contraseña
-      lock.classList.add("test-card__lock");
-      meta.appendChild(lock);
+    // [v1.9.3] Si el test tiene varias dificultades, junto a la cantidad de preguntas se muestran los iconos de las
+    // que existen (fácil / normal / difícil, cada uno con su color). Antes decía "N dificultades" en texto
+    if (t.nivelesLista.length > 1) {
+      const lv = document.createElement("span");
+      lv.className = "test-card__levels";
+      t.nivelesLista.forEach((k) => {
+        const ic = icon(NIVELES[k].icon);
+        ic.classList.add("test-card__level", `test-card__level--${k}`);
+        ic.title = NIVELES[k].label; // al pasar el mouse / mantener apretado se lee el nombre
+        lv.appendChild(ic);
+      });
+      meta.appendChild(lv);
     }
     info.appendChild(meta);
 
     const chev = icon("chevron_right");
     chev.classList.add("test-card__chev");
 
-    card.append(iconBox, info, chev);
+    // [v1.9.3] Candado (test con contraseña): ahora es una columna propia, a la izquierda de la flecha de la tarjeta
+    if (t.contrasena) {
+      const lock = icon(unlockedTests.has(t.file) ? "lock_open" : "lock"); // [v1.8.0] candado: el test tiene contraseña
+      lock.classList.add("test-card__lock");
+      card.classList.add("test-card--locked"); // el CSS le agrega la columna extra a la tarjeta
+      card.append(iconBox, info, lock, chev);
+    } else {
+      card.append(iconBox, info, chev);
+    }
     card.addEventListener("click", () => selectTest(t));
     els.menuList.appendChild(card);
   });
@@ -820,13 +843,54 @@ function startTest() {
   checked = new Array(questions.length).fill(false); // [v1.7.0] ninguna pregunta corregida todavía (modo instantáneo)
   // [v1.7.0] Formación de palabras: el banco de cada pregunta se mezcla de nuevo en cada intento
   bankOrders = questions.map((q) => (q.tipo === "palabras" ? shuffleBank(q) : null));
-  // [v1.7.0] Modo instantáneo: no hay botón "Anterior" y el botón principal ocupa todo el ancho
-  els.btnPrev.hidden = mode === "instant";
-  els.quizNav.classList.toggle("quiz__nav--single", mode === "instant");
+  // [v1.10.0] El botón "Anterior" ahora existe también en el modo instantáneo (solo sirve para ver las respuestas
+  // anteriores ya corregidas; no se pueden cambiar)
+  els.btnPrev.hidden = false;
+  els.quizNav.classList.remove("quiz__nav--single");
+  hardSeen = new Set(); // [v1.10.0] reinicia las animaciones de pregunta difícil
+  introBusy = false;
   quizActive = true;
+  setLevelBadge(); // [v1.9.4] cuadro con la dificultad del test
+  buildProgressMarks(); // [v1.9.3] iconos rojos en la barra de progreso donde hay preguntas difíciles
   setTag("EN CURSO");
   showScreen(els.screenQuiz);
   renderQuestion();
+}
+
+// [v1.9.4] Muestra arriba del contador el cuadro con la dificultad elegida (icono + nombre, color de la dificultad).
+// Solo aparece si el test tiene más de una dificultad
+function setLevelBadge() {
+  const show = currentTest.nivelesLista.length > 1;
+  els.qLevel.hidden = !show;
+  if (!show) return;
+  els.qLevel.className = `lvbadge lvbadge--${level}`;
+  els.qLevelIcon.textContent = NIVELES[level].icon;
+  els.qLevelText.textContent = NIVELES[level].label;
+}
+
+// [v1.9.3] Dibuja sobre la barra de progreso una calavera roja en cada pregunta marcada como difícil ("dificil": true).
+// Cada una se ubica donde termina la barra al llegar a su pregunta ((i + 1) de n), centrada sobre la barra. Si el test no tiene ninguna, no se ve nada
+function buildProgressMarks() {
+  els.progressMarks.textContent = "";
+  const n = questions.length;
+  questions.forEach((q, i) => {
+    if (!q.dificil) return;
+    const m = icon("skull");
+    m.className += " progress__mark";
+    m.style.left = `${((i + 1) / n) * 100}%`; // [v1.10.0] justo donde termina la barra al llegar a esta pregunta (antes: centro del tramo)
+    m.dataset.q = i;
+    els.progressMarks.appendChild(m);
+  });
+  els.progress.classList.toggle("progress--marks", els.progressMarks.children.length > 0); // deja lugar si hay marcas
+}
+
+// [v1.9.3] Marca cuál es la pregunta actual (más grande) y cuáles ya pasaron (más apagadas)
+function updateProgressMarks() {
+  [...els.progressMarks.children].forEach((m) => {
+    const i = Number(m.dataset.q);
+    m.classList.toggle("progress__mark--now", i === current);
+    m.classList.toggle("progress__mark--done", i < current);
+  });
 }
 
 // Dibuja la pregunta actual con sus opciones
@@ -837,6 +901,7 @@ function renderQuestion() {
 
   els.qCounter.textContent = `${pad(current + 1)} / ${pad(questions.length)}`;
   els.progressBar.style.width = `${((current + 1) / questions.length) * 100}%`;
+  updateProgressMarks(); // [v1.9.3] resalta la marca de la pregunta actual
   els.qText.textContent = q.pregunta; // textContent evita que el texto se interprete como HTML
   els.qTopic.textContent = q.tema;    // [v1.3.0] tema opcional: si está vacío, el CSS oculta el párrafo
   maxReached = Math.max(maxReached, current); // [v1.3.0] recuerda la pregunta más lejana alcanzada (límite de "Anterior")
@@ -913,8 +978,102 @@ function renderQuestion() {
 
   window.scrollTo(0, 0); // [v1.2.0] en celular, cada pregunta nueva arranca desde arriba
 
-  els.btnPrev.disabled = current <= minAllowedIndex(); // [v1.3.0] solo se puede volver hasta 2 preguntas
+  // [v1.10.0] Modo instantáneo: si se vuelve a una pregunta ya corregida, se repinta bloqueada con su resultado
+  if (mode === "instant" && checked[current]) {
+    paintChecked(q, answers[current], questionCredit(q, answers[current]));
+  }
+
+  els.btnPrev.disabled = current <= minAllowedIndex(); // [v1.3.0] hasta 2 preguntas atrás ([v1.10.0] en instantáneo, hasta la primera)
   updateNext();
+
+  // [v1.10.0] Primera vez que aparece una pregunta difícil: animación en el centro que termina sobre la etiqueta
+  if (q.dificil && !hardSeen.has(current)) {
+    hardSeen.add(current);
+    playHardIntro();
+  }
+}
+
+// [v1.10.0] Animación de pregunta difícil: en el centro de la pantalla aparece "PREGUNTA", luego "DIFÍCIL" con la calavera,
+// y todo el conjunto viaja y se acomoda sobre la etiqueta "Pregunta difícil" de la tarjeta. Bloquea toques y teclas mientras
+// dura (~1,7 s). Si el navegador no soporta Web Animations, se omite
+async function playHardIntro() {
+  if (!els.qBadge.animate) return;
+  introBusy = true;
+  if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
+
+  const ov = els.hardIntro;
+  ov.textContent = "";
+  const bg = document.createElement("div");
+  bg.className = "hardintro__bg";
+  const tag = document.createElement("p");
+  tag.className = "qbadge hardintro__tag"; // misma etiqueta que la de la tarjeta, pero agrandada
+  const sk = icon("skull");
+  const w1 = document.createElement("span");
+  w1.textContent = "Pregunta";
+  const w2 = document.createElement("span");
+  w2.textContent = "Difícil";
+  tag.append(sk, w1, w2);
+  [sk, w1, w2].forEach((e) => { e.style.opacity = "0"; }); // los elementos ocupan lugar pero aparecen de a uno
+  ov.append(bg, tag);
+  ov.hidden = false;
+  els.qBadge.style.visibility = "hidden"; // la etiqueta real se revela cuando llega la animación
+
+  const ease = "cubic-bezier(0.22, 1, 0.36, 1)";
+  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+  // Hace aparecer un elemento: sube un poco, se agranda y queda visible
+  const pop = (el, ms = 380) => el.animate(
+    [{ opacity: 0, transform: "translateY(10px) scale(0.85)" }, { opacity: 1, transform: "none" }],
+    { duration: ms, easing: ease, fill: "forwards" }
+  ).finished;
+
+  try {
+    const natural = tag.getBoundingClientRect();
+    const big = Math.min(3, (window.innerWidth * 0.84) / natural.width); // se agranda sin salirse de la pantalla
+    tag.style.transform = `scale(${big})`;
+
+    bg.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 250, fill: "forwards" });
+    await pop(w1);                                  // 1) "PREGUNTA"
+    await Promise.all([pop(w2), pop(sk)]);          // 2) "DIFÍCIL" + calavera
+    await wait(450);
+
+    // 3) Viaja hasta la etiqueta real y se achica a su tamaño (se mide recién ahora, con la tarjeta ya quieta)
+    const b = els.qBadge.getBoundingClientRect();
+    const t = tag.getBoundingClientRect();
+    const dx = b.left + b.width / 2 - (t.left + t.width / 2);
+    const dy = b.top + b.height / 2 - (t.top + t.height / 2);
+    await Promise.all([
+      tag.animate(
+        [{ transform: `scale(${big})` }, { transform: `translate(${dx}px, ${dy}px) scale(1)` }],
+        { duration: 650, easing: ease, fill: "forwards" }
+      ).finished,
+      bg.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 650, fill: "forwards" }).finished
+    ]);
+  } catch (err) {
+    console.warn("[Test] La animación de pregunta difícil falló:", err);
+  } finally { // pase lo que pase, se limpia y se desbloquea el test
+    ov.hidden = true;
+    ov.textContent = "";
+    els.qBadge.style.visibility = "";
+    introBusy = false;
+  }
+}
+
+// [v1.10.0] Pinta una pregunta ya corregida (modo instantáneo): opciones en verde / rojo, fichas bloqueadas y cartel de resultado.
+// La usan checkAnswer (al comprobar) y renderQuestion (al volver a una pregunta anterior)
+function paintChecked(q, chosen, credit) {
+  if (q.tipo === "palabras") {
+    renderWords(); // se vuelve a dibujar con las fichas bloqueadas
+    els.wordAnswer.classList.add(credit === 1 ? "wordbuild__answer--right" : "wordbuild__answer--wrong");
+  } else {
+    els.options.classList.add("options--locked");
+    [...els.options.children].forEach((btn, idx) => {
+      const isCorrect = q.correctas.includes(idx);
+      if (chosen.includes(idx)) btn.classList.add(isCorrect ? "option--right" : "option--wrong");
+      else if (isCorrect) btn.classList.add("option--missed");
+      btn.setAttribute("aria-disabled", "true");
+    });
+  }
+  showFeedback(q, chosen, credit);
 }
 
 // [v1.7.0] Crea una ficha de palabra (botón). "used" = es el hueco que queda en el banco cuando la palabra ya está
@@ -955,7 +1114,7 @@ function renderWords(popLast = false) {
 
 // [v1.7.0] Pasa una palabra del banco a la respuesta
 function addWord(id) {
-  if (!quizActive || (mode === "instant" && checked[current])) return;
+  if (introBusy || !quizActive || (mode === "instant" && checked[current])) return;
   const placed = answers[current] || [];
   if (placed.includes(id)) return;
   answers[current] = [...placed, id];
@@ -965,7 +1124,7 @@ function addWord(id) {
 
 // [v1.7.0] Saca una palabra de la respuesta (vuelve al banco); si no queda ninguna, la pregunta vuelve a estar sin responder
 function removeWord(pos) {
-  if (!quizActive || (mode === "instant" && checked[current])) return;
+  if (introBusy || !quizActive || (mode === "instant" && checked[current])) return;
   const placed = [...(answers[current] || [])];
   placed.splice(pos, 1);
   answers[current] = placed.length > 0 ? placed : null;
@@ -977,6 +1136,7 @@ function removeWord(pos) {
 // [v1.4.0] En normal y verdadero/falso reemplaza la elección; en selección múltiple marca o desmarca la opción tocada
 // (si no queda ninguna marcada, la pregunta vuelve a estar sin responder)
 function selectOption(i) {
+  if (introBusy) return; // [v1.10.0] no se responde durante la animación de pregunta difícil
   const q = questions[current];
   if (q.tipo === "palabras") return;                    // [v1.7.0] las palabras se arman con las fichas
   if (mode === "instant" && checked[current]) return;   // [v1.7.0] pregunta ya corregida: no se puede cambiar
@@ -1009,21 +1169,7 @@ function checkAnswer() {
   const chosen = answers[current];
   const credit = questionCredit(q, chosen);
   checked[current] = true;
-
-  if (q.tipo === "palabras") {
-    renderWords(); // se vuelve a dibujar con las fichas bloqueadas
-    els.wordAnswer.classList.add(credit === 1 ? "wordbuild__answer--right" : "wordbuild__answer--wrong");
-  } else {
-    els.options.classList.add("options--locked");
-    [...els.options.children].forEach((btn, idx) => {
-      const isCorrect = q.correctas.includes(idx);
-      if (chosen.includes(idx)) btn.classList.add(isCorrect ? "option--right" : "option--wrong");
-      else if (isCorrect) btn.classList.add("option--missed");
-      btn.setAttribute("aria-disabled", "true");
-    });
-  }
-
-  showFeedback(q, chosen, credit);
+  paintChecked(q, chosen, credit); // [v1.10.0] el pintado ahora está en paintChecked (también se usa al volver)
   updateNext();
   els.btnNext.scrollIntoView({ block: "nearest", behavior: "smooth" }); // en celular, deja a la vista el cartel y "Continuar"
 }
@@ -1081,7 +1227,7 @@ function updateNext() {
 // Avanza a la siguiente pregunta o termina el test
 // [v1.7.0] En el modo instantáneo, si la pregunta todavía no se corrigió el botón la corrige ("Comprobar")
 function goNext() {
-  if (!quizActive || answers[current] === null) return;
+  if (introBusy || !quizActive || answers[current] === null) return;
   if (mode === "instant" && !checked[current]) {
     checkAnswer();
     return;
@@ -1098,8 +1244,9 @@ function goNext() {
 // [v1.3.0] Solo hasta MAX_BACK (2) preguntas por detrás de la más lejana alcanzada; también rige para la flecha izquierda del teclado.
 // [v1.5.2] Ya no pide confirmación: volver a la pregunta anterior no saca del test ni pierde respuestas
 // [v1.7.0] En el modo instantáneo no se puede volver atrás
+// [v1.10.0] En el modo instantáneo también se puede volver (hasta la primera): la pregunta ya corregida se ve bloqueada
 function goPrev() {
-  if (mode === "instant" || current <= minAllowedIndex()) return;
+  if (introBusy || current <= minAllowedIndex()) return;
   current--;
   renderQuestion();
 }
@@ -1107,7 +1254,7 @@ function goPrev() {
 // [v1.5.2] Flecha "Volver" (arriba a la izquierda): sale del test y regresa a la vista previa
 // (pantalla de inicio del test). Como salir borra el progreso de la vuelta, pide confirmación antes
 async function goBackToPreview() {
-  if (!quizActive) return;
+  if (!quizActive || introBusy) return;
   const answered = answers.filter((a) => a !== null).length;
   const ok = await askConfirm({
     icon: "exit_to_app",
@@ -1136,7 +1283,7 @@ async function goBackToPreview() {
 // [v1.7.0] Al terminar guarda el resultado completo en el historial. En el modo instantáneo solo cuentan las preguntas
 // ya corregidas: una respuesta marcada pero sin "Comprobar" se toma como sin contestar
 async function finishTest() {
-  if (!quizActive) return; // evita terminar dos veces (por ejemplo, con un doble toque)
+  if (!quizActive || introBusy) return; // evita terminar dos veces (por ejemplo, con un doble toque)
   const effective = mode === "instant" ? answers.map((a, i) => (checked[i] ? a : null)) : answers;
   const unanswered = questions.length - effective.filter((a) => a !== null).length;
   if (unanswered > 0) {
@@ -1227,10 +1374,45 @@ function descriptionBlock(texto) {
   const tag = document.createElement("span");
   tag.className = "review__label";
   tag.textContent = "Explicación";
-  body.append(tag, document.createTextNode(texto));
+  const txt = document.createElement("span");
+  appendRich(txt, texto); // [v1.10.0] las explicaciones admiten *negrita*, _cursiva_ y <br> (salto de línea)
+  body.append(tag, txt);
 
   box.append(icon("lightbulb"), body);
   return box;
+}
+
+// [v1.10.0] Formato de texto para las explicaciones: *negrita*, _cursiva_ y <br> (o un salto de línea) para cortar renglón.
+// Se arma con nodos del DOM (nunca con innerHTML), así que cualquier otro texto o etiqueta se muestra tal cual y es seguro.
+// Los marcadores solo valen pegados al texto (*así*, no * así *) y _ no se toma dentro de una palabra (snake_case)
+const RICH_RULES = [
+  { re: /(^|[^\w*])\*(?=\S)([^*]*?\S)\*(?!\w)/, tag: "strong" }, // *negrita*
+  { re: /(^|[^\w_])_(?=\S)([^_]*?\S)_(?!\w)/, tag: "em" }          // _cursiva_
+];
+function appendRich(parent, texto) {
+  String(texto).split(/<br\s*\/?>|\n/i).forEach((line, i) => {
+    if (i > 0) parent.appendChild(document.createElement("br"));
+    appendInline(parent, line);
+  });
+}
+// Busca el marcador que aparece primero, lo convierte en <strong> / <em> (admite uno dentro del otro) y sigue con el resto
+function appendInline(parent, s) {
+  let best = null;
+  RICH_RULES.forEach((r) => {
+    const m = r.re.exec(s);
+    if (m && (!best || m.index < best.m.index)) best = { m, tag: r.tag };
+  });
+  if (!best) {
+    if (s) parent.appendChild(document.createTextNode(s));
+    return;
+  }
+  const { m, tag } = best;
+  const start = m.index + m[1].length; // m[1] = el carácter anterior (no es parte del marcador)
+  if (start > 0) parent.appendChild(document.createTextNode(s.slice(0, start)));
+  const el = document.createElement(tag);
+  appendInline(el, m[2]);
+  parent.appendChild(el);
+  appendInline(parent, s.slice(m.index + m[0].length));
 }
 
 // [v1.4.0] Línea de puntaje parcial ("Puntaje parcial: 0.33 / 1") para las selecciones múltiples respondidas a medias
@@ -1281,7 +1463,7 @@ function buildReview(qs, ans) {
     // [v1.7.0] Pregunta difícil: marca con calavera bajo el enunciado
     if (q.dificil) {
       const hard = document.createElement("p");
-      hard.className = "review__hardtag";
+      hard.className = "qbadge review__hardtag"; // [v1.10.0] mismo cuadro redondeado que en la pregunta
       hard.append(icon("skull"), document.createTextNode("Pregunta difícil"));
       item.appendChild(hard);
     }
@@ -1632,7 +1814,7 @@ document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeConfirm(false);
     return;
   }
-  if (!quizActive || e.ctrlKey || e.metaKey || e.altKey) return;
+  if (!quizActive || introBusy || e.ctrlKey || e.metaKey || e.altKey) return; // [v1.10.0] sin teclas durante la animación
 
   const key = e.key.toLowerCase();
   const q = questions[current];

@@ -187,6 +187,12 @@
           <span class="material-symbols-outlined">arrow_back</span>
           <span>Volver</span>
         </button>
+        <!-- [v1.10.0] Cuadro con la dificultad (icono + nombre, contorno del color de la dificultad), ahora en la misma fila
+             y a la misma altura que "Volver". Lo completa script.js y solo se ve si el test tiene más de una dificultad -->
+        <div class="lvbadge" id="qLevel" hidden>
+          <span class="material-symbols-outlined" id="qLevelIcon"></span>
+          <span id="qLevelText"></span>
+        </div>
       </div>
 
       <div class="progress">
@@ -194,7 +200,11 @@
           <span class="eyebrow">Pregunta</span>
           <span class="progress__count" id="qCounter">01 / 01</span>
         </div>
-        <div class="progress__track"><div class="progress__bar" id="progressBar"></div></div>
+        <!-- [v1.9.3] Marcas rojas (calavera) sobre la barra en cada pregunta difícil: las crea script.js dentro de #progressMarks -->
+        <div class="progress__wrap">
+          <div class="progress__marks" id="progressMarks" aria-hidden="true"></div>
+          <div class="progress__track"><div class="progress__bar" id="progressBar"></div></div>
+        </div>
       </div>
 
       <article class="qcard" id="qCard">
@@ -249,6 +259,10 @@
     </section>
 
   </main>
+
+  <!-- [v1.10.0] ANIMACIÓN DE PREGUNTA DIFÍCIL: capa a pantalla completa; script.js crea adentro el fondo y la etiqueta
+       ("Pregunta" → "Difícil" + calavera) que luego viaja hasta la etiqueta de la tarjeta -->
+  <div class="hardintro" id="hardIntro" hidden aria-hidden="true"></div>
 
   <!-- [v1.5.0] VENTANA FLOTANTE DE CONFIRMACIÓN: aparece al querer volver a la pregunta anterior
        o al terminar el test antes de tiempo. El título, el texto y los botones los completa script.js -->
@@ -356,11 +370,11 @@
   <footer class="footer">
     <span>Test</span>
     <span class="footer__sep">·</span>
-    <!-- [v1.9.0] versión y fecha actualizadas: switch de dificultad (fácil / normal / difícil) en la vista previa
-         (antes: v1.8.3 PWA con íconos nuevos; v1.8.2 ojo gris en la contraseña) -->
-    <span id="footerVersion">v1.9.2</span>
+    <!-- [v1.10.0] versión y fecha actualizadas: volver en corrección instantánea, animación de pregunta difícil,
+         marcas sobre la barra, formato en explicaciones y cuadro de dificultad junto a "Volver" (antes: v1.9.4) -->
+    <span id="footerVersion">v1.10.0</span>
     <span class="footer__sep">·</span>
-    <span id="footerDate">24/10/2026</span>
+    <span id="footerDate">01/11/2026</span>
   </footer>
 
   <!-- Lógica externa -->

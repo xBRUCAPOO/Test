@@ -1,12 +1,12 @@
 /* =========================================================
-   TEST — sw.js (service worker, v1.9.1)
+   TEST — sw.js (service worker, v1.10.0)
    Hace que la app se pueda instalar y funcione sin conexión.
    IMPORTANTE: cada vez que cambies index.html, style.css, script.js o los íconos, subí el número de CACHE
    (por ejemplo "test-v1.8.4") para que los dispositivos descarguen la versión nueva.
    ========================================================= */
 
 // Nombre de la caché de esta versión: al cambiarlo se borran las cachés viejas
-const CACHE = "test-v1.9.2";
+const CACHE = "test-v1.10.0";
 
 // Archivos de la app que se guardan al instalar (la "carcasa" de la app)
 const SHELL = [
