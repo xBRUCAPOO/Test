@@ -1,7 +1,6 @@
 {
   "nombre": "Pueblos Originarios de Argentina",
   "tema": "Historia, cultura, cosmovisión, derechos y situación actual",
-  "icono": "diversity_3",
   "preguntas": [
     {
       "pregunta": "¿Qué característica define mejor a los pueblos originarios de Argentina?",
@@ -96,6 +95,7 @@
     },
     {
       "pregunta": "¿En qué año ocurrió la Masacre de Napalpí?",
+      "dificil": true,
       "opciones": [
         "1810",
         "1853",
@@ -163,6 +163,7 @@
     },
     {
       "pregunta": "¿Qué reconoció el juicio por la verdad realizado en 2022 sobre la Masacre de Napalpí?",
+      "dificil": true,
       "opciones": [
         "Que los hechos nunca ocurrieron",
         "Que fue un conflicto exclusivamente privado",
@@ -189,6 +190,7 @@
     },
     {
       "pregunta": "¿En qué año ocurrió la Masacre de Rincón Bomba?",
+      "dificil": true,
       "opciones": [
         "1816",
         "1879",
@@ -256,6 +258,7 @@
     },
     {
       "pregunta": "¿Qué reconoció la sentencia civil de 2019 sobre Rincón Bomba?",
+      "dificil": true,
       "opciones": [
         "Que el Estado no tuvo ninguna responsabilidad",
         "La responsabilidad estatal y el carácter de lesa humanidad de los hechos",
@@ -542,6 +545,7 @@
     },
     {
       "pregunta": "¿Cuál fue el objetivo principal de la Ley Nacional 26.160, sancionada en 2006?",
+      "dificil": true,
       "opciones": [
         "Eliminar la propiedad comunitaria",
         "Declarar una emergencia territorial indígena y realizar relevamientos de tierras",
@@ -568,6 +572,7 @@
     },
     {
       "pregunta": "¿Qué ocurrió con la emergencia territorial prevista por la Ley 26.160 a partir del Decreto 1083/2024?",
+      "dificil": true,
       "opciones": [
         "Se amplió indefinidamente",
         "Se declaró finalizada la emergencia y la suspensión de desalojos prevista por esa ley",
