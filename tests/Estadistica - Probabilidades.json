@@ -1,0 +1,377 @@
+{
+  "nombre": "Probabilidad: métodos y diagramas",
+  "tema": "30 preguntas de probabilidad simple, condicionada, Bayes y diagramas de árbol",
+  "icono": "account_tree",
+  "preguntas": [
+    {
+      "pregunta": "Se lanza un dado equilibrado de seis caras. ¿Qué método alcanza para calcular la probabilidad de obtener un 4?",
+      "opciones": [
+        "Probabilidad simple",
+        "Probabilidad condicionada",
+        "Teorema de Bayes",
+        "Diagrama de árbol obligatorio"
+      ],
+      "correcta": 0,
+      "tema": "Reconocimiento de métodos",
+      "descripcion": "La probabilidad simple es suficiente porque se pregunta por un único acontecimiento y no se proporciona ninguna condición previa ni hay una secuencia de etapas. Hay 1 resultado favorable (obtener 4) entre 6 resultados igualmente posibles: P(4) = 1/6."
+    },
+    {
+      "pregunta": "En una caja hay 5 bolitas rojas y 3 azules. Se extrae una sola bolita al azar. ¿Cuál es la probabilidad de que sea azul?",
+      "opciones": [
+        "Probabilidad simple",
+        "Probabilidad condicionada",
+        "Teorema de Bayes",
+        "Diagrama de árbol"
+      ],
+      "correcta": 0,
+      "tema": "Reconocimiento de métodos",
+      "descripcion": "Se realiza una sola extracción y no se conoce ningún resultado previo. Por eso basta con dividir los casos favorables por el total: 3 bolitas azules / 8 bolitas = 3/8. Un árbol no aporta información necesaria en una única elección."
+    },
+    {
+      "pregunta": "En un grupo, 18 estudiantes usan lentes y 7 de ellos también practican natación. Si se elige a alguien sabiendo que usa lentes, ¿qué método permite calcular la probabilidad de que practique natación?",
+      "opciones": [
+        "Probabilidad simple",
+        "Probabilidad condicionada",
+        "Teorema de Bayes obligatoriamente",
+        "Diagrama de árbol obligatorio"
+      ],
+      "correcta": 1,
+      "tema": "Reconocimiento de métodos",
+      "descripcion": "La frase 'sabiendo que usa lentes' restringe el universo a esos 18 estudiantes. Se busca la proporción de nadadores dentro de ese grupo: P(natación | lentes) = 7/18. Es probabilidad condicionada porque la información conocida define el grupo de referencia."
+    },
+    {
+      "pregunta": "Se lanza una moneda y luego se lanza otra vez. ¿Qué representación resulta especialmente útil para mostrar todos los resultados posibles de las dos etapas?",
+      "opciones": [
+        "Solo probabilidad simple",
+        "Diagrama de árbol",
+        "Teorema de Bayes",
+        "Una tabla de frecuencias necesariamente"
+      ],
+      "correcta": 1,
+      "tema": "Diagrama de árbol",
+      "descripcion": "Hay dos acontecimientos sucesivos: primer lanzamiento y segundo lanzamiento. Un árbol muestra las ramas cara y cruz en cada etapa y permite visualizar los cuatro caminos: cara-cara, cara-cruz, cruz-cara y cruz-cruz. El árbol organiza la secuencia; luego se multiplican las probabilidades de las ramas de un camino."
+    },
+    {
+      "pregunta": "Una prueba puede dar positivo o negativo. Se conoce la proporción de personas que tienen una condición y la tasa de positivos entre quienes la tienen y quienes no la tienen. Si se pregunta qué probabilidad hay de tener la condición sabiendo que la prueba dio positivo, ¿qué método corresponde?",
+      "opciones": [
+        "Probabilidad simple",
+        "Probabilidad condicionada directa sin más datos",
+        "Teorema de Bayes",
+        "Solo diagrama de árbol, sin cálculo"
+      ],
+      "correcta": 2,
+      "tema": "Reconocimiento de Bayes",
+      "descripcion": "Se conoce cómo se comporta el resultado de la prueba dentro de cada grupo (positivo sabiendo que tiene la condición, y positivo sabiendo que no la tiene), pero se pregunta por la condición sabiendo que el resultado fue positivo. Bayes permite invertir esa dirección y combinar las tasas con la proporción inicial de cada grupo."
+    },
+    {
+      "pregunta": "¿Cuál de estas situaciones NO necesita normalmente un diagrama de árbol para resolverse?",
+      "opciones": [
+        "Extraer dos cartas una después de otra",
+        "Lanzar una moneda tres veces",
+        "Elegir una única carta y calcular la probabilidad de que sea un as",
+        "Sacar dos bolitas sin devolver la primera"
+      ],
+      "correcta": 2,
+      "tema": "Cuándo usar un árbol",
+      "descripcion": "Elegir una única carta es un solo experimento, sin etapas sucesivas. Se cuentan los ases y se dividen por el total de cartas. En las otras opciones hay varias etapas o extracciones encadenadas, por lo que el árbol ayuda a representar los caminos y los cambios de probabilidades."
+    },
+    {
+      "pregunta": "En una baraja se sabe que la carta extraída es de corazones. ¿Qué método se utiliza para calcular la probabilidad de que también sea una figura?",
+      "opciones": [
+        "Probabilidad simple",
+        "Probabilidad condicionada",
+        "Teorema de Bayes necesariamente",
+        "Diagrama de árbol"
+      ],
+      "correcta": 1,
+      "tema": "Probabilidad condicionada",
+      "descripcion": "La información 'es de corazones' ya está dada. Por lo tanto, el espacio de posibilidades se reduce a las cartas de corazones y se calcula qué fracción de ellas son figuras. No hay que invertir una probabilidad desconocida ni reconstruir una secuencia."
+    },
+    {
+      "pregunta": "Una urna contiene 4 fichas verdes y 6 amarillas. Se extrae una ficha, se anota su color, se devuelve a la urna y se extrae otra. ¿Qué afirmación describe mejor el uso de un árbol?",
+      "opciones": [
+        "No puede usarse porque hay reposición",
+        "Puede usarse para mostrar las dos extracciones; las probabilidades de la segunda extracción se mantienen",
+        "Debe usarse Bayes",
+        "Solo se puede usar probabilidad condicionada"
+      ],
+      "correcta": 1,
+      "tema": "Árbol con reposición",
+      "descripcion": "El árbol es útil porque hay dos extracciones sucesivas, aunque la primera ficha se devuelva. Como se repone, la composición de la urna vuelve a ser 4 verdes y 6 amarillas; por eso las probabilidades de la segunda extracción son las mismas que las de la primera, independientemente del primer color."
+    },
+    {
+      "pregunta": "Una tienda vendió 40 productos y 10 fueron devueltos. Si se elige al azar uno de esos 40 productos, ¿qué método básico permite calcular la probabilidad de que haya sido devuelto?",
+      "opciones": [
+        "Probabilidad simple",
+        "Probabilidad condicionada",
+        "Teorema de Bayes",
+        "Diagrama de árbol"
+      ],
+      "correcta": 0,
+      "tema": "Probabilidad simple",
+      "descripcion": "Se pregunta por un único suceso dentro de un conjunto conocido: elegir un producto devuelto entre los 40 vendidos. La probabilidad es 10/40 = 1/4 = 25 %. No hay condición previa ni una cadena de sucesos."
+    },
+    {
+      "pregunta": "¿Qué característica del enunciado suele indicar que puede ser conveniente construir un diagrama de árbol?",
+      "opciones": [
+        "Aparece la palabra 'porcentaje'",
+        "Se describe una sucesión de elecciones o acontecimientos",
+        "Se pregunta por un único resultado de un dado",
+        "Se conoce el total de elementos"
+      ],
+      "correcta": 1,
+      "tema": "Reconocimiento de árboles",
+      "descripcion": "Un árbol es especialmente conveniente cuando el experimento tiene etapas sucesivas y cada etapa puede tener varios resultados. No depende de que aparezca la palabra porcentaje: lo importante es la estructura secuencial. El árbol permite seguir cada camino y actualizar probabilidades cuando corresponde."
+    },
+    {
+      "pregunta": "En una escuela hay 120 estudiantes: 70 estudian inglés, 50 estudian francés y 30 estudian ambos idiomas. Si se elige un estudiante que estudia inglés, ¿qué método debe utilizarse para hallar la probabilidad de que también estudie francés?",
+      "opciones": [
+        "Probabilidad simple",
+        "Probabilidad condicionada",
+        "Teorema de Bayes",
+        "Diagrama de árbol obligatorio"
+      ],
+      "correcta": 1,
+      "tema": "Probabilidad condicionada",
+      "descripcion": "La condición reduce el grupo de referencia a los 70 estudiantes que estudian inglés. De esos 70, hay 30 que también estudian francés. Entonces P(francés | inglés) = 30/70 = 3/7 ≈ 42,86 %. No se necesita Bayes porque no se está invirtiendo una tasa conocida; se está calculando directamente una proporción dentro del grupo condicionado."
+    },
+    {
+      "pregunta": "Una fábrica tiene dos máquinas. A produce el 60 % de los artículos y B el 40 %. El 2 % de lo producido por A y el 5 % de lo producido por B es defectuoso. Si un artículo elegido al azar es defectuoso, ¿qué método permite calcular la probabilidad de que provenga de B?",
+      "opciones": [
+        "Probabilidad simple",
+        "Probabilidad condicionada directa",
+        "Teorema de Bayes",
+        "No se puede calcular"
+      ],
+      "correcta": 2,
+      "tema": "Teorema de Bayes",
+      "descripcion": "Se conoce la probabilidad de defecto dentro de cada máquina, pero se pregunta por la máquina de origen sabiendo que hubo un defecto. Es la inversión característica de Bayes. Primero se calcula P(defectuoso) = 0,60·0,02 + 0,40·0,05 = 0,032. Luego P(B | defectuoso) = (0,40·0,05)/0,032 = 0,625, es decir, 62,5 %."
+    },
+    {
+      "pregunta": "Se extraen dos cartas de una baraja, una después de la otra, sin devolver la primera. ¿Por qué un diagrama de árbol resulta útil?",
+      "opciones": [
+        "Porque todas las probabilidades son siempre iguales",
+        "Porque muestra las opciones de la primera extracción y cómo cambian las probabilidades de la segunda",
+        "Porque reemplaza cualquier fórmula",
+        "Porque solo sirve cuando se devuelve la primera carta"
+      ],
+      "correcta": 1,
+      "tema": "Árbol sin reposición",
+      "descripcion": "Al no devolver la primera carta, el total de cartas y la cantidad de cartas de cada tipo cambian para la segunda extracción. El árbol separa los casos según lo que salió primero y permite asignar probabilidades distintas en cada segunda rama. Para un camino se multiplican las probabilidades de sus ramas; si varios caminos sirven, se suman."
+    },
+    {
+      "pregunta": "En una caja hay 3 bolitas rojas y 2 azules. Se extraen dos sin reposición. ¿Cuál es la probabilidad de obtener primero roja y después azul?",
+      "opciones": [
+        "3/5",
+        "1/2",
+        "3/10",
+        "2/5"
+      ],
+      "correcta": 2,
+      "tema": "Árbol y regla del producto",
+      "descripcion": "Se trata de dos etapas sucesivas y el orden está especificado. La probabilidad de roja en la primera extracción es 3/5. Después de sacar una roja quedan 2 azules entre 4 bolitas, así que la probabilidad de azul en la segunda es 2/4. Se multiplican las ramas del camino: (3/5)·(2/4) = 6/20 = 3/10. El árbol ayuda a ver por qué la segunda fracción cambia."
+    },
+    {
+      "pregunta": "En una encuesta, 55 de 100 personas usan transporte público. De esas 55, 22 llegan al trabajo antes de las 8. Si se sabe que una persona usa transporte público, ¿cuál es la probabilidad de que llegue antes de las 8?",
+      "opciones": [
+        "22 %",
+        "40 %",
+        "55 %",
+        "77 %"
+      ],
+      "correcta": 1,
+      "tema": "Probabilidad condicionada",
+      "descripcion": "La condición es que la persona usa transporte público, por lo que el denominador debe ser 55 y no 100. Entre esas 55 personas, 22 llegan antes de las 8: 22/55 = 0,40 = 40 %. Usar 22/100 respondería otra pregunta: la probabilidad conjunta de usar transporte público y llegar antes de las 8."
+    },
+    {
+      "pregunta": "Una empresa compra el 50 % de sus piezas al proveedor A y el 50 % al proveedor B. A entrega un 1 % de piezas defectuosas y B un 3 %. Si una pieza no es defectuosa, ¿qué enfoque corresponde para calcular la probabilidad de que sea de A?",
+      "opciones": [
+        "Bayes, porque se busca el proveedor sabiendo el estado de la pieza",
+        "Probabilidad simple, porque los proveedores aportan lo mismo",
+        "Solo probabilidad condicionada sin calcular la probabilidad total",
+        "Diagrama de árbol obligatorio y no Bayes"
+      ],
+      "correcta": 0,
+      "tema": "Bayes y evidencia complementaria",
+      "descripcion": "Se busca el origen (A) después de observar una evidencia (que la pieza no es defectuosa). Para invertir la condición se usa Bayes. Se calcula P(no defectuosa) = 0,50·0,99 + 0,50·0,97 = 0,98. Luego P(A | no defectuosa) = 0,50·0,99 / 0,98 ≈ 0,5051, es decir, aproximadamente 50,51 %. El hecho de que los proveedores tengan igual participación no vuelve iguales las probabilidades posteriores."
+    },
+    {
+      "pregunta": "Se lanza un dado y luego una moneda. ¿Cuál es la probabilidad de obtener un número par en el dado y cara en la moneda?",
+      "opciones": [
+        "1/2",
+        "1/4",
+        "1/6",
+        "3/4"
+      ],
+      "correcta": 1,
+      "tema": "Árbol y sucesos independientes",
+      "descripcion": "Hay dos etapas, por lo que un árbol puede representar primero los resultados del dado y luego los de la moneda. La probabilidad de número par es 3/6 = 1/2 y la de cara es 1/2. Como los resultados son independientes, se multiplican: 1/2·1/2 = 1/4. También podría resolverse directamente con la regla del producto; el árbol es una representación útil, no una obligación."
+    },
+    {
+      "pregunta": "En una baraja de 40 cartas, se sabe que la carta extraída es un oro. ¿Cuál es la probabilidad de que sea un siete, si hay un siete de cada palo?",
+      "opciones": [
+        "1/40",
+        "1/10",
+        "7/40",
+        "1/4"
+      ],
+      "correcta": 1,
+      "tema": "Probabilidad condicionada",
+      "descripcion": "Una vez que sabemos que la carta es de oro, el universo queda reducido a las 10 cartas de ese palo. Solo una de esas 10 es el siete de oro. Por lo tanto, P(siete | oro) = 1/10 = 10 %. No corresponde dividir por las 40 cartas porque la condición ya descarta los otros tres palos."
+    },
+    {
+      "pregunta": "Una prueba tiene un 90 % de probabilidad de dar positivo cuando una persona tiene cierta condición y un 8 % de probabilidad de dar positivo cuando no la tiene. La condición afecta al 2 % de la población. Si una persona da positivo, ¿qué se necesita para hallar la probabilidad de que realmente tenga la condición?",
+      "opciones": [
+        "Dividir 90 % por 2 %",
+        "Aplicar Bayes y calcular primero la probabilidad total de un positivo",
+        "Usar únicamente 90 % como respuesta",
+        "Contar los resultados de un dado"
+      ],
+      "correcta": 1,
+      "tema": "Teorema de Bayes",
+      "descripcion": "El 90 % es P(positivo | condición), pero la pregunta pide P(condición | positivo); no son la misma probabilidad. Bayes exige considerar tanto los positivos verdaderos como los positivos entre quienes no tienen la condición. La probabilidad total del positivo es 0,02·0,90 + 0,98·0,08 = 0,0964. La posterior es 0,02·0,90/0,0964 ≈ 18,67 %."
+    },
+    {
+      "pregunta": "¿Cuál de estas afirmaciones sobre el diagrama de árbol es correcta?",
+      "opciones": [
+        "Solo se usa para resolver ejercicios de Bayes",
+        "Solo se usa cuando los sucesos son independientes",
+        "Puede representar sucesos sucesivos dependientes o independientes",
+        "Las ramas de un camino se suman siempre"
+      ],
+      "correcta": 2,
+      "tema": "Interpretación de árboles",
+      "descripcion": "Un árbol representa etapas sucesivas tanto si las probabilidades cambian como si permanecen iguales. En cada nodo, las probabilidades de las ramas que salen deben sumar 1. Para calcular la probabilidad de un camino se multiplican las probabilidades de sus ramas; para reunir caminos alternativos que llevan al resultado buscado, se suman sus probabilidades."
+    },
+    {
+      "pregunta": "Una compañía recibe el 20 % de sus componentes del proveedor A, el 30 % de B y el 50 % de C. Sus tasas de defecto son 1 %, 2 % y 4 %, respectivamente. Un componente elegido al azar es defectuoso. ¿Cuál es la probabilidad de que provenga de C?",
+      "opciones": [
+        "20 %",
+        "40 %",
+        "62,5 %",
+        "71,43 %"
+      ],
+      "correcta": 3,
+      "tema": "Bayes con tres proveedores",
+      "descripcion": "Como se conoce el defecto y se pregunta por el proveedor, se invierte la condición mediante Bayes. La probabilidad total de defecto es 0,20·0,01 + 0,30·0,02 + 0,50·0,04 = 0,028. La probabilidad conjunta de ser de C y defectuoso es 0,50·0,04 = 0,020. Entonces P(C | D) = 0,020/0,028 ≈ 0,7143, es decir, 71,43 %.",
+      "dificil": true
+    },
+    {
+      "pregunta": "Se extraen dos fichas sin reposición de una bolsa con 4 rojas y 6 verdes. ¿Cuál es la probabilidad de obtener dos fichas del mismo color?",
+      "opciones": [
+        "7/15",
+        "8/15",
+        "1/2",
+        "2/5"
+      ],
+      "correcta": 0,
+      "tema": "Árbol: suma de caminos",
+      "descripcion": "Hay dos caminos favorables: roja-roja y verde-verde. P(RR) = 4/10·3/9 = 12/90. P(VV) = 6/10·5/9 = 30/90. Se suman porque son caminos alternativos y mutuamente excluyentes: 42/90 = 7/15. El árbol es útil para separar los dos caminos y tener en cuenta que la segunda extracción ocurre sin reposición.",
+      "dificil": true
+    },
+    {
+      "pregunta": "En una población, el 3 % tiene una condición. Un test da positivo al 96 % de quienes la tienen y también da positivo al 5 % de quienes no la tienen. Una persona obtiene positivo. ¿Cuál es aproximadamente la probabilidad de que tenga la condición?",
+      "opciones": [
+        "3 %",
+        "37,26 %",
+        "96 %",
+        "65 %"
+      ],
+      "correcta": 1,
+      "tema": "Bayes y tasa base",
+      "descripcion": "La pregunta pide P(condición | positivo), no P(positivo | condición). Primero: P(positivo) = 0,03·0,96 + 0,97·0,05 = 0,0288 + 0,0485 = 0,0773. Luego: P(condición | positivo) = 0,0288/0,0773 ≈ 0,3726, es decir, aproximadamente 37,26 %.",
+      "dificil": true
+    },
+    {
+      "pregunta": "En una clase, el 60 % aprobó matemática, el 50 % aprobó física y el 35 % aprobó ambas. Si se elige a alguien que aprobó física, ¿cuál es la probabilidad de que también haya aprobado matemática?",
+      "opciones": [
+        "35 %",
+        "58,33 %",
+        "70 %",
+        "85 %"
+      ],
+      "correcta": 2,
+      "tema": "Condicionada con porcentajes",
+      "descripcion": "La condición es haber aprobado física. Por eso el denominador es el 50 % que aprobó física, mientras que el numerador es el 35 % que aprobó ambas: P(M | F) = 0,35/0,50 = 0,70. Por eso la respuesta es 70 %. No se aplica Bayes porque ya se proporciona directamente la intersección y el grupo condicionado.",
+      "dificil": true
+    },
+    {
+      "pregunta": "Una urna contiene 2 bolas blancas y 3 negras. Se extrae una bola sin devolverla y luego otra. ¿Cuál es la probabilidad de que salga exactamente una blanca?",
+      "opciones": [
+        "2/5",
+        "3/5",
+        "3/10",
+        "1/2"
+      ],
+      "correcta": 1,
+      "tema": "Árbol: exactamente un resultado",
+      "descripcion": "Hay dos caminos que cumplen 'exactamente una blanca': blanca-negra y negra-blanca. P(BN) = 2/5·3/4 = 6/20. P(NB) = 3/5·2/4 = 6/20. Se suman: 12/20 = 3/5. El árbol permite distinguir ambos órdenes; no alcanza con calcular un solo camino porque la blanca puede aparecer primero o segunda.",
+      "dificil": true
+    },
+    {
+      "pregunta": "Una empresa obtiene el 70 % de sus pedidos por internet y el 30 % en persona. El 4 % de los pedidos por internet y el 1 % de los pedidos en persona tienen errores. Si un pedido tiene un error, ¿cuál es la probabilidad de que haya sido realizado por internet?",
+      "opciones": [
+        "70 %",
+        "82,35 %",
+        "4 %",
+        "90,32 %"
+      ],
+      "correcta": 3,
+      "tema": "Bayes",
+      "descripcion": "Se observa un pedido con error y se pregunta por su canal de origen: es Bayes. P(error) = 0,70·0,04 + 0,30·0,01 = 0,028 + 0,003 = 0,031. P(internet | error) = 0,028/0,031 ≈ 0,9032, es decir, 90,32 %. No debe responderse 70 %: esa es la proporción inicial de pedidos por internet, antes de conocer que hubo un error.",
+      "dificil": true
+    },
+    {
+      "pregunta": "Se lanza una moneda dos veces. ¿Cuál es la probabilidad de obtener al menos una cara?",
+      "opciones": [
+        "1/4",
+        "1/2",
+        "3/4",
+        "1"
+      ],
+      "correcta": 2,
+      "tema": "Árbol y complemento",
+      "descripcion": "El árbol tiene cuatro caminos equiprobables: cara-cara, cara-cruz, cruz-cara y cruz-cruz. Tres de ellos contienen al menos una cara, por lo que la probabilidad es 3/4. También puede calcularse por complemento: 1 − P(no obtener ninguna cara) = 1 − 1/4 = 3/4. El árbol ayuda a verificar que se cuentan todos los casos favorables sin duplicarlos.",
+      "dificil": true
+    },
+    {
+      "pregunta": "En una población, el 40 % viaja en colectivo y el 60 % en tren. El 10 % de quienes viajan en colectivo llega tarde y el 5 % de quienes viajan en tren llega tarde. Si se elige una persona que llegó tarde, ¿qué probabilidad hay de que viaje en colectivo?",
+      "opciones": [
+        "40 %",
+        "57,14 %",
+        "10 %",
+        "80 %"
+      ],
+      "correcta": 1,
+      "tema": "Bayes",
+      "descripcion": "La evidencia es llegar tarde y se busca el medio de transporte que la produjo; por eso se aplica Bayes. P(tarde) = 0,40·0,10 + 0,60·0,05 = 0,04 + 0,03 = 0,07. P(colectivo | tarde) = 0,04/0,07 ≈ 57,14 %. No debe responderse 40 %: esa es la proporción inicial de usuarios de colectivo, antes de conocer que la persona llegó tarde.",
+      "dificil": true
+    },
+    {
+      "pregunta": "En una caja hay 5 tarjetas numeradas del 1 al 5. Se extrae una tarjeta y luego otra sin reposición. ¿Cuál es la probabilidad de que la suma de los dos números sea par?",
+      "opciones": [
+        "2/5",
+        "1/2",
+        "3/10",
+        "3/5"
+      ],
+      "correcta": 0,
+      "tema": "Árbol y paridad",
+      "descripcion": "La suma es par cuando ambos números tienen la misma paridad: impar-impar o par-par. Hay 3 impares y 2 pares. P(impar-impar) = 3/5·2/4 = 6/20. P(par-par) = 2/5·1/4 = 2/20. Sumando los caminos: 8/20 = 2/5. El árbol separa los dos casos favorables y refleja la extracción sin reposición.",
+      "dificil": true
+    },
+    {
+      "pregunta": "Una tienda recibe el 40 % de sus productos de A y el 60 % de B. El 5 % de los productos de A y el 2 % de los de B están dañados. Se elige un producto y se comprueba que está en buen estado. ¿Cuál es la probabilidad de que provenga de B?",
+      "opciones": [
+        "60 %",
+        "60,74 %",
+        "95 %",
+        "40 %"
+      ],
+      "correcta": 1,
+      "tema": "Bayes con evidencia negativa",
+      "descripcion": "Se observa que el producto está en buen estado y se pregunta por su proveedor: corresponde Bayes, usando la evidencia complementaria de 'no dañado'. P(buen estado) = 0,40·0,95 + 0,60·0,98 = 0,38 + 0,588 = 0,968. P(B | buen estado) = 0,60·0,98/0,968 = 0,588/0,968 ≈ 60,74 %.",
+      "dificil": true
+    }
+  ]
+}
